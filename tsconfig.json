@@ -38,6 +38,11 @@
   ],
   "exclude": [
     "node_modules",
-    "skills"
+    "skills",
+    "backups",
+    ".zenflow",
+    ".firebase",
+    "dist",
+    "build"
   ]
 }

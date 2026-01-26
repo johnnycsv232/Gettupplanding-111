@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { Bebas_Neue, Inter } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
   subsets: ["latin"],
-  weight: ["900"],
+  weight: ["400"],
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "700", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "GettUpp Enterprise | High-Performance Strategy & Delivery",
-  description: "Luxury strategic delivery for the elite 1%. Backed by AI, validated by proof.",
+  title: "GETTUPP ENT | Elite Nightlife & Luxury Design",
+  description: "Liquid Glass Premium Nightlife Luxury. Own The Night.",
 };
 
 export default function RootLayout({
@@ -25,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="en" className={`${bebasNeue.variable} ${inter.variable}`}>
+      <body className="font-sans antialiased bg-deep-void-black text-off-white selection:bg-neon-magenta selection:text-white">
         {children}
       </body>
     </html>

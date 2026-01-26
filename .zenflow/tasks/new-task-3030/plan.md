@@ -1,7 +1,7 @@
-# Full SDD workflow
+# Implementation Plan - GETTUPP ENT Landing Page V3
 
 ## Configuration
-- **Artifacts Path**: {@artifacts_path} → `.zenflow/tasks/{task_id}`
+- **Artifacts Path**: .zenflow/tasks/new-task-3030
 
 ---
 
@@ -9,49 +9,71 @@
 
 ### [x] Step: Requirements
 <!-- chat-id: 4f54bd70-53d3-419a-a64b-cca9470bebc1 -->
+Create a Product Requirements Document (PRD).
 
-Create a Product Requirements Document (PRD) based on the feature description.
-
-1. Review existing codebase to understand current architecture and patterns
-2. Analyze the feature definition and identify unclear aspects
-3. Ask the user for clarifications on aspects that significantly impact scope or user experience
-4. Make reasonable decisions for minor details based on context and conventions
-5. If user can't clarify, make a decision, state the assumption, and continue
-
-Save the PRD to `{@artifacts_path}/requirements.md`.
-
-### [ ] Step: Technical Specification
+### [x] Step: Technical Specification
 <!-- chat-id: 1093fc4c-9178-43c2-9edb-9e61ab2c2d8f -->
+Create a technical specification based on the PRD.
 
-Create a technical specification based on the PRD in `{@artifacts_path}/requirements.md`.
+### [ ] Step: Phase 1 - Foundation & Tailwind Setup
+1.  **Install & Configure Tailwind**:
+    - Install `tailwindcss`, `postcss`, `autoprefixer`.
+    - Initialize `tailwind.config.ts` and `postcss.config.js`.
+    - Define the "Liquid Glass" theme (Colors: Vegas Gold, Neon Magenta; Fonts: Bebas Neue, Inter).
+    - Create `src/app/globals.css` with Tailwind directives and remove conflicting CSS modules.
+2.  **Verify Setup**:
+    - Create a test page/component to verify Tailwind styles are applying.
+    - Run `npm run dev` and check for errors.
 
-1. Review existing codebase architecture and identify reusable components
-2. Define the implementation approach
+### [ ] Step: Phase 2 - Shared Core Components
+1.  **UI Primitives**:
+    - Create `src/components/ui/Button.tsx` (Liquid Glass style).
+    - Create `src/components/ui/GlassCard.tsx` (Backdrop blur + borders).
+    - Create `src/components/ui/Modal.tsx` (For Exit Intent).
+2.  **Three.js Setup**:
+    - Implement `src/components/three/ParticleField.tsx` using `@react-three/fiber`.
+    - Ensure it handles mouse interaction/parallax.
 
-Save to `{@artifacts_path}/spec.md` with:
-- Technical context (language, dependencies)
-- Implementation approach referencing existing code patterns
-- Source code structure changes
-- Data model / API / interface changes
-- Delivery phases (incremental, testable milestones)
-- Verification approach using project lint/test commands
+### [ ] Step: Phase 3 - Sections Group A (Header & Hero)
+1.  **Sticky Header**: Implement `src/features/landing/components/StickyHeader.tsx` with slide-in CTA.
+2.  **Hero Section**: Implement `src/features/landing/components/HeroSection.tsx`.
+    - Video background + Particle Field overlay.
+    - Lead Gen Input (Email).
+3.  **Exit Intent**: Implement `useExitIntent` hook and integrate the "Velvet Rope" popup.
 
-### [ ] Step: Planning
+### [ ] Step: Phase 4 - Sections Group B (Offer & Pricing)
+1.  **Pilot & Audit**: Implement `PilotSection.tsx` and `ContentAuditSection.tsx`.
+2.  **Problem & Solution**: Implement `ProblemSolutionSection.tsx` and `WhatYouGetSection.tsx`.
+3.  **Retainers (Pricing)**: Implement `RetainersSection.tsx`.
+    - 3-column layout with "Growth" highlight.
+    - Integrate Stripe Payment Links (placeholders for now).
 
-Create a detailed implementation plan based on `{@artifacts_path}/spec.md`.
+### [ ] Step: Phase 5 - Sections Group C (Visuals & Social Proof)
+1.  **Gallery**: Implement `GallerySection.tsx`.
+    - Setup Sanity Client fetch (mock data if Sanity not ready).
+    - Implement Masonry Grid with Framer Motion liquid transitions.
+2.  **Cinema & Events**: Implement `CinemaGradeSection.tsx` and `EventsSection.tsx`.
+3.  **Testimonials & Founder**: Implement `TestimonialsSection.tsx` and `FounderSection.tsx`.
 
-1. Break down the work into concrete tasks
-2. Each task should reference relevant contracts and include verification steps
-3. Replace the Implementation step below with the planned tasks
+### [ ] Step: Phase 6 - Sections Group D (Closing & Footer)
+1.  **Brand Verticals**: Implement `GettuppGirlsSection.tsx`, `UpgradesSection.tsx`, `RulesSection.tsx`.
+2.  **Final CTA & Footer**: Implement `FinalCTASection.tsx` (with Particles) and `Footer.tsx`.
 
-Rule of thumb for step size: each step should represent a coherent unit of work (e.g., implement a component, add an API endpoint, write tests for a module). Avoid steps that are too granular (single function) or too broad (entire feature).
+### [ ] Step: Phase 7 - Page Assembly & Integrations
+1.  **Assemble Page**: Update `src/app/page.tsx` to include all 16 sections in order.
+2.  **Firebase Integration**:
+    - Create `src/lib/firebase/client.ts`.
+    - Connect Hero Input and Exit Intent Popup to Firestore `leads` collection.
+3.  **Stripe Webhook**:
+    - Create `src/app/api/webhooks/stripe/route.ts` to handle payment success events.
 
-If the feature is trivial and doesn't warrant full specification, update this workflow to remove unnecessary steps and explain the reasoning to the user.
+### [ ] Step: Phase 8 - Admin Dashboard
+1.  **Admin Route**: Create `src/app/admin/page.tsx`.
+    - Protect with Firebase Auth (allow-list).
+    - Display Leads table and Booking status.
 
-Save to `{@artifacts_path}/plan.md`.
+### [ ] Step: Final Verification
+1.  **Lint & Typecheck**: Run `npm run lint` and `npm run type-check`.
+2.  **Test**: Run `npm run test` (if applicable).
+3.  **Build**: Run `npm run build` to ensure no build errors.
 
-### [ ] Step: Implementation
-
-This step should be replaced with detailed implementation tasks from the Planning step.
-
-If Planning didn't replace this step, execute the tasks in `{@artifacts_path}/plan.md`, updating checkboxes as you go. Run planned tests/lint and record results in plan.md.
