@@ -25,7 +25,7 @@
 ## 💎 Elite UX Invariants (The "GettUpp Luxury" Standard)
 
 1. **Fluid Motion**: All interactions (hover, entrance, scroll) MUST use Framer Motion with custom spring/inertia (stiffness: 100, damping: 20). No "linear" animations.
-2. **Reduced Motion**: All 3D and Framer Motion effects MUST respect `prefers-reduced-motion` media queries.
+2. **Reduced Motion**: All 3D and Framer Motion effects MUST respect `os-prefers-reduced-motion` media queries.
 3. **Glass Fidelity**: Glassmorphic cards must have a 20px backdrop-blur and a 1px white/10 border at all times.
 4. **3D Performance**: All Three.js/R3F sections MUST have a static image fallback for mobile and an explicit loading state (Skeleton/Progress Bar).
 5. **Typography Authority**: Large headings (900 weight) must utilize metallic gradients or glow effects as per the brand image.
@@ -34,6 +34,7 @@
 
 ## 📝 Logging & Systemic Invariants
 
-1. **Context Sync**: `docs/walkthrough.md` must be updated after every atomic task completion.
-2. **Instruction Trace**: Every complex logic block must reference the corresponding section in `docs/architecture.md`.
-3. **L1 Context Lock**: Every turn must verify state against `task.md` and `docs/invariants.md` to prevent project drift.
+1. **Context Sync**: `walkthrough.md` must be updated after every atomic task completion.
+2. **Instruction Trace**: Every complex logic block must reference the corresponding section in `architecture.md`.
+3. **Automated Guardrails**: No security-sensitive file (Firebase, Stripe, Sanity) may be edited without auto-triggering the corresponding `.claude/skills/skill-rules.json` validation.
+4. **L1 Context Lock**: Every turn must verify state against `task.md` and `invariants.md` to prevent project drift.

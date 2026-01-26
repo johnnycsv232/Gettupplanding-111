@@ -6,19 +6,55 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "type-check": "tsc --noEmit",
+    "verify": "powershell -ExecutionPolicy Bypass -File scripts/verify-setup.ps1",
+    "setup": "powershell -ExecutionPolicy Bypass -File scripts/complete-setup.ps1",
+    "cleanup": "powershell -ExecutionPolicy Bypass -File scripts/cleanup-ghost-code.ps1",
+    "skills:list": "tsx scripts/skills-manager.ts list",
+    "skills:disabled": "tsx scripts/skills-manager.ts disabled",
+    "skills:enable": "tsx scripts/skills-manager.ts enable",
+    "skills:enable-all": "tsx scripts/skills-manager.ts enable-all",
+    "skills:disable": "tsx scripts/skills-manager.ts disable",
+    "skills:index": "tsx scripts/generate-index.ts",
+    "skills:validate": "tsx scripts/validate-skills.ts",
+    "skills:sync": "tsx scripts/sync-skills.ts"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "@sanity/client": "^7.14.0",
+    "@stripe/stripe-js": "^8.6.3",
+    "firebase": "^12.8.0",
+    "framer-motion": "^12.27.5",
+    "lucide-react": "^0.562.0",
     "next": "16.1.4",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "stripe": "^20.2.0",
+    "three": "^0.182.0",
+    "zod": "^4.3.5"
   },
   "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.0",
+    "@playwright/test": "^1.57.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.182.0",
+    "@vitejs/plugin-react": "^5.1.2",
     "eslint": "^9",
     "eslint-config-next": "16.1.4",
-    "typescript": "^5"
+    "firebase-admin": "^13.6.0",
+    "firebase-tools": "^15.3.1",
+    "happy-dom": "^20.3.4",
+    "jsdom": "^27.4.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5",
+    "vitest": "^4.0.17"
   }
 }

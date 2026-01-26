@@ -1,0 +1,106 @@
+
+.pricing {
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xl);
+  background: linear-gradient(to bottom, #000, #050505);
+}
+
+.title {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  position: relative;
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+
+.highlighted {
+  border-color: var(--gold);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+}
+
+.tierName {
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+
+.price {
+  font-size: 3rem;
+  font-weight: 900;
+  font-family: var(--font-display);
+}
+
+.perMonth {
+  font-size: 1rem;
+  color: var(--gold-light);
+  opacity: 0.7;
+}
+
+.featureList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: var(--spacing-md) 0;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.featureItem::before {
+  content: "→";
+  color: var(--gold);
+}
+
+.actionButton {
+  margin-top: auto;
+  padding: var(--spacing-md);
+  background: var(--glass);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.actionButton:hover {
+  background: var(--gold);
+  color: #000;
+}
+
+.actionButtonHighlighted {
+  background: var(--gold);
+  color: #000;
+}
+
+.actionButtonHighlighted:hover {
+  background: #fff;
+}

@@ -1,0 +1,20 @@
+# GETTUPPENT - Gemini/Antigravity Rules
+
+## Project
+Next.js 14+ landing page with Firebase, Stripe, Three.js, Tailwind, TypeScript
+
+## Standards
+- Security-first development
+- Test-driven development
+- Strict TypeScript (no any)
+- Server Components default
+
+## Skills Directory
+`skills/` contains AI coding skills. Use `@skill-name` to invoke.
+Active skills include: nextjs-best-practices, firebase, stripe-integration, stitch-react-components, test-driven-development
+
+## Commands
+- `npm run dev` - Start dev server
+- `npm run build` - Production build
+- `npm run lint` - Check code
+- `npm run test` - Run tests

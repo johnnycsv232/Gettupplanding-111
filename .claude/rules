@@ -1,0 +1,19 @@
+# GETTUPPENT Project - Claude Code Rules
+
+## Stack
+Next.js 14+ | Firebase | Stripe | Three.js | Tailwind | TypeScript
+
+## Principles
+- Security-first: validate inputs, check auth, sanitize outputs
+- Test-first: write tests before implementation
+- Type-safe: strict TypeScript, no `any`
+
+## Skills
+Located in `skills/` - use for guidance on best practices.
+Key skills: nextjs-best-practices, firebase, stripe-integration, test-driven-development, stitch-react-components
+
+## Structure
+- `src/app/` - Pages (App Router)
+- `src/components/` - UI components
+- `src/lib/` - Utilities & configs
+- `skills/` - AI coding skills

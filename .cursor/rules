@@ -1,0 +1,121 @@
+# GETTUPPENT Development Rules
+# AI-First, Security-First, Test-First Development
+
+## Project Context
+- Next.js 15 + React 19 + TypeScript
+- Firebase (Auth, Firestore, Storage, Functions)
+- Stripe integration for payments
+- Three.js for 3D experiences
+- Tailwind CSS for styling
+- Sanity CMS (future integration)
+
+## Development Standards
+
+### 1. Code Quality (MANDATORY)
+- Use TypeScript strict mode
+- Follow clean code principles (@clean-code)
+- ESLint must pass before commit
+- Prettier formatting enforced
+- No console.logs in production code
+- Proper error handling with try/catch
+
+### 2. Test-First Development (MANDATORY)
+- Write tests BEFORE implementation (@test-driven-development, @tdd-workflow)
+- Unit tests for all utilities and hooks
+- Integration tests for API routes
+- E2E tests for critical user flows (@playwright-skill)
+- Aim for 80%+ code coverage
+- Run tests before every commit
+
+### 3. Security-First (MANDATORY)
+- NEVER expose API keys in client code
+- Use environment variables for secrets
+- Validate all user inputs (@webapp-testing)
+- Implement proper Firebase security rules
+- Check for common vulnerabilities (@top-web-vulnerabilities)
+- Sanitize data before database operations
+
+### 4. Architecture & Patterns
+- Follow Next.js 15 best practices (@nextjs-best-practices)
+- Use React Server Components where appropriate
+- Keep components small and focused (@react-patterns)
+- Implement proper error boundaries
+- Use loading and error states
+- Follow SOLID principles (@software-architecture)
+
+### 5. Performance
+- Optimize images (next/image)
+- Code splitting and lazy loading
+- Minimize bundle size
+- Use React.memo() judiciously
+- Profile performance regularly (@performance-profiling)
+- Monitor Core Web Vitals
+
+### 6. Git Workflow
+- Commit messages: type(scope): message
+- Branch naming: feature/*, fix/*, refactor/*
+- PR must pass all tests and linting
+- Code review before merge (@code-review-checklist)
+- Keep commits atomic and focused
+
+### 7. AI Development Guidelines
+- Reference skills using @skill-name format
+- Use @stitch-react-components for UI generation
+- Leverage @systematic-debugging for bug fixes
+- Apply @verification-before-completion before finalizing
+- Document AI-generated code thoroughly
+
+### 8. Specific Tech Guidelines
+
+#### Firebase
+- Use Firebase Admin SDK for server-side
+- Implement proper security rules
+- Use batch operations for multiple writes
+- Handle offline persistence
+- Monitor Firebase quotas
+
+#### Stripe
+- Use Stripe webhooks for payment events
+- Test with Stripe test mode
+- Handle all payment edge cases
+- Implement proper error recovery
+- Log payment events securely
+
+#### Three.js
+- Optimize geometries and materials
+- Implement proper disposal
+- Use requestAnimationFrame properly
+- Handle window resize events
+- Profile 3D performance
+
+## File Organization
+```
+src/
+├── app/              # Next.js 15 app router
+├── components/       # Shared components
+├── features/         # Feature-based modules
+├── lib/             # Utilities and configs
+├── hooks/           # Custom React hooks
+└── types/           # TypeScript types
+
+tests/
+├── unit/            # Unit tests
+├── integration/     # Integration tests
+└── e2e/             # Playwright E2E tests
+```
+
+## Before Committing Checklist
+- [ ] All tests pass (`npm test`)
+- [ ] ESLint passes (`npm run lint`)
+- [ ] TypeScript compiles (`npm run type-check`)
+- [ ] Build succeeds (`npm run build`)
+- [ ] Manual testing completed
+- [ ] Security review done
+- [ ] Performance check passed
+
+## Skills Available
+Use @ to reference any of the 73 active skills in the skills/ folder.
+Key skills: @nextjs-best-practices, @react-best-practices, @firebase, @stripe-integration, @test-driven-development, @clean-code, @systematic-debugging, @stitch-react-components
+
+---
+**Remember: Security-First, Test-First, Quality-First. No exceptions.**
