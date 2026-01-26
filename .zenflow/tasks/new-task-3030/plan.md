@@ -15,7 +15,8 @@ Create a Product Requirements Document (PRD).
 <!-- chat-id: 1093fc4c-9178-43c2-9edb-9e61ab2c2d8f -->
 Create a technical specification based on the PRD.
 
-### [ ] Step: Phase 1 - Foundation & Tailwind Setup
+### [x] Step: Phase 1 - Foundation & Tailwind Setup
+<!-- chat-id: 9adbbfa2-d0fb-4c18-aa5e-a5ade44f9f65 -->
 1.  **Install & Configure Tailwind**:
     - Install `tailwindcss`, `postcss`, `autoprefixer`.
     - Initialize `tailwind.config.ts` and `postcss.config.js`.
