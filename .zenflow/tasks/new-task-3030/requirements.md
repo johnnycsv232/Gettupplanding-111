@@ -558,6 +558,47 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - Use Framer Motion for tilt effect on hover
 - Implement breathing animation with CSS keyframes or Framer Motion loop
 
+**Mobile-Specific Requirements:**
+
+1. **Horizontal Swipe Carousel:**
+   - Layout: Single-column, horizontal scroll with snap points
+   - CSS: `scroll-snap-type: x mandatory` for card snapping
+   - Current card: Centered with 20% of adjacent cards visible (peek effect)
+   - Swipe gesture: Drag to navigate, momentum scrolling enabled
+   - Scroll indicators: Dots below cards showing position (1/3, 2/3, 3/3)
+
+2. **Touch Optimizations:**
+   - Card tap area: Full card is tappable (not just CTA button)
+   - CTA buttons: 56px minimum height (larger than desktop's 44px)
+   - Touch ripple: Vegas Gold ripple on card tap
+   - Haptic feedback: Subtle vibration (30ms) when card snaps into position
+
+3. **Visual Adjustments:**
+   - Card width: 90vw (leaves 5vw on each side for peek effect)
+   - Growth card: Still slightly larger (1.05x vs. 1.1x desktop) to avoid breaking layout
+   - Badge positioning: Top-right corner (more visible on mobile)
+   - Font sizes: Reduce headline to 24px, body to 14px for readability
+
+4. **Performance:**
+   - Lazy-load pricing details: Only render visible card details
+   - Use CSS `contain: layout` for off-screen cards to improve scroll performance
+   - Disable 3D tilt on mobile (too CPU-intensive)
+
+5. **Conversion Flow:**
+   - CTA tap: Direct to Stripe Checkout (Apple Pay / Google Pay pre-selected if available)
+   - One-tap payment: Stripe Checkout auto-detects saved payment methods
+   - Back button: Returns to pricing carousel at last position (preserve scroll state)
+
+**Desktop vs. Mobile Layout:**
+
+| Element | Desktop | Mobile |
+|---------|---------|--------|
+| Layout | 3-column grid (side-by-side) | 1-column carousel (horizontal scroll) |
+| Card Width | 320px | 90vw (~340px on iPhone 14) |
+| Navigation | Hover effects | Swipe gestures + dot indicators |
+| CTA Height | 44px | 56px |
+| Tilt Effect | 3D tilt on hover | Disabled (performance) |
+
 ---
 
 ### 3.8 The Work (Gallery)
@@ -596,6 +637,51 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 **Performance:**
 - Thumbnail optimization: Next.js Image with `width={400}` and `quality={80}`
 - Infinite scroll (optional): Load more items as user scrolls (reduces initial load)
+
+**Mobile-Specific Requirements:**
+
+1. **Layout:**
+   - 1-column masonry grid (full-width images, stacked vertically)
+   - Filter tabs: Horizontal scroll with sticky positioning
+   - Tab indicators: Underline animation on active tab
+   - Spacing: 8px gap between images (vs. 16px desktop)
+
+2. **Instagram Stories-Style Lightbox:**
+   - Full-screen vertical layout (no chrome, just media + close button)
+   - Swipe gestures:
+     - Swipe left/right: Navigate to prev/next item
+     - Swipe down: Close lightbox (with momentum animation)
+     - Swipe up: Share (if implemented)
+   - Progress indicators: Small dots at top showing position in gallery
+   - Auto-advance: Optional 5-second timer for videos (like IG Stories)
+
+3. **Touch Interactions:**
+   - Tap image: Open lightbox immediately (no hover state)
+   - Double-tap: Zoom in/out (pinch-to-zoom also supported)
+   - Long-press: Share menu (native share dialog)
+   - Haptic feedback: Subtle pulse (20ms) on image tap
+
+4. **Performance Optimizations:**
+   - Render only 10 images initially, load more on scroll
+   - Use low-quality placeholder (LQIP) while high-res loads
+   - Videos: Load thumbnail only, defer video load until lightbox opens
+   - Intersection Observer: Pause off-screen videos to save battery
+
+5. **Visual Enhancements:**
+   - Image borders: Thinner (1px vs. 2px desktop) to maximize screen space
+   - Play icon overlay: Larger (64px vs. 48px) for easier tapping on videos
+   - Filter tabs: Bottom-anchored on mobile (easier thumb access)
+
+**Desktop vs. Mobile Layout:**
+
+| Element | Desktop | Mobile |
+|---------|---------|--------|
+| Grid Columns | 3-4 columns (masonry) | 1 column (vertical stack) |
+| Image Gap | 16px | 8px |
+| Lightbox Navigation | Arrow buttons | Swipe gestures |
+| Lightbox Close | X button (top-right) | Swipe down or X button |
+| Filter Tabs | Top-anchored | Bottom-anchored (sticky) |
+| Initial Load | 20 images | 10 images |
 
 ---
 
@@ -865,6 +951,58 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - Time-delayed: `setTimeout` for 45,000ms
 - Prevent re-trigger: Check `localStorage` before showing
 - Firestore write: Use client SDK with security rules allowing writes to `leads`
+
+**Mobile-Specific Requirements:**
+
+1. **Alternative Trigger for Mobile:**
+   - **Exit-intent doesn't work on mobile** (no mouse cursor)
+   - Mobile triggers:
+     - **Back Button Tap:** Intercept browser back button using History API
+       ```javascript
+       window.history.pushState(null, '', window.location.href);
+       window.addEventListener('popstate', () => {
+         // Show popup instead of navigating back
+         showVIPPopup();
+         // Push state again to keep user on page
+         window.history.pushState(null, '', window.location.href);
+       });
+       ```
+     - **Time-Delayed:** 30 seconds on mobile (vs. 45s desktop) - shorter attention span
+     - **Scroll-to-Bottom:** Trigger when user scrolls past 80% of page
+
+2. **Mobile Layout Adjustments:**
+   - Modal: Full-screen on mobile (100vw × 100vh), no background blur (performance)
+   - Card: Centered vertically with more padding (24px vs. 40px desktop)
+   - Headline: Smaller font size (32px vs. 48px)
+   - Email input: Full-width (90vw), 56px height (easy thumb tap)
+   - Close button: Larger (48px × 48px) and positioned bottom-left (thumb reach)
+
+3. **Touch Interactions:**
+   - Tap outside modal: Close popup (same as desktop)
+   - Swipe down on modal: Close with momentum animation
+   - Email input: Auto-focus with keyboard slide-up (use `autoFocus` prop)
+   - CTA button: Touch ripple effect with haptic feedback (50ms pulse)
+
+4. **Performance:**
+   - Background: Solid color (Deep Void Black 95% opacity) instead of blurred backdrop
+   - Animation: Reduce blur effects (too CPU-intensive on mobile)
+   - Modal rendering: Use React Portal to prevent layout shifts
+
+5. **Conversion Optimization:**
+   - Pre-fill email: If user already entered city in Hero, pre-fill email input
+   - One-tap submit: `enterkeyhint="send"` on input for quick submission
+   - Social proof: Add small text below CTA: "Join 2,000+ VIP members"
+
+**Desktop vs. Mobile Comparison:**
+
+| Element | Desktop | Mobile |
+|---------|---------|--------|
+| Trigger | Exit-intent (mouse) | Back button + time-delay + scroll-to-bottom |
+| Time-Delay | 45 seconds | 30 seconds |
+| Background | Blurred backdrop | Solid color (performance) |
+| Modal Size | Centered card (600px) | Full-screen |
+| Close Button | Top-right (32px) | Bottom-left (48px, thumb reach) |
+| Input Height | 48px | 56px |
 
 ### 4.2 Hero City Input Lead Capture
 
@@ -1218,17 +1356,34 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 9.1 Technical Success Criteria
 
 **Must-Have (Launch Blockers):**
-- ✅ Lighthouse Performance: 100/100
-- ✅ Lighthouse Accessibility: 100/100
+- ✅ **Desktop:** Lighthouse Performance: 100/100
+- ✅ **Mobile:** Lighthouse Performance: 95+/100 (Three.js may impact mobile score)
+- ✅ Lighthouse Accessibility: 100/100 (desktop AND mobile)
 - ✅ All 16 sections implemented and visually match design spec
 - ✅ Stripe integration functional (test mode purchases work)
 - ✅ Firebase Security Rules tested and passing
-- ✅ Exit-intent popup triggers correctly
+- ✅ Exit-intent popup triggers correctly (desktop: mouse exit, mobile: back button)
 - ✅ Lead capture stores to Firestore
 - ✅ Admin dashboard functional (login, view data)
-- ✅ Mobile responsive (all sections)
+- ✅ **Mobile-first implementation:** Site designed and built for mobile FIRST
+- ✅ **Mobile testing on real devices:** Tested on iPhone 12+ and Samsung Galaxy S21+
+- ✅ **Touch interactions:** All buttons have 44px minimum tap targets
+- ✅ **Swipe gestures:** Gallery and pricing carousels work with swipe
+- ✅ **Haptic feedback:** CTAs vibrate on tap (iOS/Android)
 - ✅ No console errors on production build
 - ✅ Test coverage: >80%
+
+**Mobile-Specific Success Criteria:**
+- ✅ **Hero loads in < 3s on 4G connection** (tested with Chrome DevTools throttling)
+- ✅ **Pricing carousel swipes smoothly** (60fps, no jank)
+- ✅ **Gallery lightbox has Instagram Stories-style swipe navigation**
+- ✅ **Exit-intent popup triggers on back button tap** (mobile)
+- ✅ **All forms have large inputs** (56px height minimum)
+- ✅ **CTAs are thumb-friendly** (bottom-anchored on mobile)
+- ✅ **One-tap checkout works** (Apple Pay / Google Pay integration)
+- ✅ **Device gyroscope parallax works** (iOS Safari, Chrome Android)
+- ✅ **PWA manifest configured** ("Add to Home Screen" prompt)
+- ✅ **Landscape orientation handled gracefully**
 
 **Nice-to-Have (Post-Launch):**
 - Lighthouse SEO: 100/100 (may require content adjustments)
@@ -1243,15 +1398,34 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - 50+ Pilot purchases ($17,250 revenue)
 - 10+ Retainer subscriptions ($5,000-$9,950 MRR)
 
-**Engagement:**
+**Engagement (Overall):**
 - Average session duration: >2 minutes
 - Bounce rate: <40%
 - Gallery lightbox opens: >30% of visitors
 
-**Conversion Rates:**
+**Engagement (Mobile-Specific):**
+- **Mobile traffic:** >60% of total traffic (nightlife industry is mobile-heavy)
+- **Mobile session duration:** >90 seconds (shorter than desktop, but still engaged)
+- **Mobile bounce rate:** <45% (slightly higher than desktop is acceptable)
+- **Pricing carousel swipes:** >40% of mobile visitors interact with pricing carousel
+- **Gallery swipes:** >50% of mobile visitors swipe through gallery
+- **Share button taps:** >5% of mobile visitors tap share on gallery items
+
+**Conversion Rates (Overall):**
 - Hero → Pilot CTA: >5% click-through
 - Exit-intent popup: >10% email capture rate
 - Pricing page → Checkout: >15% click-through
+
+**Conversion Rates (Mobile-Specific):**
+- **Mobile → Pilot CTA:** >4% click-through (slightly lower than desktop due to smaller screen)
+- **Mobile exit-intent (back button):** >8% email capture rate
+- **Mobile → One-tap checkout:** >20% completion rate (Apple Pay / Google Pay boost)
+- **Sticky bottom CTA (mobile):** >6% click-through after appearing
+
+**"Wow Factor" Success Metric:**
+> **Primary Goal:** When a venue owner shows this site to their business partner on mobile, the partner should immediately say: "Who built this? We need them."
+- Measure: Post-launch user interviews (ask 10 customers how they heard about us)
+- Target: >50% mention "saw the website" as a key decision factor
 
 ---
 
@@ -1540,13 +1714,94 @@ gettuppent-landing/
 
 ---
 
+## Appendix D: Mobile-First Enhancement Summary
+
+**CRITICAL:** This table serves as the quick reference for all mobile-specific enhancements. Every section must implement these features.
+
+| Section | Mobile Layout | Touch Interactions | Performance Optimization | "Wow Factor" Element |
+|---------|--------------|-------------------|-------------------------|---------------------|
+| **Hero** | Full-screen (100vh), bottom-anchored CTAs | Device gyroscope parallax, haptic feedback on CTA tap | 50 particles (vs. 200 desktop), 720p video | Particles tilt with phone movement |
+| **The Pilot** | Full-width glassmorphism card, larger badge | Tap card to expand, swipe to dismiss | Disable 3D tilt (performance) | Pulsing neon badge more vibrant on mobile |
+| **Pricing (Retainers)** | Horizontal swipe carousel with snap points | Swipe to navigate, haptic feedback on snap | Lazy-load off-screen cards | Peek effect (20% of adjacent cards visible) |
+| **Gallery** | 1-column vertical stack | Instagram Stories-style swipe (left/right/down to close) | 10 images initial load, LQIP placeholders | Double-tap to zoom, long-press to share |
+| **Exit-Intent Popup** | Full-screen modal, bottom-left close button | Back button intercept, swipe down to close | Solid background (no blur) | Pre-fill email if user entered city in Hero |
+| **Sticky Header** | Transparent → solid on scroll, hamburger menu | Tap to expand menu, smooth scroll to sections | Hide on scroll down (save screen space) | Slide-in animation for CTA button |
+| **Sticky Bottom CTA** | Appears after 2 scrolls, always visible | Haptic feedback on tap, Apple Pay / Google Pay integration | Lightweight bar (no heavy graphics) | Gold glow pulses every 3 seconds |
+
+**Mobile-Specific Technologies:**
+
+| Technology | Purpose | Implementation | Browser Support |
+|------------|---------|----------------|----------------|
+| **DeviceMotion API** | Gyroscope parallax for particles | `window.addEventListener('deviceorientation', ...)` | iOS Safari 13+, Chrome Android 80+ |
+| **Navigator.vibrate()** | Haptic feedback on CTA taps | `navigator.vibrate([50])` | Chrome Android, iOS Safari (limited) |
+| **History API** | Exit-intent via back button intercept | `window.history.pushState()` + `popstate` listener | All modern mobile browsers |
+| **CSS scroll-snap** | Smooth carousel snapping | `scroll-snap-type: x mandatory` | iOS Safari 11+, Chrome Android 69+ |
+| **Intersection Observer** | Lazy-load images, pause off-screen videos | `new IntersectionObserver(...)` | All modern mobile browsers |
+| **Apple Pay / Google Pay** | One-tap checkout | Stripe Payment Request Button | iOS Safari, Chrome Android |
+| **PWA Manifest** | "Add to Home Screen" prompt | `manifest.json` with icons and theme | All modern mobile browsers |
+
+**Mobile Testing Checklist:**
+
+- [ ] Test on real iPhone 12/13/14 (iOS Safari 15+)
+- [ ] Test on real Samsung Galaxy S21/S22 (Chrome Android 11+)
+- [ ] Test on iPhone SE (smallest screen: 320px width)
+- [ ] Test on iPhone 14 Pro Max (largest screen: 428px width)
+- [ ] Test portrait orientation (primary)
+- [ ] Test landscape orientation (adjust layout gracefully)
+- [ ] Test on 4G connection (Chrome DevTools throttling: Fast 3G)
+- [ ] Test with low battery mode (iOS) - ensure animations still work
+- [ ] Test with reduced motion (accessibility setting) - disable parallax
+- [ ] Test form inputs with iOS keyboard (ensure no viewport overlap)
+- [ ] Test swipe gestures (pricing, gallery, exit-intent close)
+- [ ] Test haptic feedback (vibration on CTA taps)
+- [ ] Test back button intercept (exit-intent popup)
+- [ ] Test Apple Pay / Google Pay checkout flow
+- [ ] Test "Add to Home Screen" PWA prompt
+
+**Mobile Performance Targets:**
+
+| Metric | Target | How to Measure |
+|--------|--------|----------------|
+| **First Contentful Paint (FCP)** | < 1.5s | Chrome DevTools Lighthouse (mobile) |
+| **Largest Contentful Paint (LCP)** | < 2.5s | Chrome DevTools Lighthouse (mobile) |
+| **First Input Delay (FID)** | < 100ms | Real User Monitoring (RUM) or Lighthouse |
+| **Cumulative Layout Shift (CLS)** | < 0.1 | Chrome DevTools Lighthouse (mobile) |
+| **Time to Interactive (TTI)** | < 3.5s | Chrome DevTools Lighthouse (mobile) |
+| **Total Page Size** | < 2MB | Chrome DevTools Network tab |
+| **JavaScript Bundle Size** | < 300KB (gzipped) | Next.js build output |
+| **Hero Video Size** | < 3MB (720p mobile) | Video compression tool |
+
+**Mobile-First Development Workflow:**
+
+1. **Design in Figma/Sketch at 375px width first** (iPhone standard size)
+2. **Build mobile layout first** using Tailwind mobile-first breakpoints
+3. **Test on real device immediately** after each component
+4. **Add desktop enhancements** using `md:` and `lg:` Tailwind breakpoints
+5. **Optimize for touch** (44px minimum tap targets, swipe gestures)
+6. **Test performance on throttled connection** (Fast 3G in Chrome DevTools)
+7. **Iterate until mobile experience is flawless** before moving to next component
+
+---
+
 ## Approval & Sign-Off
 
 **Document Status:** ✅ Ready for Review
 
+**Version:** 2.1 - Mobile-First Enhanced  
 **Prepared By:** AI Development Agent (Zencoder)  
 **Date:** January 26, 2026  
+**Last Updated:** January 26, 2026 - Added comprehensive mobile-first specifications  
 **Next Step:** Await user approval → Proceed to Technical Specification
+
+**Mobile-First Enhancements:**
+- ✅ Added Section 1.3: Mobile-First Development Philosophy (7 core principles)
+- ✅ Enhanced Hero Section with device gyroscope parallax and mobile-specific optimizations
+- ✅ Enhanced Pricing Section with horizontal swipe carousel and peek effect
+- ✅ Enhanced Gallery Section with Instagram Stories-style lightbox and swipe gestures
+- ✅ Enhanced Exit-Intent Popup with back button intercept for mobile
+- ✅ Added mobile-specific success criteria and engagement metrics
+- ✅ Added Appendix D: Mobile-First Enhancement Summary with quick reference tables
+- ✅ Added comprehensive mobile testing checklist and performance targets
 
 **User Approval Required:**
 - [ ] PRD reviewed and approved
