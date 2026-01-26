@@ -7,7 +7,8 @@
 
 ## Workflow Steps
 
-### [ ] Step: Requirements
+### [x] Step: Requirements
+<!-- chat-id: 4f54bd70-53d3-419a-a64b-cca9470bebc1 -->
 
 Create a Product Requirements Document (PRD) based on the feature description.
 
@@ -20,6 +21,7 @@ Create a Product Requirements Document (PRD) based on the feature description.
 Save the PRD to `{@artifacts_path}/requirements.md`.
 
 ### [ ] Step: Technical Specification
+<!-- chat-id: 1093fc4c-9178-43c2-9edb-9e61ab2c2d8f -->
 
 Create a technical specification based on the PRD in `{@artifacts_path}/requirements.md`.
 
