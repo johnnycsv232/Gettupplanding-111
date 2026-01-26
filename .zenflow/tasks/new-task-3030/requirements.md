@@ -775,10 +775,11 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - Headline: "MEET THE FOUNDER"
 - Image: Professional photo of founder (provided: johnny_cage.png.jpg)
 - Copy:
-  - Name: Johnny Cage (or actual founder name)
+  - Name: **Mpls Johnny Cage** (@mplsjohnnycage)
   - Background: 10 years in nightlife photography, 5 years full-time
   - Mission: "Elevate Minneapolis nightlife content to LA/Miami standards"
   - Personal touch: "I started shooting parties with a $300 camera. Now I deliver cinema-grade content that venues can't afford to ignore."
+  - Social: Instagram/TikTok handle displayed prominently
 - CTA: "WORK WITH ME" (links to Pilot checkout)
 
 **Visual:**
@@ -1510,7 +1511,14 @@ FIREBASE_ADMIN_PROJECT_ID=
 FIREBASE_ADMIN_CLIENT_EMAIL=
 FIREBASE_ADMIN_PRIVATE_KEY=
 SANITY_API_TOKEN= (if using authenticated requests)
+RESEND_API_KEY= (for automated audit emails)
 ```
+
+**Email Configuration (Resend.com):**
+- Sign up at https://resend.com
+- Create API key in dashboard
+- Add verified domain or use resend.dev for testing
+- Free tier: 3,000 emails/month
 
 ---
 
@@ -1533,36 +1541,83 @@ SANITY_API_TOKEN= (if using authenticated requests)
 4. **Legal:**
    - Assumption: Privacy Policy and Terms of Service will be provided as separate pages or external links
 
-### 12.2 Open Questions (Requiring User Input)
+### 12.2 Open Questions (ANSWERED)
 
 1. **Domain & Hosting:**
-   - Q: What is the production domain? (e.g., gettuppent.com)
-   - Q: Is Vercel deployment already set up, or does it need configuration?
+   - ✅ **Domain:** Free Vercel domain for now (e.g., `gettuppent.vercel.app`)
+   - ✅ **Vercel:** Will configure during deployment
 
 2. **Brand Assets:**
-   - Q: Do we have a logo file? (SVG preferred)
-   - Q: Do we have client logos for the Events section?
-   - Q: Do we have actual event photos for the gallery, or should we use placeholders?
+   - ✅ **Logo:** Will create placeholder or use text-based logo for now
+   - ✅ **Client Logos:** Has real logos but use placeholders for testing
+   - ✅ **Event Photos/Videos:** Has real content but use placeholders for testing
 
 3. **Content:**
-   - Q: What is the founder's real name? (Currently using "Johnny Cage" as placeholder)
-   - Q: Do we have real testimonials, or should we use generic ones for launch?
+   - ✅ **Founder Name:** Mpls Johnny Cage (@mplsjohnnycage)
+   - ✅ **Testimonials:** Will use generic ones for launch, replace with real later
 
 4. **Cal.com:**
-   - Q: What is the Cal.com embed URL for the Dominate Retainer consultation?
+   - ⏳ **Cal.com URL:** Will configure during implementation (or use contact form fallback)
 
-5. **Email Delivery:**
-   - Q: How will the "free 5-point audit" be delivered after VIP popup signup?
-   - A: Options:
-     - Manual email from admin dashboard
-     - Automated email via Firebase Cloud Functions + SendGrid/Mailgun
-     - Zapier integration (Firestore → Email)
+5. **Email Delivery (ANSWERED - See Section 12.3 for Recommendation):**
+   - ✅ **Requirement:** "Most easiest and most automated way"
+   - ✅ **Decision:** Resend.com (recommended) or Zapier (alternative)
 
 6. **Analytics:**
-   - Q: Do we need Google Analytics, or is Vercel Analytics sufficient?
+   - ✅ **Decision:** Start with Vercel Analytics (built-in, free), add Google Analytics post-launch if needed
 
 7. **A/B Testing:**
-   - Q: Should we set up A/B testing infrastructure from launch, or add post-launch?
+   - ✅ **Decision:** Add post-launch (not a launch blocker)
+
+---
+
+### 12.3 Email Automation Recommendation
+
+**RECOMMENDED: Resend.com (Best Balance of Easy + Automated + Free)**
+
+**Why Resend:**
+- ✅ **Easiest Developer Experience:** Literally 3 lines of code in Next.js API route
+- ✅ **Free Tier:** 3,000 emails/month, 100 emails/day (more than enough)
+- ✅ **Beautiful Templates:** Use React Email for professional-looking audits
+- ✅ **Native Next.js Integration:** Built for modern web apps
+- ✅ **Deliverability:** High inbox rate, DKIM/SPF built-in
+- ✅ **No Monthly Cost:** Free tier covers your needs
+
+**Implementation:**
+```bash
+npm install resend react-email
+```
+
+```typescript
+// src/app/api/send-audit/route.ts
+import { Resend } from 'resend';
+import { AuditEmail } from '@/emails/AuditEmail';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function POST(req: Request) {
+  const { email } = await req.json();
+  
+  await resend.emails.send({
+    from: 'GETTUPPENT <audit@gettuppent.com>',
+    to: email,
+    subject: '🎬 Your Free 5-Point Content Audit',
+    react: AuditEmail({ recipientEmail: email }),
+  });
+  
+  return Response.json({ success: true });
+}
+```
+
+**Trigger:** When user submits VIP popup email, call this API route → Instant delivery
+
+**Alternative Option: Zapier (No-Code, Slightly More Cost)**
+- ✅ **Setup Time:** 5 minutes (no code)
+- ✅ **Cost:** $20/month for paid plan (100 tasks/month on free tier)
+- ✅ **Flow:** Firestore new document → Send email via Gmail/SendGrid
+- ❌ **Drawback:** External dependency, monthly cost
+
+**Decision:** Use **Resend.com** for automated audit delivery.
 
 ---
 
@@ -1803,16 +1858,21 @@ gettuppent-landing/
 - ✅ Added Appendix D: Mobile-First Enhancement Summary with quick reference tables
 - ✅ Added comprehensive mobile testing checklist and performance targets
 
-**User Approval Required:**
-- [ ] PRD reviewed and approved
-- [ ] Open questions answered (Section 12.2)
-- [ ] Brand assets provided or sourcing plan confirmed
-- [ ] Third-party services configured (Stripe products, Sanity schema)
+**User Approval Status:**
+- ✅ **PRD reviewed and approved** (mobile-first enhancements included)
+- ✅ **Open questions answered** (Section 12.2 - all questions resolved)
+- ✅ **Brand assets sourcing plan confirmed** (placeholders for testing, real assets later)
+- ✅ **Email automation decision made** (Resend.com for automated audit delivery)
+- ⏳ **Third-party services configuration** (to be completed during implementation)
+  - Stripe products creation (Pilot, Audit, 3 Retainers)
+  - Sanity schema deployment (galleryItem, testimonial)
+  - Resend.com account setup (free tier)
+  - Firebase Security Rules deployment
 
-**Upon Approval:**
-- Proceed to `spec.md` creation (Technical Specification)
-- Begin Tailwind CSS configuration
-- Set up component scaffolding in `src/features/landing/components/v2/`
+**Ready to Proceed:**
+- ✅ **Next Step:** Create Technical Specification (`spec.md`)
+- ✅ **After Spec:** Create Implementation Plan (`plan.md`)
+- ✅ **After Plan:** Begin development with Tailwind CSS setup and component scaffolding in `src/features/landing/components/v2/`
 
 ---
 
