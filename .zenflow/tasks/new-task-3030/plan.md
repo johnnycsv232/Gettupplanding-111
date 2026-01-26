@@ -27,6 +27,7 @@ Create a technical specification based on the PRD.
     - Run `npm run dev` and check for errors.
 
 ### [ ] Step: Phase 2 - Shared Core Components
+<!-- chat-id: 918c8313-e78e-458b-968e-19065bdeeb4b -->
 1.  **UI Primitives**:
     - Create `src/components/ui/Button.tsx` (Liquid Glass style).
     - Create `src/components/ui/GlassCard.tsx` (Backdrop blur + borders).
