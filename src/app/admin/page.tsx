@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { getFirebaseDb } from '@/lib/firebase';
-import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { collection, query, orderBy, limit, getDocs, Timestamp } from 'firebase/firestore';
 import GlassCard from '@/components/ui/GlassCard';
 
 interface Lead {
   id: string;
   email: string;
   city?: string;
-  createdAt: any;
+  createdAt: Timestamp | null;
   source?: string;
 }
 
@@ -25,7 +25,6 @@ export default function AdminDashboard() {
         const snapshot = await getDocs(q);
         const leadsData = snapshot.docs.map(doc => ({
           id: doc.id,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ...doc.data()
         })) as Lead[];
         setLeads(leadsData);

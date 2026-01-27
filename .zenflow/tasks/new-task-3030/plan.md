@@ -75,6 +75,7 @@ Create a technical specification based on the PRD.
     - [x] Display Leads table and Booking status.
 
 ### [ ] Step: Final Verification
+<!-- chat-id: 21e4296e-65aa-433e-a783-e607e41c0467 -->
 1.  **Lint & Typecheck**: Run `npm run lint` and `npm run type-check`.
 2.  **Test**: Run `npm run test` (if applicable).
 3.  **Build**: Run `npm run build` to ensure no build errors.

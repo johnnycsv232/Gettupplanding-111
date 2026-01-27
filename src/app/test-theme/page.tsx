@@ -39,7 +39,7 @@ export default function TestThemePage() {
             </GlassCard>
             <GlassCard className="p-6" intensity="medium">
               <h3 className="text-vegas-gold font-display text-xl mb-2">Medium Intensity</h3>
-              <p className="text-off-white/70">Our standard "Liquid Glass" effect.</p>
+              <p className="text-off-white/70">Our standard &quot;Liquid Glass&quot; effect.</p>
             </GlassCard>
             <GlassCard className="p-6" intensity="high" hoverEffect>
               <h3 className="text-vegas-gold font-display text-xl mb-2">High + Hover</h3>
@@ -58,7 +58,7 @@ export default function TestThemePage() {
               <div className="p-10 text-center">
                 <h2 className="font-display text-4xl text-vegas-gold mb-4 uppercase">The Velvet Rope</h2>
                 <p className="text-off-white mb-8">
-                  You're about to enter the inner circle. Join the elite who command the screen.
+                  You&apos;re about to enter the inner circle. Join the elite who command the screen.
                 </p>
                 <div className="flex flex-col gap-4">
                   <input 
