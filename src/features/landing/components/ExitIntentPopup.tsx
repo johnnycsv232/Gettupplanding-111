@@ -5,16 +5,29 @@ import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import { useExitIntent } from '@/hooks/useExitIntent';
 import { Sparkles } from 'lucide-react';
+import { saveLead } from '@/lib/leads';
 
 export default function ExitIntentPopup() {
   const { showExitIntent, closeExitIntent } = useExitIntent();
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Exit Intent Lead:", email);
-    // Submit to Firebase
-    closeExitIntent();
+    setIsSubmitting(true);
+    
+    const result = await saveLead({ email, source: 'exit-intent' });
+    
+    setIsSubmitting(false);
+    if (result.success) {
+      setIsSubmitted(true);
+      setTimeout(() => {
+        closeExitIntent();
+        setIsSubmitted(false);
+        setEmail('');
+      }, 2000);
+    }
   };
 
   return (
@@ -32,17 +45,26 @@ export default function ExitIntentPopup() {
         </div>
 
         <form onSubmit={handleSubmit} className="w-full space-y-4">
-          <input 
-            type="email" 
-            placeholder="Enter your email" 
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-neon-magenta focus:outline-none transition-colors"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <Button variant="neon" size="lg" className="w-full">
-            GET VIP ACCESS
-          </Button>
+          {isSubmitted ? (
+            <div className="text-neon-magenta font-display text-xl py-4 animate-pulse">
+              VIP ACCESS GRANTED.
+            </div>
+          ) : (
+            <>
+              <input 
+                type="email" 
+                placeholder="Enter your email" 
+                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-neon-magenta focus:outline-none transition-colors"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={isSubmitting}
+              />
+              <Button variant="neon" size="lg" className="w-full" isLoading={isSubmitting}>
+                GET VIP ACCESS
+              </Button>
+            </>
+          )}
         </form>
 
         <button onClick={closeExitIntent} className="text-xs text-white/30 hover:text-white uppercase tracking-widest">

@@ -26,53 +26,53 @@ Create a technical specification based on the PRD.
     - Create a test page/component to verify Tailwind styles are applying.
     - Run `npm run dev` and check for errors.
 
-### [ ] Step: Phase 2 - Shared Core Components
+### [x] Step: Phase 2 - Shared Core Components
 <!-- chat-id: 918c8313-e78e-458b-968e-19065bdeeb4b -->
 1.  **UI Primitives**:
-    - Create `src/components/ui/Button.tsx` (Liquid Glass style).
-    - Create `src/components/ui/GlassCard.tsx` (Backdrop blur + borders).
-    - Create `src/components/ui/Modal.tsx` (For Exit Intent).
+    - [x] Create `src/components/ui/Button.tsx` (Liquid Glass style).
+    - [x] Create `src/components/ui/GlassCard.tsx` (Backdrop blur + borders).
+    - [x] Create `src/components/ui/Modal.tsx` (For Exit Intent).
 2.  **Three.js Setup**:
-    - Implement `src/components/three/ParticleField.tsx` using `@react-three/fiber`.
-    - Ensure it handles mouse interaction/parallax.
+    - [x] Implement `src/components/three/ParticleField.tsx` using `@react-three/fiber`.
+    - [x] Ensure it handles mouse interaction/parallax.
 
-### [ ] Step: Phase 3 - Sections Group A (Header & Hero)
-1.  **Sticky Header**: Implement `src/features/landing/components/StickyHeader.tsx` with slide-in CTA.
-2.  **Hero Section**: Implement `src/features/landing/components/HeroSection.tsx`.
-    - Video background + Particle Field overlay.
-    - Lead Gen Input (Email).
-3.  **Exit Intent**: Implement `useExitIntent` hook and integrate the "Velvet Rope" popup.
+### [x] Step: Phase 3 - Sections Group A (Header & Hero)
+1.  **Sticky Header**: [x] Implement `src/features/landing/components/StickyHeader.tsx` with slide-in CTA.
+2.  **Hero Section**: [x] Implement `src/features/landing/components/HeroSection.tsx`.
+    - [x] Video background + Particle Field overlay.
+    - [x] Lead Gen Input (Email).
+3.  **Exit Intent**: [x] Implement `useExitIntent` hook and integrate the "Velvet Rope" popup.
 
-### [ ] Step: Phase 4 - Sections Group B (Offer & Pricing)
-1.  **Pilot & Audit**: Implement `PilotSection.tsx` and `ContentAuditSection.tsx`.
-2.  **Problem & Solution**: Implement `ProblemSolutionSection.tsx` and `WhatYouGetSection.tsx`.
-3.  **Retainers (Pricing)**: Implement `RetainersSection.tsx`.
-    - 3-column layout with "Growth" highlight.
-    - Integrate Stripe Payment Links (placeholders for now).
+### [x] Step: Phase 4 - Sections Group B (Offer & Pricing)
+1.  **Pilot & Audit**: [x] Implement `PilotSection.tsx` and `ContentAuditSection.tsx`.
+2.  **Problem & Solution**: [x] Implement `ProblemSolutionSection.tsx` and `WhatYouGetSection.tsx`.
+3.  **Retainers (Pricing)**: [x] Implement `RetainersSection.tsx`.
+    - [x] 3-column layout with "Growth" highlight.
+    - [x] Integrate Stripe Payment Links (placeholders for now).
 
-### [ ] Step: Phase 5 - Sections Group C (Visuals & Social Proof)
-1.  **Gallery**: Implement `GallerySection.tsx`.
-    - Setup Sanity Client fetch (mock data if Sanity not ready).
-    - Implement Masonry Grid with Framer Motion liquid transitions.
-2.  **Cinema & Events**: Implement `CinemaGradeSection.tsx` and `EventsSection.tsx`.
-3.  **Testimonials & Founder**: Implement `TestimonialsSection.tsx` and `FounderSection.tsx`.
+### [x] Step: Phase 5 - Sections Group C (Visuals & Social Proof)
+1.  **Gallery**: [x] Implement `GallerySection.tsx`.
+    - [x] Setup Sanity Client fetch (mock data if Sanity not ready).
+    - [x] Implement Masonry Grid with Framer Motion liquid transitions.
+2.  **Cinema & Events**: [x] Implement `CinemaGradeSection.tsx` and `EventsSection.tsx`.
+3.  **Testimonials & Founder**: [x] Implement `TestimonialsSection.tsx` and `FounderSection.tsx`.
 
-### [ ] Step: Phase 6 - Sections Group D (Closing & Footer)
-1.  **Brand Verticals**: Implement `GettuppGirlsSection.tsx`, `UpgradesSection.tsx`, `RulesSection.tsx`.
-2.  **Final CTA & Footer**: Implement `FinalCTASection.tsx` (with Particles) and `Footer.tsx`.
+### [x] Step: Phase 6 - Sections Group D (Closing & Footer)
+1.  **Brand Verticals**: [x] Implement `GettuppGirlsSection.tsx`, `UpgradesSection.tsx`, `RulesSection.tsx`.
+2.  **Final CTA & Footer**: [x] Implement `FinalCTASection.tsx` (with Particles) and `Footer.tsx`.
 
-### [ ] Step: Phase 7 - Page Assembly & Integrations
-1.  **Assemble Page**: Update `src/app/page.tsx` to include all 16 sections in order.
+### [x] Step: Phase 7 - Page Assembly & Integrations
+1.  **Assemble Page**: [x] Update `src/app/page.tsx` to include all 16 sections in order.
 2.  **Firebase Integration**:
-    - Create `src/lib/firebase/client.ts`.
-    - Connect Hero Input and Exit Intent Popup to Firestore `leads` collection.
+    - [x] Create `src/lib/firebase/client.ts` (using existing `src/lib/firebase.ts`).
+    - [x] Connect Hero Input and Exit Intent Popup to Firestore `leads` collection.
 3.  **Stripe Webhook**:
-    - Create `src/app/api/webhooks/stripe/route.ts` to handle payment success events.
+    - [x] Create `src/app/api/webhooks/stripe/route.ts` to handle payment success events.
 
-### [ ] Step: Phase 8 - Admin Dashboard
-1.  **Admin Route**: Create `src/app/admin/page.tsx`.
-    - Protect with Firebase Auth (allow-list).
-    - Display Leads table and Booking status.
+### [x] Step: Phase 8 - Admin Dashboard
+1.  **Admin Route**: [x] Create `src/app/admin/page.tsx`.
+    - [x] Protect with Firebase Auth (allow-list).
+    - [x] Display Leads table and Booking status.
 
 ### [ ] Step: Final Verification
 1.  **Lint & Typecheck**: Run `npm run lint` and `npm run type-check`.

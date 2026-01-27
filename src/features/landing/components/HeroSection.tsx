@@ -5,15 +5,26 @@ import ParticleField from '@/components/three/ParticleField';
 import Button from '@/components/ui/Button';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { useState } from 'react';
+import { saveLead } from '@/lib/leads';
 
 export default function HeroSection() {
   const [email, setEmail] = useState('');
   const [city, setCity] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle submission (Firebase)
-    console.log('Lead:', { email, city });
+    setIsSubmitting(true);
+    
+    const result = await saveLead({ email, city, source: 'hero' });
+    
+    setIsSubmitting(false);
+    if (result.success) {
+      setIsSubmitted(true);
+      setEmail('');
+      setCity('');
+    }
   };
 
   return (
@@ -65,29 +76,39 @@ export default function HeroSection() {
           onSubmit={handleSubmit}
           className="mt-8 w-full max-w-md p-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-2 box-glow-gold"
         >
-          <div className="pl-4 text-vegas-gold">
-            <MapPin size={20} />
-          </div>
-          <input 
-            type="text" 
-            placeholder="Your City (e.g. Minneapolis)" 
-            className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          />
-           <div className="w-px h-6 bg-white/20" />
-           <input 
-            type="email" 
-            placeholder="Email Address" 
-            className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <Button variant="primary" size="sm" type="submit" className="rounded-full px-6">
-            JOIN <ArrowRight size={16} />
-          </Button>
+          {isSubmitted ? (
+            <div className="flex-1 py-2 text-vegas-gold font-display text-lg animate-pulse">
+              ACCESS GRANTED. CHECK YOUR EMAIL.
+            </div>
+          ) : (
+            <>
+              <div className="pl-4 text-vegas-gold">
+                <MapPin size={20} />
+              </div>
+              <input 
+                type="text" 
+                placeholder="Your City" 
+                className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none text-sm"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                required
+                disabled={isSubmitting}
+              />
+              <div className="w-px h-6 bg-white/20" />
+              <input 
+                type="email" 
+                placeholder="Email Address" 
+                className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none text-sm"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={isSubmitting}
+              />
+              <Button variant="primary" size="sm" type="submit" className="rounded-full px-6 whitespace-nowrap" isLoading={isSubmitting}>
+                JOIN <ArrowRight size={16} />
+              </Button>
+            </>
+          )}
         </motion.form>
 
         <motion.div
