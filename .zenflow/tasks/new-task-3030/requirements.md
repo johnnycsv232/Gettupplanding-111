@@ -238,6 +238,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
      createdAt: Timestamp
    }
    ```
+   *Note: This collection is stored in Firestore. Access is strictly controlled via Firebase Security Rules which check if `request.auth.token.email` exists in this collection.*
 
 **Security Rules:**
 - `leads`: Write-only for client, read for authenticated admins

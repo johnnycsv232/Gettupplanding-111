@@ -57,6 +57,7 @@ src/
 Build each section as a standalone component in `src/features/landing/components`.
 *Note: We will reference the `DESIGN_V2.md` for specific interactions.*
 
+**Section Components:**
 1.  **HeroSection**: Video BG + Particles + Lead Input.
 2.  **StickyHeader**: Slide-in animation + CTA.
 3.  **PilotSection**: Glass card + Tilt.
@@ -64,7 +65,7 @@ Build each section as a standalone component in `src/features/landing/components
 5.  **ProblemSolutionSection**: Text/Layout.
 6.  **WhatYouGetSection**: Grid.
 7.  **RetainersSection**: Pricing logic + Stripe links.
-8.  **GallerySection**: Sanity fetch + Masonry + Liquid transition (Framer Motion).
+8.  **GallerySection**: Sanity fetch + Masonry + Liquid transition.
 9.  **CinemaGradeSection**: Video UI.
 10. **EventsSection**: Logos/List.
 11. **TestimonialsSection**: Carousel.
@@ -73,6 +74,17 @@ Build each section as a standalone component in `src/features/landing/components
 14. **UpgradesSection**: List.
 15. **RulesSection**: List.
 16. **FinalCTASection**: Particle burst.
+
+**Liquid Transitions & Visual Effects:**
+- **Custom Shaders**: The `GallerySection` and `FinalCTASection` may require custom GLSL shaders (via `@react-three/drei`'s `MeshDistortionMaterial` or custom `shaderMaterial`) to achieve "liquid" effects that standard CSS/Framer Motion cannot replicate.
+- **SVG Filters**: Use SVG `feTurbulence` and `feDisplacementMap` for organic, liquid-like distortion on text and image hover states.
+
+**Mobile & Touch Optimization:**
+- **Tap Targets**: All interactive elements (buttons, inputs, links) MUST have a minimum hit area of 44x44px.
+- **Touch States**: Implement specific `:active` or `whileTap` states that provide immediate visual feedback (e.g., Vegas Gold glow pulse) on mobile.
+- **Particle Budget**: 
+  - Mobile: Max 50 particles.
+  - Desktop: 200 particles.
 
 ### Phase 4: Integrations & Logic
 1.  **Firebase**: Implement `useAuth` hook, `leads` collection writing.

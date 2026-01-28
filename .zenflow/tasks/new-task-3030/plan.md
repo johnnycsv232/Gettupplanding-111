@@ -17,6 +17,8 @@ Create a technical specification based on the PRD.
 
 ### [x] Step: Phase 1 - Foundation & Tailwind Setup
 <!-- chat-id: 9adbbfa2-d0fb-4c18-aa5e-a5ade44f9f65 -->
+0.  **Skill Indexing**:
+    - [x] Run `npm run skills:index` to regenerate the skill library.
 1.  **Install & Configure Tailwind**:
     - Install `tailwindcss`, `postcss`, `autoprefixer`.
     - Initialize `tailwind.config.ts` and `postcss.config.js`.
