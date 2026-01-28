@@ -85,3 +85,8 @@ Create a technical specification based on the PRD.
 2.  **Test**: Run `npm run test` (if applicable).
 3.  **Build**: Run `npm run build` to ensure no build errors.
 
+### [x] Step: Resolve Merge Issues
+1.  **Fix Long Paths**: Enabled `core.longpaths` to fix Windows filename length errors.
+2.  **Final Polish**: Staged and committed pending UI/accessibility improvements.
+3.  **Push**: Pushed all changes to origin.
+
