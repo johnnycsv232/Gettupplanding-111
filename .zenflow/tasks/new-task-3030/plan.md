@@ -44,6 +44,7 @@ Create a technical specification based on the PRD.
 3.  **Exit Intent**: [x] Implement `useExitIntent` hook and integrate the "Velvet Rope" popup.
 
 ### [x] Step: Phase 4 - Sections Group B (Offer & Pricing)
+<!-- chat-id: b6c2d70c-7b31-4935-8a40-f665063cc4d2 -->
 1.  **Pilot & Audit**: [x] Implement `PilotSection.tsx` and `ContentAuditSection.tsx`.
 2.  **Problem & Solution**: [x] Implement `ProblemSolutionSection.tsx` and `WhatYouGetSection.tsx`.
 3.  **Retainers (Pricing)**: [x] Implement `RetainersSection.tsx`.
@@ -51,6 +52,7 @@ Create a technical specification based on the PRD.
     - [x] Integrate Stripe Payment Links (placeholders for now).
 
 ### [x] Step: Phase 5 - Sections Group C (Visuals & Social Proof)
+<!-- chat-id: c14e62b9-537f-43da-9c34-ca5ebfea85b4 -->
 1.  **Gallery**: [x] Implement `GallerySection.tsx`.
     - [x] Setup Sanity Client fetch (mock data if Sanity not ready).
     - [x] Implement Masonry Grid with Framer Motion liquid transitions.
@@ -58,10 +60,12 @@ Create a technical specification based on the PRD.
 3.  **Testimonials & Founder**: [x] Implement `TestimonialsSection.tsx` and `FounderSection.tsx`.
 
 ### [x] Step: Phase 6 - Sections Group D (Closing & Footer)
+<!-- chat-id: d339bada-9038-4123-a3d0-68e4a80ae20e -->
 1.  **Brand Verticals**: [x] Implement `GettuppGirlsSection.tsx`, `UpgradesSection.tsx`, `RulesSection.tsx`.
 2.  **Final CTA & Footer**: [x] Implement `FinalCTASection.tsx` (with Particles) and `Footer.tsx`.
 
 ### [x] Step: Phase 7 - Page Assembly & Integrations
+<!-- chat-id: e4ff6d93-94e0-4353-a86b-95582d4637c3 -->
 1.  **Assemble Page**: [x] Update `src/app/page.tsx` to include all 16 sections in order.
 2.  **Firebase Integration**:
     - [x] Create `src/lib/firebase/client.ts` (using existing `src/lib/firebase.ts`).
@@ -70,6 +74,7 @@ Create a technical specification based on the PRD.
     - [x] Create `src/app/api/webhooks/stripe/route.ts` to handle payment success events.
 
 ### [x] Step: Phase 8 - Admin Dashboard
+<!-- chat-id: 2ec64888-4d75-4c5a-82b7-e3cb8532da62 -->
 1.  **Admin Route**: [x] Create `src/app/admin/page.tsx`.
     - [x] Protect with Firebase Auth (allow-list).
     - [x] Display Leads table and Booking status.
