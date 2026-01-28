@@ -1,0 +1,6 @@
+{
+  "setup_script": "npm install && npm run skills:index",
+  "dev_script": "npm run dev",
+  "verification_script": "npm run test -- --run",
+  "copy_files": [".env.local"]
+}
