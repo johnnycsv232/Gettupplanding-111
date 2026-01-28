@@ -51,7 +51,7 @@ vi.mock('@/lib/stripe', async (importOriginal) => {
                 }),
             },
             webhooks: {
-                constructEvent: vi.fn((payload, signature, _secret) => {
+                constructEvent: vi.fn((payload, signature) => {
                     if (signature === 'invalid_signature') {
                         throw new Error('Invalid signature');
                     }

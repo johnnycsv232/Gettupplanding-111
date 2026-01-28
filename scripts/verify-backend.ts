@@ -25,9 +25,9 @@ async function verifyBackend() {
 
     await testDoc.delete();
     console.log('✅ Firestore Delete: SUCCESS');
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('❌ Firestore Verification: FAILED');
-    console.error(error.message);
+    console.error(error instanceof Error ? error.message : String(error));
   }
 
   // 2. Verify Sanity
@@ -38,9 +38,9 @@ async function verifyBackend() {
     const result = await client.fetch('*[0]._id'); 
     console.log('✅ Sanity Connection: SUCCESS');
     console.log(`ℹ️ Sanity fetched first document ID: ${result || 'None found (Empty dataset)'}`);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('❌ Sanity Verification: FAILED');
-    console.error(error.message);
+    console.error(error instanceof Error ? error.message : String(error));
   }
 
   console.log('\n✨ Verification Complete.');
