@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useId } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
@@ -18,7 +18,7 @@ interface ModalProps {
 export default function Modal({ isOpen, onClose, children, className, title, descriptionId }: ModalProps) {
   const [mounted, setMounted] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
-  const titleId = useRef(`modal-title-${Math.random().toString(36).substr(2, 9)}`).current;
+  const titleId = useId();
 
   useEffect(() => {
     const timer = setTimeout(() => setMounted(true), 0);
