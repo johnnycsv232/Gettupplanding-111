@@ -7,6 +7,7 @@ import { ArrowRight, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { saveLead } from '@/lib/leads';
 import Image from 'next/image';
+import { tokens } from '@/styles/tokens';
 
 export default function HeroSection() {
   const [email, setEmail] = useState('');
@@ -56,7 +57,7 @@ export default function HeroSection() {
       </div>
 
       {/* Particle Field */}
-      <ParticleField count={150} color="#FFC72C" speed={0.3} size={1.5} />
+      <ParticleField count={150} color={tokens.colors.gold} speed={0.3} size={1.5} />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center gap-6">
@@ -64,7 +65,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ type: 'spring', stiffness: 100, damping: 20 }}
           className="space-y-2"
         >
           <h2 className="text-xl md:text-2xl tracking-[0.5em] text-off-white uppercase font-sans">
@@ -78,7 +79,7 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
+          transition={{ delay: 0.4, type: 'spring', stiffness: 100, damping: 20 }}
           className="max-w-xl text-lg text-off-white/80 font-light"
         >
           The uniform of the Minneapolis night. Premium content. Real ROI. Zero excuses.
@@ -88,7 +89,7 @@ export default function HeroSection() {
         <motion.form
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
+          transition={{ delay: 0.6, type: 'spring', stiffness: 100, damping: 20 }}
           onSubmit={handleSubmit}
           className="mt-8 w-full max-w-md p-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-2 box-glow-gold"
         >

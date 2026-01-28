@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #080808;
-  --foreground: #E0E0E0;
+  --background: #000000;
+  --foreground: #F1E5AC;
 }
 
 body {
@@ -14,22 +14,22 @@ body {
 
 @layer utilities {
   .liquid-glass {
-    @apply bg-white/5 backdrop-blur-[30px] border border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)];
+    @apply bg-white/5 backdrop-blur-[30px] border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
   }
   
   .text-shadow-glow {
-    text-shadow: 0 0 10px rgba(255, 199, 44, 0.5);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
   }
 
   .text-shadow-neon {
-    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
   }
   
   .box-glow-gold {
-    box-shadow: 0 0 20px rgba(255, 199, 44, 0.3);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
   }
   
   .box-glow-magenta {
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
   }
 }
