@@ -90,6 +90,12 @@
     "description": "Production deployment principles and decision-making. Safe deployment workflows, rollback strategies, and verification. Teaches thinking, not scripts."
   },
   {
+    "id": "stitch-design-md",
+    "path": "skills\\stitch-design-md",
+    "name": "design-md",
+    "description": "Analyze Stitch projects and synthesize a semantic design system into DESIGN.md files"
+  },
+  {
     "id": "docker-expert",
     "path": "skills\\docker-expert",
     "name": "docker-expert",
@@ -258,6 +264,12 @@
     "description": "Modern React UI patterns for loading states, error handling, and data fetching. Use when building UI components, handling async data, or managing UI states."
   },
   {
+    "id": "stitch-react-components",
+    "path": "skills\\stitch-react-components",
+    "name": "react:components",
+    "description": "Converts Stitch designs into modular Vite and React components using system-level networking and AST-based validation."
+  },
+  {
     "id": "schema-markup",
     "path": "skills\\schema-markup",
     "name": "schema-markup",
@@ -316,6 +328,12 @@
     "path": "skills\\software-architecture",
     "name": "software-architecture",
     "description": "Guide for quality focused software architecture. This skill should be used when users want to write code, design architecture, analyze code, in any case that relates to software development."
+  },
+  {
+    "id": "stitch-loop",
+    "path": "skills\\stitch-loop",
+    "name": "stitch-loop",
+    "description": "Teaches agents to iteratively build websites using Stitch with an autonomous baton-passing loop pattern"
   },
   {
     "id": "stripe-integration",
