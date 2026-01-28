@@ -12,10 +12,12 @@ export default function ExitIntentPopup() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
     const result = await saveLead({ email, source: 'exit-intent' });
     
@@ -27,6 +29,8 @@ export default function ExitIntentPopup() {
         setIsSubmitted(false);
         setEmail('');
       }, 2000);
+    } else {
+      setError(typeof result.error === 'string' ? result.error : 'Something went wrong');
     }
   };
 
@@ -60,6 +64,7 @@ export default function ExitIntentPopup() {
                 required
                 disabled={isSubmitting}
               />
+              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
               <Button variant="primary" size="lg" className="w-full" isLoading={isSubmitting}>
                 GET VIP ACCESS
               </Button>

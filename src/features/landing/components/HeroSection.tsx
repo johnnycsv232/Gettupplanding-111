@@ -14,10 +14,12 @@ export default function HeroSection() {
   const [city, setCity] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
     const result = await saveLead({ email, city, source: 'hero' });
     
@@ -26,6 +28,8 @@ export default function HeroSection() {
       setIsSubmitted(true);
       setEmail('');
       setCity('');
+    } else {
+      setError(typeof result.error === 'string' ? result.error : 'Something went wrong');
     }
   };
 
@@ -86,47 +90,58 @@ export default function HeroSection() {
         </motion.p>
 
         {/* Lead Gen Form */}
-        <motion.form
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6, type: 'spring', stiffness: 100, damping: 20 }}
-          onSubmit={handleSubmit}
-          className="mt-8 w-full max-w-md p-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-2 box-glow-gold"
-        >
-          {isSubmitted ? (
-            <div className="flex-1 py-2 text-vegas-gold font-display text-lg animate-pulse">
-              ACCESS GRANTED. CHECK YOUR EMAIL.
-            </div>
-          ) : (
-            <>
-              <div className="pl-4 text-vegas-gold">
-                <MapPin size={20} />
+        <div className="w-full max-w-md space-y-4">
+          <motion.form
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6, type: 'spring', stiffness: 100, damping: 20 }}
+            onSubmit={handleSubmit}
+            className="w-full p-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-2 box-glow-gold"
+          >
+            {isSubmitted ? (
+              <div className="flex-1 py-2 text-vegas-gold font-display text-lg animate-pulse">
+                ACCESS GRANTED. CHECK YOUR EMAIL.
               </div>
-              <input 
-                type="text" 
-                placeholder="Your City" 
-                className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none text-sm"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                required
-                disabled={isSubmitting}
-              />
-              <div className="w-px h-6 bg-white/20" />
-              <input 
-                type="email" 
-                placeholder="Email Address" 
-                className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none text-sm"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={isSubmitting}
-              />
-              <Button variant="primary" size="sm" type="submit" className="rounded-full px-6 whitespace-nowrap" isLoading={isSubmitting}>
-                JOIN <ArrowRight size={16} />
-              </Button>
-            </>
+            ) : (
+              <>
+                <div className="pl-4 text-vegas-gold">
+                  <MapPin size={20} />
+                </div>
+                <input 
+                  type="text" 
+                  placeholder="Your City" 
+                  className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none text-sm"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                />
+                <div className="w-px h-6 bg-white/20" />
+                <input 
+                  type="email" 
+                  placeholder="Email Address" 
+                  className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none text-sm"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                />
+                <Button variant="primary" size="sm" type="submit" className="rounded-full px-6 whitespace-nowrap" isLoading={isSubmitting}>
+                  JOIN <ArrowRight size={16} />
+                </Button>
+              </>
+            )}
+          </motion.form>
+          {error && (
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-red-500 text-sm font-medium"
+            >
+              {error}
+            </motion.p>
           )}
-        </motion.form>
+        </div>
 
         <motion.div
            initial={{ opacity: 0 }}
