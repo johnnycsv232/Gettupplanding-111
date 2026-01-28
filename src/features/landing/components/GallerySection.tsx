@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GlassCard from '@/components/ui/GlassCard';
 import { Play, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 
 const works = [
   { id: 1, type: 'video', src: 'https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&q=80', title: 'Neon Nights' },
@@ -54,8 +55,13 @@ export default function GallerySection() {
                 transition={{ duration: 0.4 }}
               >
                 <GlassCard className="aspect-[4/5] relative group cursor-pointer border-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={work.src} alt={work.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <Image 
+                    src={work.src} 
+                    alt={work.title} 
+                    fill 
+                    className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                      <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
                         {work.type === 'video' ? <Play fill="currentColor" /> : <ImageIcon />}

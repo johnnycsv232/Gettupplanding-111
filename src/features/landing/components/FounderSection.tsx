@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import GlassCard from '@/components/ui/GlassCard';
+import Image from 'next/image';
 
 export default function FounderSection() {
   const ref = useRef(null);
@@ -19,11 +20,12 @@ export default function FounderSection() {
         
         <div className="md:col-span-5 relative">
           <motion.div style={{ y }} className="relative z-10">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image 
               src="/johnny_cage.jpg" 
               alt="Founder" 
-              className="w-full rounded-2xl border-2 border-vegas-gold/30 shadow-2xl shadow-vegas-gold/10 grayscale hover:grayscale-0 transition-all duration-500"
+              width={500}
+              height={700}
+              className="w-full rounded-2xl border-2 border-vegas-gold/30 shadow-2xl shadow-vegas-gold/10 grayscale hover:grayscale-0 transition-all duration-500 h-auto"
             />
             {/* Decorative elements */}
             <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-neon-magenta/20 rounded-2xl -z-10" />

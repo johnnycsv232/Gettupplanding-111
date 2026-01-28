@@ -3,8 +3,35 @@
 import GlassCard from '@/components/ui/GlassCard';
 import Button from '@/components/ui/Button';
 import { Check, ShieldCheck } from 'lucide-react';
+import { useState } from 'react';
 
 export default function PilotSection() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handlePilotCheckout = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceId: 'price_pilot_placeholder',
+          tier: 'PILOT',
+          mode: 'payment' // Pilot is a one-time payment
+        }),
+      });
+
+      const { url, error } = await response.json();
+      if (error) throw new Error(error);
+      if (url) window.location.href = url;
+    } catch (err) {
+      console.error('Checkout error:', err);
+      alert('Failed to initiate checkout. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section className="py-24 px-4 bg-deep-void-black relative overflow-hidden">
       {/* Background glow */}
@@ -43,7 +70,13 @@ export default function PilotSection() {
                <div className="w-full aspect-video rounded-lg bg-black/40 flex items-center justify-center border border-white/10 mb-4">
                   <span className="text-white/20 font-display text-2xl">VIP PREVIEW</span>
                </div>
-               <Button variant="neon" size="xl" className="w-full md:w-auto">
+               <Button 
+                 variant="neon" 
+                 size="xl" 
+                 className="w-full md:w-auto"
+                 onClick={handlePilotCheckout}
+                 isLoading={isLoading}
+               >
                  SECURE ACCESS
                </Button>
                <div className="flex items-center gap-2 text-xs text-white/40">

@@ -6,6 +6,7 @@ import Button from '@/components/ui/Button';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { saveLead } from '@/lib/leads';
+import Image from 'next/image';
 
 export default function HeroSection() {
   const [email, setEmail] = useState('');
@@ -29,12 +30,27 @@ export default function HeroSection() {
 
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-deep-void-black">
-      {/* Background Video Placeholder */}
+      {/* Background Video with Poster Optimization */}
       <div className="absolute inset-0 z-0 opacity-40">
-        {/* <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+        <Image
+          src="/assets/hero-poster.jpg"
+          alt="Hero Background"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/assets/hero-poster.jpg"
+        >
           <source src="/assets/hero-bg.mp4" type="video/mp4" />
-        </video> */}
-        <div className="w-full h-full bg-gradient-to-b from-deep-void-black/20 via-deep-void-black/50 to-deep-void-black" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-deep-void-black/20 via-deep-void-black/50 to-deep-void-black" />
         {/* Radial Gradient Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#080808_90%)]" />
       </div>

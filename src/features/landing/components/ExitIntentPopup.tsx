@@ -31,36 +31,36 @@ export default function ExitIntentPopup() {
   };
 
   return (
-    <Modal isOpen={showExitIntent} onClose={closeExitIntent} className="bg-deep-void-black text-center p-8 border border-neon-magenta/50 box-glow-magenta">
+    <Modal isOpen={showExitIntent} onClose={closeExitIntent} className="bg-deep-void-black text-center p-8 border border-vegas-gold/50 box-glow-gold">
       <div className="flex flex-col items-center gap-6">
-        <div className="w-16 h-16 rounded-full bg-neon-magenta/10 flex items-center justify-center text-neon-magenta box-glow-magenta">
+        <div className="w-16 h-16 rounded-full bg-vegas-gold/10 flex items-center justify-center text-vegas-gold box-glow-gold">
           <Sparkles size={32} />
         </div>
         
         <div className="space-y-2">
-          <h2 className="font-display text-4xl text-white">THE NIGHT ISN&apos;T OVER</h2>
+          <h2 className="font-display text-4xl text-white uppercase">The VIP Entrance</h2>
           <p className="text-off-white/80 max-w-xs mx-auto">
-            Join the VIP List for exclusive content, early access, and a free 5-point audit delivered instantly.
+            Join the inner circle. Get exclusive content and a free 5-point content audit instantly.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="w-full space-y-4">
           {isSubmitted ? (
-            <div className="text-neon-magenta font-display text-xl py-4 animate-pulse">
-              VIP ACCESS GRANTED.
+            <div className="text-vegas-gold font-display text-xl py-4 animate-pulse">
+              ACCESS GRANTED.
             </div>
           ) : (
             <>
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-neon-magenta focus:outline-none transition-colors"
+                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-vegas-gold focus:outline-none transition-colors"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isSubmitting}
               />
-              <Button variant="neon" size="lg" className="w-full" isLoading={isSubmitting}>
+              <Button variant="primary" size="lg" className="w-full" isLoading={isSubmitting}>
                 GET VIP ACCESS
               </Button>
             </>
