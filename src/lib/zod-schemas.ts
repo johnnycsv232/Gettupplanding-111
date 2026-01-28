@@ -56,3 +56,12 @@ export const ProofPackSchema = z.object({
 }).strict();
 
 export type ProofPack = z.infer<typeof ProofPackSchema>;
+
+// --- Lead Schema ---
+export const LeadSchema = z.object({
+    email: z.string().email('Please enter a valid email address'),
+    city: z.string().optional(),
+    source: z.enum(['hero', 'exit-intent']),
+});
+
+export type Lead = z.infer<typeof LeadSchema>;

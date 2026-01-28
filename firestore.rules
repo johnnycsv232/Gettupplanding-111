@@ -37,5 +37,11 @@ service cloud.firestore {
                     resource.data.userId == request.auth.uid;
       allow write: if false;
     }
+
+    // Leads collection - allow unauthenticated create for landing page forms
+    match /leads/{leadId} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
   }
 }
