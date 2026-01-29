@@ -27,6 +27,7 @@ export default function Comparison() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ type: 'spring', stiffness: 100, damping: 20 }}
         >
           <h2 className="text-4xl md:text-6xl font-black text-white text-display leading-tight">
             THE OLD WAY <span className="text-gray-600">VS</span> <br />
@@ -40,7 +41,7 @@ export default function Comparison() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ type: 'spring', stiffness: 100, damping: 20 }}
           >
             <h3 className={styles.comparisonTitle}>TIRED OF CONTENT THAT GHOSTS YOU?</h3>
             <ul className={styles.comparisonList}>
@@ -58,7 +59,7 @@ export default function Comparison() {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ type: 'spring', stiffness: 100, damping: 20 }}
           >
             <h3 className={`${styles.comparisonTitle} ${styles.comparisonStandardTitle}`}>A SYSTEM THAT PACKS VENUES.</h3>
             <ul className={styles.comparisonList}>
