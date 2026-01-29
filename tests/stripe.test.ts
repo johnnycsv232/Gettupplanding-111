@@ -47,7 +47,7 @@ describe('Stripe Webhook Handler', () => {
             const mockCreate = vi.fn().mockRejectedValue({ code: 6, message: 'ALREADY_EXISTS' });
             vi.spyOn(mockDb, 'collection').mockReturnValue({
                 doc: vi.fn().mockReturnValue({ create: mockCreate }),
-            } as any);
+            } as unknown as ReturnType<typeof mockDb.collection>);
 
             const event = { id: 'evt_processed', type: 'ping' };
             const req = createRequest(event);
@@ -72,7 +72,7 @@ describe('Stripe Webhook Handler', () => {
                         set: mockSet,
                         update: mockUpdate,
                     }))
-                } as any;
+                } as unknown as ReturnType<typeof mockDb.collection>;
             });
 
             const metadata = { userId: 'user_123', tier: 'pilot', priceId: 'price_123' };
@@ -118,7 +118,7 @@ describe('Stripe Webhook Handler', () => {
             const mockUpdate = vi.fn().mockResolvedValue({});
             vi.spyOn(mockDb, 'collection').mockReturnValue({
                 doc: vi.fn(() => ({ create: mockCreate, update: mockUpdate })),
-            } as any);
+            } as unknown as ReturnType<typeof mockDb.collection>);
 
             const event = {
                 id: 'evt_bad_meta',
