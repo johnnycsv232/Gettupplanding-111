@@ -35,7 +35,8 @@ Save to `{@artifacts_path}/spec.md` with:
 - Delivery phases (incremental, testable milestones)
 - Verification approach using project lint/test commands
 
-### [ ] Step: Planning
+### [x] Step: Planning
+<!-- chat-id: d1c2be1c-e10c-4944-baf3-7ff44b9f0e09 -->
 
 Create a detailed implementation plan based on `{@artifacts_path}/spec.md`.
 
@@ -49,8 +50,26 @@ If the feature is trivial and doesn't warrant full specification, update this wo
 
 Save to `{@artifacts_path}/plan.md`.
 
-### [ ] Step: Implementation
+### [ ] Step: Implementation - Phase 1: Security Hardening
+1. [ ] Implement CSP and Security Headers in `next.config.ts`.
+2. [ ] Restrict leads rules in `firestore.rules` with App Check validation.
+3. [ ] Add idempotencyKey to Stripe checkout session creation in `src/app/api/checkout/route.ts`.
 
-This step should be replaced with detailed implementation tasks from the Planning step.
+### [ ] Step: Implementation - Phase 2: Logic & Validation Fixes
+1. [ ] Fix Hardcoded User Identity in `src/app/api/checkout/route.ts` by using session data.
+2. [ ] Enforce `.strict()` in all Zod DTOs in `src/lib/validations/stripe.ts`.
+3. [ ] Initialize Analytics in `src/lib/firebase.ts`.
 
-If Planning didn't replace this step, execute the tasks in `{@artifacts_path}/plan.md`, updating checkboxes as you go. Run planned tests/lint and record results in plan.md.
+### [ ] Step: Implementation - Phase 3: SEO & Discovery
+1. [ ] Implement JSON-LD and canonical tags in `src/app/layout.tsx`.
+2. [ ] Generate `src/app/sitemap.ts` and `src/app/robots.ts`.
+3. [ ] Audit and fix heading nesting in landing page components.
+
+### [ ] Step: Implementation - Phase 4: UI/UX & Branding Audit
+1. [ ] Audit and polish UI/UX elements (GlassCard, ParticleField, etc.) for 'The GettUpp Look'.
+2. [ ] Ensure all inputs have proper validation feedback.
+
+### [ ] Step: Implementation - Phase 5: Verification
+1. [ ] Run `npm run lint`.
+2. [ ] Run `npm run test`.
+3. [ ] Run `npm run type-check`.

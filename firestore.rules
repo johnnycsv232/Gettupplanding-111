@@ -38,9 +38,9 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Leads collection - allow unauthenticated create for landing page forms
+    // Leads collection - allow unauthenticated create for landing page forms with App Check
     match /leads/{leadId} {
-      allow create: if true;
+      allow create: if request.appCheck != null;
       allow read, update, delete: if false;
     }
   }
