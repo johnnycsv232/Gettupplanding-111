@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import JsonLd from "@/components/seo/JsonLd";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -70,10 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${inter.variable} ${bebasNeue.variable}`}>
       <body className="font-sans antialiased bg-deep-void-black text-off-white selection:bg-neon-magenta selection:text-white">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={jsonLd} />
         {children}
       </body>
     </html>

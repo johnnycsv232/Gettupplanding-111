@@ -62,11 +62,11 @@ Save to `{@artifacts_path}/plan.md`.
 2. [x] Enforce `.strict()` in all Zod DTOs in `src/lib/validations/stripe.ts`.
 3. [x] Initialize Analytics in `src/lib/firebase.ts`.
 
-### [ ] Step: Implementation - Phase 3: SEO & Discovery
+### [x] Step: Implementation - Phase 3: SEO & Discovery
 <!-- chat-id: 646df1e3-a930-4203-942c-a8add4c1f4c2 -->
-1. [ ] Implement JSON-LD and canonical tags in `src/app/layout.tsx`.
-2. [ ] Generate `src/app/sitemap.ts` and `src/app/robots.ts`.
-3. [ ] Audit and fix heading nesting in landing page components.
+1. [x] Implement JSON-LD and canonical tags in `src/app/layout.tsx`.
+2. [x] Generate `src/app/sitemap.ts` and `src/app/robots.ts`.
+3. [x] Audit and fix heading nesting in landing page components.
 
 ### [ ] Step: Implementation - Phase 4: UI/UX & Branding Audit
 1. [ ] Audit and polish UI/UX elements (GlassCard, ParticleField, etc.) for 'The GettUpp Look'.
