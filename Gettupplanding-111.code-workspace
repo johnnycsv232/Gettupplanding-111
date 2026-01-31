@@ -2,6 +2,7 @@
   "folders": [
     {
       "name": "Project Root",
+<<<<<<< Updated upstream
       "path": "."
     },
     {
@@ -14,6 +15,14 @@
     {
       "path": "../set-up-project-config-008a"
     }
+=======
+      "path": ".",
+    },
+    {
+      "name": "Skills Library",
+      "path": "skills",
+    },
+>>>>>>> Stashed changes
   ],
   "settings": {
     "editor.formatOnSave": true,
@@ -31,10 +40,13 @@
       "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     },
     "powershell.cwd": "Project Root",
+<<<<<<< Updated upstream
     "[jsonc]": {
       "editor.defaultFormatter": "vscode.json-language-features",
     },
     "editor.codeActions.triggerOnFocusChange": true,
+=======
+>>>>>>> Stashed changes
   },
   "extensions": {
     "recommendations": [

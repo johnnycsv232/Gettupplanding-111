@@ -1,15 +1,15 @@
 {
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
     "firestore": {
-        "rules": "firestore.rules",
-        "indexes": "firestore.indexes.json"
+      "port": 8080
     },
-    "emulators": {
-        "firestore": {
-            "port": 8080
-        },
-        "ui": {
-            "enabled": true
-        },
-        "single_project_mode": true
-    }
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  }
 }
