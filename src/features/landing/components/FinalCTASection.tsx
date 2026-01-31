@@ -3,13 +3,19 @@
 import { motion } from 'framer-motion';
 import ParticleField from '@/components/three/ParticleField';
 import Button from '@/components/ui/Button';
+import { tokens } from '@/styles/tokens';
 
 export default function FinalCTASection() {
   return (
     <section className="relative py-48 md:py-64 bg-deep-void-black overflow-hidden flex items-center justify-center text-center">
       {/* Intense Particle Field */}
       <div className="absolute inset-0 z-0">
-        <ParticleField count={800} speed={2} color="#FFC72C" size={4} />
+        <ParticleField 
+          count={tokens.config3d.finalCta.count} 
+          speed={tokens.config3d.finalCta.speed} 
+          color={tokens.colors.gold} 
+          size={tokens.config3d.finalCta.size} 
+        />
       </div>
       
       {/* Overlay Gradients */}

@@ -1,13 +1,26 @@
 import { NextResponse } from 'next/server';
 import { getStripeClient } from '@/lib/stripe';
+import { getAdminAuth } from '@/lib/firebase-admin';
 import type { Stripe } from 'stripe';
 
 export async function POST(req: Request) {
   try {
     const { priceId, tier, mode = 'subscription' } = await req.json();
     
-    // For demo purposes, we'll use a placeholder userId
-    const userId = "demo-user-123";
+    // Extract userId from Authorization header
+    const authHeader = req.headers.get('Authorization');
+    let userId: string | undefined;
+
+    if (authHeader?.startsWith('Bearer ')) {
+      const idToken = authHeader.split('Bearer ')[1];
+      const adminAuth = getAdminAuth();
+      const decodedToken = await adminAuth.verifyIdToken(idToken);
+      userId = decodedToken.uid;
+    }
+
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized: Authentication required for checkout' }, { status: 401 });
+    }
 
     const stripe = getStripeClient();
 
@@ -27,6 +40,9 @@ export async function POST(req: Request) {
         tier,
         priceId,
       },
+    }, {
+      // INVARIANT: Prevent double-charging via idempotency
+      idempotencyKey: `checkout_${userId}_${priceId}`,
     });
 
     return NextResponse.json({ url: checkoutSession.url });

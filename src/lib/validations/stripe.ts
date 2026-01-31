@@ -22,7 +22,7 @@ export const checkoutSessionCompletedSchema = z.object({
         tier: z.string().min(1, "tier is required"),
         priceId: z.string().optional(),
     }).strict(), // STRICT on checkout metadata: tier is MANDATORY here
-}).passthrough();
+}).strict();
 
 export type CheckoutSessionCompleted = z.infer<typeof checkoutSessionCompletedSchema>;
 
@@ -31,7 +31,7 @@ export const subscriptionSchema = z.object({
     id: z.string().transform(val => val as StripeSubscriptionId),
     status: z.enum(['active', 'trialing', 'past_due', 'canceled', 'unpaid', 'incomplete', 'incomplete_expired', 'paused']),
     metadata: metadataSchema, // Uses the strict metadataSchema
-}).passthrough();
+}).strict();
 
 export type SubscriptionEvent = z.infer<typeof subscriptionSchema>;
 
@@ -43,7 +43,7 @@ export const invoiceSchema = z.object({
     status: z.string(),
     billing_reason: z.string().optional(),
     metadata: metadataSchema.partial(), // Invoices might have partial metadata
-}).passthrough();
+}).strict();
 
 export type InvoiceEvent = z.infer<typeof invoiceSchema>;
 
@@ -54,4 +54,4 @@ export const stripeEventSchema = z.object({
     data: z.object({
         object: z.record(z.string(), z.unknown()),
     }),
-}).passthrough();
+}).strict();
