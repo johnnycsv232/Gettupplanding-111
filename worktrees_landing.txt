@@ -1,0 +1,32 @@
+worktree C:/Users/finan/Gettupplanding-111
+HEAD 387702e05b9833a4f33496a9be1716e2d454ff88
+branch refs/heads/set-up-project-config-9bc7
+
+worktree C:/Users/finan/.zenflow/worktrees/new-task-1276
+HEAD 3fc9adfbed3f9dea546a36440f7568691adf44f2
+branch refs/heads/new-task-1276
+
+worktree C:/Users/finan/.zenflow/worktrees/new-task-3030
+HEAD b6b6a199cc5860827512c341fc875b3f0c35c3c5
+branch refs/heads/new-task-3030
+
+worktree C:/Users/finan/.zenflow/worktrees/new-task-4d40
+HEAD 9d7eb27a983bec3508118181c029a5db02183db8
+branch refs/heads/new-task-4d40
+
+worktree C:/Users/finan/.zenflow/worktrees/new-task-4e2f
+HEAD 8b7b742c7569766d69efb7a194a2ee1a454e566c
+branch refs/heads/new-task-4e2f
+
+worktree C:/Users/finan/.zenflow/worktrees/project-configuartion-dece
+HEAD fe9133ba301a814463c0ca80e020af77f855f8e6
+branch refs/heads/project-configuartion-dece
+
+worktree C:/Users/finan/.zenflow/worktrees/set-up-project-config-008a
+HEAD 0875eace6443bc9fdd9841a407c562e843534e69
+branch refs/heads/set-up-project-config-008a
+
+worktree C:/Users/finan/.zenflow/worktrees/set-up-project-config-5d06
+HEAD 28af83f02ee3bd487d54dc82d063ee814dbbc305
+branch refs/heads/set-up-project-config-5d06
+
