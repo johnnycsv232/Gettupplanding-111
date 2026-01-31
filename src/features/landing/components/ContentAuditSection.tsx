@@ -23,9 +23,9 @@ export default function ContentAuditSection() {
               Limited Availability
             </div>
             
-            <h3 className="text-4xl md:text-5xl font-display text-white tracking-tighter uppercase">
+            <h2 className="text-4xl md:text-5xl font-display text-white tracking-tighter uppercase">
               NOT READY FOR <span className="text-vegas-gold">THE PILOT?</span>
-            </h3>
+            </h2>
             
             <p className="text-off-white/60 text-lg md:text-xl max-w-xl mx-auto font-light leading-relaxed">
               Get a comprehensive 5-point audit of your current social presence. We&apos;ll tell you exactly why you&apos;re losing money.

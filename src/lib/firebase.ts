@@ -8,6 +8,7 @@
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
+import { getAnalytics, Analytics, isSupported } from 'firebase/analytics';
 
 // Environment validation - fail fast if config is missing
 const requiredEnvVars = [
@@ -47,6 +48,7 @@ const firebaseConfig = {
 let firebaseApp: FirebaseApp | undefined;
 let auth: Auth | undefined;
 let db: Firestore | undefined;
+let analytics: Analytics | undefined;
 
 export function getFirebaseApp(): FirebaseApp {
     if (!firebaseApp) {
@@ -70,6 +72,16 @@ export function getFirebaseDb(): Firestore {
         db = getFirestore(getFirebaseApp());
     }
     return db;
+}
+
+export async function getFirebaseAnalytics(): Promise<Analytics | undefined> {
+    if (typeof window !== 'undefined' && !analytics) {
+        const supported = await isSupported();
+        if (supported) {
+            analytics = getAnalytics(getFirebaseApp());
+        }
+    }
+    return analytics;
 }
 
 // Re-export for convenience

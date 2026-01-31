@@ -34,4 +34,16 @@ export const tokens = {
     blueGlow: '0 0 20px rgba(0, 255, 255, 0.5)',
     obsidianShadow: '0 20px 40px rgba(0, 0, 0, 0.6)',
   },
+  config3d: {
+    hero: {
+      count: 150,
+      speed: 0.3,
+      size: 1.5,
+    },
+    finalCta: {
+      count: 800,
+      speed: 2,
+      size: 4,
+    },
+  },
 };

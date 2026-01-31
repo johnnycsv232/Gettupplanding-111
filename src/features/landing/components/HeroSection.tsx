@@ -61,7 +61,12 @@ export default function HeroSection() {
       </div>
 
       {/* Particle Field */}
-      <ParticleField count={150} color={tokens.colors.gold} speed={0.3} size={1.5} />
+      <ParticleField 
+        count={tokens.config3d.hero.count} 
+        color={tokens.colors.gold} 
+        speed={tokens.config3d.hero.speed} 
+        size={tokens.config3d.hero.size} 
+      />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center gap-6">
@@ -72,12 +77,12 @@ export default function HeroSection() {
           transition={{ type: 'spring', stiffness: 100, damping: 20 }}
           className="space-y-2"
         >
-          <h2 className="text-xl md:text-2xl tracking-[0.5em] text-off-white uppercase font-sans">
-            Minneapolis Royalty
-          </h2>
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-display tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-vegas-gold to-vegas-gold/50 text-shadow-glow">
             OWN THE NIGHT
           </h1>
+          <p className="text-xl md:text-2xl tracking-[0.5em] text-off-white uppercase font-sans">
+            Minneapolis Royalty
+          </p>
         </motion.div>
 
         <motion.p

@@ -4,6 +4,7 @@ import GlassCard from '@/components/ui/GlassCard';
 import Button from '@/components/ui/Button';
 import { Check } from 'lucide-react';
 import { useState } from 'react';
+import { getFirebaseAuth } from '@/lib/firebase';
 
 const tiers = [
   {
@@ -38,9 +39,22 @@ export default function RetainersSection() {
   const handleSubscribe = async (tier: typeof tiers[0]) => {
     setLoadingTier(tier.name);
     try {
+      const auth = getFirebaseAuth();
+      const user = auth.currentUser;
+      
+      if (!user) {
+        alert('Please sign in to continue with checkout.');
+        return;
+      }
+
+      const idToken = await user.getIdToken();
+
       const response = await fetch('/api/checkout', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`
+        },
         body: JSON.stringify({
           priceId: tier.priceId,
           tier: tier.name,
