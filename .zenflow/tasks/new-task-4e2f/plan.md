@@ -50,15 +50,17 @@ If the feature is trivial and doesn't warrant full specification, update this wo
 
 Save to `{@artifacts_path}/plan.md`.
 
-### [ ] Step: Implementation - Phase 1: Security Hardening
-1. [ ] Implement CSP and Security Headers in `next.config.ts`.
-2. [ ] Restrict leads rules in `firestore.rules` with App Check validation.
-3. [ ] Add idempotencyKey to Stripe checkout session creation in `src/app/api/checkout/route.ts`.
+### [x] Step: Implementation - Phase 1: Security Hardening
+<!-- chat-id: 2bf8f668-9db1-4579-8cbd-2d1e7a5cdec1 -->
+1. [x] Implement CSP and Security Headers in `next.config.ts`.
+2. [x] Restrict leads rules in `firestore.rules` with App Check validation.
+3. [x] Add idempotencyKey to Stripe checkout session creation in `src/app/api/checkout/route.ts`.
 
-### [ ] Step: Implementation - Phase 2: Logic & Validation Fixes
-1. [ ] Fix Hardcoded User Identity in `src/app/api/checkout/route.ts` by using session data.
-2. [ ] Enforce `.strict()` in all Zod DTOs in `src/lib/validations/stripe.ts`.
-3. [ ] Initialize Analytics in `src/lib/firebase.ts`.
+### [x] Step: Implementation - Phase 2: Logic & Validation Fixes
+<!-- chat-id: 753f5d8f-0d47-42a9-aff2-8227bf65696d -->
+1. [x] Fix Hardcoded User Identity in `src/app/api/checkout/route.ts` by using session data.
+2. [x] Enforce `.strict()` in all Zod DTOs in `src/lib/validations/stripe.ts`.
+3. [x] Initialize Analytics in `src/lib/firebase.ts`.
 
 ### [ ] Step: Implementation - Phase 3: SEO & Discovery
 1. [ ] Implement JSON-LD and canonical tags in `src/app/layout.tsx`.

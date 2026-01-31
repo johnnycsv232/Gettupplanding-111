@@ -23,6 +23,23 @@ const bebasNeue = Bebas_Neue({
 export const metadata: Metadata = {
   title: "GETTUPP ENT | Elite Nightlife & Luxury Design",
   description: "Liquid Glass Premium Nightlife Luxury. Own The Night.",
+  metadataBase: new URL('https://gettupp.com'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "GETTUPP ENT | Elite Nightlife & Luxury Design",
+    description: "Liquid Glass Premium Nightlife Luxury. Own The Night.",
+    url: 'https://gettupp.com',
+    siteName: 'GETTUPP ENT',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "GETTUPP ENT | Elite Nightlife & Luxury Design",
+    description: "Liquid Glass Premium Nightlife Luxury. Own The Night.",
+  },
 };
 
 export default function RootLayout({
@@ -30,9 +47,33 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'GETTUPP ENT',
+    url: 'https://gettupp.com',
+    logo: 'https://gettupp.com/logo.png',
+    description: 'Liquid Glass Premium Nightlife Luxury. Own The Night.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Minneapolis',
+      addressRegion: 'MN',
+      addressCountry: 'US',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      email: 'hello@gettupp.com',
+    },
+  };
+
   return (
     <html lang="en" className={`${outfit.variable} ${inter.variable} ${bebasNeue.variable}`}>
       <body className="font-sans antialiased bg-deep-void-black text-off-white selection:bg-neon-magenta selection:text-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>

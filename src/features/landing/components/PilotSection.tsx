@@ -4,6 +4,7 @@ import GlassCard from '@/components/ui/GlassCard';
 import Button from '@/components/ui/Button';
 import { Check, ShieldCheck } from 'lucide-react';
 import { useState } from 'react';
+import { getFirebaseAuth } from '@/lib/firebase';
 
 export default function PilotSection() {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,9 +12,22 @@ export default function PilotSection() {
   const handlePilotCheckout = async () => {
     setIsLoading(true);
     try {
+      const auth = getFirebaseAuth();
+      const user = auth.currentUser;
+      
+      if (!user) {
+        alert('Please sign in to continue with checkout.');
+        return;
+      }
+
+      const idToken = await user.getIdToken();
+
       const response = await fetch('/api/checkout', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`
+        },
         body: JSON.stringify({
           priceId: 'price_pilot_placeholder',
           tier: 'PILOT',

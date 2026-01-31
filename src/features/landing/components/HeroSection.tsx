@@ -72,12 +72,12 @@ export default function HeroSection() {
           transition={{ type: 'spring', stiffness: 100, damping: 20 }}
           className="space-y-2"
         >
-          <h2 className="text-xl md:text-2xl tracking-[0.5em] text-off-white uppercase font-sans">
-            Minneapolis Royalty
-          </h2>
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-display tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-vegas-gold to-vegas-gold/50 text-shadow-glow">
             OWN THE NIGHT
           </h1>
+          <p className="text-xl md:text-2xl tracking-[0.5em] text-off-white uppercase font-sans">
+            Minneapolis Royalty
+          </p>
         </motion.div>
 
         <motion.p
