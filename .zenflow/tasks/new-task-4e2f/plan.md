@@ -63,6 +63,7 @@ Save to `{@artifacts_path}/plan.md`.
 3. [x] Initialize Analytics in `src/lib/firebase.ts`.
 
 ### [ ] Step: Implementation - Phase 3: SEO & Discovery
+<!-- chat-id: 646df1e3-a930-4203-942c-a8add4c1f4c2 -->
 1. [ ] Implement JSON-LD and canonical tags in `src/app/layout.tsx`.
 2. [ ] Generate `src/app/sitemap.ts` and `src/app/robots.ts`.
 3. [ ] Audit and fix heading nesting in landing page components.
