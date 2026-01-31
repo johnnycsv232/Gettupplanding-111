@@ -61,7 +61,12 @@ export default function HeroSection() {
       </div>
 
       {/* Particle Field */}
-      <ParticleField count={150} color={tokens.colors.gold} speed={0.3} size={1.5} />
+      <ParticleField 
+        count={tokens.config3d.hero.count} 
+        color={tokens.colors.gold} 
+        speed={tokens.config3d.hero.speed} 
+        size={tokens.config3d.hero.size} 
+      />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center gap-6">

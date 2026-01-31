@@ -69,6 +69,7 @@ Save to `{@artifacts_path}/plan.md`.
 3. [x] Audit and fix heading nesting in landing page components.
 
 ### [ ] Step: Implementation - Phase 4: UI/UX & Branding Audit
+<!-- chat-id: 77b6704d-fef8-4dbc-80f6-736f7d019cc3 -->
 1. [ ] Audit and polish UI/UX elements (GlassCard, ParticleField, etc.) for 'The GettUpp Look'.
 2. [ ] Ensure all inputs have proper validation feedback.
 
