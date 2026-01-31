@@ -1,6 +1,7 @@
 # Skills Reorganization Plan for GETTUPPENT
 
 ## Project Tech Stack
+
 - **Framework**: Next.js (App Router)
 - **Frontend**: React, Tailwind CSS, Three.js (3D)
 - **Backend**: Firebase (Auth, Firestore, Functions)
@@ -87,6 +88,7 @@ skills/
 ## Skills to REMOVE (Not relevant)
 
 ### Penetration Testing / Security Tools (35+ skills)
+
 - active-directory-attacks, api-fuzzing-bug-bounty, aws-penetration-testing
 - broken-authentication, burp-suite-testing, cloud-penetration-testing
 - ethical-hacking-methodology, file-path-traversal, file-uploads
@@ -100,6 +102,7 @@ skills/
 - xss-html-injection
 
 ### Unrelated Platforms (20+ skills)
+
 - shopify-apps, shopify-development
 - salesforce-development
 - telegram-bot-builder, telegram-mini-app
@@ -111,6 +114,7 @@ skills/
 - wordpress-penetration-testing
 
 ### Other Unrelated Skills
+
 - crewai, langgraph, langfuse (separate AI frameworks)
 - voice-agents, voice-ai-development
 - game-development
@@ -121,6 +125,7 @@ skills/
 ---
 
 ## Estimated Results
+
 - **Keep**: ~50-60 relevant skills
 - **Remove**: ~150+ irrelevant skills
 - **Space saved**: ~15+ MB

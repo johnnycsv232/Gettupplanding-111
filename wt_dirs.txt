@@ -1,0 +1,15 @@
+
+    Directory: C:\Users\finan\.zenflow\worktrees
+
+Mode    LastWriteTi
+                 me
+----    -----------
+d----    1/31/2026
+           11:30 AM
+d----    1/31/2026
+           12:17 PM
+d----    1/31/2026
+           11:38 AM
+d----    1/31/2026
+           11:10 AM
+

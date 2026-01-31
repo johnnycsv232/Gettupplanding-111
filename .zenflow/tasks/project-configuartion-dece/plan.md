@@ -1,6 +1,7 @@
 # Full SDD workflow
 
 ## Configuration
+
 - **Artifacts Path**: {@artifacts_path} → `.zenflow/tasks/{task_id}`
 
 ---
@@ -8,6 +9,7 @@
 ## Workflow Steps
 
 ### [ ] Step: Requirements
+
 <!-- chat-id: c9b2dd0f-74d6-4c6b-94a8-9c187909331f -->
 
 Create a Product Requirements Document (PRD) based on the feature description.
@@ -28,6 +30,7 @@ Create a technical specification based on the PRD in `{@artifacts_path}/requirem
 2. Define the implementation approach
 
 Save to `{@artifacts_path}/spec.md` with:
+
 - Technical context (language, dependencies)
 - Implementation approach referencing existing code patterns
 - Source code structure changes

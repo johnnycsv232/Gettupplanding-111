@@ -22,9 +22,12 @@ export default function Math() {
           className="text-center"
         >
           <span className={styles.founderLabel}>ROI Strategy</span>
-          <h2 className="text-4xl md:text-5xl font-black text-white text-display mb-4">THE MATH — TRACKED RSVPS</h2>
-          <p className="text-gray-500 max-w-2xl mx-auto mb-12">
-            Your nights aren&apos;t judged on likes—they&apos;re judged on doors, covers, and who comes back next week.
+          <h2 className="text-display mb-4 text-4xl font-black text-white md:text-5xl">
+            THE MATH — TRACKED RSVPS
+          </h2>
+          <p className="mx-auto mb-12 max-w-2xl text-gray-500">
+            Your nights aren&apos;t judged on likes—they&apos;re judged on doors, covers, and who
+            comes back next week.
           </p>
         </motion.div>
 
@@ -45,7 +48,7 @@ export default function Math() {
         </div>
 
         <div className={styles.mathResult}>
-          <motion.div 
+          <motion.div
             className={styles.mathBreakEven}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -74,7 +77,7 @@ export default function Math() {
                 <span className={styles.mathListValue}>~$11/photo</span>
               </div>
             </div>
-            
+
             <div className={styles.mathHighlight}>
               <TrendingUp size={20} />
               ROI Positive with just 3 new regulars

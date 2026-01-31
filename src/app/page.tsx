@@ -19,7 +19,7 @@ import ExitIntentPopup from '@/features/landing/components/ExitIntentPopup';
 
 export default function Home() {
   return (
-    <main className="bg-deep-void-black min-h-screen text-off-white selection:bg-neon-magenta selection:text-white">
+    <main className="min-h-screen bg-deep-void-black text-off-white selection:bg-neon-magenta selection:text-white">
       <StickyHeader />
       <HeroSection />
       <PilotSection />

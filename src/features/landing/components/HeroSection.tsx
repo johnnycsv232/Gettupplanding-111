@@ -20,9 +20,9 @@ export default function HeroSection() {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-    
+
     const result = await saveLead({ email, city, source: 'hero' });
-    
+
     setIsSubmitting(false);
     if (result.success) {
       setIsSubmitted(true);
@@ -34,7 +34,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-deep-void-black">
+    <section className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-deep-void-black">
       {/* Background Video with Poster Optimization */}
       <div className="absolute inset-0 z-0 opacity-40">
         <Image
@@ -45,12 +45,12 @@ export default function HeroSection() {
           className="object-cover"
           sizes="100vw"
         />
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="absolute inset-0 w-full h-full object-cover"
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
           poster="/assets/hero-poster.jpg"
         >
           <source src="/assets/hero-bg.mp4" type="video/mp4" />
@@ -61,26 +61,25 @@ export default function HeroSection() {
       </div>
 
       {/* Particle Field */}
-      <ParticleField 
-        count={tokens.config3d.hero.count} 
-        color={tokens.colors.gold} 
-        speed={tokens.config3d.hero.speed} 
-        size={tokens.config3d.hero.size} 
+      <ParticleField
+        count={tokens.config3d.hero.count}
+        color={tokens.colors.gold}
+        speed={tokens.config3d.hero.speed}
+        size={tokens.config3d.hero.size}
       />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center gap-6">
-        
+      <div className="container relative z-10 mx-auto flex flex-col items-center gap-6 px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 100, damping: 20 }}
           className="space-y-2"
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-vegas-gold to-vegas-gold/50 text-shadow-glow">
+          <h1 className="text-shadow-glow bg-gradient-to-b from-white via-vegas-gold to-vegas-gold/50 bg-clip-text font-display text-6xl tracking-tighter text-transparent md:text-8xl lg:text-9xl">
             OWN THE NIGHT
           </h1>
-          <p className="text-xl md:text-2xl tracking-[0.5em] text-off-white uppercase font-sans">
+          <p className="font-sans text-xl uppercase tracking-[0.5em] text-off-white md:text-2xl">
             Minneapolis Royalty
           </p>
         </motion.div>
@@ -89,7 +88,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, type: 'spring', stiffness: 100, damping: 20 }}
-          className="max-w-xl text-lg text-off-white/80 font-light"
+          className="max-w-xl text-lg font-light text-off-white/80"
         >
           The uniform of the Minneapolis night. Premium content. Real ROI. Zero excuses.
         </motion.p>
@@ -101,10 +100,10 @@ export default function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, type: 'spring', stiffness: 100, damping: 20 }}
             onSubmit={handleSubmit}
-            className="w-full p-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full flex items-center gap-2 box-glow-gold"
+            className="box-glow-gold flex w-full items-center gap-2 rounded-full border border-white/10 bg-white/5 p-2 backdrop-blur-md"
           >
             {isSubmitted ? (
-              <div className="flex-1 py-2 text-vegas-gold font-display text-lg animate-pulse">
+              <div className="flex-1 animate-pulse py-2 font-display text-lg text-vegas-gold">
                 ACCESS GRANTED. CHECK YOUR EMAIL.
               </div>
             ) : (
@@ -112,36 +111,42 @@ export default function HeroSection() {
                 <div className="pl-4 text-vegas-gold">
                   <MapPin size={20} />
                 </div>
-                <input 
-                  type="text" 
-                  placeholder="Your City" 
-                  className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none text-sm"
+                <input
+                  type="text"
+                  placeholder="Your City"
+                  className="h-10 flex-1 border-none bg-transparent text-sm text-white placeholder-white/40 outline-none focus:ring-0"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   required
                   disabled={isSubmitting}
                 />
-                <div className="w-px h-6 bg-white/20" />
-                <input 
-                  type="email" 
-                  placeholder="Email Address" 
-                  className="bg-transparent border-none text-white placeholder-white/40 focus:ring-0 flex-1 h-10 outline-none text-sm"
+                <div className="h-6 w-px bg-white/20" />
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  className="h-10 flex-1 border-none bg-transparent text-sm text-white placeholder-white/40 outline-none focus:ring-0"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isSubmitting}
                 />
-                <Button variant="primary" size="sm" type="submit" className="rounded-full px-6 whitespace-nowrap" isLoading={isSubmitting}>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  type="submit"
+                  className="whitespace-nowrap rounded-full px-6"
+                  isLoading={isSubmitting}
+                >
                   JOIN <ArrowRight size={16} />
                 </Button>
               </>
             )}
           </motion.form>
           {error && (
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-red-500 text-sm font-medium"
+              className="text-sm font-medium text-red-500"
             >
               {error}
             </motion.p>
@@ -149,10 +154,10 @@ export default function HeroSection() {
         </div>
 
         <motion.div
-           initial={{ opacity: 0 }}
-           animate={{ opacity: 1 }}
-           transition={{ delay: 1, duration: 1 }}
-           className="absolute bottom-8 text-xs text-white/30 uppercase tracking-widest animate-pulse"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-8 animate-pulse text-xs uppercase tracking-widest text-white/30"
         >
           Scroll to Explore
         </motion.div>

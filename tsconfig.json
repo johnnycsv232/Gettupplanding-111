@@ -30,18 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-<<<<<<< Updated upstream
-  "exclude": [
-    "node_modules",
-    "skills",
-    "backups",
-    ".zenflow",
-    ".firebase",
-    "dist",
-    "build"
-  ]
-}
-=======
   "exclude": ["node_modules", "skills", "backups", "scripts"]
 }
->>>>>>> Stashed changes

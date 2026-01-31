@@ -1,20 +1,22 @@
-# GETTUPPENT - Gemini/Antigravity Rules
+# GETTUPP ZENITH PROTOCOLS
 
-## Project
-Next.js 14+ landing page with Firebase, Stripe, Three.js, Tailwind, TypeScript
+<CRITICAL_INSTRUCTION>
+STOP.
+READ `skills/using-superpowers/SKILL.md`.
+INVOKE `Skill` tool.
+DO NOT PROCEED WITHOUT IT.
+</CRITICAL_INSTRUCTION>
 
-## Standards
-- Security-first development
-- Test-driven development
-- Strict TypeScript (no any)
-- Server Components default
+## ?? The Zenith Mandate (Invariants)
+1. **Security**: No secrets in code. No raw queries. 
+2. **Quality**: No `any`. No `console.log`. Zod for EVERYTHING.
+3. **Workflow**: `npm run verify` is the ONLY Definition of Done.
 
-## Skills Directory
-`skills/` contains AI coding skills. Use `@skill-name` to invoke.
-Active skills include: nextjs-best-practices, firebase, stripe-integration, stitch-react-components, test-driven-development
-
-## Commands
-- `npm run dev` - Start dev server
-- `npm run build` - Production build
-- `npm run lint` - Check code
-- `npm run test` - Run tests
+## ?? Expert Skill Routing
+| Task Type | REQUIRED Skill |
+|-----------|----------------|
+| **Planning** | `@plan-writing` + `@senior-architect` |
+| **Testing** | `@tdd-workflow` + `@playwright-skill` |
+| **Debugging** | `@systematic-debugging` |
+| **UI Design** | `@ui-ux-pro-max` + `@3d-web-experience` |
+| **Security** | `@top-web-vulnerabilities` |

@@ -5,6 +5,7 @@ This repository is configured for seamless startup across **Windsurf**, **Cursor
 ## ✅ Pre-Configured IDEs
 
 All IDEs are pre-configured with:
+
 - Unified settings (formatting, linting, TypeScript)
 - AI development rules (security-first, test-first)
 - Skills integration (73 curated skills)
@@ -31,21 +32,25 @@ npm run dev
 ## 🔧 IDE-Specific Notes
 
 ### Windsurf / Cascade
+
 - Auto-loads skills from `skills/` folder
 - Uses `.windsurf/rules` for AI guidelines
 - Settings in `.windsurf/settings.json`
 
 ### Cursor
+
 - Auto-loads skills from `skills/` folder
 - Uses `.cursor/rules` for AI guidelines
 - Settings in `.cursor/settings.json`
 
 ### Antigravity IDE
+
 - Skills linked via `.agent/skills` junction
 - Project context in `AGENTS.md`
 - Always-on rules in `.agent/rules`
 
 ### VSCode / Claude Code
+
 - Standard VSCode settings apply
 - Skills available via extensions
 - Use `.vscode/settings.json`
@@ -76,7 +81,9 @@ C:\Users\finan\Gettupplanding-111\
 ## 🎯 Skills System
 
 ### Using Skills
+
 In any AI IDE, reference skills with `@` symbol:
+
 ```
 @nextjs-best-practices help optimize this component
 @test-driven-development write tests for this function
@@ -85,6 +92,7 @@ In any AI IDE, reference skills with `@` symbol:
 ```
 
 ### Managing Skills
+
 ```bash
 # List active skills
 npm run skills:list
@@ -99,28 +107,35 @@ npx tsx scripts/generate-index.ts
 ## ⚡ Common Issues & Fixes
 
 ### Issue: IDE not finding skills
+
 **Fix:** Regenerate skills index
+
 ```bash
 npx tsx scripts/generate-index.ts
 ```
 
 ### Issue: Git conflicts
+
 **Fix:** Ensure `.next/` and `node_modules/` are in .gitignore
 
 ### Issue: Dependencies out of sync
+
 **Fix:** Clean install
+
 ```bash
 rm -rf node_modules package-lock.json
 npm install
 ```
 
 ### Issue: IDE slow startup
+
 **Fix:** All IDEs exclude `.next/`, `node_modules/`, `skills/.disabled/`
 Already configured in settings.json files.
 
 ## 🔐 Security Checklist
 
 Before committing:
+
 - [ ] No API keys in code
 - [ ] Environment variables in `.env.local` (git-ignored)
 - [ ] Firebase rules tested
@@ -152,6 +167,7 @@ npm run type-check
 ## 🆘 Support
 
 If you encounter issues:
+
 1. Run `.\scripts\complete-setup.ps1` to verify setup
 2. Check IDE-specific settings files
 3. Ensure Node.js 20+ is installed

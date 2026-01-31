@@ -19,6 +19,7 @@ npm test            # Run tests
 ## 🎯 Skills
 
 Use `@skill-name` in AI IDEs:
+
 - `@nextjs-best-practices`
 - `@react-best-practices`
 - `@firebase`

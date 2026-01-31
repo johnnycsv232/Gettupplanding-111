@@ -1,19 +1,22 @@
-# GETTUPPENT Project - Claude Code Rules
+# GETTUPP ZENITH PROTOCOLS
 
-## Stack
-Next.js 14+ | Firebase | Stripe | Three.js | Tailwind | TypeScript
+<CRITICAL_INSTRUCTION>
+STOP.
+READ `skills/using-superpowers/SKILL.md`.
+INVOKE `Skill` tool.
+DO NOT PROCEED WITHOUT IT.
+</CRITICAL_INSTRUCTION>
 
-## Principles
-- Security-first: validate inputs, check auth, sanitize outputs
-- Test-first: write tests before implementation
-- Type-safe: strict TypeScript, no `any`
+## ?? The Zenith Mandate (Invariants)
+1. **Security**: No secrets in code. No raw queries. 
+2. **Quality**: No `any`. No `console.log`. Zod for EVERYTHING.
+3. **Workflow**: `npm run verify` is the ONLY Definition of Done.
 
-## Skills
-Located in `skills/` - use for guidance on best practices.
-Key skills: nextjs-best-practices, firebase, stripe-integration, test-driven-development, stitch-react-components
-
-## Structure
-- `src/app/` - Pages (App Router)
-- `src/components/` - UI components
-- `src/lib/` - Utilities & configs
-- `skills/` - AI coding skills
+## ?? Expert Skill Routing
+| Task Type | REQUIRED Skill |
+|-----------|----------------|
+| **Planning** | `@plan-writing` + `@senior-architect` |
+| **Testing** | `@tdd-workflow` + `@playwright-skill` |
+| **Debugging** | `@systematic-debugging` |
+| **UI Design** | `@ui-ux-pro-max` + `@3d-web-experience` |
+| **Security** | `@top-web-vulnerabilities` |

@@ -31,7 +31,7 @@ export default function Hero() {
           Minneapolis Royalty
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           className={styles.headline}
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -49,7 +49,7 @@ export default function Hero() {
           The uniform of the Minneapolis night.
         </motion.h2>
 
-        <motion.p 
+        <motion.p
           className={styles.description}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -58,7 +58,7 @@ export default function Hero() {
           Premium content. Real ROI. Zero excuses.
         </motion.p>
 
-        <motion.div 
+        <motion.div
           className={styles.metaGrid}
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -72,7 +72,7 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className={styles.ctaContainer}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -2,27 +2,16 @@
   "folders": [
     {
       "name": "Project Root",
-<<<<<<< Updated upstream
-      "path": "."
-    },
-    {
-      "name": "Skills Library",
-      "path": "skills"
-    },
-    {
-      "path": "../set-up-project-config-5d06"
-    },
-    {
-      "path": "../set-up-project-config-008a"
-    }
-=======
       "path": ".",
     },
     {
       "name": "Skills Library",
       "path": "skills",
     },
->>>>>>> Stashed changes
+    {
+      "name": "Scripts",
+      "path": "scripts",
+    },
   ],
   "settings": {
     "editor.formatOnSave": true,
@@ -39,14 +28,11 @@
     "[markdown]": {
       "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     },
-    "powershell.cwd": "Project Root",
-<<<<<<< Updated upstream
     "[jsonc]": {
       "editor.defaultFormatter": "vscode.json-language-features",
     },
     "editor.codeActions.triggerOnFocusChange": true,
-=======
->>>>>>> Stashed changes
+    "powershell.cwd": "Project Root",
   },
   "extensions": {
     "recommendations": [

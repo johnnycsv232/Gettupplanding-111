@@ -1,6 +1,7 @@
 # Full SDD workflow
 
 ## Configuration
+
 - **Artifacts Path**: {@artifacts_path} → `.zenflow/tasks/{task_id}`
 
 ---
@@ -8,6 +9,7 @@
 ## Workflow Steps
 
 ### [x] Step: Requirements
+
 <!-- chat-id: ded964cf-e6f5-4759-b5a4-97eb016b5b1c -->
 
 Create a Product Requirements Document (PRD) based on the feature description.
@@ -28,6 +30,7 @@ Create a technical specification based on the PRD in `{@artifacts_path}/requirem
 2. Define the implementation approach
 
 Save to `{@artifacts_path}/spec.md` with:
+
 - Technical context (language, dependencies)
 - Implementation approach referencing existing code patterns
 - Source code structure changes
@@ -36,6 +39,7 @@ Save to `{@artifacts_path}/spec.md` with:
 - Verification approach using project lint/test commands
 
 ### [x] Step: Planning
+
 <!-- chat-id: d1c2be1c-e10c-4944-baf3-7ff44b9f0e09 -->
 
 Create a detailed implementation plan based on `{@artifacts_path}/spec.md`.
@@ -51,29 +55,38 @@ If the feature is trivial and doesn't warrant full specification, update this wo
 Save to `{@artifacts_path}/plan.md`.
 
 ### [x] Step: Implementation - Phase 1: Security Hardening
+
 <!-- chat-id: 2bf8f668-9db1-4579-8cbd-2d1e7a5cdec1 -->
+
 1. [x] Implement CSP and Security Headers in `next.config.ts`.
 2. [x] Restrict leads rules in `firestore.rules` with App Check validation.
 3. [x] Add idempotencyKey to Stripe checkout session creation in `src/app/api/checkout/route.ts`.
 
 ### [x] Step: Implementation - Phase 2: Logic & Validation Fixes
+
 <!-- chat-id: 753f5d8f-0d47-42a9-aff2-8227bf65696d -->
+
 1. [x] Fix Hardcoded User Identity in `src/app/api/checkout/route.ts` by using session data.
 2. [x] Enforce `.strict()` in all Zod DTOs in `src/lib/validations/stripe.ts`.
 3. [x] Initialize Analytics in `src/lib/firebase.ts`.
 
 ### [x] Step: Implementation - Phase 3: SEO & Discovery
+
 <!-- chat-id: 646df1e3-a930-4203-942c-a8add4c1f4c2 -->
+
 1. [x] Implement JSON-LD and canonical tags in `src/app/layout.tsx`.
 2. [x] Generate `src/app/sitemap.ts` and `src/app/robots.ts`.
 3. [x] Audit and fix heading nesting in landing page components.
 
 ### [ ] Step: Implementation - Phase 4: UI/UX & Branding Audit
+
 <!-- chat-id: 77b6704d-fef8-4dbc-80f6-736f7d019cc3 -->
+
 1. [ ] Audit and polish UI/UX elements (GlassCard, ParticleField, etc.) for 'The GettUpp Look'.
 2. [ ] Ensure all inputs have proper validation feedback.
 
 ### [ ] Step: Implementation - Phase 5: Verification
+
 1. [ ] Run `npm run lint`.
 2. [ ] Run `npm run test`.
 3. [ ] Run `npm run type-check`.

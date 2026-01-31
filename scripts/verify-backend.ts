@@ -9,10 +9,10 @@ async function verifyBackend() {
   try {
     const db = getAdminDb();
     const testDoc = db.collection('_verification').doc('test');
-    
+
     await testDoc.set({
       timestamp: new Date().toISOString(),
-      message: 'Backend verification'
+      message: 'Backend verification',
     });
     console.log('✅ Firestore Write: SUCCESS');
 
@@ -35,7 +35,7 @@ async function verifyBackend() {
   try {
     const client = getSanityClient();
     // Use a simple query that doesn't rely on existing data
-    const result = await client.fetch('*[0]._id'); 
+    const result = await client.fetch('*[0]._id');
     console.log('✅ Sanity Connection: SUCCESS');
     console.log(`ℹ️ Sanity fetched first document ID: ${result || 'None found (Empty dataset)'}`);
   } catch (error: unknown) {
@@ -46,7 +46,7 @@ async function verifyBackend() {
   console.log('\n✨ Verification Complete.');
 }
 
-verifyBackend().catch(err => {
+verifyBackend().catch((err) => {
   console.error('💥 Critical Failure during verification:');
   console.error(err);
   process.exit(1);

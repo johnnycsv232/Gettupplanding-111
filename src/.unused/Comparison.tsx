@@ -22,21 +22,21 @@ export default function Comparison() {
   return (
     <section className={styles.comparison}>
       <div className="container mx-auto px-4">
-        <motion.div 
-          className="text-center mb-16"
+        <motion.div
+          className="mb-16 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ type: 'spring', stiffness: 100, damping: 20 }}
         >
-          <h2 className="text-4xl md:text-6xl font-black text-white text-display leading-tight">
+          <h2 className="text-display text-4xl font-black leading-tight text-white md:text-6xl">
             THE OLD WAY <span className="text-gray-600">VS</span> <br />
             <span className="text-gold">THE GETTUPP STANDARD</span>
           </h2>
         </motion.div>
 
         <div className={styles.comparisonContent}>
-          <motion.div 
+          <motion.div
             className={styles.comparisonCard}
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -54,14 +54,16 @@ export default function Comparison() {
             </ul>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className={`${styles.comparisonCard} ${styles.standard}`}
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ type: 'spring', stiffness: 100, damping: 20 }}
           >
-            <h3 className={`${styles.comparisonTitle} ${styles.comparisonStandardTitle}`}>A SYSTEM THAT PACKS VENUES.</h3>
+            <h3 className={`${styles.comparisonTitle} ${styles.comparisonStandardTitle}`}>
+              A SYSTEM THAT PACKS VENUES.
+            </h3>
             <ul className={styles.comparisonList}>
               {standardWay.map((item, idx) => (
                 <li key={idx} className={`${styles.comparisonItem} ${styles.standard}`}>

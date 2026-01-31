@@ -195,11 +195,11 @@
   .metaGrid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .ctaContainer {
     flex-direction: column;
   }
-  
+
   .primaryCta {
     width: 100%;
     justify-content: center;
@@ -308,7 +308,7 @@
   .founderContent {
     grid-template-columns: 1fr;
   }
-  
+
   .founderStats {
     grid-template-columns: repeat(2, 1fr);
   }

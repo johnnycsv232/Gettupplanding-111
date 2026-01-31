@@ -11,7 +11,7 @@ export default function StickyHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showCTA, setShowCTA] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
+  useMotionValueEvent(scrollY, 'change', (latest) => {
     setIsScrolled(latest > 50);
     setShowCTA(latest > 600); // Assume Hero is ~800px, show CTA when scrolled past
   });
@@ -19,26 +19,35 @@ export default function StickyHeader() {
   return (
     <motion.header
       className={cn(
-        "fixed top-0 left-0 right-0 z-40 transition-all duration-300 px-6 py-4 flex items-center justify-between",
-        isScrolled ? "liquid-glass py-3" : "bg-transparent"
+        'fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-6 py-4 transition-all duration-300',
+        isScrolled ? 'liquid-glass py-3' : 'bg-transparent'
       )}
     >
       <div className="flex items-center gap-2">
-        <Link href="/" className="font-display text-2xl text-off-white tracking-widest hover:text-vegas-gold transition-colors">
+        <Link
+          href="/"
+          className="font-display text-2xl tracking-widest text-off-white transition-colors hover:text-vegas-gold"
+        >
           GETTUPP<span className="text-vegas-gold">ENT</span>
         </Link>
       </div>
 
       <div className="flex items-center gap-4">
         {/* Navigation could go here */}
-        
+
         <motion.div
           initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: showCTA ? 1 : 0, x: showCTA ? 0 : 20, pointerEvents: showCTA ? 'auto' : 'none' }}
+          animate={{
+            opacity: showCTA ? 1 : 0,
+            x: showCTA ? 0 : 20,
+            pointerEvents: showCTA ? 'auto' : 'none',
+          }}
           transition={{ duration: 0.3 }}
         >
           <Link href="#pricing">
-             <Button variant="primary" size="sm">Start The Pilot</Button>
+            <Button variant="primary" size="sm">
+              Start The Pilot
+            </Button>
           </Link>
         </motion.div>
       </div>

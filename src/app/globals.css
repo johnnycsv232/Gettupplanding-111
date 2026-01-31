@@ -4,7 +4,7 @@
 
 :root {
   --background: #000000;
-  --foreground: #F1E5AC;
+  --foreground: #f1e5ac;
 }
 
 body {
@@ -14,9 +14,9 @@ body {
 
 @layer utilities {
   .liquid-glass {
-    @apply bg-white/5 backdrop-blur-[30px] border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+    @apply border border-white/10 bg-white/5 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] backdrop-blur-[30px];
   }
-  
+
   .text-shadow-glow {
     text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
   }
@@ -24,11 +24,11 @@ body {
   .text-shadow-neon {
     text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
   }
-  
+
   .box-glow-gold {
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
   }
-  
+
   .box-glow-magenta {
     box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
   }

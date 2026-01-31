@@ -13,52 +13,54 @@ const rules = [
 
 export default function RulesSection() {
   return (
-    <section className="py-32 bg-black relative overflow-hidden">
+    <section className="relative overflow-hidden bg-black py-32">
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      
-      <div className="container mx-auto px-4 max-w-4xl relative z-10">
-        <motion.div 
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+      <div className="container relative z-10 mx-auto max-w-4xl px-4">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[#0A0A0A] border border-white/10 p-8 md:p-16 relative shadow-2xl"
+          className="relative border border-white/10 bg-[#0A0A0A] p-8 shadow-2xl md:p-16"
         >
           {/* Decorative Corner */}
-          <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-vegas-gold opacity-50" />
-          
-          <div className="flex items-center gap-4 mb-12">
+          <div className="absolute right-0 top-0 h-16 w-16 border-r-2 border-t-2 border-vegas-gold opacity-50" />
+
+          <div className="mb-12 flex items-center gap-4">
             <AlertTriangle className="text-vegas-gold" size={32} />
-            <h2 className="font-display text-4xl md:text-5xl text-white tracking-tighter">THE RULES</h2>
+            <h2 className="font-display text-4xl tracking-tighter text-white md:text-5xl">
+              THE RULES
+            </h2>
           </div>
 
           <div className="space-y-8">
             {rules.map((rule, i) => (
-              <motion.div 
+              <motion.div
                 key={rule.id}
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="flex gap-6 items-start group"
+                className="group flex items-start gap-6"
               >
-                <span className="font-mono text-vegas-gold text-lg font-bold pt-1 opacity-50 group-hover:opacity-100 transition-opacity">
+                <span className="pt-1 font-mono text-lg font-bold text-vegas-gold opacity-50 transition-opacity group-hover:opacity-100">
                   {rule.id}
                 </span>
-                <p className="text-off-white/80 font-mono text-sm md:text-base leading-relaxed tracking-wide group-hover:text-white transition-colors">
+                <p className="font-mono text-sm leading-relaxed tracking-wide text-off-white/80 transition-colors group-hover:text-white md:text-base">
                   {rule.text}
                 </p>
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-off-white/30 text-[10px] font-mono tracking-[0.2em] uppercase">
+          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-off-white/30">
               Compliance is non-negotiable for elite production.
             </p>
-            <div className="h-px flex-grow mx-8 bg-white/5 hidden md:block" />
-            <span className="text-vegas-gold/40 font-display text-xl">GETTUPP ENT.</span>
+            <div className="mx-8 hidden h-px flex-grow bg-white/5 md:block" />
+            <span className="font-display text-xl text-vegas-gold/40">GETTUPP ENT.</span>
           </div>
         </motion.div>
       </div>

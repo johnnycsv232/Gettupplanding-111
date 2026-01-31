@@ -1,0 +1,74 @@
+*   6c68590 Merge branch 'master' into unified-main
+|\  
+| * 1fac837 Refactor verify-setup script and update firebase.json
+| * 8790056 Update workspace, Firebase config, and add docs/logs
+* |   ee4aabb Resolve merge conflicts during unification
+|\ \  
+| * | 0875eac Set up project config
+| * | 10233de Set up project config
+| * | 3499afd Implementation
+* | |   42b7de0 Merge branch 'project-configuartion-dece' into unified-main
+|\ \ \  
+| * | | fe9133b Requirements
+| * | | d1b7268 Initialize task: Project-Configuartion
+| | |/  
+| |/|   
+* | |   8cd7564 Merge branch 'new-task-4e2f' into unified-main
+|\ \ \  
+| * | | 8b7b742 Implementation - Phase 3: SEO & Discovery
+| * | | a2e14d5 Implementation - Phase 1: Security Hardening
+| * | | 49b57b9 Planning
+| * | | 66ce881 Implementation - Phase 2: Logic & Validation Fixes
+| * | | 5135983 New task
+| * | | 8c82610 Requirements
+| * | | a631644 Initialize task: New task
+* | | | 93aa83b Merge branch 'new-task-4d40' into unified-main
+|\| | | 
+| * | | 9d7eb27 New task
+| * | | 8246766 New task
+| * | | a3baa89 Technical Specification
+| * | | c46f990 Requirements
+| * | | f5652ad Initialize task: New task
+* | | | 3fc9adf Initialize task: New task
+| |/ /  
+|/| |   
+* | |   387702e Merge branch 'set-up-project-config-5d06' into set-up-project-config-9bc7
+|\ \ \  
+| * | | 28af83f Implementation
+| * | | 3d08c1a Initialize task: Set up project config
+* | | |   6968237 Merge branch 'new-task-3030' into set-up-project-config-9bc7
+|\ \ \ \  
+| | |/ /  
+| |/| |   
+| * | | b6b6a19 ...
+* | | |   a001144 Merge branch 'set-up-project-config-0072' into set-up-project-config-9bc7
+|\ \ \ \  
+| * | | | 08c50e8 Initialize task: Set up project config
+| | |/ /  
+| |/| |   
+* | | |   9725f2f Merge remote-tracking branch 'origin/dependabot/npm_and_yarn/npm_and_yarn-23bfa9442b' into set-up-project-config-9bc7
+|\ \ \ \  
+| * | | | 9a4c460 build(deps): bump the npm_and_yarn group across 1 directory with 3 updates
+| * | | |   071ae0e Merge pull request #1 from johnnycsv232/dependabot/npm_and_yarn/npm_and_yarn-f3562b46b9
+| |\ \ \ \  
+| | * | | | 993e3ce build(deps-dev): bump lodash
+| | |/ / /  
+| * | | |   3d3d000 Merge pull request #2 from johnnycsv232/new-task-3030
+| |\ \ \ \  
+| | |/ / /  
+| |/| / /   
+| | |/ /    
+| | * | dc154fd feat: configure VS Code workspace and settings for the project.
+| | * | b448cc5 New task
+| | * | 93a61fb New task
+| | * | fd26050 New task
+| | * | 66abc91 "docs"
+| | * | 0d6b045 Phase 2 - Shared Core Components
+| | * | 3e8ca0b "UI"
+| | * | c6819f7 "enhancements"
+| | * | 3e155f9 Phase 6 - Sections Group D (Closing & Footer)
+| | * | 78409d6 Final Verification
+| | * | e92967c Final Verification
+| | * | 83c0846 Merge project config from set-up-project-config-008a branch
+| | |\| 
+| | | * 4fba18b Implementation

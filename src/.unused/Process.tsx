@@ -36,8 +36,12 @@ export default function Process() {
           viewport={{ once: true }}
         >
           <span className={styles.founderLabel}>The Process</span>
-          <h2 className="text-4xl md:text-5xl font-black text-white text-display mb-4">HOW IT WORKS</h2>
-          <p className="text-gray-500 max-width-md mb-12">From booking to packed venue—here&apos;s the system that makes it happen.</p>
+          <h2 className="text-display mb-4 text-4xl font-black text-white md:text-5xl">
+            HOW IT WORKS
+          </h2>
+          <p className="max-width-md mb-12 text-gray-500">
+            From booking to packed venue—here&apos;s the system that makes it happen.
+          </p>
         </motion.div>
 
         <div className={styles.processGrid}>

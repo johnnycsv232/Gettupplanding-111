@@ -1,0 +1,8 @@
+ M tsconfig.json
+?? branch_all.txt
+?? branch_no_merged.txt
+?? git_graph.txt
+?? main_status.txt
+?? worktree_list.txt
+?? worktrees_to_delete.txt
+?? wt_final.txt
