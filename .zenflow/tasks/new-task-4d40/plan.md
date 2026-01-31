@@ -37,6 +37,7 @@ Save to `{@artifacts_path}/spec.md` with:
 - Verification approach using project lint/test commands
 
 ### [ ] Step: Planning
+<!-- chat-id: ad4dfdde-d9db-4452-a564-5a0d930408c6 -->
 
 Create a detailed implementation plan based on `{@artifacts_path}/spec.md`.
 
