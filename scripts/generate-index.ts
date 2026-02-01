@@ -17,11 +17,13 @@ function generateIndex(skillsDir: string, outputFile: string) {
     return;
   }
 
-  const items = fs.readdirSync(skillsDir, { withFileTypes: true });
+  function scan(dir: string) {
+    const items = fs.readdirSync(dir, { withFileTypes: true });
 
-  for (const item of items) {
-    if (item.isDirectory() && item.name !== '.disabled' && !item.name.startsWith('.')) {
-      const skillDir = path.join(skillsDir, item.name);
+    for (const item of items) {
+      if (!item.isDirectory()) continue;
+
+      const skillDir = path.join(dir, item.name);
       const skillMdPath = path.join(skillDir, 'SKILL.md');
 
       if (fs.existsSync(skillMdPath)) {
@@ -71,9 +73,14 @@ function generateIndex(skillsDir: string, outputFile: string) {
           name,
           description,
         });
+      } else if (item.name !== '.disabled' && !item.name.startsWith('.')) {
+        // Recurse into subdirectories that aren't skills themselves
+        scan(skillDir);
       }
     }
   }
+
+  scan(skillsDir);
 
   skills.sort((a, b) => a.name.localeCompare(b.name));
 

@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 
 interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'neon';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'neon' | 'liquid-glass' | 'outline';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   isLoading?: boolean;
   children?: React.ReactNode;
@@ -19,6 +19,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       secondary: 'bg-transparent border border-vegas-gold text-vegas-gold hover:bg-vegas-gold/10',
       ghost: 'bg-transparent text-off-white hover:text-white hover:bg-white/5',
       neon: 'bg-neon-magenta text-white border border-neon-magenta box-glow-magenta hover:bg-fuchsia-500',
+      'liquid-glass': 'liquid-glass text-white hover:bg-white/10',
+      outline:
+        'bg-transparent border border-white/20 text-white hover:border-white/40 hover:bg-white/5',
     };
 
     const sizes = {
@@ -31,11 +34,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <motion.button
         ref={ref}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.02, y: -2 }}
+        whileTap={{ scale: 0.98 }}
         className={cn(
-          'relative flex items-center justify-center gap-2 rounded-none font-display uppercase tracking-wider transition-colors disabled:cursor-not-allowed disabled:opacity-50',
-          variants[variant],
+          'relative flex items-center justify-center gap-2 rounded-none font-display uppercase tracking-wider transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50',
+          variants[variant as keyof typeof variants],
           sizes[size],
           className
         )}

@@ -13,7 +13,7 @@ const rules = [
 
 export default function RulesSection() {
   return (
-    <section className="relative overflow-hidden bg-black py-32">
+    <section className="bg-deep-void border-b border-white/5 py-32">
       {/* Background elements */}
       <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />

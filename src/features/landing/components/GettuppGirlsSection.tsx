@@ -2,76 +2,105 @@
 
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
+import { ArrowRight } from 'lucide-react';
+import Magnetic from '@/components/animations/Magnetic';
 
-const models = [
-  { id: 1, tilt: -3 },
-  { id: 2, tilt: 2 },
-  { id: 3, tilt: -1.5 },
-  { id: 4, tilt: 4 },
+const girls = [
+  { id: 1, img: '/api/placeholder/600/800', label: 'LIFESTYLE' },
+  { id: 2, img: '/api/placeholder/600/800', label: 'PREMIUM' },
+  { id: 3, img: '/api/placeholder/600/800', label: 'BOTTLE SERVICE' },
+  { id: 4, img: '/api/placeholder/600/800', label: 'ATMOSPHERE' },
+  { id: 5, img: '/api/placeholder/600/800', label: 'INFLUENCER' },
+  { id: 6, img: '/api/placeholder/600/800', label: 'ELITE' },
 ];
 
 export default function GettuppGirlsSection() {
   return (
-    <section className="relative overflow-hidden border-y border-neon-magenta/20 bg-deep-void-black py-24">
-      {/* Ambient Glow */}
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-neon-magenta/5 blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 left-0 h-1/2 w-1/3 bg-neon-magenta/5 blur-[100px]" />
-
-      <div className="container relative z-10 mx-auto grid items-center gap-16 px-4 md:grid-cols-2">
-        <div className="space-y-8">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="mb-6 font-display text-5xl text-white md:text-7xl">
-              GETTUPP{' '}
-              <span className="text-neon-magenta drop-shadow-[0_0_15px_rgba(255,0,255,0.5)]">
-                GIRLS
-              </span>
+    <section
+      id="girls"
+      className="bg-deep-void relative overflow-hidden border-y border-white/5 py-32"
+    >
+      {/* Pink Aura Glow */}
+      <div className="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] rounded-full bg-neon-magenta/5 blur-[150px]" />
+      <div className="container mx-auto mb-20 px-4 text-center lg:text-left">
+        <div className="grid grid-cols-1 items-end gap-12 lg:grid-cols-2">
+          <div className="space-y-6">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="text-premium-sm font-bold tracking-[0.3em] text-neon-magenta"
+            >
+              BRAND VERTICAL
+            </motion.span>
+            <h2 className="heading-zenith text-6xl leading-none text-white md:text-8xl">
+              GETTUPP <br />
+              <span className="agency-serif text-neon-magenta opacity-90">GIRLS</span>
             </h2>
-            <p className="mb-8 max-w-lg text-xl leading-relaxed text-off-white/80">
-              The elite face of your venue. We source, cast, and manage premium talent that defines
-              the atmosphere. Models. Bottle Service. Unmatched Presence.
+            <p className="max-w-xl text-xl font-light leading-relaxed text-off-white/40">
+              More than just models. A lifestyle ecosystem. <br className="hidden md:block" />
+              Cross-promote your venue with our exclusive network and the unofficial nightlife
+              uniform.
             </p>
-            <Button
-              variant="neon"
-              className="border-2 border-neon-magenta px-10 py-4 text-lg text-neon-magenta shadow-[0_0_20px_rgba(255,0,255,0.2)] transition-all duration-300 hover:bg-neon-magenta hover:text-white"
-            >
-              VIEW THE ROSTER
-            </Button>
-          </motion.div>
+          </div>
+          <div className="flex justify-center pb-4 lg:justify-end">
+            <Magnetic strength={0.2}>
+              <Button
+                variant="secondary"
+                size="lg"
+                className="group rounded-full border border-neon-magenta/50 px-10 text-neon-magenta transition-all duration-500 hover:bg-neon-magenta hover:text-white"
+              >
+                VIEW COLLECTION{' '}
+                <ArrowRight className="ml-2 transition-transform duration-500 group-hover:translate-x-2" />
+              </Button>
+            </Magnetic>
+          </div>
         </div>
-
-        <div className="grid grid-cols-2 gap-6 md:gap-8">
-          {models.map((model, i) => (
+      </div>
+      {/* Infinite Marquee Scroll */}
+      <div className="relative flex overflow-hidden border-y border-white/5 bg-black/20">
+        <div className="animate-marquee flex gap-6 py-12">
+          {[...girls, ...girls].map((girl, i) => (
             <motion.div
-              key={model.id}
-              initial={{ opacity: 0, y: 30, rotate: model.tilt }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{
-                rotate: 0,
-                scale: 1.05,
-                zIndex: 20,
-                transition: { type: 'spring', stiffness: 300 },
-              }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group relative cursor-pointer"
+              key={i}
+              whileHover={{ y: -20, scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="glass-card glint-effect group relative aspect-[3/4] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 md:w-[400px]"
             >
-              <div className="transform bg-white p-3 pb-12 shadow-2xl transition-all duration-500 group-hover:shadow-neon-magenta/20">
-                <div className="relative aspect-[3/4] overflow-hidden bg-neutral-900">
-                  <div className="absolute inset-0 bg-gradient-to-br from-neon-magenta/20 to-transparent mix-blend-overlay" />
-                  {/* Image would go here */}
-                  <div className="h-full w-full bg-[url('/api/placeholder/400/500')] bg-cover bg-center grayscale transition-all duration-700 group-hover:grayscale-0" />
-                </div>
-                <div className="mt-4 h-4 w-2/3 rounded-sm bg-neutral-100" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-20" />
+              <div
+                className="absolute inset-0 bg-cover bg-center contrast-[1.1] grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0"
+                style={{ backgroundImage: `url(${girl.img})` }}
+              />
+              <div className="absolute bottom-8 left-8 z-20">
+                <span className="rounded-full border border-white/20 bg-black/60 px-4 py-2 text-[10px] font-black tracking-[0.2em] text-white backdrop-blur-xl transition-all group-hover:border-neon-magenta/50 group-hover:text-neon-magenta">
+                  {girl.label}
+                </span>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+      <div className="mt-20 text-center">
+        <span className="font-display text-sm uppercase tracking-[0.5em] text-white/20">
+          🔥 Coming Soon: The Winter Collection
+        </span>
+      </div>
+      <style jsx global>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 }

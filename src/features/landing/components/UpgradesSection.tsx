@@ -12,7 +12,7 @@ const upgrades = [
 
 export default function UpgradesSection() {
   return (
-    <section className="relative overflow-hidden border-b border-white/5 bg-deep-void-black py-20">
+    <section className="bg-deep-void relative overflow-hidden border-b border-white/5 py-20">
       {/* Subtle Background Text */}
       <div className="pointer-events-none absolute inset-0 flex select-none items-center justify-center opacity-[0.02]">
         <span className="whitespace-nowrap font-display text-[20vw]">ELITE UPGRADES</span>

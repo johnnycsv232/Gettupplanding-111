@@ -5,9 +5,11 @@ import { Star } from 'lucide-react';
 
 export default function TestimonialsSection() {
   return (
-    <section className="bg-deep-void-black py-24">
+    <section className="bg-deep-void border-b border-white/5 py-32">
       <div className="container mx-auto px-4">
-        <h2 className="mb-16 text-center font-display text-4xl text-white">THEY DON&apos;T LIE</h2>
+        <h2 className="mb-20 text-center font-display text-5xl text-white md:text-7xl">
+          THEY DON&apos;T <span className="text-glow-gold text-vegas-gold">LIE</span>
+        </h2>
 
         <div className="grid gap-8 md:grid-cols-3">
           {[1, 2, 3].map((i) => (

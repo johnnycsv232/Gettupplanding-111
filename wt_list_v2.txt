@@ -1,2 +1,0 @@
-C:/Users/finan/Gettupplanding-111                             6c68590 [unified-main]
-C:/Users/finan/.zenflow/worktrees/set-up-project-config-5d06  28af83f [set-up-project-config-5d06]

@@ -1,25 +1,37 @@
 [
   {
     "id": "3d-web-experience",
-    "path": "skills\\3d-web-experience",
+    "path": "skills\\_core\\3d-web-experience",
     "name": "3d-web-experience",
-    "description": "\"Expert in building 3D experiences for the web - Three.js, React Three Fiber, Spline, WebGL, and interactive 3D scenes. Covers product configurators, 3D portfolios, immersive websites, and bringing depth to web experiences. Use when: 3D website, three.js, WebGL, react three fiber, 3D experience.\""
+    "description": "'Expert in building 3D experiences for the web - Three.js, React Three Fiber, Spline, WebGL, and interactive 3D scenes. Covers product configurators, 3D portfolios, immersive websites, and bringing depth to web experiences. Use when: 3D website, three.js, WebGL, react three fiber, 3D experience.'"
+  },
+  {
+    "id": "active-directory-attacks",
+    "path": "skills\\active-directory-attacks",
+    "name": "Active Directory Attacks",
+    "description": "This skill should be used when the user asks to \"attack Active Directory\", \"exploit AD\", \"Kerberoasting\", \"DCSync\", \"pass-the-hash\", \"BloodHound enumeration\", \"Golden Ticket\", \"Silver Ticket\", \"AS-REP roasting\", \"NTLM relay\", or needs guidance on Windows domain penetration testing."
   },
   {
     "id": "agent-tool-builder",
-    "path": "skills\\agent-tool-builder",
+    "path": "skills\\_ai-tools\\agent-tool-builder",
     "name": "agent-tool-builder",
     "description": "\"Tools are how AI agents interact with the world. A well-designed tool is the difference between an agent that works and one that hallucinates, fails silently, or costs 10x more tokens than necessary.  This skill covers tool design from schema to error handling. JSON Schema best practices, description writing that actually helps the LLM, validation, and the emerging MCP standard that's becoming the lingua franca for AI tools.  Key insight: Tool descriptions are more important than tool implementa\""
   },
   {
-    "id": "ai-product",
-    "path": "skills\\ai-product",
-    "name": "ai-product",
-    "description": "\"Every product will be AI-powered. The question is whether you'll build it right or ship a demo that falls apart in production.  This skill covers LLM integration patterns, RAG architecture, prompt engineering that scales, AI UX that users trust, and cost optimization that doesn't bankrupt you. Use when: keywords, file_patterns, code_patterns.\""
+    "id": "algolia-search",
+    "path": "skills\\_tools\\algolia-search",
+    "name": "algolia-search",
+    "description": "'Expert patterns for Algolia search implementation, indexing strategies, React InstantSearch, and relevance tuning Use when: adding search to, algolia, instantsearch, search api, search functionality.'"
+  },
+  {
+    "id": "algorithmic-art",
+    "path": "skills\\algorithmic-art",
+    "name": "algorithmic-art",
+    "description": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations."
   },
   {
     "id": "analytics-tracking",
-    "path": "skills\\analytics-tracking",
+    "path": "skills\\_seo-marketing\\analytics-tracking",
     "name": "analytics-tracking",
     "description": "When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions \"set up tracking,\" \"GA4,\" \"Google Analytics,\" \"conversion tracking,\" \"event tracking,\" \"UTM parameters,\" \"tag manager,\" \"GTM,\" \"analytics implementation,\" or \"tracking plan.\" For A/B test measurement, see ab-test-setup."
   },
@@ -30,10 +42,34 @@
     "description": "API design principles and decision-making. REST vs GraphQL vs tRPC selection, response formats, versioning, pagination."
   },
   {
+    "id": "app-builder",
+    "path": "skills\\app-builder",
+    "name": "app-builder",
+    "description": "Main application building orchestrator. Creates full-stack applications from natural language requests. Determines project type, selects tech stack, coordinates agents."
+  },
+  {
     "id": "architecture",
-    "path": "skills\\architecture",
+    "path": "skills\\_architecture\\architecture",
     "name": "architecture",
     "description": "Architectural decision-making framework. Requirements analysis, trade-off evaluation, ADR documentation. Use when making architecture decisions or analyzing system design."
+  },
+  {
+    "id": "autonomous-agent-patterns",
+    "path": "skills\\_ai-tools\\autonomous-agent-patterns",
+    "name": "autonomous-agent-patterns",
+    "description": "'Design patterns for building autonomous coding agents. Covers tool integration, permission systems, browser automation, and human-in-the-loop workflows. Use when building AI agents, designing tool APIs, implementing permission systems, or creating autonomous coding assistants.'"
+  },
+  {
+    "id": "autonomous-agents",
+    "path": "skills\\_ai-tools\\autonomous-agents",
+    "name": "autonomous-agents",
+    "description": "\"Autonomous agents are AI systems that can independently decompose goals, plan actions, execute tools, and self-correct without constant human guidance. The challenge isn't making them capable - it's making them reliable. Every extra decision multiplies failure probability.  This skill covers agent loops (ReAct, Plan-Execute), goal decomposition, reflection patterns, and production reliability. Key insight: compounding error rates kill autonomous agents. A 95% success rate per step drops to 60% b\""
+  },
+  {
+    "id": "aws-penetration-testing",
+    "path": "skills\\aws-penetration-testing",
+    "name": "AWS Penetration Testing",
+    "description": "This skill should be used when the user asks to \"pentest AWS\", \"test AWS security\", \"enumerate IAM\", \"exploit cloud infrastructure\", \"AWS privilege escalation\", \"S3 bucket testing\", \"metadata SSRF\", \"Lambda exploitation\", or needs guidance on Amazon Web Services security assessment."
   },
   {
     "id": "backend-dev-guidelines",
@@ -42,16 +78,10 @@
     "description": "Comprehensive backend development guide for Node.js/Express/TypeScript microservices. Use when creating routes, controllers, services, repositories, middleware, or working with Express APIs, Prisma database access, Sentry error tracking, Zod validation, unifiedConfig, dependency injection, or async patterns. Covers layered architecture (routes → controllers → services → repositories), BaseController pattern, error handling, performance monitoring, testing strategies, and migration from legacy patterns."
   },
   {
-    "id": "brainstorming",
-    "path": "skills\\brainstorming",
-    "name": "brainstorming",
-    "description": "\"You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.\""
-  },
-  {
-    "id": "browser-automation",
-    "path": "skills\\browser-automation",
-    "name": "browser-automation",
-    "description": "\"Browser automation powers web testing, scraping, and AI agent interactions. The difference between a flaky script and a reliable system comes down to understanding selectors, waiting strategies, and anti-detection patterns.  This skill covers Playwright (recommended) and Puppeteer, with patterns for testing, scraping, and agentic browser control. Key insight: Playwright won the framework war. Unless you need Puppeteer's stealth ecosystem or are Chrome-only, Playwright is the better choice in 202\""
+    "id": "bullmq-specialist",
+    "path": "skills\\_tools\\bullmq-specialist",
+    "name": "bullmq-specialist",
+    "description": "'BullMQ expert for Redis-backed job queues, background processing, and reliable async execution in Node.js/TypeScript applications. Use when: bullmq, bull queue, redis queue, background job, job queue.'"
   },
   {
     "id": "canvas-design",
@@ -61,21 +91,51 @@
   },
   {
     "id": "clean-code",
-    "path": "skills\\clean-code",
+    "path": "skills\\_quality\\clean-code",
     "name": "clean-code",
     "description": "Pragmatic coding standards - concise, direct, no over-engineering, no unnecessary comments"
   },
   {
+    "id": "clerk-auth",
+    "path": "skills\\_tools\\clerk-auth",
+    "name": "clerk-auth",
+    "description": "'Expert patterns for Clerk auth implementation, middleware, organizations, webhooks, and user sync Use when: adding authentication, clerk auth, user authentication, sign in, sign up.'"
+  },
+  {
+    "id": "cloud-penetration-testing",
+    "path": "skills\\cloud-penetration-testing",
+    "name": "Cloud Penetration Testing",
+    "description": "This skill should be used when the user asks to \"perform cloud penetration testing\", \"assess Azure or AWS or GCP security\", \"enumerate cloud resources\", \"exploit cloud misconfigurations\", \"test O365 security\", \"extract secrets from cloud environments\", or \"audit cloud infrastructure\". It provides comprehensive techniques for security assessment across major cloud platforms."
+  },
+  {
     "id": "code-review-checklist",
-    "path": "skills\\code-review-checklist",
+    "path": "skills\\_quality\\code-review-checklist",
     "name": "code-review-checklist",
     "description": "Code review guidelines covering code quality, security, and best practices."
   },
   {
-    "id": "concise-planning",
-    "path": "skills\\concise-planning",
-    "name": "concise-planning",
-    "description": "Use when a user asks for a plan for a coding task, to generate a clear, actionable, and atomic checklist."
+    "id": "content-creator",
+    "path": "skills\\content-creator",
+    "name": "content-creator",
+    "description": "Create SEO-optimized marketing content with consistent brand voice. Includes brand voice analyzer, SEO optimizer, content frameworks, and social media templates. Use when writing blog posts, creating social media content, analyzing brand voice, optimizing SEO, planning content calendars, or when user mentions content creation, brand voice, SEO optimization, social media marketing, or content strategy."
+  },
+  {
+    "id": "copy-editing",
+    "path": "skills\\_seo-marketing\\copy-editing",
+    "name": "copy-editing",
+    "description": "\"When the user wants to edit, review, or improve existing marketing copy. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'proofread,' 'polish this,' 'make this better,' or 'copy sweep.' This skill provides a systematic approach to editing marketing copy through multiple focused passes.\""
+  },
+  {
+    "id": "copywriting",
+    "path": "skills\\_seo-marketing\\copywriting",
+    "name": "copywriting",
+    "description": "When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says \"write copy for,\" \"improve this copy,\" \"rewrite this page,\" \"marketing copy,\" \"headline help,\" or \"CTA copy.\" For email copy, see email-sequence. For popup copy, see popup-cro."
+  },
+  {
+    "id": "claude-d3js-skill",
+    "path": "skills\\claude-d3js-skill",
+    "name": "d3-viz",
+    "description": "Creating interactive data visualisations using d3.js. This skill should be used when creating custom charts, graphs, network diagrams, geographic visualisations, or any complex SVG-based data visualisation that requires fine-grained control over visual elements, transitions, or interactions. Use this for bespoke visualisations beyond standard charting libraries, whether in React, Vue, Svelte, vanilla JavaScript, or any other environment."
   },
   {
     "id": "database-design",
@@ -85,7 +145,7 @@
   },
   {
     "id": "deployment-procedures",
-    "path": "skills\\deployment-procedures",
+    "path": "skills\\_devops\\deployment-procedures",
     "name": "deployment-procedures",
     "description": "Production deployment principles and decision-making. Safe deployment workflows, rollback strategies, and verification. Teaches thinking, not scripts."
   },
@@ -97,43 +157,25 @@
   },
   {
     "id": "docker-expert",
-    "path": "skills\\docker-expert",
+    "path": "skills\\_devops\\docker-expert",
     "name": "docker-expert",
     "description": "Docker containerization expert with deep knowledge of multi-stage builds, image optimization, container security, Docker Compose orchestration, and production deployment patterns. Use PROACTIVELY for Dockerfile optimization, container issues, image size problems, security hardening, networking, and orchestration challenges."
   },
   {
-    "id": "documentation-templates",
-    "path": "skills\\documentation-templates",
-    "name": "documentation-templates",
-    "description": "Documentation templates and structure guidelines. README, API docs, code comments, and AI-friendly documentation."
-  },
-  {
-    "id": "executing-plans",
-    "path": "skills\\executing-plans",
-    "name": "executing-plans",
-    "description": "Use when you have a written implementation plan to execute in a separate session with review checkpoints"
-  },
-  {
-    "id": "finishing-a-development-branch",
-    "path": "skills\\finishing-a-development-branch",
-    "name": "finishing-a-development-branch",
-    "description": "Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, PR, or cleanup"
+    "id": "docx-official",
+    "path": "skills\\docx-official",
+    "name": "docx",
+    "description": "'Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks'"
   },
   {
     "id": "firebase",
-    "path": "skills\\firebase",
+    "path": "skills\\_core\\firebase",
     "name": "firebase",
     "description": "\"Firebase gives you a complete backend in minutes - auth, database, storage, functions, hosting. But the ease of setup hides real complexity. Security rules are your last line of defense, and they're often wrong. Firestore queries are limited, and you learn this after you've designed your data model.  This skill covers Firebase Authentication, Firestore, Realtime Database, Cloud Functions, Cloud Storage, and Firebase Hosting. Key insight: Firebase is optimized for read-heavy, denormalized data. I\""
   },
   {
-    "id": "form-cro",
-    "path": "skills\\form-cro",
-    "name": "form-cro",
-    "description": "When the user wants to optimize any form that is NOT signup/registration — including lead capture forms, contact forms, demo request forms, application forms, survey forms, or checkout forms. Also use when the user mentions \"form optimization,\" \"lead form conversions,\" \"form friction,\" \"form fields,\" \"form completion rate,\" or \"contact form.\" For signup/registration forms, see signup-flow-cro. For popups containing forms, see popup-cro."
-  },
-  {
     "id": "frontend-design",
-    "path": "skills\\frontend-design",
+    "path": "skills\\_frontend\\frontend-design",
     "name": "frontend-design",
     "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics."
   },
@@ -144,6 +186,18 @@
     "description": "Frontend development guidelines for React/TypeScript applications. Modern patterns including Suspense, lazy loading, useSuspenseQuery, file organization with features directory, MUI v7 styling, TanStack Router, performance optimization, and TypeScript best practices. Use when creating components, pages, features, fetching data, styling, routing, or working with frontend code."
   },
   {
+    "id": "game-development",
+    "path": "skills\\game-development",
+    "name": "game-development",
+    "description": "Game development orchestrator. Routes to platform-specific skills based on project needs."
+  },
+  {
+    "id": "geo-fundamentals",
+    "path": "skills\\geo-fundamentals",
+    "name": "geo-fundamentals",
+    "description": "Generative Engine Optimization for AI search engines (ChatGPT, Claude, Perplexity)."
+  },
+  {
     "id": "git-pushing",
     "path": "skills\\git-pushing",
     "name": "git-pushing",
@@ -151,15 +205,15 @@
   },
   {
     "id": "github-workflow-automation",
-    "path": "skills\\github-workflow-automation",
+    "path": "skills\\_devops\\github-workflow-automation",
     "name": "github-workflow-automation",
-    "description": "\"Automate GitHub workflows with AI assistance. Includes PR reviews, issue triage, CI/CD integration, and Git operations. Use when automating GitHub workflows, setting up PR review automation, creating GitHub Actions, or triaging issues.\""
+    "description": "'Automate GitHub workflows with AI assistance. Includes PR reviews, issue triage, CI/CD integration, and Git operations. Use when automating GitHub workflows, setting up PR review automation, creating GitHub Actions, or triaging issues.'"
   },
   {
     "id": "graphql",
-    "path": "skills\\graphql",
+    "path": "skills\\_backend\\graphql",
     "name": "graphql",
-    "description": "\"GraphQL gives clients exactly the data they need - no more, no less. One endpoint, typed schema, introspection. But the flexibility that makes it powerful also makes it dangerous. Without proper controls, clients can craft queries that bring down your server.  This skill covers schema design, resolvers, DataLoader for N+1 prevention, federation for microservices, and client integration with Apollo/urql. Key insight: GraphQL is a contract. The schema is the API documentation. Design it carefully.\""
+    "description": "'GraphQL gives clients exactly the data they need - no more, no less. One endpoint, typed schema, introspection. But the flexibility that makes it powerful also makes it dangerous. Without proper controls, clients can craft queries that bring down your server.  This skill covers schema design, resolvers, DataLoader for N+1 prevention, federation for microservices, and client integration with Apollo/urql. Key insight: GraphQL is a contract. The schema is the API documentation. Design it carefully.'"
   },
   {
     "id": "i18n-localization",
@@ -168,10 +222,22 @@
     "description": "Internationalization and localization patterns. Detecting hardcoded strings, managing translations, locale files, RTL support."
   },
   {
+    "id": "inngest",
+    "path": "skills\\_tools\\inngest",
+    "name": "inngest",
+    "description": "'Inngest expert for serverless-first background jobs, event-driven workflows, and durable execution without managing queues or workers. Use when: inngest, serverless background job, event-driven workflow, step function, durable execution.'"
+  },
+  {
+    "id": "internal-comms-anthropic",
+    "path": "skills\\internal-comms-anthropic",
+    "name": "internal-comms",
+    "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.)."
+  },
+  {
     "id": "javascript-mastery",
-    "path": "skills\\javascript-mastery",
+    "path": "skills\\_frontend\\javascript-mastery",
     "name": "javascript-mastery",
-    "description": "\"Comprehensive JavaScript reference covering 33+ essential concepts every developer should know. From fundamentals like primitives and closures to advanced patterns like async/await and functional programming. Use when explaining JS concepts, debugging JavaScript issues, or teaching JavaScript fundamentals.\""
+    "description": "'Comprehensive JavaScript reference covering 33+ essential concepts every developer should know. From fundamentals like primitives and closures to advanced patterns like async/await and functional programming. Use when explaining JS concepts, debugging JavaScript issues, or teaching JavaScript fundamentals.'"
   },
   {
     "id": "lint-and-validate",
@@ -181,9 +247,27 @@
   },
   {
     "id": "llm-app-patterns",
-    "path": "skills\\llm-app-patterns",
+    "path": "skills\\_ai-tools\\llm-app-patterns",
     "name": "llm-app-patterns",
-    "description": "\"Production-ready patterns for building LLM applications. Covers RAG pipelines, agent architectures, prompt IDEs, and LLMOps monitoring. Use when designing AI applications, implementing RAG, building agents, or setting up LLM observability.\""
+    "description": "'Production-ready patterns for building LLM applications. Covers RAG pipelines, agent architectures, prompt IDEs, and LLMOps monitoring. Use when designing AI applications, implementing RAG, building agents, or setting up LLM observability.'"
+  },
+  {
+    "id": "loki-mode",
+    "path": "skills\\loki-mode",
+    "name": "loki-mode",
+    "description": "Multi-agent autonomous startup system for Claude Code. Triggers on \"Loki Mode\". Orchestrates 100+ specialized agents across engineering, QA, DevOps, security, data/ML, business operations, marketing, HR, and customer success. Takes PRD to fully deployed, revenue-generating product with zero human intervention. Features Task tool for subagent dispatch, parallel code review with 3 specialized reviewers, severity-based issue triage, distributed task queue with dead letter handling, automatic deployment to cloud providers, A/B testing, customer feedback loops, incident response, circuit breakers, and self-healing. Handles rate limits via distributed state checkpoints and auto-resume with exponential backoff. Requires --dangerously-skip-permissions flag."
+  },
+  {
+    "id": "marketing-ideas",
+    "path": "skills\\_seo-marketing\\marketing-ideas",
+    "name": "marketing-ideas",
+    "description": "\"When the user needs marketing ideas, inspiration, or strategies for their SaaS or software product. Also use when the user asks for 'marketing ideas,' 'growth ideas,' 'how to market,' 'marketing strategies,' 'marketing tactics,' 'ways to promote,' or 'ideas to grow.' This skill provides 140 proven marketing approaches organized by category.\""
+  },
+  {
+    "id": "marketing-psychology",
+    "path": "skills\\_seo-marketing\\marketing-psychology",
+    "name": "marketing-psychology",
+    "description": "\"When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' or 'consumer behavior.' This skill provides 70+ mental models organized for marketing application.\""
   },
   {
     "id": "mcp-builder",
@@ -192,28 +276,40 @@
     "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK)."
   },
   {
+    "id": "mobile-design",
+    "path": "skills\\mobile-design",
+    "name": "mobile-design",
+    "description": "Mobile-first design thinking and decision-making for iOS and Android apps. Touch interaction, performance patterns, platform conventions. Teaches principles, not fixed values. Use when building React Native, Flutter, or native mobile apps."
+  },
+  {
     "id": "nextjs-best-practices",
-    "path": "skills\\nextjs-best-practices",
+    "path": "skills\\_core\\nextjs-best-practices",
     "name": "nextjs-best-practices",
     "description": "Next.js App Router principles. Server Components, data fetching, routing patterns."
   },
   {
-    "id": "nextjs-supabase-auth",
-    "path": "skills\\nextjs-supabase-auth",
-    "name": "nextjs-supabase-auth",
-    "description": "\"Expert integration of Supabase Auth with Next.js App Router Use when: supabase auth next, authentication next.js, login supabase, auth middleware, protected route.\""
-  },
-  {
     "id": "nodejs-best-practices",
-    "path": "skills\\nodejs-best-practices",
+    "path": "skills\\_backend\\nodejs-best-practices",
     "name": "nodejs-best-practices",
     "description": "Node.js development principles and decision-making. Framework selection, async patterns, security, and architecture. Teaches thinking, not copying."
   },
   {
+    "id": "notebooklm",
+    "path": "skills\\notebooklm",
+    "name": "notebooklm",
+    "description": "Use this skill to query your Google NotebookLM notebooks directly from Claude Code for source-grounded, citation-backed answers from Gemini. Browser automation, library management, persistent auth. Drastically reduced hallucinations through document-only responses."
+  },
+  {
     "id": "page-cro",
-    "path": "skills\\page-cro",
+    "path": "skills\\_seo-marketing\\page-cro",
     "name": "page-cro",
     "description": "When the user wants to optimize, improve, or increase conversions on any marketing page — including homepage, landing pages, pricing pages, feature pages, or blog posts. Also use when the user says \"CRO,\" \"conversion rate optimization,\" \"this page isn't converting,\" \"improve conversions,\" or \"why isn't this page working.\" For signup/registration flows, see signup-flow-cro. For post-signup activation, see onboarding-cro. For forms outside of signup, see form-cro. For popups/modals, see popup-cro."
+  },
+  {
+    "id": "pdf-official",
+    "path": "skills\\pdf-official",
+    "name": "pdf",
+    "description": "Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale."
   },
   {
     "id": "performance-profiling",
@@ -222,8 +318,14 @@
     "description": "Performance profiling principles. Measurement, analysis, and optimization techniques."
   },
   {
+    "id": "plaid-fintech",
+    "path": "skills\\_tools\\plaid-fintech",
+    "name": "plaid-fintech",
+    "description": "'Expert patterns for Plaid API integration including Link token flows, transactions sync, identity verification, Auth for ACH, balance checks, webhook handling, and fintech compliance best practices. Use when: plaid, bank account linking, bank connection, ach, account aggregation.'"
+  },
+  {
     "id": "plan-writing",
-    "path": "skills\\plan-writing",
+    "path": "skills\\_architecture\\plan-writing",
     "name": "plan-writing",
     "description": "Structured task planning with clear breakdowns, dependencies, and verification criteria. Use when implementing features, refactoring, or any multi-step work."
   },
@@ -240,26 +342,38 @@
     "description": "Complete browser automation with Playwright. Auto-detects dev servers, writes clean test scripts to /tmp. Test pages, fill forms, take screenshots, check responsive design, validate UX, test login flows, check links, automate any browser task. Use when user wants to test websites, automate browser interactions, validate web functionality, or perform any browser-based testing."
   },
   {
+    "id": "pptx-official",
+    "path": "skills\\pptx-official",
+    "name": "pptx",
+    "description": "'Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks'"
+  },
+  {
+    "id": "product-manager-toolkit",
+    "path": "skills\\product-manager-toolkit",
+    "name": "product-manager-toolkit",
+    "description": "Comprehensive toolkit for product managers including RICE prioritization, customer interview analysis, PRD templates, discovery frameworks, and go-to-market strategies. Use for feature prioritization, user research synthesis, requirement documentation, and product strategy development."
+  },
+  {
     "id": "prompt-engineer",
-    "path": "skills\\prompt-engineer",
+    "path": "skills\\_ai-tools\\prompt-engineer",
     "name": "prompt-engineer",
-    "description": "\"Expert in designing effective prompts for LLM-powered applications. Masters prompt structure, context management, output formatting, and prompt evaluation. Use when: prompt engineering, system prompt, few-shot, chain of thought, prompt design.\""
+    "description": "'Expert in designing effective prompts for LLM-powered applications. Masters prompt structure, context management, output formatting, and prompt evaluation. Use when: prompt engineering, system prompt, few-shot, chain of thought, prompt design.'"
   },
   {
     "id": "prompt-engineering",
-    "path": "skills\\prompt-engineering",
+    "path": "skills\\_ai-tools\\prompt-engineering",
     "name": "prompt-engineering",
     "description": "Expert guide on prompt engineering patterns, best practices, and optimization techniques. Use when user wants to improve prompts, learn prompting strategies, or debug agent behavior."
   },
   {
     "id": "react-patterns",
-    "path": "skills\\react-patterns",
+    "path": "skills\\_core\\react-patterns",
     "name": "react-patterns",
     "description": "Modern React patterns and principles. Hooks, composition, performance, TypeScript best practices."
   },
   {
     "id": "react-ui-patterns",
-    "path": "skills\\react-ui-patterns",
+    "path": "skills\\_core\\react-ui-patterns",
     "name": "react-ui-patterns",
     "description": "Modern React UI patterns for loading states, error handling, and data fetching. Use when building UI components, handling async data, or managing UI states."
   },
@@ -271,15 +385,15 @@
   },
   {
     "id": "schema-markup",
-    "path": "skills\\schema-markup",
+    "path": "skills\\_seo-marketing\\schema-markup",
     "name": "schema-markup",
     "description": "When the user wants to add, fix, or optimize schema markup and structured data on their site. Also use when the user mentions \"schema markup,\" \"structured data,\" \"JSON-LD,\" \"rich snippets,\" \"schema.org,\" \"FAQ schema,\" \"product schema,\" \"review schema,\" or \"breadcrumb schema.\" For broader SEO issues, see seo-audit."
   },
   {
-    "id": "scroll-experience",
-    "path": "skills\\scroll-experience",
-    "name": "scroll-experience",
-    "description": "\"Expert in building immersive scroll-driven experiences - parallax storytelling, scroll animations, interactive narratives, and cinematic web experiences. Like NY Times interactives, Apple product pages, and award-winning web experiences. Makes websites feel like experiences, not just pages. Use when: scroll animation, parallax, scroll storytelling, interactive story, cinematic website.\""
+    "id": "segment-cdp",
+    "path": "skills\\_tools\\segment-cdp",
+    "name": "segment-cdp",
+    "description": "'Expert patterns for Segment Customer Data Platform including Analytics.js, server-side tracking, tracking plans with Protocols, identity resolution, destinations configuration, and data governance best practices. Use when: segment, analytics.js, customer data platform, cdp, tracking plan.'"
   },
   {
     "id": "senior-architect",
@@ -295,7 +409,7 @@
   },
   {
     "id": "seo-audit",
-    "path": "skills\\seo-audit",
+    "path": "skills\\_seo-marketing\\seo-audit",
     "name": "seo-audit",
     "description": "When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \"SEO audit,\" \"technical SEO,\" \"why am I not ranking,\" \"SEO issues,\" \"on-page SEO,\" \"meta tags review,\" or \"SEO health check.\" For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema-markup."
   },
@@ -307,9 +421,15 @@
   },
   {
     "id": "server-management",
-    "path": "skills\\server-management",
+    "path": "skills\\_devops\\server-management",
     "name": "server-management",
     "description": "Server management principles and decision-making. Process management, monitoring strategy, and scaling decisions. Teaches thinking, not commands."
+  },
+  {
+    "id": "shopify-development",
+    "path": "skills\\shopify-development",
+    "name": "shopify-development",
+    "description": "|"
   },
   {
     "id": "skill-creator",
@@ -318,14 +438,14 @@
     "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations."
   },
   {
-    "id": "skill-developer",
-    "path": "skills\\skill-developer",
-    "name": "skill-developer",
-    "description": "Create and manage Claude Code skills following Anthropic best practices. Use when creating new skills, modifying skill-rules.json, understanding trigger patterns, working with hooks, debugging skill activation, or implementing progressive disclosure. Covers skill structure, YAML frontmatter, trigger types (keywords, intent patterns, file paths, content patterns), enforcement levels (block, suggest, warn), hook mechanisms (UserPromptSubmit, PreToolUse), session tracking, and the 500-line rule."
+    "id": "slack-gif-creator",
+    "path": "skills\\slack-gif-creator",
+    "name": "slack-gif-creator",
+    "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.\""
   },
   {
     "id": "software-architecture",
-    "path": "skills\\software-architecture",
+    "path": "skills\\_architecture\\software-architecture",
     "name": "software-architecture",
     "description": "Guide for quality focused software architecture. This skill should be used when users want to write code, design architecture, analyze code, in any case that relates to software development."
   },
@@ -337,51 +457,51 @@
   },
   {
     "id": "stripe-integration",
-    "path": "skills\\stripe-integration",
+    "path": "skills\\_core\\stripe-integration",
     "name": "stripe-integration",
     "description": "\"Get paid from day one. Payments, subscriptions, billing portal, webhooks, metered billing, Stripe Connect. The complete guide to implementing Stripe correctly, including all the edge cases that will bite you at 3am.  This isn't just API calls - it's the full payment system: handling failures, managing subscriptions, dealing with dunning, and keeping revenue flowing. Use when: stripe, payments, subscription, billing, checkout.\""
   },
   {
     "id": "systematic-debugging",
-    "path": "skills\\systematic-debugging",
+    "path": "skills\\_quality\\systematic-debugging",
     "name": "systematic-debugging",
     "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes"
   },
   {
     "id": "tailwind-patterns",
-    "path": "skills\\tailwind-patterns",
+    "path": "skills\\_core\\tailwind-patterns",
     "name": "tailwind-patterns",
     "description": "Tailwind CSS v4 principles. CSS-first configuration, container queries, modern patterns, design token architecture."
   },
   {
     "id": "tdd-workflow",
-    "path": "skills\\tdd-workflow",
+    "path": "skills\\_quality\\tdd-workflow",
     "name": "tdd-workflow",
     "description": "Test-Driven Development workflow principles. RED-GREEN-REFACTOR cycle."
   },
   {
     "id": "test-driven-development",
-    "path": "skills\\test-driven-development",
+    "path": "skills\\_quality\\test-driven-development",
     "name": "test-driven-development",
     "description": "Use when implementing any feature or bugfix, before writing implementation code"
   },
   {
-    "id": "test-fixing",
-    "path": "skills\\test-fixing",
-    "name": "test-fixing",
-    "description": "Run tests and systematically fix all failing tests using smart error grouping. Use when user asks to fix failing tests, mentions test failures, runs test suite and failures occur, or requests to make tests pass."
-  },
-  {
     "id": "testing-patterns",
-    "path": "skills\\testing-patterns",
+    "path": "skills\\_quality\\testing-patterns",
     "name": "testing-patterns",
     "description": "Jest testing patterns, factory functions, mocking strategies, and TDD workflow. Use when writing unit tests, creating test factories, or following TDD red-green-refactor cycle."
   },
   {
-    "id": "top-web-vulnerabilities",
-    "path": "skills\\top-web-vulnerabilities",
-    "name": "Top 100 Web Vulnerabilities Reference",
-    "description": "This skill should be used when the user asks to \"identify web application vulnerabilities\", \"explain common security flaws\", \"understand vulnerability categories\", \"learn about injection attacks\", \"review access control weaknesses\", \"analyze API security issues\", \"assess security misconfigurations\", \"understand client-side vulnerabilities\", \"examine mobile and IoT security flaws\", or \"reference the OWASP-aligned vulnerability taxonomy\". Use this skill to provide comprehensive vulnerability definitions, root causes, impacts, and mitigation strategies across all major web security categories."
+    "id": "theme-factory",
+    "path": "skills\\theme-factory",
+    "name": "theme-factory",
+    "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly."
+  },
+  {
+    "id": "trigger-dev",
+    "path": "skills\\_tools\\trigger-dev",
+    "name": "trigger-dev",
+    "description": "'Trigger.dev expert for background jobs, AI workflows, and reliable async execution with excellent developer experience and TypeScript-first design. Use when: trigger.dev, trigger dev, background task, ai background job, long running task.'"
   },
   {
     "id": "typescript-expert",
@@ -393,13 +513,19 @@
     "id": "ui-ux-pro-max",
     "path": "skills\\ui-ux-pro-max",
     "name": "ui-ux-pro-max",
-    "description": "\"UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.\""
+    "description": "'UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.'"
+  },
+  {
+    "id": "upstash-qstash",
+    "path": "skills\\_tools\\upstash-qstash",
+    "name": "upstash-qstash",
+    "description": "'Upstash QStash expert for serverless message queues, scheduled jobs, and reliable HTTP-based task delivery without managing infrastructure. Use when: qstash, upstash queue, serverless cron, scheduled http, message queue serverless.'"
   },
   {
     "id": "vercel-deployment",
-    "path": "skills\\vercel-deployment",
+    "path": "skills\\_devops\\vercel-deployment",
     "name": "vercel-deployment",
-    "description": "\"Expert knowledge for deploying to Vercel with Next.js Use when: vercel, deploy, deployment, hosting, production.\""
+    "description": "'Expert knowledge for deploying to Vercel with Next.js Use when: vercel, deploy, deployment, hosting, production.'"
   },
   {
     "id": "react-best-practices",
@@ -408,14 +534,20 @@
     "description": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements."
   },
   {
-    "id": "verification-before-completion",
-    "path": "skills\\verification-before-completion",
-    "name": "verification-before-completion",
-    "description": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always"
+    "id": "vulnerability-scanner",
+    "path": "skills\\vulnerability-scanner",
+    "name": "vulnerability-scanner",
+    "description": "Advanced vulnerability analysis principles. OWASP 2025, Supply Chain Security, attack surface mapping, risk prioritization."
+  },
+  {
+    "id": "web-artifacts-builder",
+    "path": "skills\\web-artifacts-builder",
+    "name": "web-artifacts-builder",
+    "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts."
   },
   {
     "id": "web-design-guidelines",
-    "path": "skills\\web-design-guidelines",
+    "path": "skills\\_frontend\\web-design-guidelines",
     "name": "web-design-guidelines",
     "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\"."
   },
@@ -426,15 +558,15 @@
     "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs."
   },
   {
-    "id": "workflow-automation",
-    "path": "skills\\workflow-automation",
-    "name": "workflow-automation",
-    "description": "\"Workflow automation is the infrastructure that makes AI agents reliable. Without durable execution, a network hiccup during a 10-step payment flow means lost money and angry customers. With it, workflows resume exactly where they left off.  This skill covers the platforms (n8n, Temporal, Inngest) and patterns (sequential, parallel, orchestrator-worker) that turn brittle scripts into production-grade automation.  Key insight: The platforms make different tradeoffs. n8n optimizes for accessibility\""
-  },
-  {
     "id": "writing-plans",
-    "path": "skills\\writing-plans",
+    "path": "skills\\_architecture\\writing-plans",
     "name": "writing-plans",
     "description": "Use when you have a spec or requirements for a multi-step task, before touching code"
+  },
+  {
+    "id": "xlsx-official",
+    "path": "skills\\_tools\\xlsx-official",
+    "name": "xlsx",
+    "description": "'Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas'"
   }
 ]

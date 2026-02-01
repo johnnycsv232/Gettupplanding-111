@@ -1,5 +1,0 @@
-C:/Users/finan/Gettupplanding-111                             ee4aabb [unified-main]
-C:/Users/finan/.zenflow/worktrees/new-task-4e2f               8b7b742 [new-task-4e2f] prunable
-C:/Users/finan/.zenflow/worktrees/project-configuartion-dece  fe9133b [project-configuartion-dece]
-C:/Users/finan/.zenflow/worktrees/set-up-project-config-008a  0875eac [set-up-project-config-008a]
-C:/Users/finan/.zenflow/worktrees/set-up-project-config-5d06  28af83f [set-up-project-config-5d06]

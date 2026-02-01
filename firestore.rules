@@ -3,16 +3,17 @@ service cloud.firestore {
   match /databases/{database}/documents {
     // INVARIANT: Deny-All Firebase (See docs/invariants.md)
     // All collections start with deny all. Access granted via tested rules only.
-    
+
     match /{document=**} {
       allow read, write: if false;
     }
-    
+
     // === TESTED ACCESS RULES BELOW ===
     // Each rule must have a corresponding test in tests/security.test.ts
-    
+
     // Users collection - authenticated users can read/write their own data
     // INVARIANT: Users cannot self-upgrade their subscription tier
+    // SECURITY: Prevents users from modifying billing-critical fields manually
     match /users/{userId} {
       allow read: if request.auth != null && request.auth.uid == userId;
       allow update: if request.auth != null && request.auth.uid == userId
@@ -22,18 +23,19 @@ service cloud.firestore {
                     && !request.resource.data.keys()
                         .hasAny(['subscriptionTier', 'stripeCustomerId', 'hasActiveSubscription', 'subscriptionStatus']);
     }
-    
+
     // Subscriptions collection - authenticated users can read their own subscription
+    // SECURITY: Read-only access for users to their own subscription data
     match /subscriptions/{subscriptionId} {
-      allow read: if request.auth != null && 
+      allow read: if request.auth != null &&
                     resource.data.userId == request.auth.uid;
       // Only server (admin SDK) can write subscriptions via webhooks
       allow write: if false;
     }
-    
+
     // Proof packs - users can read their own, only server can write
     match /proofPacks/{proofPackId} {
-      allow read: if request.auth != null && 
+      allow read: if request.auth != null &&
                     resource.data.userId == request.auth.uid;
       allow write: if false;
     }

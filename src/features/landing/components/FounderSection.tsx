@@ -15,7 +15,7 @@ export default function FounderSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-deep-void-black py-32">
+    <section ref={ref} className="bg-deep-void relative overflow-hidden py-32">
       <div className="container mx-auto grid items-center gap-12 px-4 md:grid-cols-12">
         <div className="relative md:col-span-5">
           <motion.div style={{ y }} className="relative z-10">

@@ -9,12 +9,14 @@ import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
 import { getAnalytics, Analytics, isSupported } from 'firebase/analytics';
+import { initializeAppCheck, ReCaptchaEnterpriseProvider, AppCheck } from 'firebase/app-check';
 
 // Environment validation - fail fast if config is missing
 const requiredEnvVars = [
   'NEXT_PUBLIC_FIREBASE_API_KEY',
   'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
   'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
+  'NEXT_PUBLIC_RECAPTCHA_SITE_KEY',
 ] as const;
 
 function validateEnv(): void {
@@ -45,11 +47,20 @@ let firebaseApp: FirebaseApp | undefined;
 let auth: Auth | undefined;
 let db: Firestore | undefined;
 let analytics: Analytics | undefined;
+let appCheck: AppCheck | undefined;
 
 export function getFirebaseApp(): FirebaseApp {
   if (!firebaseApp) {
     validateEnv();
     firebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
+    // Initialize App Check
+    if (typeof window !== 'undefined') {
+      appCheck = initializeAppCheck(firebaseApp, {
+        provider: new ReCaptchaEnterpriseProvider(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''),
+        isTokenAutoRefreshEnabled: true,
+      });
+    }
   }
   return firebaseApp;
 }

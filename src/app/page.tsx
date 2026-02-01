@@ -1,4 +1,4 @@
-import StickyHeader from '@/features/landing/components/StickyHeader';
+import GettUppNavbar from '@/features/landing/components/GettUppNavbar';
 import HeroSection from '@/features/landing/components/HeroSection';
 import PilotSection from '@/features/landing/components/PilotSection';
 import ContentAuditSection from '@/features/landing/components/ContentAuditSection';
@@ -6,7 +6,7 @@ import ProblemSolutionSection from '@/features/landing/components/ProblemSolutio
 import WhatYouGetSection from '@/features/landing/components/WhatYouGetSection';
 import RetainersSection from '@/features/landing/components/RetainersSection';
 import GallerySection from '@/features/landing/components/GallerySection';
-import CinemaGradeSection from '@/features/landing/components/CinemaGradeSection';
+import CinematicRevealSection from '@/features/landing/components/CinematicRevealSection';
 import EventsSection from '@/features/landing/components/EventsSection';
 import TestimonialsSection from '@/features/landing/components/TestimonialsSection';
 import FounderSection from '@/features/landing/components/FounderSection';
@@ -16,19 +16,28 @@ import RulesSection from '@/features/landing/components/RulesSection';
 import FinalCTASection from '@/features/landing/components/FinalCTASection';
 import Footer from '@/features/landing/components/Footer';
 import ExitIntentPopup from '@/features/landing/components/ExitIntentPopup';
+import GettUppAgent from '@/features/leads/components/GettUppAgent';
+import KineticCanvas from '@/features/landing/components/KineticCanvas';
 
-export default function Home() {
+import { headers } from 'next/headers';
+
+export default async function Home() {
+  const headersList = await headers();
+  const city = headersList.get('x-city') || 'Your City';
+  const country = headersList.get('x-country') || 'US';
+
   return (
-    <main className="min-h-screen bg-deep-void-black text-off-white selection:bg-neon-magenta selection:text-white">
-      <StickyHeader />
-      <HeroSection />
+    <main className="bg-deep-void min-h-screen text-off-white selection:bg-neon-magenta selection:text-white">
+      <GettUppNavbar />
+      <HeroSection initialCity={city} initialCountry={country} />
+      <CinematicRevealSection />
       <PilotSection />
       <ContentAuditSection />
       <ProblemSolutionSection />
       <WhatYouGetSection />
+      <KineticCanvas />
       <RetainersSection />
       <GallerySection />
-      <CinemaGradeSection />
       <EventsSection />
       <TestimonialsSection />
       <FounderSection />
@@ -38,6 +47,7 @@ export default function Home() {
       <FinalCTASection />
       <Footer />
       <ExitIntentPopup />
+      <GettUppAgent />
     </main>
   );
 }

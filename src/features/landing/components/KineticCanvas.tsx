@@ -1,0 +1,96 @@
+'use client';
+
+import React, { Suspense, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, Text, Float, MeshDistortMaterial, ContactShadows } from '@react-three/drei';
+import { motion } from 'framer-motion';
+
+const services = [
+  { name: 'PRODUCTION', color: '#d4af37', desc: '4K Cinematic Storytelling' },
+  { name: 'STRATEGY', color: '#ff007f', desc: 'Viral Growth Mechanics' },
+  { name: 'TALENT', color: '#00ffff', desc: 'Elite Creator Network' },
+];
+
+function ServiceOrb({ service, index, active, onClick }: any) {
+  return (
+    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+      <mesh
+        position={[index * 3 - 3, 0, 0]}
+        onClick={onClick}
+        onPointerOver={() => (document.body.style.cursor = 'pointer')}
+        onPointerOut={() => (document.body.style.cursor = 'auto')}
+      >
+        <sphereGeometry args={[1, 64, 64]} />
+        <MeshDistortMaterial
+          color={active ? service.color : '#222'}
+          speed={active ? 3 : 1}
+          distort={active ? 0.4 : 0.2}
+          roughness={0.1}
+          metalness={0.8}
+        />
+        <Text
+          position={[0, -1.5, 0]}
+          fontSize={0.2}
+          color="white"
+          font="/fonts/Inter-Bold.woff"
+          anchorX="center"
+          anchorY="middle"
+        >
+          {service.name}
+        </Text>
+      </mesh>
+    </Float>
+  );
+}
+
+export default function KineticCanvas() {
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  return (
+    <section className="relative h-[600px] w-full bg-black py-20">
+      <div className="container mx-auto px-4 h-full flex flex-col md:flex-row items-center gap-12">
+        <div className="flex-1 space-y-6">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-[12px] font-black tracking-[0.4em] text-vegas-gold"
+          >
+            KINETIC EXPLORATION
+          </motion.span>
+          <h2 className="font-display text-5xl text-white">INTERACT WITH THE ARSENAL</h2>
+          <p className="text-off-white/40 leading-relaxed max-w-md">
+            Click the orbs to explore our core specializations. Physics-driven, immersive,
+            and built for high-conversion engagement.
+          </p>
+
+          <div className="p-8 glass-heavy rounded-3xl border-white/10 bg-white/5">
+            <h3 className="text-2xl font-bold text-white mb-2">{services[activeIdx].name}</h3>
+            <p className="text-off-white/60">{services[activeIdx].desc}</p>
+          </div>
+        </div>
+
+        <div className="flex-1 h-full w-full min-h-[400px]">
+          <Canvas camera={{ position: [0, 0, 8], fov: 35 }}>
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} intensity={1} color="#d4af37" />
+            <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#ff007f" />
+
+            <Suspense fallback={null}>
+              {services.map((s, i) => (
+                <ServiceOrb
+                  key={i}
+                  service={s}
+                  index={i}
+                  active={activeIdx === i}
+                  onClick={() => setActiveIdx(i)}
+                />
+              ))}
+              <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={20} blur={2.5} far={4.5} />
+            </Suspense>
+            <OrbitControls enableZoom={false} makeDefault />
+          </Canvas>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,12 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
+
 import Button from '@/components/ui/Button';
 import GlassCard from '@/components/ui/GlassCard';
+import Magnetic from '@/components/animations/Magnetic';
 
 export default function ContentAuditSection() {
   return (
-    <section className="relative overflow-hidden border-y border-white/5 bg-black py-12">
+    <section className="bg-deep-void relative overflow-hidden border-y border-white/5 py-24">
       {/* Subtle Background Glow */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-vegas-gold/5 blur-[100px]" />
 
@@ -32,14 +34,16 @@ export default function ContentAuditSection() {
               exactly why you&apos;re losing money.
             </p>
 
-            <div className="pt-4">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="border-vegas-gold/50 hover:bg-vegas-gold hover:text-black"
-              >
-                GET THE AUDIT ($300)
-              </Button>
+            <div className="flex justify-center pt-4">
+              <Magnetic strength={0.2}>
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="border-vegas-gold/50 px-10 font-black uppercase tracking-widest hover:bg-vegas-gold hover:text-black"
+                >
+                  GET THE AUDIT ($300)
+                </Button>
+              </Magnetic>
             </div>
 
             <p className="text-[10px] uppercase tracking-[0.4em] text-white/20">

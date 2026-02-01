@@ -3,11 +3,12 @@
 import { motion } from 'framer-motion';
 import ParticleField from '@/components/three/ParticleField';
 import Button from '@/components/ui/Button';
+import Magnetic from '@/components/animations/Magnetic';
 import { tokens } from '@/styles/tokens';
 
 export default function FinalCTASection() {
   return (
-    <section className="relative flex items-center justify-center overflow-hidden bg-deep-void-black py-48 text-center md:py-64">
+    <section className="relative overflow-hidden bg-white py-40">
       {/* Intense Particle Field */}
       <div className="absolute inset-0 z-0">
         <ParticleField
@@ -26,7 +27,7 @@ export default function FinalCTASection() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1 }}
           viewport={{ once: true }}
           className="space-y-12"
         >
@@ -53,14 +54,19 @@ export default function FinalCTASection() {
             transition={{ delay: 0.6 }}
             className="flex flex-col items-center gap-6"
           >
-            <Button
-              variant="primary"
-              size="xl"
-              className="rounded-none border-2 border-vegas-gold bg-transparent px-20 py-8 text-3xl font-bold uppercase tracking-widest text-vegas-gold shadow-[0_0_50px_rgba(255,199,44,0.3)] transition-all duration-500 hover:bg-vegas-gold hover:text-black hover:shadow-[0_0_70px_rgba(255,199,44,0.5)]"
-            >
-              START THE PILOT
-            </Button>
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-off-white/30">
+            <Magnetic strength={0.3}>
+              <Button
+                variant="primary"
+                size="xl"
+                className="rounded-none border-2 border-white bg-black px-20 py-8 text-3xl font-bold uppercase tracking-widest text-white shadow-[0_0_50px_rgba(255,255,255,0.3)] transition-all duration-500 hover:bg-white hover:text-black hover:shadow-[0_0_70px_rgba(255,255,255,0.5)]"
+                onClick={() =>
+                  document.getElementById('pilot')?.scrollIntoView({ behavior: 'smooth' })
+                }
+              >
+                START THE PILOT
+              </Button>
+            </Magnetic>
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-black/30">
               Limited availability for Q1 2026
             </span>
           </motion.div>

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import GlassCard from '@/components/ui/GlassCard';
+import GlintEffect from '@/components/ui/GlintEffect';
 import { Camera, Zap, Cloud, TrendingUp, Users, Lock } from 'lucide-react';
 
 const features = [
@@ -39,7 +40,7 @@ const features = [
 
 export default function WhatYouGetSection() {
   return (
-    <section className="relative overflow-hidden bg-deep-void-black py-32">
+    <section id="services" className="bg-deep-void relative overflow-hidden py-32">
       <div className="container relative z-10 mx-auto px-4">
         <motion.div
           className="mb-20 space-y-4 text-center"
@@ -64,18 +65,24 @@ export default function WhatYouGetSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, type: 'spring', damping: 20, stiffness: 200 }}
+              className="h-full"
             >
-              <GlassCard className="group flex h-full flex-col items-start gap-6 p-10 text-left transition-all duration-500 hover:border-vegas-gold/50">
-                <div className="box-glow-gold flex h-14 w-14 items-center justify-center rounded-none border border-vegas-gold/30 text-vegas-gold transition-all duration-500 group-hover:bg-vegas-gold group-hover:text-black">
-                  <feature.icon size={28} />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="font-display text-2xl tracking-tight text-white">
-                    {feature.title}
-                  </h3>
-                  <p className="font-light leading-relaxed text-off-white/60">{feature.desc}</p>
-                </div>
-              </GlassCard>
+              <GlintEffect
+                className="h-full border-none bg-transparent"
+                glintColor="rgba(212, 175, 55, 0.15)"
+              >
+                <GlassCard className="group flex h-full flex-col items-start gap-6 p-10 text-left transition-all duration-500 hover:border-vegas-gold/50">
+                  <div className="box-glow-gold flex h-14 w-14 items-center justify-center rounded-none border border-vegas-gold/30 text-vegas-gold transition-all duration-500 group-hover:bg-vegas-gold group-hover:text-black">
+                    <feature.icon size={28} />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="font-display text-2xl tracking-tight text-white">
+                      {feature.title}
+                    </h3>
+                    <p className="font-light leading-relaxed text-off-white/60">{feature.desc}</p>
+                  </div>
+                </GlassCard>
+              </GlintEffect>
             </motion.div>
           ))}
         </div>
