@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import {
   motion,
   useScroll,
@@ -10,16 +10,22 @@ import {
 } from 'framer-motion';
 
 interface VelocityTypographyProps {
-  text: string;
+  children?: React.ReactNode;
+  text?: string;
   className?: string;
-  baseVelocity?: number;
+  velocity?: number;
 }
 
-export default function VelocityTypography({
+/**
+ * VelocityTypography
+ * A horizontally scrolling text/component container that speeds up based on scroll velocity.
+ */
+export const VelocityTypography = ({
+  children,
   text,
   className = '',
-  baseVelocity = 100,
-}: VelocityTypographyProps) {
+  velocity = 100,
+}: VelocityTypographyProps) => {
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
   const smoothVelocity = useSpring(scrollVelocity, {
@@ -31,17 +37,17 @@ export default function VelocityTypography({
     clamp: false,
   });
 
-  const x = useTransform(velocityFactor, (v) => `${v * baseVelocity}px`);
+  const x = useTransform(velocityFactor, (v) => `${v * velocity}px`);
 
   return (
     <div className={`overflow-hidden whitespace-nowrap ${className}`}>
       <motion.div style={{ x }} className="flex gap-8">
         {[...Array(4)].map((_, i) => (
-          <span key={i} className="heading-zenith text-glow-gold">
-            {text}
-          </span>
+          <React.Fragment key={i}>
+            {children ? children : <span className="heading-zenith text-glow-gold">{text}</span>}
+          </React.Fragment>
         ))}
       </motion.div>
     </div>
   );
-}
+};

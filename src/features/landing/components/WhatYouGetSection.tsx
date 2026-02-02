@@ -1,9 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import GlassCard from '@/components/ui/GlassCard';
-import GlintEffect from '@/components/ui/GlintEffect';
 import { Camera, Zap, Cloud, TrendingUp, Users, Lock } from 'lucide-react';
+import { GlassCard, GlintEffect } from '@/components/ui';
 
 const features = [
   {
@@ -38,9 +37,13 @@ const features = [
   },
 ];
 
-export default function WhatYouGetSection() {
+/**
+ * WhatYouGetSection
+ * Details the core features and value propositions of the GettUpp service.
+ */
+export const WhatYouGetSection = () => {
   return (
-    <section id="services" className="bg-deep-void relative overflow-hidden py-32">
+    <section id="services" className="relative overflow-hidden bg-deep-void py-32">
       <div className="container relative z-10 mx-auto px-4">
         <motion.div
           className="mb-20 space-y-4 text-center"
@@ -52,41 +55,27 @@ export default function WhatYouGetSection() {
           <h2 className="font-display text-5xl uppercase tracking-tighter text-white md:text-6xl">
             THE GETTUPP <span className="text-shadow-glow text-vegas-gold">ARSENAL</span>
           </h2>
-          <p className="text-xs uppercase tracking-[0.4em] text-off-white/40">
+          <p className="text-off-white/40 text-xs uppercase tracking-[0.4em]">
             Full Stack Nightlife Production
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, type: 'spring', damping: 20, stiffness: 200 }}
-              className="h-full"
-            >
-              <GlintEffect
-                className="h-full border-none bg-transparent"
-                glintColor="rgba(212, 175, 55, 0.15)"
-              >
-                <GlassCard className="group flex h-full flex-col items-start gap-6 p-10 text-left transition-all duration-500 hover:border-vegas-gold/50">
-                  <div className="box-glow-gold flex h-14 w-14 items-center justify-center rounded-none border border-vegas-gold/30 text-vegas-gold transition-all duration-500 group-hover:bg-vegas-gold group-hover:text-black">
-                    <feature.icon size={28} />
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="font-display text-2xl tracking-tight text-white">
-                      {feature.title}
-                    </h3>
-                    <p className="font-light leading-relaxed text-off-white/60">{feature.desc}</p>
-                  </div>
-                </GlassCard>
-              </GlintEffect>
-            </motion.div>
+            <GlintEffect key={i}>
+              <GlassCard className="group h-full p-8" hoverEffect>
+                <div className="bg-vegas-gold/10 mb-6 inline-flex h-12 w-12 items-center justify-center rounded-lg text-vegas-gold transition-colors group-hover:bg-vegas-gold group-hover:text-black">
+                  <feature.icon size={24} />
+                </div>
+                <h3 className="font-display mb-2 text-xl uppercase tracking-widest text-white">
+                  {feature.title}
+                </h3>
+                <p className="text-off-white/60 text-sm">{feature.desc}</p>
+              </GlassCard>
+            </GlintEffect>
           ))}
         </div>
       </div>
     </section>
   );
-}
+};

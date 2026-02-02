@@ -9,37 +9,18 @@ import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
 import { getAnalytics, Analytics, isSupported } from 'firebase/analytics';
-import { initializeAppCheck, ReCaptchaEnterpriseProvider, AppCheck } from 'firebase/app-check';
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
 
 // Environment validation - fail fast if config is missing
-const requiredEnvVars = [
-  'NEXT_PUBLIC_FIREBASE_API_KEY',
-  'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
-  'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
-  'NEXT_PUBLIC_RECAPTCHA_SITE_KEY',
-] as const;
-
-function validateEnv(): void {
-  const missing = requiredEnvVars.filter((key) => !process.env[key]);
-
-  if (missing.length > 0 && process.env.NODE_ENV !== 'test') {
-    console.warn(`⚠️ Missing Firebase environment variables: ${missing.join(', ')}`);
-    // In production, this should throw. In development, warn only.
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error(
-        `INVARIANT VIOLATION: Missing required Firebase config: ${missing.join(', ')}`
-      );
-    }
-  }
-}
+import { env } from '@/lib/env';
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 // Singleton pattern for Firebase app
@@ -47,17 +28,16 @@ let firebaseApp: FirebaseApp | undefined;
 let auth: Auth | undefined;
 let db: Firestore | undefined;
 let analytics: Analytics | undefined;
-let appCheck: AppCheck | undefined;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 export function getFirebaseApp(): FirebaseApp {
   if (!firebaseApp) {
-    validateEnv();
     firebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
     // Initialize App Check
     if (typeof window !== 'undefined') {
-      appCheck = initializeAppCheck(firebaseApp, {
-        provider: new ReCaptchaEnterpriseProvider(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''),
+      initializeAppCheck(firebaseApp, {
+        provider: new ReCaptchaEnterpriseProvider(env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''),
         isTokenAutoRefreshEnabled: true,
       });
     }

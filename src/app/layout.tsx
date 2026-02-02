@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { Orbitron, Inter, DM_Serif_Display } from 'next/font/google';
+import { Orbitron, Inter } from 'next/font/google';
 import './globals.css';
+import { Providers } from '@/lib/providers';
+import { BaseLayout } from '@/layouts/BaseLayout';
 import JsonLd from '@/components/seo/JsonLd';
-import NoiseOverlay from '@/components/ui/NoiseOverlay';
-import CustomCursor from '@/components/ui/CustomCursor';
-import Preloader from '@/components/ui/Preloader';
+import { METADATA_DEFAULTS, JSON_LD_DEFAULTS } from '@/config/constants';
+import { headers } from 'next/headers';
 
 const orbitron = Orbitron({
   variable: '--font-orbitron',
@@ -18,82 +19,28 @@ const inter = Inter({
   weight: ['400', '500', '700', '900'],
 });
 
-const dmSerif = DM_Serif_Display({
-  variable: '--font-dm-serif',
-  subsets: ['latin'],
-  weight: ['400'],
-});
+export const metadata: Metadata = METADATA_DEFAULTS;
 
-export const metadata: Metadata = {
-  title: 'GettUpp ENT | Premier Nightlife Agency',
-  description: 'Premium Nightlife & Luxury Content Production. Own The Night.',
-  metadataBase: new URL('https://gettupp.com'),
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: 'GettUpp ENT | Premier Nightlife Agency',
-    description: 'Premium Nightlife & Luxury Content Production. Own The Night.',
-    url: 'https://gettupp.com',
-    siteName: 'GettUpp ENT',
-    locale: 'en_US',
-    type: 'website',
-  },
-};
-
-import SmoothScroll from '@/components/ui/SmoothScroll';
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: 'GettUpp ENT',
-      url: 'https://gettupp.com',
-      logo: 'https://gettupp.com/logo.png',
-      description: 'Premium Nightlife & Luxury Content Production. Own The Night.',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Minneapolis',
-        addressRegion: 'MN',
-        addressCountry: 'US',
-      },
-      contactPoint: {
-        '@type': 'ContactPoint',
-        contactType: 'customer service',
-        email: 'hello@gettupp.com',
-      },
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'ProfessionalService',
-      name: 'GettUpp ENT',
-      image: 'https://gettupp.com/logo.png',
-      priceRange: '$$$$',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Minneapolis',
-        addressRegion: 'MN',
-        addressCountry: 'US',
-      },
-    },
-  ];
+  const headersList = await headers();
+  const country = headersList.get('x-vercel-ip-country');
+
+  // Detect language based on country
+  const locale = country === 'ES' || country === 'MX' ? 'es' : 'en';
 
   return (
-    <html lang="en" className={`${orbitron.variable} ${inter.variable} ${dmSerif.variable}`}>
-      <body className="bg-deep-void font-sans text-off-white antialiased selection:bg-neon-magenta selection:text-white">
-        <SmoothScroll>
-          <Preloader />
-          <NoiseOverlay />
-          <CustomCursor />
-          <JsonLd data={jsonLd} />
-          {children}
-        </SmoothScroll>
+    <html lang={locale} className={`${inter.variable} ${orbitron.variable} dark`}>
+      <body className="bg-deep-void text-white antialiased selection:bg-vegas-gold selection:text-black">
+        <Providers initialLocale={locale}>
+          <BaseLayout>{children}</BaseLayout>
+        </Providers>
+        <JsonLd data={JSON_LD_DEFAULTS as any} />
       </body>
     </html>
   );
 }
+

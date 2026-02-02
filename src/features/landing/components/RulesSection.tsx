@@ -1,69 +1,70 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { AlertTriangle } from 'lucide-react';
 
 const rules = [
-  { id: '01', text: '50% NON-REFUNDABLE DEPOSIT REQUIRED TO SECURE DATE.' },
-  { id: '02', text: 'NO REFUNDS. IF THE SHUTTER CLICKS, THE INVOICE STICKS.' },
-  { id: '03', text: 'WE RETAIN FULL RIGHTS UNTIL FINAL BALANCE IS CLEARED.' },
-  { id: '04', text: 'DO NOT TOUCH OR OBSTRUCT PRODUCTION EQUIPMENT.' },
-  { id: '05', text: 'DELIVERY TIMELINES ARE FINAL. NO RUSH WITHOUT FEE.' },
+  {
+    id: '01',
+    title: 'Absolute Discretion',
+    desc: 'We operate like ghosts. Your VIPs remain anonymous unless otherwise requested.',
+  },
+  {
+    id: '02',
+    title: 'Zero Friction',
+    desc: 'Our crews are optimized for minimal impact on venue flow and guest experience.',
+  },
+  {
+    id: '03',
+    title: 'Master Ownership',
+    desc: 'You own 100% of the raw assets. We archive them for life at no extra cost.',
+  },
+  {
+    id: '04',
+    title: 'Elite Talent',
+    desc: 'Only vetted production veterans handle our gear. No amateurs, no excuses.',
+  },
 ];
 
-export default function RulesSection() {
+/**
+ * RulesSection
+ * Outlines the operational standards and "GettUpp Rules" for partnership.
+ */
+export const RulesSection = () => {
   return (
-    <section className="bg-deep-void border-b border-white/5 py-32">
-      {/* Background elements */}
-      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-      <div className="container relative z-10 mx-auto max-w-4xl px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative border border-white/10 bg-[#0A0A0A] p-8 shadow-2xl md:p-16"
-        >
-          {/* Decorative Corner */}
-          <div className="absolute right-0 top-0 h-16 w-16 border-r-2 border-t-2 border-vegas-gold opacity-50" />
-
-          <div className="mb-12 flex items-center gap-4">
-            <AlertTriangle className="text-vegas-gold" size={32} />
-            <h2 className="font-display text-4xl tracking-tighter text-white md:text-5xl">
-              THE RULES
+    <section className="bg-void border-b border-white/5 py-32">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col gap-20 md:flex-row">
+          <div className="space-y-8 md:w-1/3">
+            <h2 className="font-display text-5xl uppercase leading-none tracking-tighter text-white md:text-7xl">
+              THE <br />
+              <span className="text-vegas-gold">RULES</span> OF <br />
+              ENGAGEMENT
             </h2>
+            <p className="text-off-white/40 text-sm uppercase tracking-[0.4em]">
+              Operational Excellence
+            </p>
           </div>
 
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:w-2/3">
             {rules.map((rule, i) => (
               <motion.div
                 key={rule.id}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="group flex items-start gap-6"
+                className="space-y-4"
               >
-                <span className="pt-1 font-mono text-lg font-bold text-vegas-gold opacity-50 transition-opacity group-hover:opacity-100">
-                  {rule.id}
-                </span>
-                <p className="font-mono text-sm leading-relaxed tracking-wide text-off-white/80 transition-colors group-hover:text-white md:text-base">
-                  {rule.text}
-                </p>
+                <div className="font-display text-4xl tracking-widest text-white/10">{rule.id}</div>
+                <h3 className="text-xl font-black uppercase tracking-widest text-white">
+                  {rule.title}
+                </h3>
+                <p className="text-off-white/40 text-sm leading-relaxed">{rule.desc}</p>
               </motion.div>
             ))}
           </div>
-
-          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-off-white/30">
-              Compliance is non-negotiable for elite production.
-            </p>
-            <div className="mx-8 hidden h-px flex-grow bg-white/5 md:block" />
-            <span className="font-display text-xl text-vegas-gold/40">GETTUPP ENT.</span>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+};

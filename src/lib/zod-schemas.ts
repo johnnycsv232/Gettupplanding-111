@@ -79,7 +79,20 @@ export type ProofPack = z.infer<typeof ProofPackSchema>;
 export const LeadSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
   city: z.string().optional(),
-  source: z.enum(['hero', 'exit-intent']),
+  country: z.string().optional(),
+  source: z
+    .string()
+    .min(1, 'Source is required')
+    .describe('Source of the lead, e.g. hero_zenith, exit_intent, etc.'),
 });
 
 export type Lead = z.infer<typeof LeadSchema>;
+
+// --- Agent Schema ---
+export const ChatMessageSchema = z.object({
+  role: z.enum(['user', 'assistant']),
+  content: z.string().min(1),
+});
+
+export type ChatMessage = z.infer<typeof ChatMessageSchema>;
+export const ChatHistorySchema = z.array(ChatMessageSchema);

@@ -1,13 +1,17 @@
 'use client';
 
-import GlassCard from '@/components/ui/GlassCard';
 import { Star } from 'lucide-react';
+import { GlassCard } from '@/components/ui';
 
-export default function TestimonialsSection() {
+/**
+ * TestimonialsSection
+ * Showcases client success stories and social proof.
+ */
+export const TestimonialsSection = () => {
   return (
-    <section className="bg-deep-void border-b border-white/5 py-32">
+    <section className="border-b border-white/5 bg-deep-void py-32">
       <div className="container mx-auto px-4">
-        <h2 className="mb-20 text-center font-display text-5xl text-white md:text-7xl">
+        <h2 className="font-display mb-20 text-center text-5xl text-white md:text-7xl">
           THEY DON&apos;T <span className="text-glow-gold text-vegas-gold">LIE</span>
         </h2>
 
@@ -19,7 +23,7 @@ export default function TestimonialsSection() {
                   <Star key={j} size={16} fill="currentColor" />
                 ))}
               </div>
-              <p className="italic text-off-white/80">
+              <p className="text-off-white/80 italic">
                 &quot;Revenue went up 30% the first month we switched to GettUpp. The content just
                 hits different.&quot;
               </p>
@@ -36,4 +40,4 @@ export default function TestimonialsSection() {
       </div>
     </section>
   );
-}
+};

@@ -1,9 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import Button from '@/components/ui/Button';
-import GlassCard from '@/components/ui/GlassCard';
-import Modal from '@/components/ui/Modal';
+import { useState } from 'react';
+import { GlassCard, Modal, Button } from '@/components/ui';
 import ParticleField from '@/components/three/ParticleField';
 
 export default function TestThemePage() {

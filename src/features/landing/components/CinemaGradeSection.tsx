@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import GlassCard from '@/components/ui/GlassCard';
+import { GlassCard } from '@/components/ui';
 import { Play } from 'lucide-react';
 
 export default function CinemaGradeSection() {

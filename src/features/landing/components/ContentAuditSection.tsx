@@ -1,57 +1,77 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { TrendingDown, Users, Target, ShieldAlert } from 'lucide-react';
+import { GlassCard } from '@/components/ui';
 
-import Button from '@/components/ui/Button';
-import GlassCard from '@/components/ui/GlassCard';
-import Magnetic from '@/components/animations/Magnetic';
+const failurePoints = [
+  {
+    icon: TrendingDown,
+    title: 'Low Frame Rate',
+    desc: 'Choppy 24fps mobile Recaps devalue your venues perceived status.',
+    impact: 'Poor Retention',
+  },
+  {
+    icon: ShieldAlert,
+    title: 'Dark Lighting',
+    desc: 'iPhone-only production loses the atmosphere in shadows.',
+    impact: 'Lost Aesthetic',
+  },
+  {
+    icon: Users,
+    title: 'Generic Angles',
+    desc: 'Lacking the cinematic direction needed for viral clout.',
+    impact: 'Zero Engagement',
+  },
+  {
+    icon: Target,
+    title: 'Delayed Delivery',
+    desc: 'Content delivered 3 days later is already dead on arrival.',
+    impact: 'Irrelevance',
+  },
+];
 
-export default function ContentAuditSection() {
+/**
+ * ContentAuditSection
+ * Highlights common flaws in competitor content to set the stage for GettOpp's solution.
+ */
+export const ContentAuditSection = () => {
   return (
-    <section className="bg-deep-void relative overflow-hidden border-y border-white/5 py-24">
-      {/* Subtle Background Glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-vegas-gold/5 blur-[100px]" />
-
-      <div className="container relative z-10 mx-auto px-4">
-        <GlassCard className="border-white/5 bg-white/[0.02] p-12 text-center md:p-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="mx-auto max-w-3xl space-y-8"
+    <section className="bg-void border-b border-white/5 py-32">
+      <div className="container mx-auto px-4">
+        <div className="mb-24 max-w-3xl">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="mb-4 block text-xs font-black uppercase tracking-[0.4em] text-red-500"
           >
-            <div className="mb-4 inline-block rounded-full border border-vegas-gold/30 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-vegas-gold">
-              Limited Availability
-            </div>
+            The Critical Failure
+          </motion.span>
+          <h2 className="font-display text-5xl uppercase leading-none tracking-tighter text-white md:text-7xl">
+            WHY YOUR CONTENT IS <br />
+            <span className="text-off-white/20">KILLING THE VIBE</span>
+          </h2>
+        </div>
 
-            <h2 className="font-display text-4xl uppercase tracking-tighter text-white md:text-5xl">
-              NOT READY FOR <span className="text-vegas-gold">THE PILOT?</span>
-            </h2>
-
-            <p className="mx-auto max-w-xl text-lg font-light leading-relaxed text-off-white/60 md:text-xl">
-              Get a comprehensive 5-point audit of your current social presence. We&apos;ll tell you
-              exactly why you&apos;re losing money.
-            </p>
-
-            <div className="flex justify-center pt-4">
-              <Magnetic strength={0.2}>
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="border-vegas-gold/50 px-10 font-black uppercase tracking-widest hover:bg-vegas-gold hover:text-black"
-                >
-                  GET THE AUDIT ($300)
-                </Button>
-              </Magnetic>
-            </div>
-
-            <p className="text-[10px] uppercase tracking-[0.4em] text-white/20">
-              Instant Delivery Upon Receipt of Profile
-            </p>
-          </motion.div>
-        </GlassCard>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {failurePoints.map((point, i) => (
+            <GlassCard key={i} className="group border-red-500/10 p-8 hover:border-red-500/30">
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10 text-red-500 transition-all duration-500 group-hover:bg-red-500 group-hover:text-white">
+                <point.icon size={24} />
+              </div>
+              <h3 className="font-display mb-2 text-lg uppercase tracking-widest text-white">
+                {point.title}
+              </h3>
+              <p className="text-off-white/40 mb-6 text-sm leading-relaxed">{point.desc}</p>
+              <div className="border-t border-white/5 pt-4">
+                <span className="text-[10px] font-black uppercase tracking-widest text-red-500">
+                  Impact: {point.impact}
+                </span>
+              </div>
+            </GlassCard>
+          ))}
+        </div>
       </div>
     </section>
   );
-}
+};

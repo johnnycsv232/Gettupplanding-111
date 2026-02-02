@@ -10,17 +10,21 @@ const upgrades = [
   { name: 'Extra Shooter', price: '+$350', icon: UserPlus },
 ];
 
-export default function UpgradesSection() {
+/**
+ * UpgradesSection
+ * Displays additional service add-ons and premium upgrades.
+ */
+export const UpgradesSection = () => {
   return (
-    <section className="bg-deep-void relative overflow-hidden border-b border-white/5 py-20">
+    <section className="relative overflow-hidden border-b border-white/5 bg-deep-void py-20">
       {/* Subtle Background Text */}
       <div className="pointer-events-none absolute inset-0 flex select-none items-center justify-center opacity-[0.02]">
-        <span className="whitespace-nowrap font-display text-[20vw]">ELITE UPGRADES</span>
+        <span className="font-display whitespace-nowrap text-[20vw]">ELITE UPGRADES</span>
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="mb-12 flex flex-col items-center">
-          <h3 className="mb-2 font-display text-3xl tracking-widest text-white md:text-4xl">
+          <h3 className="font-display mb-2 text-3xl tracking-widest text-white md:text-4xl">
             UPGRADES
           </h3>
           <div className="h-1 w-20 bg-vegas-gold" />
@@ -34,7 +38,7 @@ export default function UpgradesSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               whileHover={{
                 y: -5,
-                borderColor: 'rgba(255, 199, 44, 0.5)',
+                borderColor: 'rgba(212, 175, 55, 0.5)',
                 backgroundColor: 'rgba(255, 255, 255, 0.08)',
               }}
               viewport={{ once: true }}
@@ -46,14 +50,14 @@ export default function UpgradesSection() {
                 className="text-vegas-gold transition-transform group-hover:scale-110"
               />
               <div className="flex flex-col">
-                <span className="text-sm font-bold uppercase tracking-wide text-white">
+                <span className="text-[10px] font-black uppercase tracking-widest text-white">
                   {u.name}
                 </span>
-                <span className="font-mono text-xs text-vegas-gold/70">{u.price}</span>
+                <span className="text-[10px] font-bold text-white/40">{u.price}</span>
               </div>
               <Plus
                 size={14}
-                className="ml-2 text-white/20 transition-colors group-hover:text-vegas-gold"
+                className="ml-4 text-white/20 transition-colors group-hover:text-vegas-gold"
               />
             </motion.div>
           ))}
@@ -61,4 +65,4 @@ export default function UpgradesSection() {
       </div>
     </section>
   );
-}
+};

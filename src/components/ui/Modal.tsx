@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useScrollLock } from '@/hooks/use-scroll-lock';
 
 interface ModalProps {
   isOpen: boolean;
@@ -15,14 +16,11 @@ interface ModalProps {
   descriptionId?: string;
 }
 
-export default function Modal({
-  isOpen,
-  onClose,
-  children,
-  className,
-  title,
-  descriptionId,
-}: ModalProps) {
+/**
+ * Modal
+ * A premium accessibility-focused modal component using Framer Motion for cinematic transitions.
+ */
+export const Modal = ({ isOpen, onClose, children, title, className = '', descriptionId }: ModalProps) => {
   const [mounted, setMounted] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -32,25 +30,20 @@ export default function Modal({
     return () => clearTimeout(timer);
   }, []);
 
+  useScrollLock(isOpen);
+
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
-
       // Focus the first focusable element or the modal itself
       const focusableElements = modalRef.current?.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       ) as NodeListOf<HTMLElement>;
 
       if (focusableElements && focusableElements.length > 0) {
         // Delay slightly to ensure motion animation doesn't interfere with focus
         setTimeout(() => focusableElements[0].focus(), 50);
       }
-    } else {
-      document.body.style.overflow = 'unset';
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [isOpen]);
 
   // Handle Escape key and Focus trapping
@@ -64,7 +57,7 @@ export default function Modal({
 
       if (e.key === 'Tab') {
         const focusableElements = modalRef.current?.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
         ) as NodeListOf<HTMLElement>;
 
         if (!focusableElements || focusableElements.length === 0) return;
@@ -118,8 +111,8 @@ export default function Modal({
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             className={cn(
-              'liquid-glass relative w-full max-w-lg overflow-hidden rounded-2xl border-vegas-gold/30 shadow-2xl shadow-vegas-gold/10',
-              className
+              'liquid-glass border-vegas-gold/30 shadow-vegas-gold/10 relative w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl',
+              className,
             )}
           >
             {title && (
@@ -129,7 +122,7 @@ export default function Modal({
             )}
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 rounded-full p-1 text-off-white/50 transition-colors hover:bg-white/10 hover:text-white"
+              className="text-off-white/50 absolute right-4 top-4 rounded-full p-1 transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Close modal"
             >
               <X size={20} />
@@ -139,6 +132,6 @@ export default function Modal({
         </div>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
-}
+};

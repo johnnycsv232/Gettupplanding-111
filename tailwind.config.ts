@@ -26,6 +26,29 @@ const config: Config = {
         'liquid-glass':
           'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
       },
+      keyframes: {
+        shimmer: {
+          '100%': { transform: 'translateX(100%)' },
+        },
+      },
+      animation: {
+        shimmer: 'shimmer 2s infinite',
+      },
+      zIndex: {
+        hide: '-1',
+        base: '0',
+        docked: '10',
+        dropdown: '1000',
+        sticky: '1100',
+        banner: '1200',
+        overlay: '1300',
+        modal: '1400',
+        popover: '1500',
+        skipLink: '1600',
+        toast: '1700',
+        tooltip: '1800',
+        cursor: '9999',
+      },
     },
   },
   plugins: [],

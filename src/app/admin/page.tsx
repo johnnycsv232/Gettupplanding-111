@@ -1,42 +1,40 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { getFirebaseDb } from '@/lib/firebase';
-import { collection, query, orderBy, limit, getDocs, Timestamp } from 'firebase/firestore';
-import GlassCard from '@/components/ui/GlassCard';
+import { getAdminDb } from '@/lib/firebase-admin';
+import { GlassCard } from '@/components/ui';
+import { LeadsTable } from './components/LeadsTable';
 
 interface Lead {
   id: string;
   email: string;
   city?: string;
-  createdAt: Timestamp | null;
+  createdAt: string | null;
   source?: string;
 }
 
-export default function AdminDashboard() {
-  const [leads, setLeads] = useState<Lead[]>([]);
-  const [loading, setLoading] = useState(true);
+async function getLeads(): Promise<Lead[]> {
+  try {
+    const db = getAdminDb();
+    const snapshot = await db.collection('leads').orderBy('createdAt', 'desc').limit(50).get();
 
-  useEffect(() => {
-    const fetchLeads = async () => {
-      const db = getFirebaseDb();
-      try {
-        const q = query(collection(db, 'leads'), orderBy('createdAt', 'desc'), limit(50));
-        const snapshot = await getDocs(q);
-        const leadsData = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Lead[];
-        setLeads(leadsData);
-      } catch (error) {
-        console.error('Error fetching leads:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    return snapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        email: data.email,
+        city: data.city,
+        source: data.source,
+        createdAt: data.createdAt?.toDate
+          ? data.createdAt.toDate().toLocaleDateString()
+          : 'Just now',
+      };
+    }) as Lead[];
+  } catch (error) {
+    console.error('Error fetching leads on server:', error);
+    return [];
+  }
+}
 
-    fetchLeads();
-  }, []);
+export default async function AdminDashboard() {
+  const leads = await getLeads();
 
   return (
     <div className="space-y-8">
@@ -60,44 +58,7 @@ export default function AdminDashboard() {
         </GlassCard>
       </div>
 
-      <GlassCard className="p-6">
-        <h2 className="mb-6 text-xl font-bold">Recent Leads</h2>
-        {loading ? (
-          <div className="text-white/40">Loading leads...</div>
-        ) : leads.length === 0 ? (
-          <div className="text-white/40">No leads found yet.</div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-left">
-              <thead>
-                <tr className="border-b border-white/10 text-xs uppercase tracking-widest text-white/40">
-                  <th className="p-4">Date</th>
-                  <th className="p-4">Email</th>
-                  <th className="p-4">City</th>
-                  <th className="p-4">Source</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leads.map((lead) => (
-                  <tr
-                    key={lead.id}
-                    className="border-b border-white/5 transition-colors hover:bg-white/5"
-                  >
-                    <td className="p-4 text-white/60">
-                      {lead.createdAt?.toDate
-                        ? lead.createdAt.toDate().toLocaleDateString()
-                        : 'Just now'}
-                    </td>
-                    <td className="p-4 font-mono text-white">{lead.email}</td>
-                    <td className="p-4 text-white/80">{lead.city || '-'}</td>
-                    <td className="p-4 text-white/60">{lead.source || 'Hero'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </GlassCard>
+      <LeadsTable leads={leads} />
     </div>
   );
 }

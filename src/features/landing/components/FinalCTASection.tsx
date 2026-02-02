@@ -1,81 +1,60 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ParticleField from '@/components/three/ParticleField';
-import Button from '@/components/ui/Button';
-import Magnetic from '@/components/animations/Magnetic';
-import { tokens } from '@/styles/tokens';
+import { Button, GlintEffect } from '@/components/ui';
+import { Magnetic } from '@/components/animations/Magnetic';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
-export default function FinalCTASection() {
+/**
+ * FinalCTASection
+ * The ultimate call to action at the bottom of the landing page.
+ */
+export const FinalCTASection = () => {
   return (
-    <section className="relative overflow-hidden bg-white py-40">
-      {/* Intense Particle Field */}
+    <section className="relative overflow-hidden bg-deep-void py-40">
+      {/* Background Atmosphere */}
       <div className="absolute inset-0 z-0">
-        <ParticleField
-          count={tokens.config3d.finalCta.count}
-          speed={tokens.config3d.finalCta.speed}
-          color={tokens.colors.gold}
-          size={tokens.config3d.finalCta.size}
-        />
+        <div className="bg-vegas-gold/5 absolute left-1/2 top-1/2 h-[80vw] w-[80vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[200px]" />
       </div>
 
-      {/* Overlay Gradients */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-deep-void-black via-transparent to-deep-void-black" />
-      <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_center,rgba(255,199,44,0.1)_0%,transparent_70%)]" />
-
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="container relative z-10 mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="space-y-12"
+          className="mx-auto max-w-4xl space-y-12"
         >
-          <h2 className="font-display text-7xl leading-[0.8] tracking-tighter text-white md:text-[12rem]">
-            READY TO
-            <br />
-            <motion.span
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="inline-block text-vegas-gold drop-shadow-[0_0_30px_rgba(255,199,44,0.4)]"
-            >
-              DOMINATE?
-            </motion.span>
+          <div className="border-vegas-gold/30 bg-vegas-gold/5 mb-8 inline-flex items-center gap-3 rounded-full border px-6 py-2 text-vegas-gold">
+            <Sparkles size={16} />
+            <span className="text-[10px] font-black uppercase tracking-[0.4em]">
+              Limited Pilot Slots Available
+            </span>
+          </div>
+
+          <h2 className="font-display text-6xl uppercase leading-none tracking-tighter text-white md:text-[9rem]">
+            READY TO <br />
+            <span className="text-glow-gold text-vegas-gold">GETTUPP?</span>
           </h2>
 
-          <p className="mx-auto max-w-2xl text-xl font-light italic tracking-wide text-off-white/60 md:text-2xl">
-            &quot;The night belongs to those who own the vision.&quot;
+          <p className="text-off-white/60 mx-auto max-w-2xl text-xl uppercase tracking-widest md:text-2xl">
+            Join the world's most elite nightlife network. Your first production starts here.
           </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col items-center gap-6"
-          >
-            <Magnetic strength={0.3}>
-              <Button
-                variant="primary"
-                size="xl"
-                className="rounded-none border-2 border-white bg-black px-20 py-8 text-3xl font-bold uppercase tracking-widest text-white shadow-[0_0_50px_rgba(255,255,255,0.3)] transition-all duration-500 hover:bg-white hover:text-black hover:shadow-[0_0_70px_rgba(255,255,255,0.5)]"
-                onClick={() =>
-                  document.getElementById('pilot')?.scrollIntoView({ behavior: 'smooth' })
-                }
-              >
-                START THE PILOT
-              </Button>
+          <div className="flex flex-col items-center justify-center gap-6 pt-12 sm:flex-row">
+            <Magnetic strength={0.2}>
+              <GlintEffect>
+                <Button variant="primary" size="lg" className="rounded-full px-12 py-8 text-xl">
+                  BOOK YOUR PILOT <ArrowRight size={24} className="ml-2" />
+                </Button>
+              </GlintEffect>
             </Magnetic>
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-black/30">
-              Limited availability for Q1 2026
-            </span>
-          </motion.div>
+
+            <button className="text-sm font-black uppercase tracking-[0.4em] text-white/40 transition-colors hover:text-white">
+              Speak to an Agent
+            </button>
+          </div>
         </motion.div>
       </div>
-
-      {/* Edge Glows */}
-      <div className="pointer-events-none absolute left-0 top-0 z-[2] h-32 w-full bg-gradient-to-b from-black to-transparent" />
-      <div className="pointer-events-none absolute bottom-0 left-0 z-[2] h-32 w-full bg-gradient-to-t from-black to-transparent" />
     </section>
   );
-}
+};

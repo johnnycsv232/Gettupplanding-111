@@ -11,7 +11,11 @@ interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   children?: React.ReactNode;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+/**
+ * Button component with multiple variants and motion effects.
+ * Extends Framer Motion's button props.
+ */
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
     const variants = {
       primary:
@@ -55,5 +59,3 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
-
-export default Button;

@@ -1,9 +1,12 @@
 'use client';
 
-import React from 'react';
 import { motion } from 'framer-motion';
 
-export default function LoadingFallback() {
+/**
+ * LoadingFallback component for Suspense boundaries.
+ * Features a golden shimmer and pulsing glow.
+ */
+export const LoadingFallback = () => {
   return (
     <div className="absolute inset-0 z-0 flex items-center justify-center bg-deep-void">
       {/* Shimmer background */}
@@ -33,4 +36,4 @@ export default function LoadingFallback() {
       </div>
     </div>
   );
-}
+};

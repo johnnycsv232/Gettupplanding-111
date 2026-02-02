@@ -1,0 +1,8 @@
+node_modules
+.next
+build
+dist
+public
+*.md
+package-lock.json
+.firebase

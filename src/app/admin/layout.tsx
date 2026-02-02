@@ -3,15 +3,15 @@
 import { useEffect, useState } from 'react';
 import { getFirebaseAuth } from '@/lib/firebase';
 import { onAuthStateChanged, User, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
-import Button from '@/components/ui/Button';
+// import { useRouter } from 'next/navigation'; // Removed unused useRouter
+import { Button } from '@/components/ui';
 
 const ALLOWED_EMAILS = ['admin@gettupp.com', 'test@test.com']; // Replace with real admin emails
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter(); // eslint-disable-line @typescript-eslint/no-unused-vars
+  // const router = useRouter(); // Removed unused router
 
   useEffect(() => {
     const auth = getFirebaseAuth();
@@ -41,9 +41,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (!user || !ALLOWED_EMAILS.includes(user.email || '')) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-deep-void-black p-4">
+      <div className="bg-deep-void-black flex min-h-screen flex-col items-center justify-center gap-6 p-4">
         <h1 className="font-display text-4xl text-white">RESTRICTED ACCESS</h1>
-        <p className="max-w-md text-center text-off-white/60">
+        <p className="text-off-white/60 max-w-md text-center">
           This area is for authorized personnel only. If you are Johnny Cage, please login.
         </p>
         <Button onClick={handleLogin} variant="neon">
@@ -55,7 +55,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="min-h-screen bg-deep-void-black text-white">
+    <div className="bg-deep-void-black min-h-screen text-white">
       <nav className="flex items-center justify-between border-b border-white/10 bg-black/50 p-4 backdrop-blur-md">
         <span className="font-display text-xl text-vegas-gold">GETTUPP ADMIN</span>
         <div className="flex items-center gap-4">

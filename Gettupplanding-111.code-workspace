@@ -1,16 +1,8 @@
 {
   "folders": [
     {
-      "name": "Project Root",
+      "name": "Zenith Root",
       "path": ".",
-    },
-    {
-      "name": "Skills Library",
-      "path": "skills",
-    },
-    {
-      "name": "Scripts",
-      "path": "scripts",
     },
   ],
   "settings": {

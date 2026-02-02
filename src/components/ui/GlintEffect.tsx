@@ -9,11 +9,15 @@ interface GlintEffectProps {
   glintColor?: string;
 }
 
-export default function GlintEffect({
+/**
+ * GlintEffect
+ * Adds a high-end light reflection effect that follows the mouse across its children.
+ */
+export const GlintEffect = ({
   children,
   className = '',
   glintColor = 'rgba(255, 255, 255, 0.4)',
-}: GlintEffectProps) {
+}: GlintEffectProps) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -46,4 +50,4 @@ export default function GlintEffect({
       <div className="relative z-10">{children}</div>
     </div>
   );
-}
+};

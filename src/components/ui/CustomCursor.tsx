@@ -1,9 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
-export default function CustomCursor() {
+/**
+ * CustomCursor component providing a premium magnetic cursor interaction.
+ * Features a main dot and a trailing ring.
+ */
+export const CustomCursor = () => {
   const [cursorType, setCursorType] = useState<'default' | 'pointer' | 'hover'>('default');
 
   const mouseX = useMotionValue(0);

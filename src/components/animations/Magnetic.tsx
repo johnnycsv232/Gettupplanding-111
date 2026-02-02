@@ -8,7 +8,12 @@ interface MagneticProps {
   strength?: number;
 }
 
-export default function Magnetic({ children, strength = 0.5 }: MagneticProps) {
+/**
+ * Magnetic
+ * A container that pulls its children towards the mouse cursor,
+ * creating a magnetic attraction effect.
+ */
+export const Magnetic = ({ children, strength = 0.5 }: MagneticProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -36,4 +41,4 @@ export default function Magnetic({ children, strength = 0.5 }: MagneticProps) {
       {children}
     </motion.div>
   );
-}
+};

@@ -1,15 +1,17 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import React from 'react';
 
-interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassCardProps extends HTMLMotionProps<'div'> {
   hoverEffect?: boolean;
   intensity?: 'low' | 'medium' | 'high';
 }
 
-const GlassCard = ({
+/**
+ * GlassCard component with backdrop blur and optional motion effects.
+ */
+export const GlassCard = ({
   className,
   hoverEffect = false,
   intensity = 'medium',
@@ -18,8 +20,9 @@ const GlassCard = ({
 }: GlassCardProps) => {
   const intensityMap = {
     low: 'bg-white/5 backdrop-blur-md border-white/5',
-    medium: 'liquid-glass', // Uses our custom utility
-    high: 'bg-white/10 backdrop-blur-xl border-white/20 shadow-2xl',
+    medium: 'glass-medium',
+    high: 'glass-heavy',
+    zenith: 'glass-zenith',
   };
 
   const Component = hoverEffect ? motion.div : 'div';
@@ -31,19 +34,16 @@ const GlassCard = ({
     : {};
 
   return (
-    // @ts-expect-error - motion.div accepts standard div props but TS might complain about mixing types
     <Component
       className={cn(
         'overflow-hidden rounded-xl transition-all duration-300',
         intensityMap[intensity],
-        className
+        className,
       )}
       {...motionProps}
-      {...props}
+      {...(props as any)}
     >
       {children}
     </Component>
   );
 };
-
-export default GlassCard;

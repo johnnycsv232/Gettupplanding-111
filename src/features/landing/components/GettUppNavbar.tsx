@@ -1,24 +1,28 @@
 'use client';
 
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useState } from 'react';
-import Magnetic from '@/components/animations/Magnetic';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { Magnetic } from '@/components/animations/Magnetic';
 
-export default function GettUppNavbar() {
+/**
+ * GettUppNavbar
+ * A floating, glassmorphic navigation bar that intelligently hides on scroll
+ * and reveals on hover or upward scroll.
+ */
+export const GettUppNavbar = () => {
   const { scrollY, scrollYProgress } = useScroll();
-  const [hidden, setHidden] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
     if (latest > previous && latest > 150) {
-      setHidden(true);
+      setIsHidden(true);
     } else {
-      setHidden(false);
+      setIsHidden(false);
     }
-    setScrolled(latest > 50);
+    setIsScrolled(latest > 50);
   });
-
 
   return (
     <motion.header
@@ -26,61 +30,63 @@ export default function GettUppNavbar() {
         visible: { y: 0 },
         hidden: { y: -100 },
       }}
-      animate={hidden ? 'hidden' : 'visible'}
+      animate={isHidden ? 'hidden' : 'visible'}
       transition={{ duration: 0.35, ease: 'easeInOut' }}
-      className="fixed top-0 left-0 right-0 z-[100] flex justify-center p-6 pointer-events-none"
+      className="pointer-events-none fixed left-0 right-0 top-0 z-[100] flex justify-center p-6"
     >
-      <div className={`
-        relative flex items-center justify-between px-8 py-3 rounded-full border pointer-events-auto
-        transition-all duration-700 ease-[0.76, 0, 0.24, 1]
-        ${scrolled
-          ? 'glass-heavy bg-black/60 border-vegas-gold/20 w-[90%] md:w-[70%] lg:w-[60%] shadow-[0_0_30px_rgba(0,0,0,0.5)]'
-          : 'bg-transparent border-white/5 w-full md:w-[95%]'}
-      `}>
+      <div
+        className={`ease-[0.76, 0, 0.24, 1] pointer-events-auto relative flex items-center justify-between rounded-full border px-8 py-3 transition-all duration-700 ${
+          isScrolled
+            ? 'glass-heavy border-vegas-gold/20 w-[90%] bg-black/60 shadow-[0_0_30px_rgba(0,0,0,0.5)] md:w-[70%] lg:w-[60%]'
+            : 'w-full border-white/5 bg-transparent md:w-[95%]'
+        } `}
+      >
         {/* Scroll Progress Tube */}
         <div className="absolute bottom-0 left-8 right-8 h-[1px] overflow-hidden rounded-full bg-white/5">
           <motion.div
-            style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
+            style={{ scaleX: scrollYProgress, transformOrigin: '0%' }}
             className="h-full bg-gradient-to-r from-transparent via-vegas-gold to-transparent opacity-50"
           />
         </div>
 
         {/* Brand Shield */}
         <Magnetic strength={0.2}>
-          <div className="flex items-center gap-3 cursor-pointer group">
-            <div className="h-8 w-8 rounded-lg bg-vegas-gold flex items-center justify-center text-black font-black text-xs rotate-45 group-hover:rotate-0 transition-transform duration-500">
-              <span className="-rotate-45 group-hover:rotate-0 transition-transform duration-500">G</span>
+          <div className="group flex cursor-pointer items-center gap-3">
+            <div className="flex h-8 w-8 rotate-45 items-center justify-center rounded-lg bg-vegas-gold font-black text-black transition-transform duration-500 group-hover:rotate-90">
+              <span className="-rotate-45 transition-transform duration-500 group-hover:-rotate-90">
+                G
+              </span>
             </div>
-            <span className="font-display text-lg tracking-[0.2em] text-white">GETTUPP</span>
+            <span className="font-display text-lg tracking-[0.3em] text-white">GETTUPP</span>
           </div>
         </Magnetic>
 
-        {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-10">
-          {['Services', 'Pilot', 'Gallery', 'Retainers', 'Founder'].map((item) => (
-            <Magnetic key={item} strength={0.1}>
+        {/* Desktop Nav Actions */}
+        <div className="flex items-center gap-6">
+          <nav className="mr-4 hidden items-center gap-8 md:flex">
+            {['Arsenal', 'Pricing', 'Pilot'].map((item) => (
               <a
+                key={item}
                 href={`#${item.toLowerCase()}`}
-                className="group relative text-[9px] font-black tracking-[0.4em] uppercase text-white/30 hover:text-white transition-all"
+                className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 transition-colors hover:text-vegas-gold"
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-vegas-gold transition-all duration-300 group-hover:w-full shadow-[0_0_10px_#d4af37]" />
               </a>
-            </Magnetic>
-          ))}
-        </nav>
+            ))}
+          </nav>
 
+          <Magnetic strength={0.1}>
+            <button className="glass-medium border-vegas-gold/30 hidden rounded-full px-6 py-2 text-[10px] font-black uppercase tracking-widest text-vegas-gold transition-all hover:bg-vegas-gold hover:text-black md:block">
+              Join Elite
+            </button>
+          </Magnetic>
 
-        {/* Action Button */}
-        <Magnetic strength={0.2}>
-          <button
-            onClick={() => document.getElementById('pilot')?.scrollIntoView({ behavior: 'smooth' })}
-            className="text-[10px] font-black tracking-[0.3em] uppercase bg-vegas-gold text-black px-6 py-2 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:scale-105 transition-transform"
-          >
-            START PILOT
+          <button className="flex h-8 w-8 flex-col items-end justify-center gap-1.5 px-1 text-white md:hidden">
+            <div className="h-0.5 w-6 bg-white" />
+            <div className="h-0.5 w-4 bg-vegas-gold" />
           </button>
-        </Magnetic>
+        </div>
       </div>
     </motion.header>
   );
-}
+};

@@ -3,7 +3,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-export default function Preloader() {
+/**
+ * Preloader component for the initial site load.
+ * Features a branded reveal animation and initialization stats.
+ */
+export const Preloader = () => {
   const [loading, setLoading] = useState(true);
   const [counter, setCounter] = useState(0);
 

@@ -21,7 +21,17 @@
     "skills:disable": "tsx scripts/skills-manager.ts disable",
     "skills:index": "tsx scripts/generate-index.ts",
     "skills:validate": "tsx scripts/validate-skills.ts",
-    "skills:sync": "tsx scripts/sync-skills.ts"
+    "skills:sync": "tsx scripts/sync-skills.ts",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -40,8 +50,7 @@
     "react-intersection-observer": "^10.0.2",
     "stripe": "^20.2.0",
     "tailwind-merge": "^3.4.0",
-    "three": "^0.182.0",
-    "zod": "^4.3.5"
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^5.0.0",
@@ -56,16 +65,22 @@
     "autoprefixer": "^10.4.23",
     "eslint": "^9",
     "eslint-config-next": "16.1.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-tailwindcss": "^3.18.2",
+    "eslint-plugin-unused-imports": "^4.3.0",
     "firebase-admin": "^12.7.0",
     "firebase-tools": "^15.3.1",
     "happy-dom": "^20.3.4",
+    "husky": "^9.1.7",
     "jsdom": "^27.4.0",
+    "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.21.0",
     "typescript": "^5",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.17",
+    "zod": "^4.3.6"
   }
 }
