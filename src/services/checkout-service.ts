@@ -1,5 +1,5 @@
-import { getFirebaseAuth } from '@/lib/firebase';
 import { Routes } from '@/config/routes';
+import { getFirebaseAuth } from '@/lib/firebase';
 
 export interface CheckoutParams {
   priceId: string;
@@ -33,9 +33,10 @@ class CheckoutService {
    */
   public async redirectToCheckout(priceIdOrParams: string | CheckoutParams): Promise<void> {
     try {
-      const params = typeof priceIdOrParams === 'string'
-        ? { priceId: priceIdOrParams, tier: 'unknown', mode: 'payment' as const }
-        : priceIdOrParams;
+      const params =
+        typeof priceIdOrParams === 'string'
+          ? { priceId: priceIdOrParams, tier: 'unknown', mode: 'payment' as const }
+          : priceIdOrParams;
 
       const auth = getFirebaseAuth();
       const user = auth.currentUser;
@@ -43,7 +44,7 @@ class CheckoutService {
       if (!user) {
         // In a real app, maybe redirect to login with a 'next' param
         console.warn('User not signed in. Redirecting to login...');
-         // For now, throw to be handled by UI
+        // For now, throw to be handled by UI
         throw new Error('Please sign in to continue.');
       }
 

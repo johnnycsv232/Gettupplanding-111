@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-import { getStripeClient } from '@/lib/stripe';
-import { getAdminAuth } from '@/lib/firebase-admin';
 import type { Stripe } from 'stripe';
+
+import { getAdminAuth } from '@/lib/firebase-admin';
+import { getStripeClient } from '@/lib/stripe';
 
 export async function POST(req: Request) {
   try {
@@ -21,7 +22,7 @@ export async function POST(req: Request) {
     if (!userId) {
       return NextResponse.json(
         { error: 'Unauthorized: Authentication required for checkout' },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -48,7 +49,7 @@ export async function POST(req: Request) {
       {
         // INVARIANT: Prevent double-charging via idempotency
         idempotencyKey: `checkout_${userId}_${priceId}`,
-      }
+      },
     );
 
     return NextResponse.json({ url: checkoutSession.url });

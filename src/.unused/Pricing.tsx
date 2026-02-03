@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+
 import styles from '../styles/Pricing.module.css';
 
 const tiers = [

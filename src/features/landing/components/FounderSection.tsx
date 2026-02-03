@@ -68,7 +68,7 @@ export const FounderSection = () => {
               {[Instagram, Twitter, Linkedin].map((Icon, i) => (
                 <button
                   key={i}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 text-white/40 transition-all duration-500 hover:border-vegas-gold hover:text-vegas-gold"
+                  className="flex size-12 items-center justify-center rounded-full border border-white/10 text-white/40 transition-all duration-500 hover:border-vegas-gold hover:text-vegas-gold"
                 >
                   <Icon size={20} />
                 </button>

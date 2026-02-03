@@ -4,7 +4,8 @@
 
 ## 🏗️ Core Tech Stack
 
-- **Framework**: Next.js 15 (App Router).
+- **Framework**: Next.js 16 (App Router).
+- **Build Engine**: Turbopack (Vercel-native optimization).
 - **Runtime**: Node.js 20+.
 - **Language**: TypeScript 5.6 (Strict Mode).
 - **Styling**: CSS Modules + Global Tokens.
@@ -59,6 +60,13 @@
 
 ## 🚀 Performance Targets
 
-- **Lighthouse Score**: 90+ (Performance, Accessibility, SEO).
-- **LCP-P90**: < 2.5s.
-- **CLS**: ~0.
+## 🤝 Architecture Freeze Agreement
+
+As of February 2, 2026, the core architecture defined in this document is formally **FROZEN** to ensure stability during the Zenith Alpha launch phase.
+
+- **Lead Architect**: Antigravity AI
+- **Timestamp**: 2026-02-02 21:15
+- **Agreement Level**: MANDATORY (All deviations require a formal RFC)
+
+> [!IMPORTANT]
+> This freeze covers the Tech Stack, Security Invariants, and Directory Structure. UI/UX and feature logic remain iterative.

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+
 import styles from '../styles/Landing.module.css';
 
 export default function Founder() {
@@ -76,7 +77,7 @@ export default function Founder() {
           >
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-transparent" />
             {/* Image placeholder for Johnny Cage */}
-            <div className="flex h-full w-full items-center justify-center bg-zinc-900 font-bold text-gray-500">
+            <div className="flex size-full items-center justify-center bg-zinc-900 font-bold text-gray-500">
               JOHNNY CAGE
             </div>
           </motion.div>

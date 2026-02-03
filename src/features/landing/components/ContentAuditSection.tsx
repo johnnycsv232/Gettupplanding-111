@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { TrendingDown, Users, Target, ShieldAlert } from 'lucide-react';
+
 import { GlassCard } from '@/components/ui';
 
 const failurePoints = [
@@ -56,7 +57,7 @@ export const ContentAuditSection = () => {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {failurePoints.map((point, i) => (
             <GlassCard key={i} className="group border-red-500/10 p-8 hover:border-red-500/30">
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10 text-red-500 transition-all duration-500 group-hover:bg-red-500 group-hover:text-white">
+              <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-red-500/10 text-red-500 transition-all duration-500 group-hover:bg-red-500 group-hover:text-white">
                 <point.icon size={24} />
               </div>
               <h3 className="font-display mb-2 text-lg uppercase tracking-widest text-white">

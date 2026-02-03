@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { useFrame, useThree, extend } from '@react-three/fiber';
 import { MeshTransmissionMaterial, Sphere, Float, Trail, shaderMaterial } from '@react-three/drei';
+import { useFrame, useThree, extend } from '@react-three/fiber';
+import { useRef } from 'react';
 import * as THREE from 'three';
+
 import { use3DHeatmap } from '@/lib/analytics/use3DHeatmap';
 
 // Custom Energy Pulse Shader
@@ -51,14 +52,17 @@ const PulseMaterial = shaderMaterial(
 
     gl_FragColor = vec4(uColor, strength);
   }
-  `
+  `,
 );
 
 extend({ PulseMaterial });
 
 declare module '@react-three/fiber' {
   interface ThreeElements {
-    pulseMaterial: React.DetailedHTMLProps<React.HTMLAttributes<THREE.ShaderMaterial>, THREE.ShaderMaterial> & {
+    pulseMaterial: React.DetailedHTMLProps<
+      React.HTMLAttributes<THREE.ShaderMaterial>,
+      THREE.ShaderMaterial
+    > & {
       uTime?: number;
       uColor?: THREE.Color;
       uIntensity?: number;
@@ -89,8 +93,16 @@ export function RefractiveSphere() {
     if (!mesh.current) return;
 
     // Smooth follow mouse
-    targetX.current = THREE.MathUtils.lerp(targetX.current, (state.mouse.x * viewport.width) / 2.5, 0.05);
-    targetY.current = THREE.MathUtils.lerp(targetY.current, (state.mouse.y * viewport.height) / 2.5, 0.05);
+    targetX.current = THREE.MathUtils.lerp(
+      targetX.current,
+      (state.mouse.x * viewport.width) / 2.5,
+      0.05,
+    );
+    targetY.current = THREE.MathUtils.lerp(
+      targetY.current,
+      (state.mouse.y * viewport.height) / 2.5,
+      0.05,
+    );
 
     mesh.current.position.x = targetX.current;
     mesh.current.position.y = targetY.current;

@@ -106,7 +106,7 @@ export function getMockProofPack(overrides: Partial<ProofPack> = {}): ProofPack 
 // ============================================
 
 export function getMockCheckoutMetadata(
-  overrides: Partial<CheckoutMetadata> = {}
+  overrides: Partial<CheckoutMetadata> = {},
 ): CheckoutMetadata {
   return {
     userId: overrides.userId || generateId('user'),

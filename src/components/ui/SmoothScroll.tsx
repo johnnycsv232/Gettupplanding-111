@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, ReactNode } from 'react';
 import Lenis from 'lenis';
+import { useEffect, ReactNode } from 'react';
 
 /**
  * SmoothScroll component using Lenis for premium scrolling experience.
@@ -31,4 +31,4 @@ export const SmoothScroll = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return <>{children}</>;
-}
+};

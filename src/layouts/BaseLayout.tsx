@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import { ReactNode } from 'react';
 
+import { CommandPalette } from '@/components/ui/CommandPalette';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { NoiseOverlay } from '@/components/ui/NoiseOverlay';
 import { PageTransition } from '@/components/ui/PageTransition';
@@ -9,7 +10,7 @@ import { Preloader } from '@/components/ui/Preloader';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
 
 interface BaseLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 /**
@@ -22,10 +23,9 @@ export function BaseLayout({ children }: BaseLayoutProps) {
     <SmoothScroll>
       <Preloader />
       <CustomCursor />
+      <CommandPalette />
       <NoiseOverlay />
-      <PageTransition>
-        {children}
-      </PageTransition>
+      <PageTransition>{children}</PageTransition>
     </SmoothScroll>
   );
 }

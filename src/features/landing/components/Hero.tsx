@@ -1,9 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import MeshBackground from './MeshBackground';
-import styles from '../styles/Landing.module.css';
 import { MousePointer2, Play } from 'lucide-react';
+
+import styles from '../styles/Landing.module.css';
+
+import MeshBackground from './MeshBackground';
 
 export default function Hero() {
   const metrics = [

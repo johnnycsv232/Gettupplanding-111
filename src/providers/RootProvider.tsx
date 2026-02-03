@@ -1,8 +1,10 @@
 'use client';
 
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
-import { Action } from '@/lib/actions';
+
+import { CommandPalette } from '@/components/ui/CommandPalette';
 import { ToastContainer, ToastMessage } from '@/components/ui/Toast';
+import { Action } from '@/lib/actions';
 
 /**
  * Standard Global State Interface
@@ -14,6 +16,7 @@ interface GlobalState {
     language: string;
   };
   notifications: ToastMessage[];
+  isCommandPaletteOpen: boolean;
 }
 
 const initialState: GlobalState = {
@@ -23,6 +26,7 @@ const initialState: GlobalState = {
     language: 'en',
   },
   notifications: [],
+  isCommandPaletteOpen: false,
 };
 
 /**
@@ -39,17 +43,22 @@ function rootReducer(state: GlobalState, action: Action<any>): GlobalState {
     case 'REMOVE_NOTIFICATION':
       return {
         ...state,
-        notifications: state.notifications.filter(n => n.id !== action.payload)
+        notifications: state.notifications.filter((n) => n.id !== action.payload),
       };
+    case 'TOGGLE_COMMAND_PALETTE':
+      return { ...state, isCommandPaletteOpen: action.payload ?? !state.isCommandPaletteOpen };
     default:
       return state;
   }
 }
 
-const GlobalStateContext = createContext<{
-  state: GlobalState;
-  dispatch: React.Dispatch<Action<any>>;
-} | undefined>(undefined);
+const GlobalStateContext = createContext<
+  | {
+      state: GlobalState;
+      dispatch: React.Dispatch<Action<any>>;
+    }
+  | undefined
+>(undefined);
 
 /**
  * Root Provider to wrap the entire app.
@@ -64,6 +73,7 @@ export function RootProvider({ children }: { children: ReactNode }) {
         toasts={state.notifications}
         onRemove={(id) => dispatch({ type: 'REMOVE_NOTIFICATION', payload: id })}
       />
+      <CommandPalette />
     </GlobalStateContext.Provider>
   );
 }

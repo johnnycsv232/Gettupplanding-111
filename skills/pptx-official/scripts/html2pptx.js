@@ -79,7 +79,7 @@ function validateDimensions(bodyDimensions, pres) {
     if (Math.abs(layoutWidth - widthInches) > 0.1 || Math.abs(layoutHeight - heightInches) > 0.1) {
       errors.push(
         `HTML dimensions (${widthInches.toFixed(1)}" × ${heightInches.toFixed(1)}") ` +
-          `don't match presentation layout (${layoutWidth.toFixed(1)}" × ${layoutHeight.toFixed(1)}")`
+          `don't match presentation layout (${layoutWidth.toFixed(1)}" × ${layoutHeight.toFixed(1)}")`,
       );
     }
   }
@@ -109,7 +109,7 @@ function validateTextBoxPosition(slideData, bodyDimensions) {
 
         errors.push(
           `Text box "${textPrefix}" ends too close to bottom edge ` +
-            `(${distanceFromBottom.toFixed(2)}" from bottom, minimum ${minBottomMargin}" required)`
+            `(${distanceFromBottom.toFixed(2)}" from bottom, minimum ${minBottomMargin}" required)`,
         );
       }
     }
@@ -425,7 +425,7 @@ async function extractSlideData(page) {
       element,
       baseOptions = {},
       runs = [],
-      baseTextTransform = (x) => x
+      baseTextTransform = (x) => x,
     ) => {
       let prevNodeIsText = false;
 
@@ -476,22 +476,22 @@ async function extractSlideData(page) {
             // Validate: Check for margins on inline elements
             if (computed.marginLeft && parseFloat(computed.marginLeft) > 0) {
               errors.push(
-                `Inline element <${node.tagName.toLowerCase()}> has margin-left which is not supported in PowerPoint. Remove margin from inline elements.`
+                `Inline element <${node.tagName.toLowerCase()}> has margin-left which is not supported in PowerPoint. Remove margin from inline elements.`,
               );
             }
             if (computed.marginRight && parseFloat(computed.marginRight) > 0) {
               errors.push(
-                `Inline element <${node.tagName.toLowerCase()}> has margin-right which is not supported in PowerPoint. Remove margin from inline elements.`
+                `Inline element <${node.tagName.toLowerCase()}> has margin-right which is not supported in PowerPoint. Remove margin from inline elements.`,
               );
             }
             if (computed.marginTop && parseFloat(computed.marginTop) > 0) {
               errors.push(
-                `Inline element <${node.tagName.toLowerCase()}> has margin-top which is not supported in PowerPoint. Remove margin from inline elements.`
+                `Inline element <${node.tagName.toLowerCase()}> has margin-top which is not supported in PowerPoint. Remove margin from inline elements.`,
               );
             }
             if (computed.marginBottom && parseFloat(computed.marginBottom) > 0) {
               errors.push(
-                `Inline element <${node.tagName.toLowerCase()}> has margin-bottom which is not supported in PowerPoint. Remove margin from inline elements.`
+                `Inline element <${node.tagName.toLowerCase()}> has margin-bottom which is not supported in PowerPoint. Remove margin from inline elements.`,
               );
             }
 
@@ -525,7 +525,7 @@ async function extractSlideData(page) {
     if (bgImage && (bgImage.includes('linear-gradient') || bgImage.includes('radial-gradient'))) {
       errors.push(
         'CSS gradients are not supported. Use Sharp to rasterize gradients as PNG images first, ' +
-          "then reference with background-image: url('gradient.png')"
+          "then reference with background-image: url('gradient.png')",
       );
     }
 
@@ -575,7 +575,7 @@ async function extractSlideData(page) {
         if (hasBg || hasBorder || hasShadow) {
           errors.push(
             `Text element <${el.tagName.toLowerCase()}> has ${hasBg ? 'background' : hasBorder ? 'border' : 'shadow'}. ` +
-              'Backgrounds, borders, and shadows are only supported on <div> elements, not text elements.'
+              'Backgrounds, borders, and shadows are only supported on <div> elements, not text elements.',
           );
           return;
         }
@@ -586,7 +586,7 @@ async function extractSlideData(page) {
         const rect = el.getBoundingClientRect();
         if (rect.width === 0 || rect.height === 0) {
           errors.push(
-            `Placeholder "${el.id || 'unnamed'}" has ${rect.width === 0 ? 'width: 0' : 'height: 0'}. Check the layout CSS.`
+            `Placeholder "${el.id || 'unnamed'}" has ${rect.width === 0 ? 'width: 0' : 'height: 0'}. Check the layout CSS.`,
           );
         } else {
           placeholders.push({
@@ -633,7 +633,7 @@ async function extractSlideData(page) {
             if (text) {
               errors.push(
                 `DIV element contains unwrapped text "${text.substring(0, 50)}${text.length > 50 ? '...' : ''}". ` +
-                  'All text must be wrapped in <p>, <h1>-<h6>, <ul>, or <ol> tags to appear in PowerPoint.'
+                  'All text must be wrapped in <p>, <h1>-<h6>, <ul>, or <ol> tags to appear in PowerPoint.',
               );
             }
           }
@@ -644,7 +644,7 @@ async function extractSlideData(page) {
         if (bgImage && bgImage !== 'none') {
           errors.push(
             'Background images on DIV elements are not supported. ' +
-              'Use solid colors or borders for shapes, or use slide.addImage() in PptxGenJS to layer images.'
+              'Use solid colors or borders for shapes, or use slide.addImage() in PptxGenJS to layer images.',
           );
           return;
         }
@@ -655,7 +655,7 @@ async function extractSlideData(page) {
         const borderBottom = computed.borderBottomWidth;
         const borderLeft = computed.borderLeftWidth;
         const borders = [borderTop, borderRight, borderBottom, borderLeft].map(
-          (b) => parseFloat(b) || 0
+          (b) => parseFloat(b) || 0,
         );
         const hasBorder = borders.some((b) => b > 0);
         const hasUniformBorder = hasBorder && borders.every((b) => b === borders[0]);
@@ -855,7 +855,7 @@ async function extractSlideData(page) {
       if (el.tagName !== 'LI' && /^[•\-\*▪▸○●◆◇■□]\s/.test(text.trimStart())) {
         errors.push(
           `Text element <${el.tagName.toLowerCase()}> starts with bullet symbol "${text.substring(0, 20)}...". ` +
-            'Use <ul> or <ol> lists instead of manual bullet symbols.'
+            'Use <ul> or <ol> lists instead of manual bullet symbols.',
         );
         return;
       }
@@ -892,7 +892,7 @@ async function extractSlideData(page) {
         // Text with inline formatting
         const transformStr = computed.textTransform;
         const runs = parseInlineFormatting(el, {}, [], (str) =>
-          applyTextTransform(str, transformStr)
+          applyTextTransform(str, transformStr),
         );
 
         // Adjust lineSpacing based on largest fontSize in runs
@@ -900,7 +900,7 @@ async function extractSlideData(page) {
         if (adjustedStyle.lineSpacing) {
           const maxFontSize = Math.max(
             adjustedStyle.fontSize,
-            ...runs.map((r) => r.options?.fontSize || 0)
+            ...runs.map((r) => r.options?.fontSize || 0),
           );
           if (maxFontSize > adjustedStyle.fontSize) {
             const lineHeightMultiplier = adjustedStyle.lineSpacing / adjustedStyle.fontSize;

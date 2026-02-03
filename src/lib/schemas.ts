@@ -57,7 +57,7 @@ export const ProofPackSchema = z
         type: z.enum(['image', 'video']),
         aiScore: z.number().min(0).max(100),
         metadata: z.record(z.string(), z.string()).optional(),
-      })
+      }),
     ),
     overallScore: z.number().min(0).max(100),
     status: z.enum(['pending', 'delivered', 'rejected']),

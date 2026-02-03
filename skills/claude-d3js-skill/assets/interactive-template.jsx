@@ -49,7 +49,7 @@ function InteractiveChart({ data }) {
       .on('zoom', (event) => {
         g.attr(
           'transform',
-          `translate(${margin.left + event.transform.x},${margin.top + event.transform.y}) scale(${event.transform.k})`
+          `translate(${margin.left + event.transform.x},${margin.top + event.transform.y}) scale(${event.transform.k})`,
         );
       });
 

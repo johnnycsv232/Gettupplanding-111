@@ -19,7 +19,11 @@ export interface ActionResult<T = any> {
 /**
  * Creates a standardized action.
  */
-export const createAction = <T>(type: string, payload?: T, meta?: Record<string, any>): Action<T> => ({
+export const createAction = <T>(
+  type: string,
+  payload?: T,
+  meta?: Record<string, any>,
+): Action<T> => ({
   type,
   payload,
   meta,
@@ -30,14 +34,14 @@ export const createAction = <T>(type: string, payload?: T, meta?: Record<string,
  */
 export const executeAction = async <T>(
   action: Action<any>,
-  handler: () => Promise<T>
+  handler: () => Promise<T>,
 ): Promise<ActionResult<T>> => {
   const timestamp = new Date().toISOString();
-  console.log(`[ACTION][${timestamp}] Executing: ${action.type}`, action.payload);
+  console.warn(`[ACTION][${timestamp}] Executing: ${action.type}`, action.payload);
 
   try {
     const result = await handler();
-    console.log(`[ACTION][${timestamp}] Success: ${action.type}`, result);
+    console.warn(`[ACTION][${timestamp}] Success: ${action.type}`, result);
     return {
       success: true,
       data: result,

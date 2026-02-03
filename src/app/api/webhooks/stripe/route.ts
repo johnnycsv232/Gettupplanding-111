@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { verifyWebhookSignature } from '@/lib/stripe';
-import { getAdminDb } from '@/lib/firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
+import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+
+import { getAdminDb } from '@/lib/firebase-admin';
+import { verifyWebhookSignature } from '@/lib/stripe';
 import {
   checkoutSessionCompletedSchema,
   subscriptionSchema,
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
     console.error(`⚠️ Webhook signature verification failed.`, errorMessage);
     return NextResponse.json(
       { error: `Webhook signature verification failed: ${errorMessage}` },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -62,7 +63,7 @@ export async function POST(req: NextRequest) {
         err.code === 'ALREADY_EXISTS' ||
         err.message?.includes('ALREADY_EXISTS')
       ) {
-        console.log(`ℹ️ Event ${eventId} already processed or processing. Skipping.`);
+        console.warn(`ℹ️ Event ${eventId} already processed or processing. Skipping.`);
         return NextResponse.json({ received: true, skipped: true });
       }
     }
@@ -99,7 +100,7 @@ export async function POST(req: NextRequest) {
       }
 
       default:
-        console.log(`Unhandled event type ${eventType}`);
+        console.warn(`Unhandled event type ${eventType}`);
     }
 
     // Mark event as success
@@ -123,7 +124,7 @@ export async function POST(req: NextRequest) {
       });
       return NextResponse.json(
         { error: `Webhook validation failed: ${zodError.message}` },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -146,7 +147,7 @@ export async function POST(req: NextRequest) {
 
 async function handleCheckoutSessionCompleted(
   session: CheckoutSessionCompleted,
-  db: FirebaseFirestore.Firestore
+  db: FirebaseFirestore.Firestore,
 ) {
   const { metadata, customer, subscription } = session;
   const { userId, tier } = metadata;
@@ -172,12 +173,12 @@ async function handleCheckoutSessionCompleted(
     hasActiveSubscription: true,
   });
 
-  console.log(`✅ Provisioned Tier [${tier}] for User [${userId}] via Session [${session.id}]`);
+  console.warn(`✅ Provisioned Tier [${tier}] for User [${userId}] via Session [${session.id}]`);
 }
 
 async function handleSubscriptionUpdated(
   subscription: SubscriptionEvent,
-  db: FirebaseFirestore.Firestore
+  db: FirebaseFirestore.Firestore,
 ) {
   const { id, status, metadata } = subscription;
   const { userId } = metadata;
@@ -196,12 +197,12 @@ async function handleSubscriptionUpdated(
     subscriptionStatus: status,
   });
 
-  console.log(`🔄 Updated Subscription [${id}] for User [${userId}]. Status: ${status}`);
+  console.warn(`🔄 Updated Subscription [${id}] for User [${userId}]. Status: ${status}`);
 }
 
 async function handleSubscriptionDeleted(
   subscription: SubscriptionEvent,
-  db: FirebaseFirestore.Firestore
+  db: FirebaseFirestore.Firestore,
 ) {
   const { id, metadata } = subscription;
   const { userId } = metadata;
@@ -218,7 +219,7 @@ async function handleSubscriptionDeleted(
     subscriptionStatus: 'canceled',
   });
 
-  console.log(`🚫 Deleted Subscription [${id}] for User [${userId}]. Downgraded to free.`);
+  console.warn(`🚫 Deleted Subscription [${id}] for User [${userId}]. Downgraded to free.`);
 }
 
 async function handleInvoicePaymentFailed(invoice: InvoiceEvent, db: FirebaseFirestore.Firestore) {
@@ -228,7 +229,7 @@ async function handleInvoicePaymentFailed(invoice: InvoiceEvent, db: FirebaseFir
 
   // Log failure for dunning tracking
   console.warn(
-    `⚠️ Payment failed for invoice ${invoice.id} (Sub: ${subscription}, Reason: ${billing_reason})`
+    `⚠️ Payment failed for invoice ${invoice.id} (Sub: ${subscription}, Reason: ${billing_reason})`,
   );
 
   // Update subscription status in DB

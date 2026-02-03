@@ -1,6 +1,7 @@
 'use client';
 
 import { Star } from 'lucide-react';
+
 import { GlassCard } from '@/components/ui';
 
 /**
@@ -28,7 +29,7 @@ export const TestimonialsSection = () => {
                 hits different.&quot;
               </p>
               <div className="flex items-center gap-3 border-t border-white/10 pt-4">
-                <div className="h-10 w-10 rounded-full bg-white/20" />
+                <div className="size-10 rounded-full bg-white/20" />
                 <div>
                   <div className="font-bold text-white">VIP Host</div>
                   <div className="text-xs text-white/50">Miami, FL</div>

@@ -13,7 +13,7 @@ export const trackInteraction = (eventName: string, metadata?: Record<string, un
     event: eventName,
     timestamp: new Date().toISOString(),
     path: window.location.pathname,
-    ...metadata
+    ...metadata,
   };
 
   // For development, we log to console.

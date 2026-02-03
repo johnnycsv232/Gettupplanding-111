@@ -8,11 +8,11 @@ export const getLocalizedPaymentMethods = (country: string | null) => {
   if (!country) return defaultMethods;
 
   const regionalMethods: Record<string, string[]> = {
-    'ES': ['card', 'sepa_debit', 'ideal'],
-    'NL': ['card', 'ideal'],
-    'DE': ['card', 'sepa_debit', 'giropay'],
-    'GB': ['card', 'bacs_debit'],
-    'US': ['card', 'cashapp', 'link'],
+    ES: ['card', 'sepa_debit', 'ideal'],
+    NL: ['card', 'ideal'],
+    DE: ['card', 'sepa_debit', 'giropay'],
+    GB: ['card', 'bacs_debit'],
+    US: ['card', 'cashapp', 'link'],
   };
 
   return regionalMethods[country] || defaultMethods;

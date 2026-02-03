@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { getFirebaseAuth } from '@/lib/firebase';
 import { onAuthStateChanged, User, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-// import { useRouter } from 'next/navigation'; // Removed unused useRouter
+import { useEffect, useState } from 'react';
+
 import { Button } from '@/components/ui';
+import { getFirebaseAuth } from '@/lib/firebase';
+// import { useRouter } from 'next/navigation'; // Removed unused useRouter
 
 const ALLOWED_EMAILS = ['admin@gettupp.com', 'test@test.com']; // Replace with real admin emails
 

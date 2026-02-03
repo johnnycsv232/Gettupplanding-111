@@ -25,7 +25,7 @@ export function HeroBackground({ scrollYProgress }: HeroBackgroundProps) {
         playsInline
         poster="/hero-video-poster.jpg"
         preload="metadata"
-        className="h-full w-full scale-110 object-cover blur-[3px]"
+        className="size-full scale-110 object-cover blur-[3px]"
       >
         <source src="/videos/A_macro_productreveal_1080p_202601121922.mp4" type="video/mp4" />
       </motion.video>

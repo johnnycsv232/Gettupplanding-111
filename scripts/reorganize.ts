@@ -4,7 +4,7 @@ import * as path from 'path';
 const skillsDir = 'skills';
 
 const mapping: Record<string, string[]> = {
-  '_core': [
+  _core: [
     'nextjs-best-practices',
     'react-best-practices',
     'react-patterns',
@@ -12,25 +12,25 @@ const mapping: Record<string, string[]> = {
     'firebase',
     'stripe-integration',
     '3d-web-experience',
-    'tailwind-patterns'
+    'tailwind-patterns',
   ],
-  '_frontend': [
+  _frontend: [
     'frontend-dev-guidelines',
     'frontend-design',
     'javascript-mastery',
     'typescript-expert',
     'web-design-guidelines',
     'ui-ux-pro-max',
-    'canvas-design'
+    'canvas-design',
   ],
-  '_backend': [
+  _backend: [
     'backend-dev-guidelines',
     'api-patterns',
     'nodejs-best-practices',
     'database-design',
-    'graphql'
+    'graphql',
   ],
-  '_quality': [
+  _quality: [
     'clean-code',
     'code-review-checklist',
     'testing-patterns',
@@ -39,23 +39,23 @@ const mapping: Record<string, string[]> = {
     'playwright-skill',
     'lint-and-validate',
     'systematic-debugging',
-    'performance-profiling'
+    'performance-profiling',
   ],
-  '_devops': [
+  _devops: [
     'vercel-deployment',
     'docker-expert',
     'deployment-procedures',
     'git-pushing',
     'github-workflow-automation',
-    'server-management'
+    'server-management',
   ],
-  '_architecture': [
+  _architecture: [
     'architecture',
     'software-architecture',
     'senior-architect',
     'senior-fullstack',
     'plan-writing',
-    'writing-plans'
+    'writing-plans',
   ],
   '_seo-marketing': [
     'seo-fundamentals',
@@ -66,7 +66,7 @@ const mapping: Record<string, string[]> = {
     'marketing-ideas',
     'marketing-psychology',
     'copywriting',
-    'copy-editing'
+    'copy-editing',
   ],
   '_ai-tools': [
     'prompt-engineering',
@@ -75,9 +75,9 @@ const mapping: Record<string, string[]> = {
     'agent-tool-builder',
     'llm-app-patterns',
     'autonomous-agents',
-    'autonomous-agent-patterns'
+    'autonomous-agent-patterns',
   ],
-  '_tools': [
+  _tools: [
     'clerk-auth',
     'algolia-search',
     'plaid-fintech',
@@ -90,8 +90,8 @@ const mapping: Record<string, string[]> = {
     'docx-official',
     'pptx-official',
     'xlsx-official',
-    'notebooklm'
-  ]
+    'notebooklm',
+  ],
 };
 
 function moveSkill(skillName: string, category: string) {
@@ -112,7 +112,7 @@ function moveSkill(skillName: string, category: string) {
 }
 
 // 1. Create categories
-Object.keys(mapping).forEach(category => {
+Object.keys(mapping).forEach((category) => {
   const catPath = path.join(skillsDir, category);
   if (!fs.existsSync(catPath)) {
     fs.mkdirSync(catPath, { recursive: true });
@@ -121,7 +121,7 @@ Object.keys(mapping).forEach(category => {
 
 // 2. Move mapped skills
 Object.entries(mapping).forEach(([category, skills]) => {
-  skills.forEach(skill => moveSkill(skill, category));
+  skills.forEach((skill) => moveSkill(skill, category));
 });
 
 // 3. Collect and move irrelevant skills to .disabled
@@ -147,7 +147,7 @@ if (!fs.existsSync(disabledDir)) {
   fs.mkdirSync(disabledDir, { recursive: true });
 }
 
-fs.readdirSync(skillsDir).forEach(item => {
+fs.readdirSync(skillsDir).forEach((item) => {
   if (keptSkills.has(item)) return;
 
   const source = path.join(skillsDir, item);
@@ -158,7 +158,7 @@ fs.readdirSync(skillsDir).forEach(item => {
       fs.renameSync(source, target);
       console.log(`💤 Disabled ${item}`);
     } catch (err) {
-       console.error(`❌ Failed to disable ${item}: ${err}`);
+      console.error(`❌ Failed to disable ${item}: ${err}`);
     }
   }
 });

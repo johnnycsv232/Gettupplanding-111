@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Eye } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const works = [
   {
@@ -62,7 +62,7 @@ export const GallerySection = () => {
   return (
     <section id="gallery" className="relative bg-deep-void px-4 py-32">
       {/* Ambient Glow */}
-      <div className="bg-vegas-gold/5 pointer-events-none absolute left-0 top-1/2 h-[400px] w-[400px] rounded-full blur-[120px]" />
+      <div className="bg-vegas-gold/5 pointer-events-none absolute left-0 top-1/2 size-[400px] rounded-full blur-[120px]" />
 
       <div className="container mx-auto">
         <div className="mb-20 flex flex-col items-end justify-between gap-8 md:flex-row">
@@ -114,7 +114,7 @@ export const GallerySection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
 
                 <div className="absolute inset-0 flex scale-90 items-center justify-center opacity-0 transition-opacity duration-500 group-hover:scale-100 group-hover:opacity-100">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-vegas-gold text-black">
+                  <div className="flex size-16 items-center justify-center rounded-full bg-vegas-gold text-black">
                     {work.type === 'video' ? (
                       <Play size={24} fill="currentColor" />
                     ) : (

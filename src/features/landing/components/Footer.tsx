@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { Instagram, Twitter, Linkedin, Youtube } from 'lucide-react';
+import Link from 'next/link';
 
 /**
  * Footer
@@ -16,8 +16,8 @@ export const Footer = () => {
         <div className="mb-20 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-8">
             <Link href="/" className="group flex items-center gap-2">
-              <div className="flex h-8 w-8 rotate-45 items-center justify-center rounded-sm bg-vegas-gold transition-transform group-hover:rotate-90">
-                <div className="h-4 w-4 -rotate-45 bg-black" />
+              <div className="flex size-8 rotate-45 items-center justify-center rounded-sm bg-vegas-gold transition-transform group-hover:rotate-90">
+                <div className="size-4 -rotate-45 bg-black" />
               </div>
               <span className="font-display text-2xl tracking-[0.2em] text-white">GETTUPP</span>
             </Link>
@@ -114,7 +114,7 @@ export const Footer = () => {
           </div>
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20">
-              <div className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+              <div className="size-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
               Systems Online
             </div>
             <div className="text-[10px] font-black uppercase tracking-widest text-white/20">

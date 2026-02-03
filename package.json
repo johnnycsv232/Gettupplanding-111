@@ -22,6 +22,7 @@
     "skills:index": "tsx scripts/generate-index.ts",
     "skills:validate": "tsx scripts/validate-skills.ts",
     "skills:sync": "tsx scripts/sync-skills.ts",
+    "analyze": "set ANALYZE=true && next build",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -34,6 +35,7 @@
     ]
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^16.1.6",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@react-three/postprocessing": "^3.0.4",

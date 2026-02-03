@@ -1,18 +1,19 @@
 'use client';
 
-import React, { Suspense, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
 import { Stars, AdaptiveDpr, AdaptiveEvents, PerformanceMonitor } from '@react-three/drei';
-import * as THREE from 'three';
-import { useInView } from 'react-intersection-observer';
+import { Canvas } from '@react-three/fiber';
 import { useScroll } from 'framer-motion';
+import { Suspense, useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import * as THREE from 'three';
 
+import { LoadingFallback } from '@/components/ui/LoadingFallback';
+
+import { CinematicLights } from './hero/CinematicLights';
+import { HeroBackground } from './hero/HeroBackground';
+import { HeroEffects } from './hero/HeroEffects';
 import { ParticleField } from './hero/ParticleField';
 import { RefractiveSphere } from './hero/RefractiveSphere';
-import { CinematicLights } from './hero/CinematicLights';
-import { HeroEffects } from './hero/HeroEffects';
-import { HeroBackground } from './hero/HeroBackground';
-import { LoadingFallback } from '@/components/ui/LoadingFallback';
 
 /**
  * ThreeHero
@@ -30,7 +31,7 @@ export default function ThreeHero() {
   // but we can also use scrollYProgress directly in some cases.
   // For the lights, we'll use a local state updated by a hook or just use the motion value.
 
-  React.useEffect(() => {
+  useEffect(() => {
     return scrollYProgress.on('change', (latest) => {
       setScrollValue(latest);
     });
@@ -77,4 +78,3 @@ export default function ThreeHero() {
     </div>
   );
 }
-

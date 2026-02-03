@@ -16,6 +16,7 @@ const config: Config = {
         'neon-magenta': 'var(--neon-magenta)',
         'deep-void': 'var(--deep-void)',
         'off-white': 'var(--off-white)',
+        'electric-cyan': 'var(--electric-cyan)',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

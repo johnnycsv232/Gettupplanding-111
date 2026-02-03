@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
 import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface GlintEffectProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   glintColor?: string;
 }

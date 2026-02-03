@@ -233,7 +233,7 @@ export type UnionLast<T> =
  * Union to intersection.
  */
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
-  k: infer I
+  k: infer I,
 ) => void
   ? I
   : never;

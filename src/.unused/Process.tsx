@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+
 import styles from '../styles/Landing.module.css';
 
 export default function Process() {

@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { useState } from 'react';
+
 import { Magnetic } from '@/components/animations/Magnetic';
 
 /**
@@ -32,17 +33,17 @@ export const GettUppNavbar = () => {
       }}
       animate={isHidden ? 'hidden' : 'visible'}
       transition={{ duration: 0.35, ease: 'easeInOut' }}
-      className="pointer-events-none fixed left-0 right-0 top-0 z-[100] flex justify-center p-6"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[100] flex justify-center p-6"
     >
       <div
         className={`ease-[0.76, 0, 0.24, 1] pointer-events-auto relative flex items-center justify-between rounded-full border px-8 py-3 transition-all duration-700 ${
           isScrolled
-            ? 'glass-heavy border-vegas-gold/20 w-[90%] bg-black/60 shadow-[0_0_30px_rgba(0,0,0,0.5)] md:w-[70%] lg:w-[60%]'
+            ? 'glass-heavy border-vegas-gold/20 w-[90%] bg-black/60 shadow-[0_0_30px_rgba(0,0,0,0.5)] md:w-[70%] lg:w-3/5'
             : 'w-full border-white/5 bg-transparent md:w-[95%]'
         } `}
       >
         {/* Scroll Progress Tube */}
-        <div className="absolute bottom-0 left-8 right-8 h-[1px] overflow-hidden rounded-full bg-white/5">
+        <div className="absolute inset-x-8 bottom-0 h-px overflow-hidden rounded-full bg-white/5">
           <motion.div
             style={{ scaleX: scrollYProgress, transformOrigin: '0%' }}
             className="h-full bg-gradient-to-r from-transparent via-vegas-gold to-transparent opacity-50"
@@ -52,7 +53,7 @@ export const GettUppNavbar = () => {
         {/* Brand Shield */}
         <Magnetic strength={0.2}>
           <div className="group flex cursor-pointer items-center gap-3">
-            <div className="flex h-8 w-8 rotate-45 items-center justify-center rounded-lg bg-vegas-gold font-black text-black transition-transform duration-500 group-hover:rotate-90">
+            <div className="flex size-8 rotate-45 items-center justify-center rounded-lg bg-vegas-gold font-black text-black transition-transform duration-500 group-hover:rotate-90">
               <span className="-rotate-45 transition-transform duration-500 group-hover:-rotate-90">
                 G
               </span>
@@ -81,7 +82,7 @@ export const GettUppNavbar = () => {
             </button>
           </Magnetic>
 
-          <button className="flex h-8 w-8 flex-col items-end justify-center gap-1.5 px-1 text-white md:hidden">
+          <button className="flex size-8 flex-col items-end justify-center gap-1.5 px-1 text-white md:hidden">
             <div className="h-0.5 w-6 bg-white" />
             <div className="h-0.5 w-4 bg-vegas-gold" />
           </button>

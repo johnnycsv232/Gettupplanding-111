@@ -7,10 +7,10 @@ export const SITE_URL = 'https://gettupp.com';
 export const SUPPORT_EMAIL = 'hello@gettupp.com';
 
 export const STRIPE_PRICES = {
-  ESSENTIAL: 'price_essential_placeholder',
-  ELITE: 'price_elite_placeholder',
-  ENTERPRISE: 'price_enterprise_placeholder',
-  PILOT: 'price_pilot_placeholder',
+  ESSENTIAL: 'price_1SY1yqGfFr3wuAHAQhUzUNr9', // T1
+  ELITE: 'price_1SY1yrGfFr3wuAHAoc46u4WB', // T2
+  ENTERPRISE: 'price_1SY1yrGfFr3wuAHA7cULY8Ef', // T3
+  PILOT: 'price_1SY1yqGfFr3wuAHAqmytgSsj',
 } as const;
 
 export const SOCIAL_LINKS = {

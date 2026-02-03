@@ -1,7 +1,8 @@
-import { cn } from '@/lib/utils';
-import React from 'react';
+import { HTMLAttributes } from 'react';
 
-interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+import { cn } from '@/lib/utils';
+
+interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'rectangular' | 'circle' | 'rounded';
 }
 
@@ -9,26 +10,22 @@ interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
  * Skeleton
  * Standard component for building cinematic shimmer loading states.
  */
-export const Skeleton = ({
-  className,
-  variant = 'rectangular',
-  ...props
-}: SkeletonProps) => {
+export const Skeleton = ({ className, variant = 'rectangular', ...props }: SkeletonProps) => {
   return (
     <div
       className={cn(
-        'relative overflow-hidden bg-white/5 animate-pulse',
+        'relative animate-pulse overflow-hidden bg-white/5',
         {
           'rounded-none': variant === 'rectangular',
           'rounded-full': variant === 'circle',
           'rounded-xl': variant === 'rounded',
         },
-        className
+        className,
       )}
       {...props}
     >
       {/* Shimmer Effect Overlay */}
-      <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer" />
+      <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/5 to-transparent" />
     </div>
   );
 };

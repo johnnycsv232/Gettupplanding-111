@@ -1,14 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+
+import { ParticleField } from '@/components/three/ParticleField';
 import { GlassCard, Modal, Button } from '@/components/ui';
-import ParticleField from '@/components/three/ParticleField';
 
 export default function TestThemePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="relative flex min-h-screen flex-col gap-8 overflow-hidden bg-deep-void-black p-10">
+    <div className="relative flex min-h-screen flex-col gap-8 overflow-hidden bg-deep-void p-10">
       <ParticleField />
 
       <div className="relative z-10 space-y-12">
@@ -38,15 +39,15 @@ export default function TestThemePage() {
           </h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <GlassCard className="p-6" intensity="low">
-              <h3 className="mb-2 font-display text-xl text-vegas-gold">Low Intensity</h3>
+              <h3 className="font-display mb-2 text-xl text-vegas-gold">Low Intensity</h3>
               <p className="text-off-white/70">Subtle backdrop blur and borders.</p>
             </GlassCard>
             <GlassCard className="p-6" intensity="medium">
-              <h3 className="mb-2 font-display text-xl text-vegas-gold">Medium Intensity</h3>
+              <h3 className="font-display mb-2 text-xl text-vegas-gold">Medium Intensity</h3>
               <p className="text-off-white/70">Our standard &quot;Liquid Glass&quot; effect.</p>
             </GlassCard>
             <GlassCard className="p-6" intensity="high" hoverEffect>
-              <h3 className="mb-2 font-display text-xl text-vegas-gold">High + Hover</h3>
+              <h3 className="font-display mb-2 text-xl text-vegas-gold">High + Hover</h3>
               <p className="text-off-white/70">Maximum blur and motion interactions.</p>
             </GlassCard>
           </div>
@@ -62,7 +63,7 @@ export default function TestThemePage() {
             </Button>
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
               <div className="p-10 text-center">
-                <h2 className="mb-4 font-display text-4xl uppercase text-vegas-gold">
+                <h2 className="font-display mb-4 text-4xl uppercase text-vegas-gold">
                   The Velvet Rope
                 </h2>
                 <p className="mb-8 text-off-white">
@@ -87,9 +88,9 @@ export default function TestThemePage() {
         <section className="space-y-4">
           <h2 className="font-sans text-2xl font-bold text-off-white">Base Styles Check</h2>
           <div className="flex gap-4">
-            <div className="h-20 w-20 rounded-full bg-vegas-gold" />
-            <div className="h-20 w-20 rounded-full bg-neon-magenta" />
-            <div className="h-20 w-20 rounded-full bg-electric-cyan" />
+            <div className="size-20 rounded-full bg-vegas-gold" />
+            <div className="size-20 rounded-full bg-neon-magenta" />
+            <div className="size-20 rounded-full bg-electric-cyan" />
           </div>
         </section>
       </div>

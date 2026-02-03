@@ -30,7 +30,7 @@ export const initDatabase = (): Promise<void> => {
           console.log('Database schema initialized');
           resolve();
         }
-      }
+      },
     );
   });
 };

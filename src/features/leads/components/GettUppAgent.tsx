@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X, MessageSquare, Sparkles } from 'lucide-react';
+import { useState, useRef, useEffect, useTransition } from 'react';
 
 import { ChatHistorySchema, type ChatMessage } from '@/lib/zod-schemas';
 
@@ -20,7 +20,7 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Load and Persist Messages
@@ -59,7 +59,7 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages, isTyping]);
+  }, [messages, isPending]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -67,41 +67,27 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
     const userMessage = input;
     setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
     setInput('');
-    setIsTyping(true);
 
     // Track Interaction
     import('@/lib/logger').then(({ trackInteraction }) => {
       trackInteraction('agent_message_sent', { content: userMessage });
     });
 
-    // Intelligent Simulation (Context Aware)
-    setTimeout(() => {
-      let response =
-        'Understood. Our team specializes in high-energy production. Would you like to schedule a strategy audit?';
+    startTransition(async () => {
+      const { agentChatAction } = await import('@/app/actions');
+      const result = await agentChatAction(userMessage);
 
-      if (
-        userMessage.toLowerCase().includes('price') ||
-        userMessage.toLowerCase().includes('cost')
-      ) {
-        response =
-          'Our retainers are tailored for high-growth venues. We usually start with a Pilot Phase to prove ROI. Should I send over the pricing deck?';
-      } else if (
-        userMessage.toLowerCase().includes('hello') ||
-        userMessage.toLowerCase().includes('hi')
-      ) {
-        response = `Greetings! Great to see someone from ${initialCity || 'the scene'} here. How can I help you scale today?`;
+      if (result.success) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: result.response }]);
       }
-
-      setMessages((prev) => [...prev, { role: 'assistant', content: response }]);
-      setIsTyping(false);
-    }, 1500);
+    });
   };
 
   return (
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 z-[110] flex h-16 w-16 items-center justify-center rounded-full bg-vegas-gold text-black shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-transform hover:scale-110 active:scale-95"
+        className="fixed bottom-8 right-8 z-[110] flex size-16 items-center justify-center rounded-full bg-vegas-gold text-black shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-transform hover:scale-110 active:scale-95"
       >
         <MessageSquare size={28} />
       </button>
@@ -117,7 +103,7 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
             {/* Header */}
             <div className="bg-vegas-gold/10 flex items-center justify-between border-b border-white/10 p-6">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-vegas-gold text-black">
+                <div className="flex size-10 items-center justify-center rounded-xl bg-vegas-gold text-black">
                   <Sparkles size={20} />
                 </div>
                 <div>
@@ -150,13 +136,13 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
                   </div>
                 </div>
               ))}
-              {isTyping && (
+              {isPending && (
                 <div className="flex justify-start">
                   <div className="rounded-2xl rounded-tl-none border border-white/10 bg-white/5 px-4 py-3">
                     <div className="flex gap-1">
-                      <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-vegas-gold" />
-                      <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-vegas-gold [animation-delay:0.2s]" />
-                      <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-vegas-gold [animation-delay:0.4s]" />
+                      <div className="size-1.5 animate-bounce rounded-full bg-vegas-gold" />
+                      <div className="size-1.5 animate-bounce rounded-full bg-vegas-gold [animation-delay:0.2s]" />
+                      <div className="size-1.5 animate-bounce rounded-full bg-vegas-gold [animation-delay:0.4s]" />
                     </div>
                   </div>
                 </div>
@@ -178,12 +164,12 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
                   className="flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-vegas-gold"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  disabled={isTyping}
+                  disabled={isPending}
                 />
                 <button
                   type="submit"
-                  disabled={isTyping}
-                  className="hover:bg-vegas-gold/80 flex h-10 w-10 items-center justify-center rounded-full bg-vegas-gold text-black transition-colors disabled:opacity-50"
+                  disabled={isPending}
+                  className="hover:bg-vegas-gold/80 flex size-10 items-center justify-center rounded-full bg-vegas-gold text-black transition-colors disabled:opacity-50"
                 >
                   <Send size={18} />
                 </button>

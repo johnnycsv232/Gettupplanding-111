@@ -1,10 +1,11 @@
+import { HTMLAttributes } from 'react';
+
 import { cn } from '@/lib/utils';
-import React from 'react';
 
 /**
  * NoiseOverlay component providing a cinematic film grain effect.
  */
-export const NoiseOverlay = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
+export const NoiseOverlay = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
   return (
     <div
       className={cn('pointer-events-none fixed inset-0 z-[9999] opacity-[0.03]', className)}

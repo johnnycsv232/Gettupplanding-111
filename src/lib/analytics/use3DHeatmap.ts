@@ -16,7 +16,10 @@ export function use3DHeatmap(trackingId: string) {
   useEffect(() => {
     const flush = () => {
       if (pointsRef.current.length > 0) {
-        console.log(`[Zenith Analytics] Batching 3D interactions for ${trackingId}`, pointsRef.current);
+        console.warn(
+          `[Zenith Analytics] Batching 3D interactions for ${trackingId}`,
+          pointsRef.current,
+        );
         // Send to API
         pointsRef.current = [];
       }
@@ -26,12 +29,15 @@ export function use3DHeatmap(trackingId: string) {
     return () => clearInterval(interval);
   }, [trackingId]);
 
-  const trackInteraction = useCallback((x: number, y: number, type: 'hover' | 'click' = 'hover') => {
-    // Throttle hover events
-    if (type === 'hover' && Math.random() > 0.1) return;
+  const trackInteraction = useCallback(
+    (x: number, y: number, type: 'hover' | 'click' = 'hover') => {
+      // Throttle hover events
+      if (type === 'hover' && Math.random() > 0.1) return;
 
-    pointsRef.current.push({ x, y, timestamp: Date.now(), type });
-  }, []);
+      pointsRef.current.push({ x, y, timestamp: Date.now(), type });
+    },
+    [],
+  );
 
   return { trackInteraction };
 }

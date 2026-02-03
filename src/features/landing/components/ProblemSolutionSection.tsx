@@ -30,7 +30,7 @@ export const ProblemSolutionSection = () => {
 
             <div className="space-y-10">
               <div className="group flex gap-8">
-                <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-white/5 text-vegas-gold transition-all duration-500 group-hover:bg-vegas-gold group-hover:text-black">
+                <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-white/5 text-vegas-gold transition-all duration-500 group-hover:bg-vegas-gold group-hover:text-black">
                   <Camera size={28} />
                 </div>
                 <div className="space-y-2">
@@ -46,7 +46,7 @@ export const ProblemSolutionSection = () => {
               </div>
 
               <div className="group flex gap-8">
-                <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-white/5 text-vegas-gold transition-all duration-500 group-hover:bg-vegas-gold group-hover:text-black">
+                <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-white/5 text-vegas-gold transition-all duration-500 group-hover:bg-vegas-gold group-hover:text-black">
                   <Zap size={28} />
                 </div>
                 <div className="space-y-2">
@@ -61,7 +61,7 @@ export const ProblemSolutionSection = () => {
               </div>
 
               <div className="group flex gap-8">
-                <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-white/5 text-vegas-gold transition-all duration-500 group-hover:bg-vegas-gold group-hover:text-black">
+                <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-white/5 text-vegas-gold transition-all duration-500 group-hover:bg-vegas-gold group-hover:text-black">
                   <Globe size={28} />
                 </div>
                 <div className="space-y-2">
@@ -81,7 +81,7 @@ export const ProblemSolutionSection = () => {
             <div className="glass-heavy group relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/5">
               {/* Decorative Elements */}
               <div className="from-vegas-gold/20 to-neon-magenta/10 absolute inset-0 bg-gradient-to-tr via-transparent opacity-30" />
-              <div className="absolute left-1/2 top-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 animate-pulse bg-[radial-gradient(circle,rgba(212,175,55,0.1)_0%,transparent_70%)]" />
+              <div className="absolute left-1/2 top-1/2 size-[120%] -translate-x-1/2 -translate-y-1/2 animate-pulse bg-[radial-gradient(circle,rgba(212,175,55,0.1)_0%,transparent_70%)]" />
 
               <div className="glass-medium absolute bottom-10 left-10 max-w-xs rounded-2xl border-white/10 p-8 transition-transform duration-700 group-hover:scale-105">
                 <Cpu className="mb-4 text-vegas-gold" size={32} />

@@ -1,7 +1,8 @@
 // @vitest-environment node
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { POST } from '@/app/api/webhooks/stripe/route';
 import { NextRequest } from 'next/server';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+import { POST } from '@/app/api/webhooks/stripe/route';
 import { getAdminDb } from '@/lib/firebase-admin';
 
 // Helpers
@@ -100,14 +101,14 @@ describe('Stripe Webhook Handler', () => {
         expect.objectContaining({
           tier: 'pilot',
           userId: 'user_123',
-        })
+        }),
       );
 
       // Verify user update
       expect(mockUpdate).toHaveBeenCalledWith(
         expect.objectContaining({
           subscriptionTier: 'pilot',
-        })
+        }),
       );
 
       // Verify idempotency record update
@@ -115,7 +116,7 @@ describe('Stripe Webhook Handler', () => {
         expect.objectContaining({
           status: 'completed',
           success: true,
-        })
+        }),
       );
     });
 
@@ -148,7 +149,7 @@ describe('Stripe Webhook Handler', () => {
         expect.objectContaining({
           status: 'failed',
           success: false,
-        })
+        }),
       );
     });
   });

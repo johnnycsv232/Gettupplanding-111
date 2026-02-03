@@ -1,21 +1,22 @@
 'use client';
 
 import { motion, HTMLMotionProps } from 'framer-motion';
+import { forwardRef, ReactNode } from 'react';
+
 import { cn } from '@/lib/utils';
-import React from 'react';
 
 interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'neon' | 'liquid-glass' | 'outline';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   isLoading?: boolean;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 /**
  * Button component with multiple variants and motion effects.
  * Extends Framer Motion's button props.
  */
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
     const variants = {
       primary:
@@ -41,21 +42,21 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         whileHover={{ scale: 1.02, y: -2 }}
         whileTap={{ scale: 0.98 }}
         className={cn(
-          'relative flex items-center justify-center gap-2 rounded-none font-display uppercase tracking-wider transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50',
+          'font-display relative flex items-center justify-center gap-2 rounded-none uppercase tracking-wider transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50',
           variants[variant as keyof typeof variants],
           sizes[size],
-          className
+          className,
         )}
         disabled={isLoading || props.disabled}
         {...props}
       >
         {isLoading && (
-          <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          <div className="mr-2 size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
         )}
         {children}
       </motion.button>
     );
-  }
+  },
 );
 
 Button.displayName = 'Button';

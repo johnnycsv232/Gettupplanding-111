@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import { Orbitron, Inter } from 'next/font/google';
+import { headers } from 'next/headers';
 import './globals.css';
-import { Providers } from '@/lib/providers';
-import { BaseLayout } from '@/layouts/BaseLayout';
+
+import { HydrationOverlay } from '@/components/debug/HydrationOverlay';
 import JsonLd from '@/components/seo/JsonLd';
 import { METADATA_DEFAULTS, JSON_LD_DEFAULTS } from '@/config/constants';
-import { headers } from 'next/headers';
+import { BaseLayout } from '@/layouts/BaseLayout';
+import { Providers } from '@/lib/providers';
 
 const orbitron = Orbitron({
   variable: '--font-orbitron',
@@ -38,9 +40,9 @@ export default async function RootLayout({
         <Providers initialLocale={locale}>
           <BaseLayout>{children}</BaseLayout>
         </Providers>
-        <JsonLd data={JSON_LD_DEFAULTS as any} />
+        <JsonLd data={JSON_LD_DEFAULTS} />
+        {process.env.NODE_ENV === 'development' && <HydrationOverlay />}
       </body>
     </html>
   );
 }
-

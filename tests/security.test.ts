@@ -1,7 +1,8 @@
 // @vitest-environment node
-import { describe, it, expect } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
+
+import { describe, it, expect } from 'vitest';
 
 describe('Security Invariants (Static Analysis)', () => {
   it('Invariant #2: Deny-All Firebase Rule Check', () => {

@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 /**
  * CinematicRevealSection
@@ -47,7 +47,7 @@ export const CinematicRevealSection = () => {
 
       {/* Atmospheric Background Element */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="bg-vegas-gold/5 absolute left-1/2 top-1/2 h-[100vh] w-[100vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[150px]" />
+        <div className="bg-vegas-gold/5 absolute left-1/2 top-1/2 h-screen w-screen -translate-x-1/2 -translate-y-1/2 rounded-full blur-[150px]" />
       </div>
     </section>
   );

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, AlertCircle, Info, X } from 'lucide-react';
+import { useEffect } from 'react';
+
 import { cn } from '@/lib/utils';
 
 export type ToastType = 'success' | 'error' | 'info';
@@ -44,14 +45,12 @@ export const Toast = ({ id, type, message, duration = 5000, onRemove }: ToastPro
       layout
       className={cn(
         'liquid-glass flex min-w-[300px] items-start gap-4 rounded-xl border p-4 shadow-2xl backdrop-blur-md',
-        colors[type]
+        colors[type],
       )}
     >
       <div className="mt-0.5">{icons[type]}</div>
       <div className="flex-1">
-        <p className="font-display text-xs font-bold uppercase tracking-wider text-white">
-          {type}
-        </p>
+        <p className="font-display text-xs font-bold uppercase tracking-wider text-white">{type}</p>
         <p className="mt-1 text-sm text-white/70">{message}</p>
       </div>
       <button
@@ -66,13 +65,13 @@ export const Toast = ({ id, type, message, duration = 5000, onRemove }: ToastPro
 
 export const ToastContainer = ({
   toasts,
-  onRemove
+  onRemove,
 }: {
   toasts: ToastMessage[];
   onRemove: (id: string) => void;
 }) => {
   return (
-    <div className="fixed bottom-6 right-6 z-[1700] flex flex-col gap-3">
+    <div className="fixed bottom-6 right-6 z-toast flex flex-col gap-3">
       <AnimatePresence>
         {toasts.map((toast) => (
           <Toast key={toast.id} {...toast} onRemove={onRemove} />

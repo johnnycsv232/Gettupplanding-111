@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import { MapPin, ArrowRight } from 'lucide-react';
+import { useState, useRef, FormEvent } from 'react';
+
+import { Magnetic } from '@/components/animations/Magnetic';
 import { Button } from '@/components/ui';
 import { saveLead } from '@/lib/leads';
-import { Magnetic } from '@/components/animations/Magnetic';
 
 interface HeroSectionProps {
   initialCity?: string;
@@ -26,7 +27,7 @@ export const HeroSection = ({ initialCity = '', initialCountry = '' }: HeroSecti
   const targetRef = useRef<HTMLDivElement>(null);
   useScroll(); // Only for tracking side-effects if any, or just remove if not needed. Actually HeroSection uses useScroll() inline on line 59.
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
@@ -106,7 +107,7 @@ export const HeroSection = ({ initialCity = '', initialCountry = '' }: HeroSecti
                 <input
                   type="text"
                   placeholder="Your City"
-                  className="h-10 flex-1 border-none bg-transparent text-sm text-white placeholder-white/40 outline-none focus:ring-0"
+                  className="h-10 flex-1 border-none bg-transparent text-sm text-white outline-none placeholder:text-white/40 focus:ring-0"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   required
@@ -116,7 +117,7 @@ export const HeroSection = ({ initialCity = '', initialCountry = '' }: HeroSecti
                 <input
                   type="email"
                   placeholder="Email Address"
-                  className="h-10 flex-1 border-none bg-transparent text-sm text-white placeholder-white/40 outline-none focus:ring-0"
+                  className="h-10 flex-1 border-none bg-transparent text-sm text-white outline-none placeholder:text-white/40 focus:ring-0"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required

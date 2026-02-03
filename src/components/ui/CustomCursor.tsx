@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 /**
  * CustomCursor component providing a premium magnetic cursor interaction.
@@ -27,7 +27,11 @@ export const CustomCursor = () => {
       const hoveredElement = document.querySelector(':hover');
       if (hoveredElement) {
         const style = window.getComputedStyle(hoveredElement);
-        if (style.cursor === 'pointer' || hoveredElement.tagName === 'BUTTON' || hoveredElement.tagName === 'A') {
+        if (
+          style.cursor === 'pointer' ||
+          hoveredElement.tagName === 'BUTTON' ||
+          hoveredElement.tagName === 'A'
+        ) {
           setCursorType('pointer');
         } else {
           setCursorType('default');
@@ -62,7 +66,7 @@ export const CustomCursor = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-[10px] font-black text-black uppercase tracking-tighter"
+            className="text-[10px] font-black uppercase tracking-tighter text-black"
           >
             VIEW
           </motion.div>
@@ -71,7 +75,7 @@ export const CustomCursor = () => {
 
       {/* Dynamic Glow Around Cursor */}
       <motion.div
-        className="absolute h-40 w-40 rounded-full bg-vegas-gold/10 blur-3xl pointer-events-none"
+        className="bg-vegas-gold/10 pointer-events-none absolute size-40 rounded-full blur-3xl"
         style={{
           x: cursorX,
           y: cursorY,
@@ -81,4 +85,4 @@ export const CustomCursor = () => {
       />
     </div>
   );
-}
+};

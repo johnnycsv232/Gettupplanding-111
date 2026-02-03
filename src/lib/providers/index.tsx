@@ -21,9 +21,7 @@ export function Providers({ children, initialLocale = 'en' }: ProvidersProps) {
   return (
     <RootProvider>
       <FirebaseProvider>
-        <I18nProvider initialLocale={initialLocale}>
-          {children}
-        </I18nProvider>
+        <I18nProvider initialLocale={initialLocale}>{children}</I18nProvider>
       </FirebaseProvider>
     </RootProvider>
   );

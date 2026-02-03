@@ -50,7 +50,7 @@ export const GettuppGirlsSection = () => {
               key={i}
               whileHover={{ y: -20, scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="glass-heavy glint-effect group relative aspect-[3/4] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 md:w-[400px]"
+              className="glass-heavy glint-effect group relative aspect-[3/4] w-[300px] shrink-0 overflow-hidden rounded-2xl border border-white/10 md:w-[400px]"
             >
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-20" />
               <div

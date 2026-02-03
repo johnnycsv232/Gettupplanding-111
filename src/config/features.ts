@@ -11,6 +11,7 @@ export interface FeatureFlags {
   enablePilotProgram: boolean;
   enableAnalytics: boolean;
   showBetaBadge: boolean;
+  maintenanceMode: boolean;
 }
 
 export const features: FeatureFlags = {
@@ -26,6 +27,7 @@ export const features: FeatureFlags = {
   // Maintenance / Meta
   enableAnalytics: process.env.NODE_ENV === 'production',
   showBetaBadge: false,
+  maintenanceMode: false,
 };
 
 /**

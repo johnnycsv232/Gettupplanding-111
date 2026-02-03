@@ -5,11 +5,11 @@
  * Application will not initialize if required env vars are missing.
  */
 
+import { getAnalytics, Analytics, isSupported } from 'firebase/analytics';
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
 import { getAuth, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
-import { getAnalytics, Analytics, isSupported } from 'firebase/analytics';
-import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
 
 // Environment validation - fail fast if config is missing
 import { env } from '@/lib/env';
@@ -28,7 +28,6 @@ let firebaseApp: FirebaseApp | undefined;
 let auth: Auth | undefined;
 let db: Firestore | undefined;
 let analytics: Analytics | undefined;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 export function getFirebaseApp(): FirebaseApp {
   if (!firebaseApp) {

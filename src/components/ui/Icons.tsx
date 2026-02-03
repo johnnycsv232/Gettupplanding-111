@@ -1,4 +1,4 @@
-import React from 'react';
+import { SVGProps } from 'react';
 
 /**
  * Icons
@@ -6,7 +6,7 @@ import React from 'react';
  * Usage: <Icons.Logo className="w-8 h-8" />
  */
 export const Icons = {
-  Logo: (props: React.SVGProps<SVGSVGElement>) => (
+  Logo: (props: SVGProps<SVGSVGElement>) => (
     <svg
       viewBox="0 0 24 24"
       fill="none"
@@ -21,20 +21,22 @@ export const Icons = {
   ),
 
   // Custom Gettupp Zenith Icon
-  Zenith: (props: React.SVGProps<SVGSVGElement>) => (
-    <svg
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
+  Zenith: (props: SVGProps<SVGSVGElement>) => (
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <circle
+        cx="50"
+        cy="50"
+        r="48"
+        stroke="currentColor"
+        strokeWidth="0.5"
+        strokeDasharray="4 4"
+      />
       <path d="M50 20L80 80H20L50 20Z" stroke="currentColor" strokeWidth="1" />
       <circle cx="50" cy="50" r="5" fill="currentColor" />
     </svg>
   ),
 
-  Spinner: (props: React.SVGProps<SVGSVGElement>) => (
+  Spinner: (props: SVGProps<SVGSVGElement>) => (
     <svg
       viewBox="0 0 24 24"
       fill="none"

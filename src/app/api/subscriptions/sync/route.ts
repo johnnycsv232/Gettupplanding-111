@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { getAdminAuth, getAdminDb } from '@/lib/firebase-admin';
 import { syncSubscription } from '@/lib/subscription';
 import { StripeSubscriptionId } from '@/types/brands';
@@ -44,7 +45,7 @@ export async function POST(req: NextRequest) {
     if (subscriptionsSnapshot.empty) {
       return NextResponse.json(
         { message: 'No active subscription found to sync' },
-        { status: 200 }
+        { status: 200 },
       );
     }
 

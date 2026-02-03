@@ -2,7 +2,12 @@
 
 import { useEffect } from 'react';
 
-type FunnelStage = 'view_landing' | 'scroll_depth_50' | 'interact_3d' | 'open_pilot' | 'submit_lead';
+type FunnelStage =
+  | 'view_landing'
+  | 'scroll_depth_50'
+  | 'interact_3d'
+  | 'open_pilot'
+  | 'submit_lead';
 
 export function trackFunnelEvent(stage: FunnelStage, metadata?: Record<string, unknown>) {
   if (typeof window === 'undefined') return;
@@ -11,10 +16,10 @@ export function trackFunnelEvent(stage: FunnelStage, metadata?: Record<string, u
     stage,
     timestamp: Date.now(),
     url: window.location.pathname,
-    ...metadata
+    ...metadata,
   };
 
-  console.log('[Zenith Funnel]', event);
+  console.warn('[Zenith Funnel]', event);
 
   // Save to local storage for "dashboard" demo
   const history = JSON.parse(localStorage.getItem('zenith_funnel_history') || '[]');

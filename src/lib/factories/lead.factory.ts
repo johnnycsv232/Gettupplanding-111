@@ -18,8 +18,10 @@ export const createMockLead = (overrides?: Partial<LeadDTO>): LeadDTO => {
 };
 
 export const createMockLeads = (count: number): LeadDTO[] => {
-  return Array.from({ length: count }, (_, i) => createMockLead({
-    id: `lead_${i}`,
-    email: `test${i}@example.com`
-  }));
+  return Array.from({ length: count }, (_, i) =>
+    createMockLead({
+      id: `lead_${i}`,
+      email: `test${i}@example.com`,
+    }),
+  );
 };

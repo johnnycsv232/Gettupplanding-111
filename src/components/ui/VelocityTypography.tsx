@@ -1,16 +1,10 @@
 'use client';
 
-import React from 'react';
-import {
-  motion,
-  useScroll,
-  useVelocity,
-  useTransform,
-  useSpring,
-} from 'framer-motion';
+import { motion, useScroll, useVelocity, useTransform, useSpring } from 'framer-motion';
+import { Fragment, type ReactNode } from 'react';
 
 interface VelocityTypographyProps {
-  children?: React.ReactNode;
+  children?: ReactNode; // Changed from React.ReactNode to ReactNode
   text?: string;
   className?: string;
   velocity?: number;
@@ -43,9 +37,9 @@ export const VelocityTypography = ({
     <div className={`overflow-hidden whitespace-nowrap ${className}`}>
       <motion.div style={{ x }} className="flex gap-8">
         {[...Array(4)].map((_, i) => (
-          <React.Fragment key={i}>
+          <Fragment key={i}>
             {children ? children : <span className="heading-zenith text-glow-gold">{text}</span>}
-          </React.Fragment>
+          </Fragment>
         ))}
       </motion.div>
     </div>

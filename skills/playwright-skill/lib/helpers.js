@@ -172,7 +172,7 @@ async function safeType(page, selector, text, options = {}) {
 async function extractTexts(page, selector) {
   await page.waitForSelector(selector, { timeout: 10000 });
   return await page.$$eval(selector, (elements) =>
-    elements.map((el) => el.textContent?.trim()).filter(Boolean)
+    elements.map((el) => el.textContent?.trim()).filter(Boolean),
   );
 }
 
@@ -264,7 +264,7 @@ async function extractTableData(page, tableSelector) {
     if (!table) return null;
 
     const headers = Array.from(table.querySelectorAll('thead th')).map((th) =>
-      th.textContent?.trim()
+      th.textContent?.trim(),
     );
 
     const rows = Array.from(table.querySelectorAll('tbody tr')).map((tr) => {
@@ -405,7 +405,7 @@ async function detectDevServers(customPorts = []) {
               console.log(`  ✅ Found server on port ${port}`);
             }
             resolve();
-          }
+          },
         );
 
         req.on('error', () => resolve());

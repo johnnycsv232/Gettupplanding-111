@@ -1,7 +1,9 @@
-import { stripe } from './stripe';
-import { getAdminDb } from './firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
+
 import { StripeSubscriptionId, UserId } from '@/types/brands';
+
+import { getAdminDb } from './firebase-admin';
+import { stripe } from './stripe';
 
 /**
  * Synchronizes a subscription from Stripe to Firestore.
@@ -31,7 +33,7 @@ export async function syncSubscription(subscriptionId: StripeSubscriptionId) {
       status,
       updatedAt: FieldValue.serverTimestamp(),
     },
-    { merge: true }
+    { merge: true },
   );
 
   // 3. Update User Record
@@ -43,7 +45,9 @@ export async function syncSubscription(subscriptionId: StripeSubscriptionId) {
     subscriptionStatus: status,
   });
 
-  console.log(`🔄 Synced Subscription [${subscriptionId}] for User [${userId}]. Status: ${status}`);
+  console.warn(
+    `🔄 Synced Subscription [${subscriptionId}] for User [${userId}]. Status: ${status}`,
+  );
 
   return { status, userId, tier };
 }

@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+
 import { env } from './env';
 
 let stripeInstance: Stripe | undefined;
@@ -9,8 +10,11 @@ export const getStripeClient = (): Stripe => {
       throw new Error('STRIPE_SECRET_KEY is missing');
     }
     stripeInstance = new Stripe(env.STRIPE_SECRET_KEY, {
-      apiVersion: '2025-12-15.clover' as Stripe.LatestApiVersion,
-      typescript: true,
+      apiVersion: '2025-12-15.clover' as any,
+      appInfo: {
+        name: 'Gettupp Zenith',
+        version: '0.1.0',
+      },
     });
   }
   return stripeInstance;
@@ -26,7 +30,7 @@ export const verifyWebhookSignature = (payload: string, signature: string): Stri
   }
 
   try {
-    return client.webhooks.constructEvent(payload, signature, process.env.STRIPE_WEBHOOK_SECRET);
+    return client.webhooks.constructEvent(payload, signature, env.STRIPE_WEBHOOK_SECRET);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     throw new Error(`Webhook verification failed: ${message}`);

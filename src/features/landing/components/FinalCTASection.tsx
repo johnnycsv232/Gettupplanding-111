@@ -1,9 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Button, GlintEffect } from '@/components/ui';
-import { Magnetic } from '@/components/animations/Magnetic';
 import { ArrowRight, Sparkles } from 'lucide-react';
+
+import { Magnetic } from '@/components/animations/Magnetic';
+import { Button, GlintEffect } from '@/components/ui';
 
 /**
  * FinalCTASection
@@ -14,7 +15,7 @@ export const FinalCTASection = () => {
     <section className="relative overflow-hidden bg-deep-void py-40">
       {/* Background Atmosphere */}
       <div className="absolute inset-0 z-0">
-        <div className="bg-vegas-gold/5 absolute left-1/2 top-1/2 h-[80vw] w-[80vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[200px]" />
+        <div className="bg-vegas-gold/5 absolute left-1/2 top-1/2 size-[80vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[200px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 text-center">

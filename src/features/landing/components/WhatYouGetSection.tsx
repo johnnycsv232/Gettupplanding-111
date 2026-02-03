@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Camera, Zap, Cloud, TrendingUp, Users, Lock } from 'lucide-react';
+
 import { GlassCard, GlintEffect } from '@/components/ui';
 
 const features = [
@@ -64,7 +65,7 @@ export const WhatYouGetSection = () => {
           {features.map((feature, i) => (
             <GlintEffect key={i}>
               <GlassCard className="group h-full p-8" hoverEffect>
-                <div className="bg-vegas-gold/10 mb-6 inline-flex h-12 w-12 items-center justify-center rounded-lg text-vegas-gold transition-colors group-hover:bg-vegas-gold group-hover:text-black">
+                <div className="bg-vegas-gold/10 mb-6 inline-flex size-12 items-center justify-center rounded-lg text-vegas-gold transition-colors group-hover:bg-vegas-gold group-hover:text-black">
                   <feature.icon size={24} />
                 </div>
                 <h3 className="font-display mb-2 text-xl uppercase tracking-widest text-white">

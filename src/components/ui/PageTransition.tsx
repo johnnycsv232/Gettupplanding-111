@@ -23,4 +23,4 @@ export const PageTransition = ({ children }: { children: ReactNode }) => {
       </motion.div>
     </AnimatePresence>
   );
-}
+};

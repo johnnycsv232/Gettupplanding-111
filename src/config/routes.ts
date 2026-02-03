@@ -21,8 +21,8 @@ export const Routes = {
   api: {
     checkout: '/api/checkout',
     webhooks: {
-        stripe: '/api/webhooks/stripe',
-    }
+      stripe: '/api/webhooks/stripe',
+    },
   },
 
   // Protected (Future)

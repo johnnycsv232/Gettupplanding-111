@@ -1,9 +1,9 @@
 'use client';
 
-import { Suspense, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Text, Float, MeshDistortMaterial, ContactShadows } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
+import { Suspense, useState } from 'react';
 
 const services = [
   { name: 'PRODUCTION', color: '#d4af37', desc: '4K Cinematic Storytelling' },
@@ -92,7 +92,7 @@ export const KineticCanvas = () => {
           </div>
         </div>
 
-        <div className="h-full min-h-[400px] w-full flex-1">
+        <div className="size-full min-h-[400px] flex-1">
           <Canvas camera={{ position: [0, 0, 8], fov: 35 }}>
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} intensity={1} color="#d4af37" />

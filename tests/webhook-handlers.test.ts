@@ -1,9 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { NextRequest } from 'next/server';
+import Stripe from 'stripe';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+
 import { POST } from '@/app/api/webhooks/stripe/route';
 import { getAdminDb } from '@/lib/firebase-admin';
 import * as stripeUtils from '@/lib/stripe';
-import Stripe from 'stripe';
 
 // Mock dependencies
 vi.mock('@/lib/firebase-admin', () => ({
@@ -97,7 +98,7 @@ describe('Stripe Webhook Handler', () => {
     expect(mockUpdate).toHaveBeenCalledWith(
       expect.objectContaining({
         status: 'active',
-      })
+      }),
     );
   });
 
@@ -140,7 +141,7 @@ describe('Stripe Webhook Handler', () => {
       expect.objectContaining({
         subscriptionTier: 'free',
         hasActiveSubscription: false,
-      })
+      }),
     );
   });
 });

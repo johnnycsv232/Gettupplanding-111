@@ -80,7 +80,7 @@ vi.mock('next/server', () => ({
   NextRequest: class {
     constructor(
       public url: string,
-      public init?: RequestInit
+      public init?: RequestInit,
     ) {}
     async text() {
       return this.init?.body as string;

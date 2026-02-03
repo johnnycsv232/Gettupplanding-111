@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Lightbulb, TrendingUp } from 'lucide-react';
+
 import styles from '../styles/Landing.module.css';
 
 export default function Math() {

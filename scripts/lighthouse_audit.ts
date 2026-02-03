@@ -21,7 +21,7 @@ for (const asset of assets) {
   const ext = path.extname(asset).toLowerCase();
   if (['.jpg', '.png', '.jpeg'].includes(ext)) {
     console.warn(
-      `⚠️ PERFORMANCE WARNING: Non-WebP asset found: ${asset}. Zenith mandates modern formats.`
+      `⚠️ PERFORMANCE WARNING: Non-WebP asset found: ${asset}. Zenith mandates modern formats.`,
     );
   }
 }

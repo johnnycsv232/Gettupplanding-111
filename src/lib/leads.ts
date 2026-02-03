@@ -1,5 +1,6 @@
-import { getFirebaseDb } from './firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
+import { getFirebaseDb } from './firebase';
 import { LeadSchema, type Lead } from './zod-schemas';
 
 export async function saveLead(data: Lead) {

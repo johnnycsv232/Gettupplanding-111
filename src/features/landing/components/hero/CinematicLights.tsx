@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 import * as THREE from 'three';
 
 interface CinematicLightsProps {
@@ -19,7 +19,8 @@ export function CinematicLights({ scrollProgress }: CinematicLightsProps) {
   useFrame((state) => {
     if (spotRef.current) {
       const baseIntensity = THREE.MathUtils.lerp(3, 0.5, scrollProgress);
-      spotRef.current.intensity = baseIntensity + Math.sin(state.clock.getElapsedTime() * 0.5) * 0.5;
+      spotRef.current.intensity =
+        baseIntensity + Math.sin(state.clock.getElapsedTime() * 0.5) * 0.5;
 
       const gold = new THREE.Color('#d4af37');
       const midnight = new THREE.Color('#1a1a2e');

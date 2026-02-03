@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
 import { Sparkles } from 'lucide-react';
+import { useState, useTransition } from 'react';
+
 import { Button, Modal } from '@/components/ui';
 import { useExitIntent } from '@/hooks/useExitIntent';
-import { saveLead } from '@/lib/leads';
 
 /**
  * ExitIntentPopup
@@ -14,30 +14,31 @@ import { saveLead } from '@/lib/leads';
 export const ExitIntentPopup = () => {
   const { showExitIntent, closeExitIntent } = useExitIntent();
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setError('');
 
-    const result = await saveLead({
-      email,
-      source: 'exit_intent',
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('source', 'exit_intent');
+
+    startTransition(async () => {
+      const { submitLeadAction } = await import('@/app/actions');
+      const result = await submitLeadAction(formData);
+
+      if (result.success) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          closeExitIntent();
+        }, 3000);
+      } else {
+        setError(typeof result.error === 'string' ? result.error : 'Something went wrong');
+      }
     });
-
-    setIsSubmitting(false);
-
-    if (result.success) {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        closeExitIntent();
-      }, 3000);
-    } else {
-      setError(typeof result.error === 'string' ? result.error : 'Something went wrong');
-    }
   };
 
   return (
@@ -47,7 +48,7 @@ export const ExitIntentPopup = () => {
       className="box-glow-gold border-vegas-gold/50 bg-deep-void-black border p-8 text-center"
     >
       <div className="flex flex-col items-center gap-6">
-        <div className="box-glow-gold bg-vegas-gold/10 flex h-16 w-16 items-center justify-center rounded-full text-vegas-gold">
+        <div className="box-glow-gold bg-vegas-gold/10 flex size-16 items-center justify-center rounded-full text-vegas-gold">
           <Sparkles size={32} />
         </div>
 
@@ -72,14 +73,14 @@ export const ExitIntentPopup = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                disabled={isSubmitting}
+                disabled={isPending}
               />
               {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
               <Button
                 variant="primary"
                 size="lg"
                 className="w-full"
-                isLoading={isSubmitting}
+                isLoading={isPending}
                 type="submit"
               >
                 GET VIP ACCESS

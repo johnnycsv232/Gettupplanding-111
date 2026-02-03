@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
+
 import { Button } from '@/components/ui';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 
 /**
  * StickyHeader
@@ -40,8 +41,8 @@ export const StickyHeader = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="group flex items-center gap-2">
-            <div className="flex h-8 w-8 rotate-45 items-center justify-center rounded-sm bg-vegas-gold transition-transform group-hover:rotate-90">
-              <div className="h-4 w-4 -rotate-45 bg-black" />
+            <div className="flex size-8 rotate-45 items-center justify-center rounded-sm bg-vegas-gold transition-transform group-hover:rotate-90">
+              <div className="size-4 -rotate-45 bg-black" />
             </div>
             <span className="font-display text-2xl tracking-[0.2em] text-white">GETTUPP</span>
           </Link>

@@ -1,5 +1,6 @@
-import { getAdminDb } from '@/lib/firebase-admin';
 import { GlassCard } from '@/components/ui';
+import { getAdminDb } from '@/lib/firebase-admin';
+
 import { LeadsTable } from './components/LeadsTable';
 
 interface Lead {

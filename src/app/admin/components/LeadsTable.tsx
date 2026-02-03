@@ -37,9 +37,7 @@ export function LeadsTable({ leads }: LeadsTableProps) {
                   key={lead.id}
                   className="border-b border-white/5 transition-colors hover:bg-white/5"
                 >
-                  <td className="p-4 text-white/60">
-                    {lead.createdAt || 'Just now'}
-                  </td>
+                  <td className="p-4 text-white/60">{lead.createdAt || 'Just now'}</td>
                   <td className="p-4 font-mono text-white">{lead.email}</td>
                   <td className="p-4 text-white/80">{lead.city || '-'}</td>
                   <td className="p-4 text-white/60">{lead.source || 'Hero'}</td>

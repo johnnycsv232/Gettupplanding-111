@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
+
 import { NoiseOverlay } from '@/components/ui/NoiseOverlay';
 
 describe('NoiseOverlay', () => {

@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState, useRef, useId } from 'react';
-import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { useEffect, useState, useRef, useId } from 'react';
+import { createPortal } from 'react-dom';
+
 import { useScrollLock } from '@/hooks/use-scroll-lock';
+import { cn } from '@/lib/utils';
 
 interface ModalProps {
   isOpen: boolean;
@@ -20,7 +21,14 @@ interface ModalProps {
  * Modal
  * A premium accessibility-focused modal component using Framer Motion for cinematic transitions.
  */
-export const Modal = ({ isOpen, onClose, children, title, className = '', descriptionId }: ModalProps) => {
+export const Modal = ({
+  isOpen,
+  onClose,
+  children,
+  title,
+  className = '',
+  descriptionId,
+}: ModalProps) => {
   const [mounted, setMounted] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const titleId = useId();

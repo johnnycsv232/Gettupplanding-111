@@ -5,6 +5,7 @@ import {
   User,
   onAuthStateChanged,
 } from 'firebase/auth';
+
 import { getFirebaseAuth } from './firebase';
 
 // INVARIANT: Firebase Auth Provider Abstraction
@@ -75,7 +76,7 @@ export const getCurrentUser = (): Promise<User | null> => {
         unsubscribe();
         resolve(user);
       },
-      reject
+      reject,
     );
   });
 };

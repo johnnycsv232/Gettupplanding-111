@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { X, Check } from 'lucide-react';
+
 import styles from '../styles/Landing.module.css';
 
 export default function Comparison() {

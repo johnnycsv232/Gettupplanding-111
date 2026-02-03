@@ -59,7 +59,7 @@ router.post('/todos', (req: Request, res: Response): void => {
         };
         res.status(201).json(successResponse);
       });
-    }
+    },
   );
 });
 
@@ -110,7 +110,7 @@ router.patch('/todos/:id', (req: Request, res: Response): void => {
           };
           res.json(successResponse);
         });
-      }
+      },
     );
   });
 });

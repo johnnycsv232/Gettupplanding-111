@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { Zap, Rocket, Crown, Check, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+
 import { Button, GlassCard, GlintEffect } from '@/components/ui';
 import { checkoutService } from '@/services/checkout-service';
 
