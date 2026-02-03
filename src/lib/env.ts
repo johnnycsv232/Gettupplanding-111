@@ -24,6 +24,12 @@ const envSchema = z.object({
   STRIPE_WEBHOOK_SECRET: z.string().optional(),
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional(),
 
+  // Sanity
+  NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().optional(),
+  NEXT_PUBLIC_SANITY_DATASET: z.string().optional(),
+  NEXT_PUBLIC_ENABLE_NEW_GLINT: z.string().optional(),
+  NEXT_PUBLIC_GTM_ID: z.string().optional(),
+
   // Build Env
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
 });

@@ -5,6 +5,7 @@
  * All mock data in tests must be generated via factory functions.
  */
 
+import { STRIPE_PRICES } from '@/config/constants';
 import type {
   User,
   Subscription,
@@ -14,7 +15,13 @@ import type {
   SanityHero,
   SanityPricing,
 } from '@/lib/schemas';
-import { STRIPE_PRICE_IDS } from '@/lib/schemas';
+
+const TIER_PRICE_MAP: Record<string, string> = {
+  pilot: STRIPE_PRICES.PILOT,
+  t1: STRIPE_PRICES.ESSENTIAL,
+  t2: STRIPE_PRICES.ELITE,
+  t3: STRIPE_PRICES.ENTERPRISE,
+};
 
 // Helper for generating unique IDs
 let idCounter = 0;
@@ -40,6 +47,7 @@ export function getMockUser(overrides: Partial<User> = {}): User {
     email: `${uid}@test.example.com`,
     displayName: 'Test User',
     subscriptionTier: 'free',
+    hasActiveSubscription: overrides.hasActiveSubscription ?? false,
     createdAt: isoDate(-30),
     updatedAt: isoDate(),
     ...overrides,
@@ -59,12 +67,10 @@ export function getMockSubscription(overrides: Partial<Subscription> = {}): Subs
     id,
     userId,
     stripeCustomerId: overrides.stripeCustomerId || generateId('cus'),
-    stripeSubscriptionId: id,
-    stripePriceId: STRIPE_PRICE_IDS[tier],
     tier,
     status: 'active',
-    currentPeriodStart: isoDate(-30),
     currentPeriodEnd: isoDate(30),
+    cancelAtPeriodEnd: overrides.cancelAtPeriodEnd || false,
     createdAt: isoDate(-30),
     updatedAt: isoDate(),
     ...overrides,
@@ -111,7 +117,7 @@ export function getMockCheckoutMetadata(
   return {
     userId: overrides.userId || generateId('user'),
     tier: 'pilot',
-    priceId: STRIPE_PRICE_IDS.pilot,
+    priceId: STRIPE_PRICES.PILOT,
     ...overrides,
   };
 }
@@ -175,7 +181,7 @@ export function getMockSanityPricing(overrides: Partial<SanityPricing> = {}): Sa
     currency: 'USD',
     features: ['Professional editing', 'Fast turnaround', 'Digital delivery'],
     highlighted: tierCode === 't2',
-    stripePriceId: STRIPE_PRICE_IDS[tierCode],
+    stripePriceId: TIER_PRICE_MAP[tierCode] || STRIPE_PRICES.PILOT,
     ...overrides,
   };
 }

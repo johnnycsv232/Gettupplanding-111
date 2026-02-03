@@ -62,11 +62,11 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
   }, [messages, isPending]);
 
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || isPending) return;
 
-    const userMessage = input;
-    setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
+    const userMessage = input.trim();
     setInput('');
+    setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
 
     // Track Interaction
     import('@/lib/logger').then(({ trackInteraction }) => {
@@ -74,11 +74,23 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
     });
 
     startTransition(async () => {
-      const { agentChatAction } = await import('@/app/actions');
-      const result = await agentChatAction(userMessage);
+      try {
+        const { agentChatAction } = await import('@/app/actions');
+        const result = await agentChatAction(userMessage);
 
-      if (result.success) {
-        setMessages((prev) => [...prev, { role: 'assistant', content: result.response }]);
+        if (result.success) {
+          setMessages((prev) => [...prev, { role: 'assistant', content: result.response }]);
+        } else {
+          setMessages((prev) => [
+            ...prev,
+            { role: 'assistant', content: 'Connection lost. I am refreshing my systems...' },
+          ]);
+        }
+      } catch (err) {
+        setMessages((prev) => [
+          ...prev,
+          { role: 'assistant', content: 'Something went wrong. Let me recalibrate.' },
+        ]);
       }
     });
   };

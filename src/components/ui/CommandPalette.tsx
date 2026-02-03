@@ -10,6 +10,8 @@ import { useScrollLock } from '@/hooks/use-scroll-lock';
 import { cn } from '@/lib/utils';
 import { useGlobalState } from '@/providers/RootProvider';
 
+import { EmptyState } from './EmptyState';
+
 interface CommandItem {
   id: string;
   label: string;
@@ -112,10 +114,6 @@ export const CommandPalette = () => {
     return () => window.removeEventListener('keydown', handleNavigation);
   }, [isOpen, filteredCommands, selectedIndex]);
 
-  // Fix index when filtering
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
 
   // Focus input on open
   useEffect(() => {
@@ -155,7 +153,10 @@ export const CommandPalette = () => {
                 type="text"
                 placeholder="Type a command or search..."
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelectedIndex(0);
+                }}
                 className="w-full bg-transparent text-lg text-white placeholder:text-white/30 focus:outline-none"
               />
               <div className="flex items-center gap-2">
@@ -166,9 +167,12 @@ export const CommandPalette = () => {
             {/* Results */}
             <div className="max-h-[300px] overflow-y-auto bg-black/80 p-2">
               {filteredCommands.length === 0 ? (
-                <div className="py-8 text-center text-white/30">
-                  No results found.
-                </div>
+                <EmptyState
+                  icon={Search}
+                  title="No results found"
+                  description={`No commands match "${query}"`}
+                  className="border-none bg-transparent py-10"
+                />
               ) : (
                 <div className="flex flex-col gap-1">
                   {filteredCommands.map((cmd, index) => (
@@ -180,7 +184,9 @@ export const CommandPalette = () => {
                       }}
                       className={cn(
                         'flex items-center justify-between rounded-lg px-3 py-3 text-left transition-colors',
-                        index === selectedIndex ? 'bg-vegas-gold/20 text-white' : 'text-white/70 hover:bg-white/5 hover:text-white'
+                        index === selectedIndex
+                          ? 'bg-vegas-gold/20 text-white'
+                          : 'text-white/70 hover:bg-white/5 hover:text-white',
                       )}
                     >
                       <div className="flex items-center gap-3">
@@ -197,12 +203,12 @@ export const CommandPalette = () => {
             </div>
 
             <div className="border-t border-white/5 bg-white/5 px-4 py-2 text-xs text-white/30">
-               Gettupp Zenith Command
+              Gettupp Zenith Command
             </div>
           </motion.div>
         </div>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 };

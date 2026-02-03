@@ -1,23 +1,28 @@
-'use client';
-
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { forwardRef, ReactNode } from 'react';
 
 import { cn } from '@/lib/utils';
 
+import { Slot } from './Slot';
+
 interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'neon' | 'liquid-glass' | 'outline';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   isLoading?: boolean;
+  asChild?: boolean;
   children?: ReactNode;
 }
 
 /**
  * Button component with multiple variants and motion effects.
  * Extends Framer Motion's button props.
+ * Supports "asChild" pattern for custom component wrapping.
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
+  (
+    { className, variant = 'primary', size = 'md', isLoading, asChild, children, ...props },
+    ref,
+  ) => {
     const variants = {
       primary:
         'bg-vegas-gold text-deep-void-black font-bold hover:bg-yellow-400 box-glow-gold border border-vegas-gold',
@@ -36,17 +41,65 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       xl: 'px-10 py-5 text-xl tracking-widest',
     };
 
+    const baseClasses = cn(
+      'font-display relative flex items-center justify-center gap-2 rounded-none uppercase tracking-wider transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50',
+      variants[variant as keyof typeof variants],
+      sizes[size],
+      className,
+    );
+
+    // Separate motion props from base props
+    const {
+      _whileHover,
+      _whileTap,
+      _whileDrag,
+      _whileFocus,
+      _whileInView,
+      _animate,
+      _initial,
+      _exit,
+      _transition,
+      _variants,
+      _style,
+      _onUpdate,
+      _onAnimationStart,
+      _onAnimationComplete,
+      _onLayoutAnimationStart,
+      _onLayoutAnimationComplete,
+      _onViewportEnter,
+      _onViewportLeave,
+      _onBeforeLayoutMeasure,
+      _onPan,
+      _onPanStart,
+      _onPanEnd,
+      _onPanSessionStart,
+      _onTap,
+      _onTapStart,
+      _onTapCancel,
+      _onHoverStart,
+      _onHoverEnd,
+      _onDrag,
+      _onDragStart,
+      _onDragEnd,
+      _onDragTransitionEnd,
+      _onMeasureDragConstraints,
+      ...htmlProps
+    } = props as any;
+
+    if (asChild) {
+      return (
+        <Slot ref={ref as any} className={baseClasses} {...htmlProps}>
+          {children}
+        </Slot>
+      );
+    }
+
     return (
       <motion.button
         ref={ref}
         whileHover={{ scale: 1.02, y: -2 }}
         whileTap={{ scale: 0.98 }}
-        className={cn(
-          'font-display relative flex items-center justify-center gap-2 rounded-none uppercase tracking-wider transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50',
-          variants[variant as keyof typeof variants],
-          sizes[size],
-          className,
-        )}
+        className={baseClasses}
         disabled={isLoading || props.disabled}
         {...props}
       >

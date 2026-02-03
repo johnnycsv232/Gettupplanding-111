@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { env } from '@/lib/env';
+
 /**
  * HydrationOverlay
  * Purpose: Helps detect and visualize hydration mismatches during development.
@@ -11,10 +13,11 @@ export function HydrationOverlay({ children }: { children: React.ReactNode }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
-  if (process.env.NODE_ENV !== 'development') {
+  if (env.NODE_ENV !== 'development') {
     return <>{children}</>;
   }
 

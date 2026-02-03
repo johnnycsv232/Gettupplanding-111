@@ -3,7 +3,7 @@
 import { onAuthStateChanged, User, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 
-import { Button } from '@/components/ui';
+import { Button, Breadcrumbs } from '@/components/ui';
 import { getFirebaseAuth } from '@/lib/firebase';
 // import { useRouter } from 'next/navigation'; // Removed unused useRouter
 
@@ -66,7 +66,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Button>
         </div>
       </nav>
-      <main className="p-8">{children}</main>
+      <main className="p-8">
+        <Breadcrumbs className="mb-8" />
+        {children}
+      </main>
     </div>
   );
 }

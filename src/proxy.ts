@@ -5,9 +5,9 @@ import { UI_CONFIG } from './config/ui';
 
 export function proxy(request: NextRequest) {
   // 1. Check Maintenance Mode
-  if (UI_CONFIG.maintenance.enabled) {
+  if (UI_CONFIG.MAINTENANCE.ENABLED) {
     // Basic maintenance response - could be a rewrite to a /maintenance page
-    return new NextResponse(UI_CONFIG.maintenance.message, { status: 503 });
+    return new NextResponse(UI_CONFIG.MAINTENANCE.MESSAGE, { status: 503 });
   }
 
   // 2. Inject Location Data

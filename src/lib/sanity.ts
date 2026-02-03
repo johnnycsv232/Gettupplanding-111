@@ -7,27 +7,18 @@
 
 import { createClient, type SanityClient } from '@sanity/client';
 
-// Environment validation
-function validateSanityEnv(): void {
-  if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
-    console.warn('⚠️ Missing NEXT_PUBLIC_SANITY_PROJECT_ID');
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error('INVARIANT VIOLATION: Missing Sanity project configuration');
-    }
-  }
-}
+import { env } from './env';
 
 // Singleton Sanity client
 let sanityClient: SanityClient | undefined;
 
 export function getSanityClient(): SanityClient {
   if (!sanityClient) {
-    validateSanityEnv();
     sanityClient = createClient({
-      projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
-      dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+      projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
+      dataset: env.NEXT_PUBLIC_SANITY_DATASET || 'production',
       apiVersion: '2024-01-01',
-      useCdn: process.env.NODE_ENV === 'production',
+      useCdn: env.NODE_ENV === 'production',
     });
   }
   return sanityClient;

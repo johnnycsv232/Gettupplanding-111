@@ -2,6 +2,7 @@
   "name": "gettupplanding",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": false,
   "scripts": {
     "format": "prettier --write .",
     "dev": "next dev",
@@ -84,5 +85,8 @@
     "typescript": "^5",
     "vitest": "^4.0.17",
     "zod": "^4.3.6"
+  },
+  "overrides": {
+    "fast-xml-parser": "5.3.4"
   }
 }

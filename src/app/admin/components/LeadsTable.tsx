@@ -1,6 +1,8 @@
 'use client';
 
-import { GlassCard } from '@/components/ui';
+import { Users } from 'lucide-react';
+
+import { GlassCard, EmptyState } from '@/components/ui';
 
 interface Lead {
   id: string;
@@ -19,7 +21,12 @@ export function LeadsTable({ leads }: LeadsTableProps) {
     <GlassCard className="p-6">
       <h2 className="mb-6 text-xl font-bold">Recent Leads</h2>
       {leads.length === 0 ? (
-        <div className="text-white/40">No leads found yet.</div>
+        <EmptyState
+          icon={Users}
+          title="No leads yet"
+          description="Your captured leads will appear here."
+          className="border-none bg-transparent"
+        />
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left">

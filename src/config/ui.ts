@@ -40,4 +40,8 @@ export const UI_CONFIG = {
     OVERLAY: 1300,
     STICKY: 1100,
   },
+  MAINTENANCE: {
+    ENABLED: false,
+    MESSAGE: 'System under maintenance. Please check back shortly.',
+  },
 } as const;

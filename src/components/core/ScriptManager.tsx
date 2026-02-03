@@ -1,6 +1,7 @@
 'use client';
-
 import Script from 'next/script';
+
+import { env } from '@/lib/env';
 
 interface ScriptConfig {
   id: string;
@@ -13,9 +14,9 @@ interface ScriptConfig {
 const EXTERNAL_SCRIPTS: ScriptConfig[] = [
   {
     id: 'google-tag-manager',
-    src: `https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM_ID}`,
+    src: `https://www.googletagmanager.com/gtm.js?id=${env.NEXT_PUBLIC_GTM_ID}`,
     strategy: 'afterInteractive',
-    enabled: !!process.env.NEXT_PUBLIC_GTM_ID,
+    enabled: !!env.NEXT_PUBLIC_GTM_ID,
   },
   // Add other scripts here (Pixel, Analytics, etc.)
 ];
@@ -25,7 +26,7 @@ const EXTERNAL_SCRIPTS: ScriptConfig[] = [
  * Unified component for loading third-party scripts based on environment.
  */
 export function ScriptManager() {
-  if (process.env.NODE_ENV === 'development') {
+  if (env.NODE_ENV === 'development') {
     return null;
   }
 

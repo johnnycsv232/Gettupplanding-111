@@ -9,6 +9,8 @@ interface ExperimentalFlags {
   enableDynamicPricing: boolean;
 }
 
+import { env } from './env';
+
 const DEFAULT_FLAGS: ExperimentalFlags = {
   enableNewGlint: false,
   enableAdvancedSearch: false,
@@ -23,7 +25,7 @@ export function getExperimentalFlags(): ExperimentalFlags {
   // In a real app, this could fetch from Remote Config or use env vars
   return {
     ...DEFAULT_FLAGS,
-    enableNewGlint: process.env.NEXT_PUBLIC_ENABLE_NEW_GLINT === 'true',
+    enableNewGlint: env.NEXT_PUBLIC_ENABLE_NEW_GLINT === 'true',
   };
 }
 

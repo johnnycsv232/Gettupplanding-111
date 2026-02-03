@@ -69,6 +69,7 @@ export function RootProvider({ children }: { children: ReactNode }) {
   return (
     <GlobalStateContext.Provider value={{ state, dispatch }}>
       {children}
+      <CommandPalette />
       <ToastContainer
         toasts={state.notifications}
         onRemove={(id) => dispatch({ type: 'REMOVE_NOTIFICATION', payload: id })}
