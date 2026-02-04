@@ -1,46 +1,57 @@
 ---
-description: Verify skill discovery is working correctly
+description: Verify skill discovery and Skillport MCP server are working
 ---
 
 # Skill Discovery Check
 
-Use this workflow to validate the Antigravity skill system is functioning.
+Use this workflow to validate Skillport MCP and skill system are functioning.
 
-## Steps
+## Quick Verification
 
-1. List all skill folders:
+// turbo
 
-```bash
-ls .agent/skills | wc -l
+1. Run the verification script:
+
+```powershell
+npm run skillport:verify
+```
+
+## Manual Checks
+
+1. Verify skillport-mcp is installed:
+
+```powershell
+C:\Users\finan\AppData\Roaming\Python\Python314\Scripts\skillport-mcp.exe --help
+```
+
+Expected: Shows help with `--skills-dir`, `--reindex` options
+
+1. Count skills in directory:
+
+```powershell
+(Get-ChildItem -Path skills -Directory).Count
 ```
 
 Expected: 200+ skills
 
-1. Verify SKILL.md files exist:
+1. Force reindex if skills aren't showing:
 
-```bash
-find .agent/skills -name "SKILL.md" | wc -l
+```powershell
+npm run skillport:reindex
 ```
 
-Expected: Same count as step 1 (minus .vscode folder)
+## Troubleshooting
 
-1. Check a sample skill has valid YAML frontmatter:
+If Skillport MCP isn't working:
 
-```bash
-head -10 .agent/skills/using-superpowers/SKILL.md
-```
-
-Expected: Should see `---`, `name:`, `description:`, `---`
-
-1. Verify SKILL_TRIGGERS.md exists:
-
-```bash
-cat .agent/SKILL_TRIGGERS.md | head -20
-```
+1. **Reinstall skillport-mcp**: `pip install --upgrade skillport-mcp`
+2. **Check MCP config**: Ensure `mcp_config.json` uses `skillport-mcp.exe` not `skillport.exe`
+3. **Restart Windsurf**: MCP servers reload on IDE restart
+4. **Check Python path**: Ensure `C:\Users\finan\AppData\Roaming\Python\Python314\Scripts` exists
 
 ## Test Invocation
 
-To test skill discovery, start a new conversation with a prompt like:
+Start a new conversation with prompts like:
 
 - "Help me add Stripe checkout" → Should invoke `stripe-integration`
 - "Debug this build error" → Should invoke `systematic-debugging`
