@@ -14,6 +14,12 @@ import { getFirestore, Firestore } from 'firebase/firestore';
 // Environment validation - fail fast if config is missing
 import { env } from '@/lib/env';
 
+export const isFirebaseConfigured = Boolean(
+  env.NEXT_PUBLIC_FIREBASE_API_KEY &&
+  env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN &&
+  env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
+);
+
 const firebaseConfig = {
   apiKey: env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -31,12 +37,16 @@ let analytics: Analytics | undefined;
 
 export function getFirebaseApp(): FirebaseApp {
   if (!firebaseApp) {
+    if (!isFirebaseConfigured) {
+      throw new Error('Firebase configuration is missing required environment variables.');
+    }
+
     firebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
     // Initialize App Check
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
       initializeAppCheck(firebaseApp, {
-        provider: new ReCaptchaEnterpriseProvider(env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''),
+        provider: new ReCaptchaEnterpriseProvider(env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY),
         isTokenAutoRefreshEnabled: true,
       });
     }
