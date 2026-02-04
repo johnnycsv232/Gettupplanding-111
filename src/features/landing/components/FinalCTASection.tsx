@@ -38,7 +38,7 @@ export const FinalCTASection = () => {
           </h2>
 
           <p className="text-off-white/60 mx-auto max-w-2xl text-xl uppercase tracking-widest md:text-2xl">
-            Join the world's most elite nightlife network. Your first production starts here.
+            Join the world&apos;s most elite nightlife network. Your first production starts here.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-6 pt-12 sm:flex-row">

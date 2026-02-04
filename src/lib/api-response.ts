@@ -17,7 +17,7 @@ export interface ApiResponseMeta {
 export interface ApiResponseError {
   code: string;
   message: string;
-  details?: any;
+  details?: unknown;
 }
 
 export interface ApiResponse<T> {
@@ -32,7 +32,7 @@ export interface ApiResponse<T> {
  */
 export const createSuccessResponse = <T>(
   data: T,
-  pagination?: ApiResponseMeta['pagination'],
+  pagination?: ApiResponseMeta['pagination']
 ): ApiResponse<T> => {
   return {
     success: true,
@@ -52,7 +52,7 @@ export const createSuccessResponse = <T>(
 export const createErrorResponse = (
   code: string,
   message: string,
-  details?: any,
+  details?: unknown
 ): ApiResponse<null> => {
   return {
     success: false,

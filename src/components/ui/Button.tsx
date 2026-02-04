@@ -21,7 +21,7 @@ interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     { className, variant = 'primary', size = 'md', isLoading, asChild, children, ...props },
-    ref,
+    ref
   ) => {
     const variants = {
       primary:
@@ -45,50 +45,52 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'font-display relative flex items-center justify-center gap-2 rounded-none uppercase tracking-wider transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50',
       variants[variant as keyof typeof variants],
       sizes[size],
-      className,
+      className
     );
 
-    // Separate motion props from base props
-    const {
-      _whileHover,
-      _whileTap,
-      _whileDrag,
-      _whileFocus,
-      _whileInView,
-      _animate,
-      _initial,
-      _exit,
-      _transition,
-      _variants,
-      _style,
-      _onUpdate,
-      _onAnimationStart,
-      _onAnimationComplete,
-      _onLayoutAnimationStart,
-      _onLayoutAnimationComplete,
-      _onViewportEnter,
-      _onViewportLeave,
-      _onBeforeLayoutMeasure,
-      _onPan,
-      _onPanStart,
-      _onPanEnd,
-      _onPanSessionStart,
-      _onTap,
-      _onTapStart,
-      _onTapCancel,
-      _onHoverStart,
-      _onHoverEnd,
-      _onDrag,
-      _onDragStart,
-      _onDragEnd,
-      _onDragTransitionEnd,
-      _onMeasureDragConstraints,
-      ...htmlProps
-    } = props as any;
-
     if (asChild) {
+      // Filter motion props - extract only HTML-safe attributes for Slot
+      const htmlProps: Record<string, unknown> = {};
+      const motionKeys = new Set([
+        'whileHover',
+        'whileTap',
+        'whileDrag',
+        'whileFocus',
+        'whileInView',
+        'animate',
+        'initial',
+        'exit',
+        'transition',
+        'variants',
+        'style',
+        'onAnimationStart',
+        'onAnimationComplete',
+        'onUpdate',
+        'drag',
+        'dragConstraints',
+        'dragElastic',
+        'dragMomentum',
+        'onDrag',
+        'onDragStart',
+        'onDragEnd',
+        'onPan',
+        'onPanStart',
+        'onPanEnd',
+        'onTap',
+        'onTapStart',
+        'onTapCancel',
+        'onHoverStart',
+        'onHoverEnd',
+        'layout',
+        'layoutId',
+      ]);
+      for (const [key, value] of Object.entries(props)) {
+        if (!motionKeys.has(key)) {
+          htmlProps[key] = value;
+        }
+      }
       return (
-        <Slot ref={ref as any} className={baseClasses} {...htmlProps}>
+        <Slot ref={ref as unknown as React.Ref<HTMLElement>} className={baseClasses} {...htmlProps}>
           {children}
         </Slot>
       );
@@ -109,7 +111,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </motion.button>
     );
-  },
+  }
 );
 
 Button.displayName = 'Button';

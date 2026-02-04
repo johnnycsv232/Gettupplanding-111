@@ -59,9 +59,9 @@ export const FounderSection = () => {
             </div>
 
             <p className="text-off-white/60 text-lg italic leading-relaxed">
-              "We don't just record nights; we archive the culture. Every shutter click is an
-              investment in your brand's digital legacy. In a world of 24-hour relevance, we ensure
-              your moments live forever in the highest possible fidelity."
+              &ldquo;We don&apos;t just record nights; we archive the culture. Every shutter click
+              is an investment in your brand&apos;s digital legacy. In a world of 24-hour relevance,
+              we ensure your moments live forever in the highest possible fidelity.&rdquo;
             </p>
 
             <div className="flex gap-4">

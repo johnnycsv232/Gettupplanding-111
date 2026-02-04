@@ -15,7 +15,7 @@ describe('NoiseOverlay', () => {
     expect(div).toHaveClass('pointer-events-none');
     expect(div).toHaveClass('fixed');
     expect(div).toHaveClass('inset-0');
-    expect(div).toHaveClass('z-[9999]');
+    expect(div).toHaveClass('z-cursor');
     expect(div).toHaveClass('opacity-[0.03]');
   });
 });

@@ -42,7 +42,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (!user || !ALLOWED_EMAILS.includes(user.email || '')) {
     return (
-      <div className="bg-deep-void-black flex min-h-screen flex-col items-center justify-center gap-6 p-4">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-deep-void p-4">
         <h1 className="font-display text-4xl text-white">RESTRICTED ACCESS</h1>
         <p className="text-off-white/60 max-w-md text-center">
           This area is for authorized personnel only. If you are Johnny Cage, please login.
@@ -56,7 +56,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="bg-deep-void-black min-h-screen text-white">
+    <div className="min-h-screen bg-deep-void text-white">
       <nav className="flex items-center justify-between border-b border-white/10 bg-black/50 p-4 backdrop-blur-md">
         <span className="font-display text-xl text-vegas-gold">GETTUPP ADMIN</span>
         <div className="flex items-center gap-4">

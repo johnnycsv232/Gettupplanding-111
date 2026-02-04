@@ -6,10 +6,10 @@
 export interface Action<T = void> {
   type: string;
   payload?: T;
-  meta?: Record<string, any>;
+  meta?: Record<string, unknown>;
 }
 
-export interface ActionResult<T = any> {
+export interface ActionResult<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -22,7 +22,7 @@ export interface ActionResult<T = any> {
 export const createAction = <T>(
   type: string,
   payload?: T,
-  meta?: Record<string, any>,
+  meta?: Record<string, unknown>
 ): Action<T> => ({
   type,
   payload,
@@ -33,8 +33,8 @@ export const createAction = <T>(
  * Wrapper for executing state mutations with logging and error handling.
  */
 export const executeAction = async <T>(
-  action: Action<any>,
-  handler: () => Promise<T>,
+  action: Action<unknown>,
+  handler: () => Promise<T>
 ): Promise<ActionResult<T>> => {
   const timestamp = new Date().toISOString();
   console.warn(`[ACTION][${timestamp}] Executing: ${action.type}`, action.payload);
@@ -47,11 +47,12 @@ export const executeAction = async <T>(
       data: result,
       timestamp,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(`[ACTION][${timestamp}] Error: ${action.type}`, error);
     return {
       success: false,
-      error: error.message || 'Unknown error occurred during action execution.',
+      error:
+        error instanceof Error ? error.message : 'Unknown error occurred during action execution.',
       timestamp,
     };
   }

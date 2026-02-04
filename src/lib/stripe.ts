@@ -10,7 +10,7 @@ export const getStripeClient = (): Stripe => {
       throw new Error('STRIPE_SECRET_KEY is missing');
     }
     stripeInstance = new Stripe(env.STRIPE_SECRET_KEY, {
-      apiVersion: '2025-12-15.clover' as any,
+      apiVersion: '2025-12-15.clover' as Stripe.LatestApiVersion,
       appInfo: {
         name: 'Gettupp Zenith',
         version: '0.1.0',

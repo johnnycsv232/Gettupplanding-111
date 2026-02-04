@@ -38,8 +38,8 @@ export const ProblemSolutionSection = () => {
                     Cinema Grade Optics
                   </h3>
                   <p className="text-off-white/40 leading-relaxed">
-                    We don't use phones. We deploy full-frame cinema sensors that capture 15+ stops
-                    of dynamic range, ensuring every sparkler and strobe light is captured in
+                    We don&apos;t use phones. We deploy full-frame cinema sensors that capture 15+
+                    stops of dynamic range, ensuring every sparkler and strobe light is captured in
                     stunning 10-bit color.
                   </p>
                 </div>
@@ -55,7 +55,8 @@ export const ProblemSolutionSection = () => {
                   </h3>
                   <p className="text-off-white/40 leading-relaxed">
                     Our editors are on-site or remote-synced in real-time. We deliver world-class
-                    recaps within 24 hours, while the event is still fresh in your followers' minds.
+                    recaps within 24 hours, while the event is still fresh in your followers&apos;
+                    minds.
                   </p>
                 </div>
               </div>
@@ -69,7 +70,7 @@ export const ProblemSolutionSection = () => {
                     Global Standards
                   </h3>
                   <p className="text-off-white/40 leading-relaxed">
-                    Whether you're in Miami, Ibiza, or Dubai, our production quality remains
+                    Whether you&apos;re in Miami, Ibiza, or Dubai, our production quality remains
                     consistently elite. One brand, one standard, worldwide.
                   </p>
                 </div>

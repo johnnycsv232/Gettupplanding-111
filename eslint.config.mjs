@@ -6,6 +6,22 @@ import tailwind from 'eslint-plugin-tailwindcss';
 import unusedImports from 'eslint-plugin-unused-imports';
 
 const eslintConfig = defineConfig([
+  // Global ignores MUST be first in flat config
+  {
+    ignores: [
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+      'backups/**',
+      'skills/**',
+      '.windsurf/skills/**',
+      'scripts/**',
+      '.unused/**',
+      'src/.unused/**',
+      'src/components/ui/Slot.tsx',
+    ],
+  },
   ...nextVitals,
   ...nextTs,
   ...tailwind.configs['flat/recommended'],
@@ -50,20 +66,6 @@ const eslintConfig = defineConfig([
         React: 'readonly',
       },
     },
-  },
-  {
-    ignores: [
-      '.next/**',
-      'out/**',
-      'build/**',
-      'next-env.d.ts',
-      'backups/**',
-      'skills/**',
-      'scripts/**',
-      '.unused/**',
-      'src/.unused/**',
-      'src/components/ui/Slot.tsx',
-    ],
   },
 ]);
 

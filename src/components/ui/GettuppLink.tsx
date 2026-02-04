@@ -1,6 +1,8 @@
 'use client';
 
 import Link, { LinkProps } from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -9,9 +11,6 @@ interface GettuppLinkProps extends LinkProps {
   className?: string;
   external?: boolean;
 }
-
-import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
 
 /**
  * GettuppLink

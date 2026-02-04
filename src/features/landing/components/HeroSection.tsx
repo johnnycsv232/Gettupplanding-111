@@ -40,7 +40,7 @@ export const HeroSection = ({ initialCity = '', initialCountry = '' }: HeroSecti
         source: 'hero_zenith',
       });
       setIsSuccess(true);
-    } catch (err) {
+    } catch {
       setError('Connection failed. Please try again.');
     } finally {
       setIsSubmitting(false);
