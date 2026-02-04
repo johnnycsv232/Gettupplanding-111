@@ -58,12 +58,19 @@ export function getFirebaseDb(): Firestore {
   return db;
 }
 
-export async function getFirebaseAnalytics(): Promise<Analytics | undefined> {
+export function getFirebaseAnalytics(): Analytics | undefined {
   if (typeof window !== 'undefined' && !analytics) {
-    const supported = await isSupported();
-    if (supported) {
-      analytics = getAnalytics(getFirebaseApp());
-    }
+    // Defer analytics initialization to avoid blocking
+    setTimeout(async () => {
+      try {
+        const supported = await isSupported();
+        if (supported && !analytics) {
+          analytics = getAnalytics(getFirebaseApp());
+        }
+      } catch (error) {
+        console.warn('Analytics initialization failed:', error);
+      }
+    }, 1000);
   }
   return analytics;
 }

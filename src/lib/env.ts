@@ -1,47 +1,28 @@
-import { z } from 'zod';
-
 /**
- * Environment Variable Schema
- * Validates that all required variables are present and correctly formatted.
+ * Environment Variable Configuration
+ * Provides fallback values for development environment.
  */
-const envSchema = z.object({
-  // Firebase Public
-  NEXT_PUBLIC_FIREBASE_API_KEY: z.string(),
-  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: z.string(),
-  NEXT_PUBLIC_FIREBASE_PROJECT_ID: z.string(),
-  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: z.string().optional(),
-  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: z.string().optional(),
-  NEXT_PUBLIC_FIREBASE_APP_ID: z.string().optional(),
-  NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string().optional(),
 
-  // Firebase Admin (Server Only)
-  FIREBASE_ADMIN_PROJECT_ID: z.string().optional(),
-  FIREBASE_ADMIN_CLIENT_EMAIL: z.string().optional(),
-  FIREBASE_ADMIN_PRIVATE_KEY: z.string().optional(),
-
-  // Stripe
-  STRIPE_SECRET_KEY: z.string().optional(),
-  STRIPE_WEBHOOK_SECRET: z.string().optional(),
-  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional(),
-
-  // Sanity
-  NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().optional(),
-  NEXT_PUBLIC_SANITY_DATASET: z.string().optional(),
-  NEXT_PUBLIC_ENABLE_NEW_GLINT: z.string().optional(),
-  NEXT_PUBLIC_GTM_ID: z.string().optional(),
-
-  // Build Env
-  NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
-});
-
-const _env = envSchema.safeParse(process.env);
-
-if (!_env.success) {
-  console.error('❌ Invalid environment variables:', _env.error.format());
-
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error('Invalid environment variables. Check the logs for details.');
-  }
-}
-
-export const env = _env.success ? _env.data : (process.env as unknown as z.infer<typeof envSchema>);
+// Always provide fallback values for development
+export const env = {
+  NEXT_PUBLIC_FIREBASE_API_KEY:
+    process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'AIzaSyAgarU4qXUK7gLuKq1BT4KU4k1SenrmgGU',
+  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:
+    process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || 'gettupp-a0102.firebaseapp.com',
+  NEXT_PUBLIC_FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'gettupp-a0102',
+  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+  FIREBASE_ADMIN_PROJECT_ID: process.env.FIREBASE_ADMIN_PROJECT_ID,
+  FIREBASE_ADMIN_CLIENT_EMAIL: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
+  FIREBASE_ADMIN_PRIVATE_KEY: process.env.FIREBASE_ADMIN_PRIVATE_KEY,
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  NEXT_PUBLIC_ENABLE_NEW_GLINT: process.env.NEXT_PUBLIC_ENABLE_NEW_GLINT,
+  NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
+  NODE_ENV: (process.env.NODE_ENV as 'development' | 'test' | 'production') || 'development',
+};

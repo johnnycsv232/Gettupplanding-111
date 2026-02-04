@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, AlertCircle, Info, X } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -45,7 +45,7 @@ export const Toast = ({ id, type, message, duration = 5000, onRemove }: ToastPro
       layout
       className={cn(
         'liquid-glass flex min-w-[300px] items-start gap-4 rounded-xl border p-4 shadow-2xl backdrop-blur-md',
-        colors[type],
+        colors[type]
       )}
     >
       <div className="mt-0.5">{icons[type]}</div>
@@ -70,8 +70,28 @@ export const ToastContainer = ({
   toasts: ToastMessage[];
   onRemove: (id: string) => void;
 }) => {
+  // Prevent hydration mismatch by only rendering after mount
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // Use setTimeout to avoid synchronous setState in effect
+    const timer = setTimeout(() => setIsMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Return consistent placeholder during SSR and before mount
+  if (!isMounted) {
+    return (
+      <div
+        className="fixed bottom-6 right-6 z-toast flex flex-col gap-3"
+        suppressHydrationWarning
+        aria-hidden="true"
+      />
+    );
+  }
+
   return (
-    <div className="fixed bottom-6 right-6 z-toast flex flex-col gap-3">
+    <div className="fixed bottom-6 right-6 z-toast flex flex-col gap-3" suppressHydrationWarning>
       <AnimatePresence>
         {toasts.map((toast) => (
           <Toast key={toast.id} {...toast} onRemove={onRemove} />
