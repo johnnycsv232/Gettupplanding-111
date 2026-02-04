@@ -3,7 +3,7 @@
 import { User, onAuthStateChanged } from 'firebase/auth';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { getFirebaseApp, getFirebaseAuth } from '@/lib/firebase';
+import { getFirebaseApp, getFirebaseAuth, isFirebaseConfigured } from '@/lib/firebase';
 
 interface FirebaseContextType {
   user: User | null;
@@ -22,6 +22,15 @@ export function FirebaseProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     let unsubscribe: () => void = () => {};
+    let loadingTimer: ReturnType<typeof setTimeout> | undefined;
+
+    if (!isFirebaseConfigured) {
+      console.warn('Firebase configuration missing; skipping client initialization.');
+      loadingTimer = setTimeout(() => setLoading(false), 0);
+      return () => {
+        if (loadingTimer) clearTimeout(loadingTimer);
+      };
+    }
 
     try {
       // Initialize Firebase Client
@@ -63,7 +72,10 @@ export function FirebaseProvider({ children }: { children: React.ReactNode }) {
       }, 0);
     }
 
-    return () => unsubscribe();
+    return () => {
+      if (loadingTimer) clearTimeout(loadingTimer);
+      unsubscribe();
+    };
   }, []);
 
   if (firebaseError) {

@@ -22,6 +22,7 @@ interface CommandItem {
 }
 
 export const CommandPalette = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -30,6 +31,11 @@ export const CommandPalette = () => {
   const { dispatch } = useGlobalState();
 
   useScrollLock(isOpen);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Toggle with Ctrl+K / Cmd+K
   useEffect(() => {
@@ -124,7 +130,7 @@ export const CommandPalette = () => {
     }
   }, [isOpen]);
 
-  if (typeof window === 'undefined') return null;
+  if (!isMounted) return null;
 
   return createPortal(
     <AnimatePresence>
