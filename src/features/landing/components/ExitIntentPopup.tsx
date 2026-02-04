@@ -3,6 +3,7 @@
 import { Sparkles } from 'lucide-react';
 import { useState, useTransition } from 'react';
 
+import { submitLeadAction } from '@/app/actions';
 import { Button, Modal } from '@/components/ui';
 import { useExitIntent } from '@/hooks/useExitIntent';
 
@@ -27,7 +28,6 @@ export const ExitIntentPopup = () => {
     formData.append('source', 'exit_intent');
 
     startTransition(async () => {
-      const { submitLeadAction } = await import('@/app/actions');
       const result = await submitLeadAction(formData);
 
       if (result.success) {

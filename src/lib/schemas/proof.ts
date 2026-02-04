@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { UserIdSchema, StripeSubscriptionIdSchema, TimestampSchema } from './base';
 
 export const ProofPackAssetSchema = z.object({

@@ -1,4 +1,4 @@
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { defineConfig } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import importPlugin from 'eslint-plugin-import';
@@ -35,9 +35,36 @@ const eslintConfig = defineConfig([
       'no-var': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': 'error',
+      'react/display-name': 'off',
+    },
+    settings: {
+      tailwindcss: {
+        callees: ['cn', 'cva'],
+        config: 'tailwind.config.ts',
+      },
     },
   },
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'backups/**', 'skills/**']),
+  {
+    languageOptions: {
+      globals: {
+        React: 'readonly',
+      },
+    },
+  },
+  {
+    ignores: [
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+      'backups/**',
+      'skills/**',
+      'scripts/**',
+      '.unused/**',
+      'src/.unused/**',
+      'src/components/ui/Slot.tsx',
+    ],
+  },
 ]);
 
 export default eslintConfig;

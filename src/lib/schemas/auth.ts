@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { TimestampSchema, UserIdSchema, StripeCustomerIdSchema } from './base';
 
 export const UserSchema = z

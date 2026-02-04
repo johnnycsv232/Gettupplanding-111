@@ -42,16 +42,16 @@
 38. [x] Audit usage of Barrel Files (index.ts) for tree-shaking efficacy.
 39. [x] Standardize "Empty States" across all data-driven views.
 40. [x] Implement "Breadcrumb" logic that works across complex nested routes.
-41. [ ] Create a "Global Config" object for all UI behavior (durations, delays).
-42. [ ] Audit "Context" vs "Prop Drilling" to avoid over-engineering.
-43. [ ] Implement a "Command Palette" structure if applicable.
-44. [ ] Standardize "Pagination" vs "Infinite Scroll" decisions.
-45. [ ] Create a "Third Party Script" manager to control loading priority.
-46. [ ] Implement "Inter-component Communication" (Pub/Sub if needed).
-47. [ ] Create a standard for "Experimental" features.
-48. [ ] Review "Next.js Image" loader configuration (Cloudinary, Imgix, etc.).
-49. [ ] Implement "Server Actions" for all forms.
-50. [ ] Final review of Section I Architectural Integrity.
+41. [x] Create a "Global Config" object for all UI behavior (durations, delays).
+42. [x] Audit "Context" vs "Prop Drilling" to avoid over-engineering.
+43. [x] Implement a "Command Palette" structure if applicable.
+44. [x] Standardize "Pagination" vs "Infinite Scroll" decisions.
+45. [x] Create a "Third Party Script" manager to control loading priority.
+46. [x] Implement "Inter-component Communication" (Pub/Sub if needed).
+47. [x] Create a standard for "Experimental" features.
+48. [x] Review "Next.js Image" loader configuration (Cloudinary, Imgix, etc.).
+49. [x] Implement "Server Actions" for all forms.
+50. [x] Final review of Section I Architectural Integrity.
 
 ## II. Code Quality & Formatting (Steps 51-100)
 

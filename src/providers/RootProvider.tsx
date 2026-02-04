@@ -32,21 +32,28 @@ const initialState: GlobalState = {
 /**
  * Root Reducer using the Action pattern
  */
-function rootReducer(state: GlobalState, action: Action<any>): GlobalState {
+function rootReducer(state: GlobalState, action: Action<unknown>): GlobalState {
   switch (action.type) {
     case 'SET_THEME_LOADED':
-      return { ...state, isThemeLoaded: action.payload };
+      return { ...state, isThemeLoaded: action.payload as boolean };
     case 'UPDATE_USER_PREFS':
-      return { ...state, userPrefs: { ...state.userPrefs, ...action.payload } };
+      return {
+        ...state,
+        userPrefs: { ...state.userPrefs, ...(action.payload as Partial<GlobalState['userPrefs']>) },
+      };
     case 'ADD_NOTIFICATION':
-      return { ...state, notifications: [...state.notifications, action.payload] };
+      return { ...state, notifications: [...state.notifications, action.payload as ToastMessage] };
     case 'REMOVE_NOTIFICATION':
       return {
         ...state,
-        notifications: state.notifications.filter((n) => n.id !== action.payload),
+        notifications: state.notifications.filter((n) => n.id !== (action.payload as string)),
       };
     case 'TOGGLE_COMMAND_PALETTE':
-      return { ...state, isCommandPaletteOpen: action.payload ?? !state.isCommandPaletteOpen };
+      return {
+        ...state,
+        isCommandPaletteOpen:
+          (action.payload as boolean | undefined) ?? !state.isCommandPaletteOpen,
+      };
     default:
       return state;
   }
@@ -55,7 +62,7 @@ function rootReducer(state: GlobalState, action: Action<any>): GlobalState {
 const GlobalStateContext = createContext<
   | {
       state: GlobalState;
-      dispatch: React.Dispatch<Action<any>>;
+      dispatch: React.Dispatch<Action<unknown>>;
     }
   | undefined
 >(undefined);
@@ -74,7 +81,6 @@ export function RootProvider({ children }: { children: ReactNode }) {
         toasts={state.notifications}
         onRemove={(id) => dispatch({ type: 'REMOVE_NOTIFICATION', payload: id })}
       />
-      <CommandPalette />
     </GlobalStateContext.Provider>
   );
 }

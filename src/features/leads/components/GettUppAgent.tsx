@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Send, X, MessageSquare, Sparkles } from 'lucide-react';
 import { useState, useRef, useEffect, useTransition } from 'react';
 
+import { agentChatAction } from '@/app/actions';
 import { ChatHistorySchema, type ChatMessage } from '@/lib/zod-schemas';
 
 interface GettUppAgentProps {
@@ -75,7 +76,6 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
 
     startTransition(async () => {
       try {
-        const { agentChatAction } = await import('@/app/actions');
         const result = await agentChatAction(userMessage);
 
         if (result.success) {
@@ -86,7 +86,7 @@ export const GettUppAgent = ({ initialCity, initialCountry }: GettUppAgentProps)
             { role: 'assistant', content: 'Connection lost. I am refreshing my systems...' },
           ]);
         }
-      } catch (err) {
+      } catch {
         setMessages((prev) => [
           ...prev,
           { role: 'assistant', content: 'Something went wrong. Let me recalibrate.' },

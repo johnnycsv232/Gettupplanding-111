@@ -25,6 +25,7 @@
     },
     "editor.codeActions.triggerOnFocusChange": true,
     "powershell.cwd": "Project Root",
+    "markdown.validate.enabled": true,
   },
   "extensions": {
     "recommendations": [

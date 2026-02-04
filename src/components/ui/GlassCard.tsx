@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 interface GlassCardProps extends HTMLMotionProps<'div'> {
   hoverEffect?: boolean;
-  intensity?: 'low' | 'medium' | 'high';
+  intensity?: 'low' | 'medium' | 'high' | 'zenith';
 }
 
 /**
@@ -34,15 +34,18 @@ export const GlassCard = ({
       }
     : {};
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const componentProps = props as any;
+
   return (
     <Component
       className={cn(
         'overflow-hidden rounded-xl transition-all duration-300',
         intensityMap[intensity],
-        className,
+        className
       )}
       {...motionProps}
-      {...(props as any)}
+      {...componentProps}
     >
       {children}
     </Component>

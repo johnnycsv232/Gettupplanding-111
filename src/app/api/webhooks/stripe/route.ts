@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 import { getAdminDb } from '@/lib/firebase-admin';
+import { StripeCustomerWebhookSchema } from '@/lib/schemas/customer';
+import { syncStripeCustomerToFirestore } from '@/lib/services/customer.service';
 import { verifyWebhookSignature } from '@/lib/stripe';
 import {
   checkoutSessionCompletedSchema,
@@ -36,7 +38,7 @@ export async function POST(req: NextRequest) {
     console.error(`⚠️ Webhook signature verification failed.`, errorMessage);
     return NextResponse.json(
       { error: `Webhook signature verification failed: ${errorMessage}` },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
@@ -99,6 +101,24 @@ export async function POST(req: NextRequest) {
         break;
       }
 
+      // Customer Events
+      case 'customer.created':
+      case 'customer.updated': {
+        // We use the same schema for both, as they carry the same data shape
+        const customerData = StripeCustomerWebhookSchema.parse(event.data.object);
+        await syncStripeCustomerToFirestore(customerData);
+        break;
+      }
+
+      case 'customer.deleted': {
+        // Handle deletion if necessary - usually just marking as deleted/churned
+        // For now, we'll sync the deleted state via syncStripeCustomerToFirestore
+        // which handles updates. We might want a specific handler later.
+        const customerData = StripeCustomerWebhookSchema.parse(event.data.object);
+        await syncStripeCustomerToFirestore(customerData);
+        break;
+      }
+
       default:
         console.warn(`Unhandled event type ${eventType}`);
     }
@@ -124,7 +144,7 @@ export async function POST(req: NextRequest) {
       });
       return NextResponse.json(
         { error: `Webhook validation failed: ${zodError.message}` },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -147,7 +167,7 @@ export async function POST(req: NextRequest) {
 
 async function handleCheckoutSessionCompleted(
   session: CheckoutSessionCompleted,
-  db: FirebaseFirestore.Firestore,
+  db: FirebaseFirestore.Firestore
 ) {
   const { metadata, customer, subscription } = session;
   const { userId, tier } = metadata;
@@ -178,7 +198,7 @@ async function handleCheckoutSessionCompleted(
 
 async function handleSubscriptionUpdated(
   subscription: SubscriptionEvent,
-  db: FirebaseFirestore.Firestore,
+  db: FirebaseFirestore.Firestore
 ) {
   const { id, status, metadata } = subscription;
   const { userId } = metadata;
@@ -202,7 +222,7 @@ async function handleSubscriptionUpdated(
 
 async function handleSubscriptionDeleted(
   subscription: SubscriptionEvent,
-  db: FirebaseFirestore.Firestore,
+  db: FirebaseFirestore.Firestore
 ) {
   const { id, metadata } = subscription;
   const { userId } = metadata;
@@ -229,7 +249,7 @@ async function handleInvoicePaymentFailed(invoice: InvoiceEvent, db: FirebaseFir
 
   // Log failure for dunning tracking
   console.warn(
-    `⚠️ Payment failed for invoice ${invoice.id} (Sub: ${subscription}, Reason: ${billing_reason})`,
+    `⚠️ Payment failed for invoice ${invoice.id} (Sub: ${subscription}, Reason: ${billing_reason})`
   );
 
   // Update subscription status in DB

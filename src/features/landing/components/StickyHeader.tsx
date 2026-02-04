@@ -32,10 +32,10 @@ export const StickyHeader = () => {
   return (
     <header
       className={cn(
-        'fixed left-0 right-0 top-0 z-[100] transition-all duration-500',
+        'fixed inset-x-0 top-0 z-[100] transition-all duration-500',
         isScrolled
           ? 'bg-deep-void/80 border-b border-white/5 py-4 backdrop-blur-md'
-          : 'bg-transparent py-8',
+          : 'bg-transparent py-8'
       )}
     >
       <div className="container mx-auto px-4">

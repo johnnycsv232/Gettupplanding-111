@@ -70,7 +70,10 @@ export const CommandPalette = () => {
       label: 'Toggle Theme (Demo)',
       icon: <Search size={14} />,
       action: () => {
-        dispatch({ type: 'ADD_NOTIFICATION', payload: { id: 'theme-toggle-demo', type: 'info', message: 'Theme toggle coming soon!' } });
+        dispatch({
+          type: 'ADD_NOTIFICATION',
+          payload: { id: 'theme-toggle-demo', type: 'info', message: 'Theme toggle coming soon!' },
+        });
       },
       section: 'Actions',
     },
@@ -113,7 +116,6 @@ export const CommandPalette = () => {
     window.addEventListener('keydown', handleNavigation);
     return () => window.removeEventListener('keydown', handleNavigation);
   }, [isOpen, filteredCommands, selectedIndex]);
-
 
   // Focus input on open
   useEffect(() => {
@@ -183,10 +185,10 @@ export const CommandPalette = () => {
                         setIsOpen(false);
                       }}
                       className={cn(
-                        'flex items-center justify-between rounded-lg px-3 py-3 text-left transition-colors',
+                        'flex items-center justify-between rounded-lg p-3 text-left transition-colors',
                         index === selectedIndex
                           ? 'bg-vegas-gold/20 text-white'
-                          : 'text-white/70 hover:bg-white/5 hover:text-white',
+                          : 'text-white/70 hover:bg-white/5 hover:text-white'
                       )}
                     >
                       <div className="flex items-center gap-3">
@@ -209,6 +211,6 @@ export const CommandPalette = () => {
         </div>
       )}
     </AnimatePresence>,
-    document.body,
+    document.body
   );
 };

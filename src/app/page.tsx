@@ -11,15 +11,15 @@ import { GallerySection } from '@/features/landing/components/GallerySection';
 import { GettuppGirlsSection } from '@/features/landing/components/GettuppGirlsSection';
 import { GettUppNavbar } from '@/features/landing/components/GettuppNavbar';
 import { HeroSection } from '@/features/landing/components/HeroSection';
+import { KineticCanvas } from '@/features/landing/components/KineticCanvas';
 import { PilotSection } from '@/features/landing/components/PilotSection';
 import { ProblemSolutionSection } from '@/features/landing/components/ProblemSolutionSection';
 import { RetainersSection } from '@/features/landing/components/RetainersSection';
-import { WhatYouGetSection } from '@/features/landing/components/WhatYouGetSection';
+import { RulesSection } from '@/features/landing/components/RulesSection';
 import { TestimonialsSection } from '@/features/landing/components/TestimonialsSection';
 import { UpgradesSection } from '@/features/landing/components/UpgradesSection';
-import { RulesSection } from '@/features/landing/components/RulesSection';
+import { WhatYouGetSection } from '@/features/landing/components/WhatYouGetSection';
 import { GettUppAgent } from '@/features/leads/components/GettUppAgent';
-import { KineticCanvas } from '@/features/landing/components/KineticCanvas';
 
 export default async function Home() {
   const headersList = await headers();

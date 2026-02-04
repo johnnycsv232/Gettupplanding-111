@@ -24,9 +24,30 @@ export function FirebaseProvider({ children }: { children: React.ReactNode }) {
     getFirebaseApp();
 
     const auth = getFirebaseAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       setLoading(false);
+
+      if (user) {
+        try {
+          const token = await user.getIdToken();
+          // Idempotent call to ensure Stripe customer exists
+          await fetch('/api/customers', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              userId: user.uid,
+              email: user.email,
+              displayName: user.displayName,
+            }),
+          });
+        } catch (error) {
+          console.error('Failed to sync customer:', error);
+        }
+      }
     });
 
     return () => unsubscribe();
