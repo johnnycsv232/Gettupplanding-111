@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@context7/mcp"]
+    },
+    "skillport": {
+      "command": "C:\\Users\\finan\\AppData\\Roaming\\Python\\Python314\\Scripts\\skillport-mcp.exe",
+      "args": ["--skills-dir", "C:/Users/finan/Gettupplanding-111/skills", "--skip-auto-reindex"],
+      "disabled": false
+    },
+    "firebase": {
+      "command": "npx",
+      "args": ["firebase-tools", "mcp"],
+      "disabled": true,
+      "notes": "Enable for Firebase MCP integration"
+    }
+  }
+}
