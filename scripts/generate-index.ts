@@ -89,7 +89,7 @@ function generateIndex(skillsDir: string, outputFile: string) {
 }
 
 const baseDir = process.cwd();
-const skillsPath = path.join(baseDir, 'skills');
+const skillsPath = path.join(baseDir, '.agent', 'skills');
 const outputPath = path.join(baseDir, 'skills_index.json');
 
 generateIndex(skillsPath, outputPath);

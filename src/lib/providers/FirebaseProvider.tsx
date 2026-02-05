@@ -20,37 +20,46 @@ export function FirebaseProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Initialize Firebase Client
-    getFirebaseApp();
+    let unsubscribe: (() => void) | undefined;
 
-    const auth = getFirebaseAuth();
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
-      setLoading(false);
+    try {
+      // Initialize Firebase Client
+      getFirebaseApp();
 
-      if (user) {
-        try {
-          const token = await user.getIdToken();
-          // Idempotent call to ensure Stripe customer exists
-          await fetch('/api/customers', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              userId: user.uid,
-              email: user.email,
-              displayName: user.displayName,
-            }),
-          });
-        } catch (error) {
-          console.error('Failed to sync customer:', error);
+      const auth = getFirebaseAuth();
+      unsubscribe = onAuthStateChanged(auth, async (user) => {
+        setUser(user);
+        setLoading(false);
+
+        if (user) {
+          try {
+            const token = await user.getIdToken();
+            // Idempotent call to ensure Stripe customer exists
+            await fetch('/api/customers', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                userId: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+              }),
+            });
+          } catch (error) {
+            console.error('Failed to sync customer:', error);
+          }
         }
-      }
-    });
+      });
+    } catch (error) {
+      // Firebase initialization failed (likely invalid API key)
+      console.warn('Firebase initialization failed:', error);
+      // Defer state update to avoid synchronous render in effect body
+      setTimeout(() => setLoading(false), 0);
+    }
 
-    return () => unsubscribe();
+    return () => unsubscribe?.();
   }, []);
 
   return (

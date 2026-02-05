@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { MapPin, ArrowRight } from 'lucide-react';
 import { useState, useRef, FormEvent } from 'react';
 
@@ -15,7 +15,7 @@ interface HeroSectionProps {
 
 /**
  * HeroSection
- * The primary text-based hero section containing the value proposition and early CTA.
+ * High-performance cinematic hero with video background, SEO schema, and WCAG accessibility.
  */
 export const HeroSection = ({ initialCity = '', initialCountry = '' }: HeroSectionProps) => {
   const [email, setEmail] = useState('');
@@ -25,7 +25,9 @@ export const HeroSection = ({ initialCity = '', initialCountry = '' }: HeroSecti
   const [error, setError] = useState('');
 
   const targetRef = useRef<HTMLDivElement>(null);
-  useScroll(); // Only for tracking side-effects if any, or just remove if not needed. Actually HeroSection uses useScroll() inline on line 59.
+  const { scrollYProgress } = useScroll({ target: targetRef });
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -47,15 +49,54 @@ export const HeroSection = ({ initialCity = '', initialCountry = '' }: HeroSecti
     }
   };
 
+  const videoUrl = '/videos/A_macro_productreveal_1080p_202601121922.mp4';
+  const videoTitle = 'GettUpp Product Reveal';
+  const videoDesc = 'Cinematic reveal of the GettUpp nightlife experience.';
+
   return (
     <section
       ref={targetRef}
       className="relative flex min-h-screen items-center justify-center overflow-hidden py-32"
     >
-      <motion.div
-        className="container relative z-10 mx-auto px-4"
-        style={{ opacity: useScroll().scrollYProgress }}
-      >
+      {/* Visual SEO: JSON-LD for Video Object */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'VideoObject',
+            name: videoTitle,
+            description: videoDesc,
+            contentUrl: `https://gettupp.com${videoUrl}`,
+            uploadDate: '2026-01-12T19:22:00Z',
+            thumbnailUrl: 'https://gettupp.com/images/hero_thumb.jpg', // Placeholder fallback
+          }),
+        }}
+      />
+
+      {/* Cinematic Background Video */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-10 bg-black/60" /> {/* Contrast Overlay */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none" // Performance optimization
+          className="h-full w-full object-cover opacity-60 motion-reduce:hidden md:opacity-100" // A11y: Hide on reduced motion
+          aria-label={videoTitle}
+        >
+          <source src={videoUrl} type="video/mp4" />
+        </video>
+        {/* Fallback for Reduced Motion / No Video support */}
+        <div
+          className="hidden h-full w-full bg-black motion-reduce:block"
+          role="img"
+          aria-label="Dark cinematic background"
+        />
+      </div>
+
+      <motion.div className="container relative z-10 mx-auto px-4" style={{ opacity, y }}>
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}

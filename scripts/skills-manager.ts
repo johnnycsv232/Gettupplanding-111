@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const SKILLS_DIR = path.join(process.cwd(), 'skills');
+const SKILLS_DIR = path.join(process.cwd(), '.agent', 'skills');
 const DISABLED_DIR = path.join(SKILLS_DIR, '.disabled');
 
 function listActive() {

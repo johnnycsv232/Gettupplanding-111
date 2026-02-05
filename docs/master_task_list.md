@@ -55,7 +55,7 @@
 
 ## II. Code Quality & Formatting (Steps 51-100)
 
-51. [ ] Configure eslint with plugin:@next/next/recommended.
+1. [x] Configure eslint with plugin:@next/next/recommended.
 52. [ ] Enable strict: true in tsconfig.json if not already set.
 53. [ ] Set noImplicitAny to true and fix all resulting errors.
 54. [ ] Install and configure prettier with a shared config file.

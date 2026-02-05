@@ -45,7 +45,9 @@ yarn-error.log*
 next-env.d.ts
 
 # Skills repo (external)
-.agent/skills/
+# Skills repo (external)
+skills/
+
 
 # firebase
 .firebase/

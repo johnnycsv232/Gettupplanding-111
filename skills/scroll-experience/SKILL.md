@@ -1,6 +1,6 @@
 ---
 name: scroll-experience
-description: 'Expert in building immersive scroll-driven experiences - parallax storytelling, scroll animations, interactive narratives, and cinematic web experiences. Like NY Times interactives, Apple product pages, and award-winning web experiences. Makes websites feel like experiences, not just pages. Use when: scroll animation, parallax, scroll storytelling, interactive story, cinematic website.'
+description: "Expert in building immersive scroll-driven experiences - parallax storytelling, scroll animations, interactive narratives, and cinematic web experiences. Like NY Times interactives, Apple product pages, and award-winning web experiences. Makes websites feel like experiences, not just pages. Use when: scroll animation, parallax, scroll storytelling, interactive story, cinematic website."
 source: vibeship-spawner-skills (Apache 2.0)
 ---
 
@@ -32,7 +32,7 @@ Tools and techniques for scroll animations
 
 **When to use**: When planning scroll-driven experiences
 
-````python
+```python
 ## Scroll Animation Stack
 
 ### Library Options
@@ -62,10 +62,9 @@ gsap.to('.element', {
   y: -100,
   opacity: 1,
 });
-````
+```
 
 ### Framer Motion Scroll
-
 ```jsx
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -73,22 +72,19 @@ function ParallaxSection() {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
-  return <motion.div style={{ y }}>Content moves with scroll</motion.div>;
+  return (
+    <motion.div style={{ y }}>
+      Content moves with scroll
+    </motion.div>
+  );
 }
 ```
 
 ### CSS Native (2024+)
-
 ```css
 @keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-on-scroll {
@@ -97,8 +93,7 @@ function ParallaxSection() {
   animation-range: entry 0% cover 40%;
 }
 ```
-
-````
+```
 
 ### Parallax Storytelling
 
@@ -134,10 +129,9 @@ gsap.to('.foreground', {
   },
   y: '-50%', // Moves faster
 });
-````
+```
 
 ### Story Beats
-
 ```
 Section 1: Hook (full viewport, striking visual)
     ↓ scroll
@@ -151,13 +145,11 @@ Section 5: Resolution (CTA or conclusion)
 ```
 
 ### Text Reveals
-
 - Fade in on scroll
 - Typewriter effect on trigger
 - Word-by-word highlight
 - Sticky text with changing visuals
-
-````
+```
 
 ### Sticky Sections
 
@@ -179,10 +171,9 @@ Pin elements while scrolling through content
   top: 0;
   height: 100vh;
 }
-````
+```
 
 ### GSAP Pin
-
 ```javascript
 gsap.to('.content', {
   scrollTrigger: {
@@ -198,7 +189,6 @@ gsap.to('.content', {
 ```
 
 ### Horizontal Scroll Section
-
 ```javascript
 const sections = gsap.utils.toArray('.panel');
 
@@ -215,12 +205,10 @@ gsap.to(sections, {
 ```
 
 ### Use Cases
-
 - Product feature walkthrough
 - Before/after comparisons
 - Step-by-step processes
 - Image galleries
-
 ```
 
 ## Anti-Patterns
@@ -273,4 +261,3 @@ Graceful degradation.
 ## Related Skills
 
 Works well with: `3d-web-experience`, `frontend`, `ui-design`, `landing-page-design`
-```

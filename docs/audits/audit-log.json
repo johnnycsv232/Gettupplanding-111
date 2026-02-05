@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-02-05T14:40:00Z",
+  "phase": "Deep Scan",
+  "findings": [
+    {
+      "id": "INFRA_SPLIT_BRAIN",
+      "severity": "CRITICAL",
+      "message": ".agent/skills exists but canonical is skills/",
+      "location": ".agent/skills"
+    },
+    {
+      "id": "ASSET_MISPLACEMENT",
+      "severity": "HIGH",
+      "message": "Large video found in scripts/",
+      "location": "scripts/A_macro_productreveal_1080p_202601121922.mp4"
+    },
+    {
+      "id": "DEPS_EXTRANEOUS",
+      "severity": "MEDIUM",
+      "message": "Extraneous packages detected",
+      "evidence": "@emnapi/runtime@1.8.1"
+    }
+  ]
+}

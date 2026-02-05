@@ -23,7 +23,7 @@ const works = [
   {
     id: 3,
     type: 'photo',
-    src: 'https://images.unsplash.com/photo-1514525253440-b393452e8d26?auto=format&fit=crop&q=80',
+    src: 'https://images.unsplash.com/photo-1541339907198-e08756eaa63f?auto=format&fit=crop&q=80',
     title: 'Rooftop VIP',
     tag: 'CONTENT',
   },

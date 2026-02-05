@@ -2,10 +2,6 @@
 
 import { saveLead } from '@/lib/leads';
 
-/**
- * submitLeadAction
- * Server Action to handle lead form submissions.
- */
 export async function submitLeadAction(formData: FormData) {
   const email = formData.get('email') as string;
   const source = (formData.get('source') as string) || 'unknown';

@@ -31,6 +31,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   const headersList = await headers();
   const country = headersList.get('x-vercel-ip-country');
 
@@ -38,8 +39,12 @@ export default async function RootLayout({
   const locale = country === 'ES' || country === 'MX' ? 'es' : 'en';
 
   return (
-    <html lang={locale} className={`${inter.variable} ${orbitron.variable} dark`}>
-      <body className="bg-deep-void text-white antialiased selection:bg-vegas-gold selection:text-black">
+    <html
+      lang={locale}
+      className={`${inter.variable} ${orbitron.variable} dark`}
+      suppressHydrationWarning
+    >
+      <body className="bg-deep-void text-white antialiased" suppressHydrationWarning>
         <Providers initialLocale={locale}>
           <BaseLayout>{children}</BaseLayout>
         </Providers>

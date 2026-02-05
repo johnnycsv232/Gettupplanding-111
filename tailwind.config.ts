@@ -15,8 +15,10 @@ const config: Config = {
         'vegas-gold': 'var(--vegas-gold)',
         'neon-magenta': 'var(--neon-magenta)',
         'deep-void': 'var(--deep-void)',
+        void: 'var(--deep-void)',
         'off-white': 'var(--off-white)',
         'electric-cyan': 'var(--electric-cyan)',
+        gold: 'var(--gold)',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

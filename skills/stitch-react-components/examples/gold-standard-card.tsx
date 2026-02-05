@@ -42,7 +42,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
   const isMerged = action === 'MERGED';
 
   return (
-    <div className="bg-surface-dark flex min-h-14 items-center justify-between gap-4 rounded-lg p-4 shadow-sm ring-1 ring-white/10">
+    <div className="flex items-center justify-between gap-4 rounded-lg bg-surface-dark p-4 min-h-14 shadow-sm ring-1 ring-white/10">
       <div className="flex items-center gap-4 overflow-hidden">
         <div
           className="aspect-square h-10 w-10 flex-shrink-0 rounded-full bg-cover bg-center bg-no-repeat"
@@ -51,28 +51,27 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
         />
 
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm sm:text-base">
-          <a href="#" className="text-primary truncate font-semibold hover:underline">
+          <a href="#" className="font-semibold text-primary hover:underline truncate">
             {username}
           </a>
 
-          <span
-            className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${
-              isMerged ? 'bg-purple-500/30 text-purple-300' : 'bg-primary/30 text-primary'
-            }`}
-          >
+          <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded-full ${isMerged ? 'bg-purple-500/30 text-purple-300' : 'bg-primary/30 text-primary'
+            }`}>
             {action}
           </span>
 
           <span className="text-white/60">in</span>
 
-          <a href="#" className="text-primary truncate hover:underline">
+          <a href="#" className="text-primary hover:underline truncate">
             {repoName}
           </a>
         </div>
       </div>
 
       <div className="shrink-0">
-        <p className="text-sm font-normal leading-normal text-white/50">{timestamp}</p>
+        <p className="text-sm font-normal leading-normal text-white/50">
+          {timestamp}
+        </p>
       </div>
     </div>
   );

@@ -30,32 +30,52 @@ let db: Firestore | undefined;
 let analytics: Analytics | undefined;
 
 export function getFirebaseApp(): FirebaseApp {
-  if (!firebaseApp) {
-    firebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+  if (!firebaseConfig.apiKey) {
+    console.warn('[RC_FIREBASE_WARN] No API key found. Firebase will not initialize.');
+    return {} as FirebaseApp;
+  }
 
-    // Initialize App Check
-    if (typeof window !== 'undefined') {
-      initializeAppCheck(firebaseApp, {
-        provider: new ReCaptchaEnterpriseProvider(env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''),
-        isTokenAutoRefreshEnabled: true,
-      });
+  if (!firebaseApp) {
+    try {
+      firebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
+      // Initialize App Check
+      if (typeof window !== 'undefined' && env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
+        initializeAppCheck(firebaseApp, {
+          provider: new ReCaptchaEnterpriseProvider(env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY),
+          isTokenAutoRefreshEnabled: true,
+        });
+      }
+    } catch (err) {
+      console.error('[RC_FIREBASE_ERR] Failed to initialize Firebase:', err);
+      return {} as FirebaseApp;
     }
   }
   return firebaseApp;
 }
 
 export function getFirebaseAuth(): Auth {
-  if (!auth) {
-    auth = getAuth(getFirebaseApp());
+  const app = getFirebaseApp();
+  if (!auth && app.options) {
+    try {
+      auth = getAuth(app);
+    } catch (err) {
+      console.error('[RC_FIREBASE_ERR] Failed to initialize Auth:', err);
+    }
   }
-  return auth;
+  return auth as Auth;
 }
 
 export function getFirebaseDb(): Firestore {
-  if (!db) {
-    db = getFirestore(getFirebaseApp());
+  const app = getFirebaseApp();
+  if (!db && app.options) {
+    try {
+      db = getFirestore(app);
+    } catch (err) {
+      console.error('[RC_FIREBASE_ERR] Failed to initialize Firestore:', err);
+    }
   }
-  return db;
+  return db as Firestore;
 }
 
 export async function getFirebaseAnalytics(): Promise<Analytics | undefined> {

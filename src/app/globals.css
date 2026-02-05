@@ -35,7 +35,7 @@
 
 @layer base {
   body {
-    @apply bg-deep-void font-sans text-off-white antialiased selection:bg-neon-magenta selection:text-white;
+    @apply font-sans text-off-white antialiased;
   }
 
   h1,
