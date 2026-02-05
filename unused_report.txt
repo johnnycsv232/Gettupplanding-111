@@ -1,0 +1,212 @@
+\next.config.ts:86 - default
+\playwright.config.ts:6 - default
+\tailwind.config.ts:59 - default
+\vitest.config.ts:6 - default
+\src\proxy.ts:6 - proxy
+\src\proxy.ts:24 - config
+\tests\factories.ts:43 - getMockUser
+\tests\factories.ts:61 - getMockSubscription
+\tests\factories.ts:84 - getMockProofPack
+\tests\factories.ts:114 - getMockCheckoutMetadata
+\tests\factories.ts:129 - getMockSanityWork
+\tests\factories.ts:149 - getMockSanityHero
+\tests\factories.ts:167 - getMockSanityPricing
+\.next\types\routes.d.ts:26 - ParamsOf
+\.next\types\routes.d.ts:34 - PageRoutes (used in module)
+\.next\types\routes.d.ts:34 - RedirectRoutes (used in module)
+\.next\types\routes.d.ts:34 - RewriteRoutes (used in module)
+\src\app\error.tsx:5 - default
+\src\app\layout.tsx:29 - default
+\src\app\layout.tsx:27 - metadata
+\src\app\loading.tsx:3 - default
+\src\app\page.tsx:24 - default
+\src\app\robots.ts:3 - default
+\src\app\sitemap.ts:3 - default
+\src\config\constants.ts:5 - BRAND_NAME (used in module)
+\src\config\constants.ts:6 - SITE_URL (used in module)
+\src\config\constants.ts:7 - SUPPORT_EMAIL (used in module)
+\src\config\constants.ts:16 - SOCIAL_LINKS
+\src\config\constants.ts:23 - NAV_ITEMS
+\src\config\features.ts:6 - FeatureFlags (used in module)
+\src\config\features.ts:17 - features (used in module)
+\src\config\features.ts:36 - isEnabled
+\src\config\routes.ts:36 - AppRoutes
+\src\config\routes.ts:37 - RoutePath
+\src\hooks\use-pagination.ts:24 - usePagination
+\src\hooks\use-pagination.ts:3 - PaginationInstance (used in module)
+\src\hooks\use-viewport.ts:18 - useViewport
+\src\hooks\useCommandPalette.ts:11 - useCommandPalette
+\src\lib\actions.ts:12 - ActionResult (used in module)
+\src\lib\actions.ts:22 - createAction
+\src\lib\api-response.ts:6 - ApiResponseMeta (used in module)
+\src\lib\api-response.ts:17 - ApiResponseError (used in module)
+\src\lib\api-response.ts:23 - ApiResponse (used in module)
+\src\lib\api-response.ts:33 - createSuccessResponse
+\src\lib\api-response.ts:52 - createErrorResponse
+\src\lib\assets.ts:5 - getOptimizedAssetUrl
+\src\lib\auth.ts:26 - AuthState
+\src\lib\auth.ts:34 - signInWithGoogle
+\src\lib\auth.ts:49 - signOut (used in module)
+\src\lib\auth.ts:62 - subscribeToAuthChanges
+\src\lib\auth.ts:70 - getCurrentUser
+\src\lib\data-standards.ts:30 - usePaginationRegistry
+\src\lib\data-standards.ts:6 - PaginatedResponse
+\src\lib\events.ts:53 - events
+\src\lib\events.ts:56 - EVENT_NAMES
+\src\lib\events.ts:62 - satisfies
+\src\lib\events.ts:62 - Record
+\src\lib\experimental.ts:52 - getExperimentalFlags (used in module)
+\src\lib\experimental.ts:66 - useExperimental
+\src\lib\experimental.ts:14 - ExperimentalFlags (used in module)
+\src\lib\experimental.ts:78 - isFeatureEnabled (used in module)
+\src\lib\experimental.ts:87 - setLocalOverride
+\src\lib\firebase-admin.ts:19 - getAdminApp (used in module)
+\src\lib\firebase.ts:81 - getFirebaseAnalytics
+\src\lib\firebase.ts:92 - firebaseConfig (used in module)
+\src\lib\i18n.tsx:71 - useI18n
+\src\lib\payments.ts:5 - getLocalizedPaymentMethods
+\src\lib\payments.ts:21 - getCurrencyForCountry
+\src\lib\sanity.ts:15 - getSanityClient
+\src\lib\sanity.ts:30 - QUERIES
+\src\lib\sanity.ts:75 - SanityClient (used in module)
+\src\lib\schemas.ts:3 - TimestampSchema
+\src\lib\schemas.ts:6 - UserIdSchema
+\src\lib\schemas.ts:7 - StripeCustomerIdSchema
+\src\lib\schemas.ts:8 - StripeSubscriptionIdSchema
+\src\lib\schemas.ts:5 - UserSchema
+\src\lib\schemas.ts:5 - SubscriptionSchema
+\src\lib\schemas.ts:30 - CheckoutMetadataSchema
+\src\lib\schemas.ts:3 - LeadSchema
+\src\lib\schemas.ts:13 - Lead
+\src\lib\schemas.ts:3 - ChatMessageSchema
+\src\lib\schemas.ts:8 - ChatMessage
+\src\lib\schemas.ts:9 - ChatHistorySchema
+\src\lib\schemas.ts:3 - SanityImageSchema
+\src\lib\schemas.ts:11 - SanityWorkSchema
+\src\lib\schemas.ts:25 - SanityHeroSchema
+\src\lib\schemas.ts:42 - SanityPricingSchema
+\src\lib\schemas.ts:5 - ProofPackAssetSchema
+\src\lib\schemas.ts:11 - ProofPackSchema
+\src\lib\schemas.ts:8 - CustomerStatusSchema
+\src\lib\schemas.ts:13 - LifecycleStageSchema
+\src\lib\schemas.ts:18 - LeadSourceSchema
+\src\lib\schemas.ts:33 - CustomerSchema
+\src\lib\schemas.ts:67 - CustomerSchemaType
+\src\lib\schemas.ts:72 - CreateCustomerSchema
+\src\lib\schemas.ts:83 - CreateCustomerInput
+\src\lib\schemas.ts:88 - UpdateCustomerSchema
+\src\lib\schemas.ts:98 - UpdateCustomerInput
+\src\lib\schemas.ts:103 - StripeCustomerWebhookSchema
+\src\lib\schemas.ts:116 - StripeCustomerWebhookData
+\src\lib\scoring.ts:6 - LeadContext (used in module)
+\src\lib\scoring.ts:14 - calculateLeadScore
+\src\lib\scoring.ts:40 - getLeadTier
+\src\lib\server-actions.ts:14 - createServerAction
+\src\lib\server-actions.ts:3 - ActionState (used in module)
+\src\lib\zod-schemas.ts:3 - TimestampSchema
+\src\lib\zod-schemas.ts:6 - UserIdSchema
+\src\lib\zod-schemas.ts:7 - StripeCustomerIdSchema
+\src\lib\zod-schemas.ts:8 - StripeSubscriptionIdSchema
+\src\lib\zod-schemas.ts:5 - UserSchema
+\src\lib\zod-schemas.ts:18 - User
+\src\lib\zod-schemas.ts:5 - SubscriptionSchema
+\src\lib\zod-schemas.ts:28 - Subscription
+\src\lib\zod-schemas.ts:30 - CheckoutMetadataSchema
+\src\lib\zod-schemas.ts:36 - CheckoutMetadata
+\src\lib\zod-schemas.ts:3 - ChatMessageSchema
+\src\lib\zod-schemas.ts:3 - SanityImageSchema
+\src\lib\zod-schemas.ts:11 - SanityWorkSchema
+\src\lib\zod-schemas.ts:23 - SanityWork
+\src\lib\zod-schemas.ts:25 - SanityHeroSchema
+\src\lib\zod-schemas.ts:40 - SanityHero
+\src\lib\zod-schemas.ts:42 - SanityPricingSchema
+\src\lib\zod-schemas.ts:53 - SanityPricing
+\src\lib\zod-schemas.ts:5 - ProofPackAssetSchema
+\src\lib\zod-schemas.ts:11 - ProofPackSchema
+\src\lib\zod-schemas.ts:25 - ProofPack
+\src\lib\zod-schemas.ts:8 - CustomerStatusSchema
+\src\lib\zod-schemas.ts:13 - LifecycleStageSchema
+\src\lib\zod-schemas.ts:18 - LeadSourceSchema
+\src\lib\zod-schemas.ts:33 - CustomerSchema
+\src\lib\zod-schemas.ts:67 - CustomerSchemaType
+\src\lib\zod-schemas.ts:72 - CreateCustomerSchema
+\src\lib\zod-schemas.ts:83 - CreateCustomerInput
+\src\lib\zod-schemas.ts:88 - UpdateCustomerSchema
+\src\lib\zod-schemas.ts:98 - UpdateCustomerInput
+\src\lib\zod-schemas.ts:103 - StripeCustomerWebhookSchema
+\src\lib\zod-schemas.ts:116 - StripeCustomerWebhookData
+\src\services\checkout-service.ts:4 - CheckoutParams (used in module)
+\src\services\checkout-service.ts:12 - CheckoutResult
+\src\styles\tokens.ts:1 - tokens
+\src\types\brands.ts:6 - StripePriceId
+\src\types\customer.ts:21 - LifecycleStage
+\src\types\customer.ts:26 - LeadSource (used in module)
+\src\types\customer.ts:77 - CreateCustomerInput
+\src\types\customer.ts:89 - UpdateCustomerInput
+\src\types\customer.ts:100 - StripeCustomerData
+\.next\dev\types\routes.d.ts:26 - ParamsOf
+\.next\dev\types\routes.d.ts:34 - PageRoutes (used in module)
+\.next\dev\types\routes.d.ts:34 - RedirectRoutes (used in module)
+\.next\dev\types\routes.d.ts:34 - RewriteRoutes (used in module)
+\src\app\admin\layout.tsx:12 - default
+\src\app\admin\page.tsx:37 - default
+\src\app\test-theme\page.tsx:8 - default
+\src\components\error\ErrorBoundary.tsx:15 - ErrorBoundary
+\src\components\navigation\Breadcrumbs.tsx:18 - Breadcrumbs
+\src\components\ui\index.ts:21 - Button
+\src\components\ui\index.ts:10 - CustomCursor
+\src\components\ui\index.ts:18 - ErrorBoundary3D
+\src\components\ui\index.ts:15 - GlassCard
+\src\components\ui\index.ts:16 - GlintEffect
+\src\components\ui\index.ts:24 - Modal
+\src\components\ui\index.ts:8 - NoiseOverlay
+\src\components\ui\index.ts:10 - PageTransition
+\src\components\ui\index.ts:10 - Preloader
+\src\components\ui\index.ts:9 - SmoothScroll
+\src\components\ui\index.ts:17 - VelocityTypography
+\src\components\ui\index.ts:9 - LoadingFallback
+\src\components\ui\index.ts:23 - FeatureErrorBoundary
+\src\components\ui\index.ts:13 - Skeleton
+\src\components\ui\index.ts:8 - Icons
+\src\components\ui\index.ts:19 - GettuppLink
+\src\components\ui\index.ts:11 - Slot
+\src\components\ui\index.ts:9 - ToastType
+\src\components\ui\index.ts:11 - ToastMessage
+\src\components\ui\index.ts:22 - Toast
+\src\components\ui\index.ts:66 - ToastContainer
+\src\components\ui\index.ts:12 - HydrationOverlay
+\src\components\ui\index.ts:15 - EmptyState
+\src\components\ui\index.ts:25 - Breadcrumbs
+\src\lib\analytics\funnel.ts:12 - trackFunnelEvent (used in module)
+\src\lib\analytics\funnel.ts:31 - useFunnelTracker
+\src\lib\analytics\useABTest.ts:31 - useABTest
+\src\lib\dto\lead.dto.ts:33 - mapToLeadDTO
+\src\lib\factories\lead.factory.ts:7 - createMockLead (used in module)
+\src\lib\factories\lead.factory.ts:20 - createMockLeads
+\src\lib\providers\FirebaseProvider.tsx:72 - useFirebase
+\src\lib\providers\index.tsx:20 - Providers
+\src\lib\services\customer.service.ts:109 - getCustomerByUserId
+\src\lib\services\customer.service.ts:124 - getCustomerByStripeId (used in module)
+\src\lib\services\customer.service.ts:145 - getOrCreateCustomer
+\src\lib\services\customer.service.ts:212 - updateCustomerStatus
+\src\lib\services\customer.service.ts:300 - convertLeadToCustomer
+\src\lib\services\customer.service.ts:388 - updateCustomerMetrics
+\src\lib\validations\stripe.ts:7 - metadataSchema (used in module)
+\src\lib\validations\stripe.ts:15 - StripeMetadata
+\src\lib\validations\stripe.ts:79 - stripeEventSchema
+\src\app\api\checkout\route.ts:7 - POST
+\src\app\api\customers\route.ts:18 - GET
+\src\app\api\customers\route.ts:50 - POST
+\src\app\api\customers\route.ts:14 - dynamic
+\src\features\landing\components\CinemaGradeSection.tsx:8 - default
+\src\features\landing\components\Founder.tsx:7 - default
+\src\features\landing\components\Hero.tsx:6 - default
+\src\features\landing\components\MeshBackground.tsx:45 - default
+\src\features\landing\components\StickyHeader.tsx:15 - StickyHeader
+\src\features\landing\components\ThreeHero.tsx:23 - default
+\src\app\api\billing\portal\route.ts:10 - POST
+\src\app\api\customers\[id]\route.ts:18 - GET
+\src\app\api\customers\[id]\route.ts:53 - PATCH
+\src\app\api\customers\[id]\route.ts:11 - dynamic
+\src\app\api\subscriptions\sync\route.ts:12 - POST
+\src\app\api\webhooks\stripe\route.ts:22 - dynamic

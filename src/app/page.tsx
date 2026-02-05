@@ -26,8 +26,22 @@ export default async function Home() {
   const city = headersList.get('x-city') || 'Your City';
   const country = headersList.get('x-country') || 'US';
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: 'GettUpp Zenith Experience',
+    description: 'Transform your content with the Zenith elite ecosystem.',
+    thumbnailUrl: 'https://gettupp-enterprise.vercel.app/thumbnail.jpg',
+    uploadDate: '2026-02-05T00:00:00Z',
+    contentUrl: 'https://gettupp-enterprise.vercel.app/videos/hero.mp4',
+  };
+
   return (
     <main className="min-h-screen bg-deep-void text-off-white selection:bg-neon-magenta selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <GettUppNavbar />
       <HeroSection initialCity={city} initialCountry={country} />
       <CinematicRevealSection />

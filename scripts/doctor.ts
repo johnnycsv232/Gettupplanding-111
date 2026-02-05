@@ -57,20 +57,11 @@ function check(
 function runChecks() {
   // 1. Skills Single Source of Truth
   check('INFRA_SKILLS_CANONICAL', 'Skills Single Source of Truth', () => {
-    const skillsDir = path.join(PROJECT_ROOT, 'skills');
-    const agentSkillsDir = path.join(PROJECT_ROOT, '.agent', 'skills');
+    const canonicalSkillsDir = path.join(PROJECT_ROOT, '.agent', 'skills', 'skills');
     const skillportRc = path.join(PROJECT_ROOT, '.skillportrc');
 
-    if (!fs.existsSync(skillsDir))
-      return { status: 'FAIL', message: 'Canonical skills/ directory missing' };
-
-    if (fs.existsSync(agentSkillsDir)) {
-      const files = fs.readdirSync(agentSkillsDir);
-      if (files.length > 0)
-        return { status: 'FAIL', message: 'Split Brain: .agent/skills is non-empty' };
-    }
-
-    if (!fs.existsSync(skillportRc)) return { status: 'WARN', message: '.skillportrc missing' };
+    if (!fs.existsSync(canonicalSkillsDir))
+      return { status: 'FAIL', message: 'Canonical skills dir missing at .agent/skills/skills' };
 
     return { status: 'PASS', message: 'Skills infrastructure valid' };
   });
@@ -207,6 +198,49 @@ function runChecks() {
         evidence: stderr || 'Extraneous or invalid deps detected',
       };
     }
+  });
+
+  // 7. Environment Variables (Stripe)
+  check('ENV_STRIPE_KEYS', 'Stripe API Key Presence', () => {
+    const envPath = path.join(PROJECT_ROOT, '.env');
+    if (!fs.existsSync(envPath)) return { status: 'FAIL', message: '.env file missing' };
+    const content = fs.readFileSync(envPath, 'utf-8');
+    const hasKey = /NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_(test|live)_[a-zA-Z0-9]+/.test(content);
+    if (hasKey) return { status: 'PASS', message: 'Stripe publishable key found' };
+    return { status: 'FAIL', message: 'Stripe publishable key missing or invalid format' };
+  });
+
+  // 8. Firebase Parity
+  check('INFRA_FIREBASE_PARITY', 'Firebase Environment Parity', () => {
+    const envPath = path.join(PROJECT_ROOT, '.env');
+    const rcPath = path.join(PROJECT_ROOT, '.firebaserc');
+
+    if (!fs.existsSync(envPath) || !fs.existsSync(rcPath)) {
+      return { status: 'SKIP', message: '.env or .firebaserc missing' };
+    }
+
+    const envContent = fs.readFileSync(envPath, 'utf-8');
+    const rcContent = fs.readFileSync(rcPath, 'utf-8');
+
+    const envMatch = envContent.match(/NEXT_PUBLIC_FIREBASE_PROJECT_ID=([a-zA-Z0-9-]+)/);
+    const envId = envMatch ? envMatch[1] : null;
+
+    let rcId = null;
+    try {
+      const rc = JSON.parse(rcContent);
+      rcId = rc.projects?.default;
+    } catch {
+      return { status: 'FAIL', message: 'Failed to parse .firebaserc' };
+    }
+
+    if (!envId || !rcId) return { status: 'FAIL', message: 'Could not resolve project IDs' };
+    if (envId === rcId) return { status: 'PASS', message: `Parity confirmed (${envId})` };
+
+    return {
+      status: 'FAIL',
+      message: 'Firebase project ID mismatch',
+      evidence: `.env: ${envId} vs .firebaserc: ${rcId}`,
+    };
   });
 }
 
