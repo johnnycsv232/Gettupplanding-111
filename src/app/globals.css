@@ -5,7 +5,7 @@
 :root {
   /* Core Colors */
   --background: #050505;
-  --foreground: #f1e5ac;
+  --foreground: #f4e9c0;
   --neon-magenta: #ff007f;
   --vegas-gold: #d4af37;
   --gold: #d4af37;
@@ -14,9 +14,11 @@
   --off-white: #fafafa;
   --electric-cyan: #00ffff;
 
-  /* Semantic Tokens */
+  /* Surface Tokens */
   --glass: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.35);
+  --obsidian-shadow: rgba(0, 0, 0, 0.55);
   --neon-glow: 0 0 20px rgba(255, 0, 127, 0.5);
 
   /* Spacing */
@@ -28,14 +30,20 @@
   --spacing-xxl: 8rem;
 
   /* Typography */
-  --font-ui: var(--font-inter), system-ui;
+  --font-ui: var(--font-manrope), sans-serif;
   --font-display: var(--font-orbitron), sans-serif;
-  --font-serif: var(--font-dm-serif), serif;
+  --font-serif: var(--font-cormorant), serif;
 }
 
 @layer base {
   body {
-    @apply font-sans text-off-white antialiased;
+    font-family: var(--font-ui);
+    @apply bg-deep-void text-off-white antialiased;
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(212, 175, 55, 0.08), transparent 40%),
+      radial-gradient(circle at 85% 10%, rgba(255, 0, 127, 0.06), transparent 45%),
+      radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.03), transparent 50%);
+    background-attachment: fixed;
   }
 
   h1,
@@ -43,11 +51,23 @@
   h3,
   h4,
   .font-display {
-    font-family: var(--font-orbitron);
+    font-family: var(--font-display);
     @apply uppercase tracking-wider;
   }
 
-  /* Standardizing interactive elements */
+  p,
+  li,
+  input,
+  textarea,
+  select,
+  .font-ui {
+    font-family: var(--font-ui);
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
   a,
   button {
     @apply transition-all duration-300;
@@ -55,32 +75,49 @@
 }
 
 @layer components {
-  /* Glassmorphism 2.0 - Ultra Premium */
+  .liquid-glass {
+    background: linear-gradient(130deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 24px 48px -28px var(--obsidian-shadow);
+    backdrop-filter: blur(28px) saturate(180%);
+  }
+
   .glass-zenith {
-    @apply border border-white/20 bg-white/[0.03] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),0_10px_40px_rgba(0,0,0,0.4)] saturate-[200%] backdrop-blur-[60px];
+    @apply liquid-glass border-white/20 bg-white/[0.04] shadow-[inset_0_0_24px_rgba(255,255,255,0.1),0_14px_56px_rgba(0,0,0,0.45)] saturate-[200%] backdrop-blur-[60px];
   }
 
   .glass-light {
-    @apply border border-white/5 bg-white/[0.02] backdrop-blur-xl;
+    @apply liquid-glass border-white/5 bg-white/[0.02] backdrop-blur-xl;
   }
 
   .glass-medium {
-    @apply border border-white/10 bg-white/5 shadow-[0_4px_24px_0_rgba(0,0,0,0.2)] backdrop-blur-2xl;
+    @apply liquid-glass border-white/10 bg-white/[0.05] shadow-[0_10px_40px_rgba(0,0,0,0.32)] backdrop-blur-2xl;
   }
 
   .glass-heavy {
-    @apply border border-white/10 bg-white/5 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] saturate-[180%] backdrop-blur-[40px];
+    @apply liquid-glass border-white/10 bg-white/[0.07] shadow-[0_12px_46px_rgba(0,0,0,0.4)] saturate-[180%] backdrop-blur-[42px];
   }
 
-  /* Premium Typography Components */
   .heading-zenith {
-    font-family: var(--font-orbitron);
+    font-family: var(--font-display);
     @apply text-glow-gold font-black uppercase tracking-[0.2em];
   }
 
   .agency-serif {
     font-family: var(--font-serif);
     @apply italic tracking-tight;
+  }
+
+  .section-shell {
+    @apply relative overflow-hidden border-y border-white/5 bg-deep-void py-24 md:py-32;
+  }
+
+  .brand-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[10px] font-black uppercase tracking-[0.36em] text-vegas-gold;
+    border-color: rgba(212, 175, 55, 0.35);
+    background-color: rgba(212, 175, 55, 0.1);
   }
 }
 
@@ -89,23 +126,52 @@
     @apply text-[10px] font-black uppercase tracking-[0.5em] text-white/40;
   }
 
-  .text-glow-gold {
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+  .text-body-strong {
+    @apply text-base leading-relaxed text-white/[0.76] md:text-lg;
+  }
+
+  .text-body-soft {
+    @apply text-sm leading-relaxed text-white/[0.62];
+  }
+
+  .text-body-meta {
+    @apply text-[11px] leading-relaxed text-white/[0.45];
+  }
+
+  .text-glow-gold,
+  .text-shadow-glow {
+    text-shadow:
+      0 0 15px rgba(212, 175, 55, 0.6),
+      0 0 40px rgba(212, 175, 55, 0.2);
   }
 
   .text-glow-magenta {
     text-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
   }
 
+  .text-silver-chrome {
+    background: linear-gradient(180deg, #ffffff 0%, #dddde5 45%, #8b8f95 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   .box-glow-gold {
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
   }
 
   .box-glow-magenta {
-    box-shadow: 0 0 30px rgba(255, 0, 127, 0.4);
+    box-shadow: 0 0 30px rgba(255, 0, 127, 0.35);
   }
 
-  /* Glint Effect */
+  .focus-ring-gold {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black;
+  }
+
+  .focus-ring-gold:focus-visible {
+    --tw-ring-color: rgba(212, 175, 55, 0.8);
+  }
+
   .glint-effect {
     position: relative;
     overflow: hidden;
@@ -121,9 +187,9 @@
     background: linear-gradient(
       45deg,
       transparent 45%,
-      rgba(255, 255, 255, 0.1) 48%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0.1) 52%,
+      rgba(255, 255, 255, 0.08) 48%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.08) 52%,
       transparent 55%
     );
     transform: rotate(-45deg) translateX(-100%);
@@ -138,7 +204,6 @@
     mask-image: radial-gradient(circle, black 0%, transparent 70%);
   }
 
-  /* Custom "Stellar" Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
   }

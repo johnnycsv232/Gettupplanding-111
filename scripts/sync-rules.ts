@@ -11,7 +11,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const CANONICAL_DIR = 'agent/rules';
+import { PROJECT_ROOT, resolveRulesDirectory } from './workspace-paths';
+
 const TARGETS = [
   { dir: '.windsurf/rules', stripFrontmatter: true, ext: '.md' },
   { dir: '.cursor/rules', stripFrontmatter: false, ext: '.mdc' },
@@ -34,24 +35,34 @@ function parseFrontmatter(content: string): { frontmatter: string; body: string 
 }
 
 function ensureDir(dir: string): void {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-    console.log(`  Created directory: ${dir}`);
+  const absoluteDir = path.resolve(PROJECT_ROOT, dir);
+  if (!fs.existsSync(absoluteDir)) {
+    fs.mkdirSync(absoluteDir, { recursive: true });
+    console.log(`  Created directory: ${absoluteDir}`);
   }
 }
 
 function syncRules(): void {
+  let canonicalDir: string;
+  try {
+    canonicalDir = resolveRulesDirectory();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`❌ ${message}`);
+    process.exit(1);
+  }
+
   console.log('\n🔄 GETTUPP Rules Sync\n');
-  console.log(`Source: ${CANONICAL_DIR}/`);
+  console.log(`Source: ${canonicalDir}/`);
 
   // Check if canonical directory exists
-  if (!fs.existsSync(CANONICAL_DIR)) {
-    console.error(`❌ Canonical rules directory not found: ${CANONICAL_DIR}`);
+  if (!fs.existsSync(canonicalDir)) {
+    console.error(`❌ Canonical rules directory not found: ${canonicalDir}`);
     process.exit(1);
   }
 
   // Read all .mdc files from canonical directory
-  const files = fs.readdirSync(CANONICAL_DIR).filter((f) => f.endsWith('.mdc'));
+  const files = fs.readdirSync(canonicalDir).filter((f) => f.endsWith('.mdc'));
 
   if (files.length === 0) {
     console.warn('⚠️  No .mdc files found in canonical directory');
@@ -62,7 +73,7 @@ function syncRules(): void {
 
   // Parse each rule file
   const rules: RuleFile[] = files.map((name) => {
-    const content = fs.readFileSync(path.join(CANONICAL_DIR, name), 'utf-8');
+    const content = fs.readFileSync(path.join(canonicalDir, name), 'utf-8');
     const { frontmatter, body } = parseFrontmatter(content);
     return { name, content, frontmatter, body };
   });
@@ -75,7 +86,7 @@ function syncRules(): void {
     for (const rule of rules) {
       const baseName = path.basename(rule.name, '.mdc');
       const targetName = baseName + target.ext;
-      const targetPath = path.join(target.dir, targetName);
+      const targetPath = path.resolve(PROJECT_ROOT, target.dir, targetName);
 
       const content = target.stripFrontmatter ? rule.body : rule.content;
 

@@ -2,6 +2,10 @@
 
 import { motion } from 'framer-motion';
 
+import { GlassCard } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
+
 const rules = [
   {
     id: '01',
@@ -31,38 +35,44 @@ const rules = [
  */
 export const RulesSection = () => {
   return (
-    <section className="bg-void border-b border-white/5 py-32">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col gap-20 md:flex-row">
-          <div className="space-y-8 md:w-1/3">
-            <h2 className="font-display text-5xl uppercase leading-none tracking-tighter text-white md:text-7xl">
-              THE <br />
-              <span className="text-vegas-gold">RULES</span> OF <br />
-              ENGAGEMENT
-            </h2>
-            <p className="text-off-white/40 text-sm uppercase tracking-[0.4em]">
-              Operational Excellence
-            </p>
-          </div>
+    <section className="section-shell border-b border-white/5 bg-void">
+      <SectionBackdrop variant="neutral" />
+      <div className="container relative z-10 mx-auto px-4">
+        <SectionIntro
+          className="mb-14 max-w-3xl md:mb-16"
+          kicker="Operational Excellence"
+          title="THE RULES OF"
+          highlight="ENGAGEMENT"
+          description="Premium venues require zero-drama execution. These are the standards every GettUpp deployment is measured against."
+          tone="neutral"
+          highlightClassName="text-white/[0.36] text-shadow-none"
+        />
 
-          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:w-2/3">
-            {rules.map((rule, i) => (
-              <motion.div
-                key={rule.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="space-y-4"
-              >
-                <div className="font-display text-4xl tracking-widest text-white/10">{rule.id}</div>
-                <h3 className="text-xl font-black uppercase tracking-widest text-white">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {rules.map((rule, index) => (
+            <motion.div
+              key={rule.id}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.07, duration: 0.42 }}
+              viewport={{ once: true, margin: '-80px' }}
+            >
+              <GlassCard className="group h-full rounded-2xl border border-white/[0.1] p-6">
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="font-display text-3xl leading-none tracking-[0.12em] text-white/[0.2]">
+                    {rule.id}
+                  </span>
+                  <span className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-white/[0.52]">
+                    Rule
+                  </span>
+                </div>
+                <h3 className="mb-3 font-display text-base leading-tight tracking-[0.14em] text-white">
                   {rule.title}
                 </h3>
-                <p className="text-off-white/40 text-sm leading-relaxed">{rule.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+                <p className="text-body-soft">{rule.desc}</p>
+              </GlassCard>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

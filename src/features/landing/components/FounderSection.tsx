@@ -1,94 +1,142 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Instagram, Linkedin, Twitter, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+
+import { Button, GlassCard } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
+
+const founderMetrics = [
+  { value: '350+', label: 'Nights Captured' },
+  { value: '24HR', label: 'Turnaround Standard' },
+  { value: '10+', label: 'Premium Venues' },
+  { value: '4.9/5', label: 'Partner Score' },
+];
+
+const founderPillars = [
+  'Cinema-first direction',
+  'Real nightlife timing',
+  'Conversion over vanity',
+  'Operational discipline',
+];
 
 /**
  * FounderSection
- * Credits the vision behind GettUpp with a personal bio and contact links.
+ * Story and leadership proof behind the GettUpp methodology.
  */
 export const FounderSection = () => {
   return (
-    <section className="relative overflow-hidden bg-deep-void py-32">
+    <section id="founder" className="relative overflow-hidden border-b border-white/5 bg-deep-void py-24 md:py-32">
+      <SectionBackdrop variant="neutral" />
+
       <div className="container relative z-10 mx-auto px-4">
-        <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-2">
+        <SectionIntro
+          className="mb-12 max-w-4xl md:mb-16"
+          tone="neutral"
+          kicker="Founder Lens"
+          title="BUILT BY SOMEONE WHO"
+          highlight="LIVES THE FLOOR"
+          description="GettUpp is led by a creator who built his reputation inside packed rooms, then turned that instinct into a repeatable growth system for premium venues."
+          descriptionClassName="text-white/[0.7]"
+        />
+
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_1.08fr] lg:gap-14">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -22 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-80px' }}
             className="relative"
           >
-            <div className="glass-heavy relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/10">
+            <div className="glass-heavy relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/15">
               <Image
                 src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80"
-                alt="Founder"
+                alt="GettUpp founder portrait"
                 fill
-                className="object-cover grayscale transition-all duration-1000 hover:grayscale-0"
+                className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/40 to-transparent p-12">
-                <div className="mb-2 text-sm font-black uppercase tracking-[0.3em] text-vegas-gold">
-                  Architect & Visionary
-                </div>
-                <h3 className="font-display text-4xl uppercase tracking-tighter text-white">
-                  ALEXANDER ZENITH
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-8 md:p-10">
+                <p className="text-premium-sm text-vegas-gold">Founder & Executive Producer</p>
+                <h3 className="mt-2 font-display text-4xl leading-none tracking-[0.12em] text-white md:text-5xl">
+                  JOHNNY CAGE
                 </h3>
+                <p className="mt-2 text-sm text-white/[0.66]">GettUpp Entertainment</p>
               </div>
             </div>
 
-            {/* Signature Element */}
-            <div className="glass-medium absolute -bottom-6 -right-6 rotate-3 rounded-2xl border border-white/10 p-8">
-              <span className="font-display text-2xl text-vegas-gold">AZ.</span>
+            <div className="glass-medium absolute -bottom-6 -right-6 rounded-2xl border border-white/15 px-5 py-4">
+              <span className="font-display text-xl tracking-[0.22em] text-vegas-gold">GETTUPP DNA</span>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 22 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
+            viewport={{ once: true, margin: '-80px' }}
+            className="space-y-7"
           >
-            <div className="space-y-4">
-              <h2 className="font-display text-5xl uppercase leading-none tracking-tighter text-white md:text-7xl">
-                THE <span className="text-white/20">MAN</span> <br />
-                BEHIND THE <span className="text-vegas-gold">LENS</span>
-              </h2>
-              <p className="text-off-white/40 text-xs uppercase tracking-[0.5em]">
-                GettUpp Founder & Executive Producer
+            <GlassCard className="rounded-3xl border-white/15 p-7 md:p-9" intensity="high">
+              <p className="text-lg italic leading-relaxed text-white/[0.78]">
+                &ldquo;The camera is only half the job. The other half is knowing exactly how a
+                room moves, where the tension builds, and how to turn that energy into booked
+                tables by Monday morning.&rdquo;
               </p>
-            </div>
+              <p className="mt-4 text-[11px] font-black uppercase tracking-[0.24em] text-vegas-gold">
+                Johnny Cage
+              </p>
+            </GlassCard>
 
-            <p className="text-off-white/60 text-lg italic leading-relaxed">
-              &ldquo;We don&apos;t just record nights; we archive the culture. Every shutter click
-              is an investment in your brand&apos;s digital legacy. In a world of 24-hour relevance,
-              we ensure your moments live forever in the highest possible fidelity.&rdquo;
-            </p>
-
-            <div className="flex gap-4">
-              {[Instagram, Twitter, Linkedin].map((Icon, i) => (
-                <button
-                  key={i}
-                  className="flex size-12 items-center justify-center rounded-full border border-white/10 text-white/40 transition-all duration-500 hover:border-vegas-gold hover:text-vegas-gold"
+            <div className="grid grid-cols-2 gap-3">
+              {founderMetrics.map((metric) => (
+                <div
+                  key={metric.label}
+                  className="liquid-glass rounded-2xl border border-white/[0.12] p-4"
                 >
-                  <Icon size={20} />
-                </button>
+                  <p className="font-display text-2xl leading-none tracking-widest text-white">
+                    {metric.value}
+                  </p>
+                  <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/[0.54]">
+                    {metric.label}
+                  </p>
+                </div>
               ))}
             </div>
 
-            <div className="border-t border-white/5 pt-8">
-              <div className="mb-4 text-[10px] font-black uppercase tracking-[0.3em] text-white/20">
-                Core Philosophy
-              </div>
-              <div className="flex flex-wrap gap-4">
-                {['Zero Friction', 'Cinema First', 'Viral ROI'].map((pill) => (
-                  <div
-                    key={pill}
-                    className="rounded-full border border-white/5 bg-white/5 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white"
+            <div className="flex flex-wrap gap-2.5">
+              {founderPillars.map((pillar) => (
+                <span
+                  key={pillar}
+                  className="rounded-full border border-white/[0.12] bg-white/5 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/[0.76]"
+                >
+                  {pillar}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3">
+                {[Instagram, Twitter, Linkedin].map((Icon, index) => (
+                  <button
+                    key={index}
+                    className="hover:border-vegas-gold/45 flex size-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/[0.7] transition-all hover:text-vegas-gold"
+                    aria-label="Visit founder social profile"
                   >
-                    {pill}
-                  </div>
+                    <Icon size={16} />
+                  </button>
                 ))}
               </div>
+
+              <Button
+                asChild
+                variant="outline"
+                className="rounded-2xl px-6 py-3 text-[11px] tracking-[0.2em]"
+              >
+                <a href="#lead-capture">
+                  Work With The Founder <ArrowRight size={15} />
+                </a>
+              </Button>
             </div>
           </motion.div>
         </div>

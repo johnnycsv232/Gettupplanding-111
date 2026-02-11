@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { resolveSkillsDirectory } from './workspace-paths';
+
 function validateSkills(skillsDir: string) {
   console.log(`🔍 Validating skills in: ${skillsDir}`);
   const errors: string[] = [];
@@ -65,5 +67,6 @@ function validateSkills(skillsDir: string) {
   }
 }
 
-const skillsPath = path.join(process.cwd(), 'skills');
-validateSkills(skillsPath);
+const skillsPath = resolveSkillsDirectory(false);
+const isValid = validateSkills(skillsPath);
+process.exit(isValid ? 0 : 1);

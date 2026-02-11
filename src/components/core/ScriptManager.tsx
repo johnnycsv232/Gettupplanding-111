@@ -21,11 +21,15 @@ const EXTERNAL_SCRIPTS: ScriptConfig[] = [
   // Add other scripts here (Pixel, Analytics, etc.)
 ];
 
+interface ScriptManagerProps {
+  nonce?: string;
+}
+
 /**
  * ScriptManager
  * Unified component for loading third-party scripts based on environment.
  */
-export function ScriptManager() {
+export function ScriptManager({ nonce }: ScriptManagerProps) {
   if (env.NODE_ENV === 'development') {
     return null;
   }
@@ -39,6 +43,7 @@ export function ScriptManager() {
           src={script.src}
           strategy={script.strategy}
           onLoad={script.onLoad}
+          nonce={nonce}
         />
       ))}
     </>

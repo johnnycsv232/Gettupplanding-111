@@ -72,7 +72,7 @@ export function usePagination({
     }
 
     return [];
-  }, [totalItems, itemsPerPage, currentPage, siblingCount, totalPages]);
+  }, [currentPage, siblingCount, totalPages]);
 
   return {
     currentPage,

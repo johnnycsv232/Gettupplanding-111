@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
         err.message?.includes('ALREADY_EXISTS')
       ) {
         console.warn(`ℹ️ Event ${eventId} already processed or processing. Skipping.`);
-        return NextResponse.json({ received: true, skipped: true });
+        return NextResponse.json({ success: true, received: true, skipped: true });
       }
     }
     // Real db error
@@ -171,29 +171,54 @@ async function handleCheckoutSessionCompleted(
 ) {
   const { metadata, customer, subscription } = session;
   const { userId, tier } = metadata;
+  const subscriptionId = typeof subscription === 'string' && subscription.length > 0 ? subscription : null;
 
-  // Create Subscription Record
-  await db
-    .collection('subscriptions')
-    .doc(subscription as string)
-    .set({
-      userId,
-      tier,
+  if (subscriptionId) {
+    // Create Subscription Record
+    await db
+      .collection('subscriptions')
+      .doc(subscriptionId)
+      .set({
+        userId,
+        tier,
+        stripeCustomerId: customer,
+        stripeSubscriptionId: subscriptionId,
+        status: 'active', // Optimistic, will be updated by subscription.updated
+        createdAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+
+    // Update User Record with Tier
+    await updateDocumentWithMergeFallback(db.collection('users').doc(userId), {
+      subscriptionTier: tier,
       stripeCustomerId: customer,
-      stripeSubscriptionId: subscription,
-      status: 'active', // Optimistic, will be updated by subscription.updated
-      createdAt: FieldValue.serverTimestamp(),
+      hasActiveSubscription: true,
+      subscriptionStatus: 'active',
       updatedAt: FieldValue.serverTimestamp(),
     });
 
-  // Update User Record with Tier
-  await db.collection('users').doc(userId).update({
-    subscriptionTier: tier,
+    console.warn(`✅ Provisioned Tier [${tier}] for User [${userId}] via Session [${session.id}]`);
+    return;
+  }
+
+  // One-time payment checkout (no subscription id present).
+  await db.collection('payments').doc(session.id).set({
+    userId,
+    tier,
     stripeCustomerId: customer,
-    hasActiveSubscription: true,
+    checkoutSessionId: session.id,
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    status: 'paid',
   });
 
-  console.warn(`✅ Provisioned Tier [${tier}] for User [${userId}] via Session [${session.id}]`);
+  await updateDocumentWithMergeFallback(db.collection('users').doc(userId), {
+    stripeCustomerId: customer,
+    lastPaymentSessionId: session.id,
+    updatedAt: FieldValue.serverTimestamp(),
+  });
+
+  console.warn(`✅ Recorded payment session [${session.id}] for User [${userId}]`);
 }
 
 async function handleSubscriptionUpdated(
@@ -203,7 +228,7 @@ async function handleSubscriptionUpdated(
   const { id, status, metadata } = subscription;
   const { userId } = metadata;
 
-  await db.collection('subscriptions').doc(id).update({
+  await updateDocumentWithMergeFallback(db.collection('subscriptions').doc(id), {
     status,
     updatedAt: FieldValue.serverTimestamp(),
   });
@@ -212,9 +237,10 @@ async function handleSubscriptionUpdated(
   // Statuses that grant access: active, trialing
   const isActive = status === 'active' || status === 'trialing';
 
-  await db.collection('users').doc(userId).update({
+  await updateDocumentWithMergeFallback(db.collection('users').doc(userId), {
     hasActiveSubscription: isActive,
     subscriptionStatus: status,
+    updatedAt: FieldValue.serverTimestamp(),
   });
 
   console.warn(`🔄 Updated Subscription [${id}] for User [${userId}]. Status: ${status}`);
@@ -227,16 +253,17 @@ async function handleSubscriptionDeleted(
   const { id, metadata } = subscription;
   const { userId } = metadata;
 
-  await db.collection('subscriptions').doc(id).update({
+  await updateDocumentWithMergeFallback(db.collection('subscriptions').doc(id), {
     status: 'canceled',
     canceledAt: FieldValue.serverTimestamp(),
     updatedAt: FieldValue.serverTimestamp(),
   });
 
-  await db.collection('users').doc(userId).update({
+  await updateDocumentWithMergeFallback(db.collection('users').doc(userId), {
     hasActiveSubscription: false,
     subscriptionTier: 'free', // Downgrade to free
     subscriptionStatus: 'canceled',
+    updatedAt: FieldValue.serverTimestamp(),
   });
 
   console.warn(`🚫 Deleted Subscription [${id}] for User [${userId}]. Downgraded to free.`);
@@ -254,11 +281,39 @@ async function handleInvoicePaymentFailed(invoice: InvoiceEvent, db: FirebaseFir
 
   // Update subscription status in DB
   // Stripe will automatically retry based on settings, but we should reflect the state
-  await db.collection('subscriptions').doc(subscription).update({
+  await updateDocumentWithMergeFallback(db.collection('subscriptions').doc(subscription), {
     status: 'past_due',
     updatedAt: FieldValue.serverTimestamp(),
   });
 
   // Optional: Trigger email or notification here
   // In a real app, you'd check which retry attempt this is
+}
+
+function isFirestoreNotFoundError(error: unknown): boolean {
+  if (!error || typeof error !== 'object') {
+    return false;
+  }
+
+  const candidate = error as { code?: number | string; message?: string };
+  return (
+    candidate.code === 5 ||
+    candidate.code === 'NOT_FOUND' ||
+    candidate.message?.includes('NOT_FOUND') === true
+  );
+}
+
+async function updateDocumentWithMergeFallback(
+  docRef: FirebaseFirestore.DocumentReference,
+  data: FirebaseFirestore.UpdateData<FirebaseFirestore.DocumentData>
+): Promise<void> {
+  try {
+    await docRef.update(data);
+  } catch (error: unknown) {
+    if (!isFirestoreNotFoundError(error)) {
+      throw error;
+    }
+
+    await docRef.set(data, { merge: true });
+  }
 }

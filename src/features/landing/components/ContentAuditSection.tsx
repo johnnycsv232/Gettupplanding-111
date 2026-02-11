@@ -4,74 +4,94 @@ import { motion } from 'framer-motion';
 import { TrendingDown, Users, Target, ShieldAlert } from 'lucide-react';
 
 import { GlassCard } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
 
 const failurePoints = [
   {
     icon: TrendingDown,
-    title: 'Low Frame Rate',
-    desc: 'Choppy 24fps mobile Recaps devalue your venues perceived status.',
-    impact: 'Poor Retention',
+    title: 'Content Dies Before Peak Hour',
+    desc: 'Most teams post too late. The moment fades before the recap lands.',
+    impact: 'Lower same-week bookings',
   },
   {
     icon: ShieldAlert,
-    title: 'Dark Lighting',
-    desc: 'iPhone-only production loses the atmosphere in shadows.',
-    impact: 'Lost Aesthetic',
+    title: 'Lighting Is Crushed',
+    desc: 'Phone-only workflows miss texture, depth, and table energy in dark scenes.',
+    impact: 'Premium brand feel is lost',
   },
   {
     icon: Users,
-    title: 'Generic Angles',
-    desc: 'Lacking the cinematic direction needed for viral clout.',
-    impact: 'Zero Engagement',
+    title: 'No Narrative Direction',
+    desc: 'Random clips without a story underperform on watch time and saves.',
+    impact: 'Audience drop-off',
   },
   {
     icon: Target,
-    title: 'Delayed Delivery',
-    desc: 'Content delivered 3 days later is already dead on arrival.',
-    impact: 'Irrelevance',
+    title: 'No Conversion Layer',
+    desc: 'Great visuals without clear hooks and CTAs fail to move real revenue.',
+    impact: 'High reach, low bookings',
   },
 ];
 
 /**
  * ContentAuditSection
- * Highlights common flaws in competitor content to set the stage for GettOpp's solution.
+ * Frames common nightlife content failures before introducing solutions.
  */
 export const ContentAuditSection = () => {
-  return (
-    <section className="bg-void border-b border-white/5 py-32">
-      <div className="container mx-auto px-4">
-        <div className="mb-24 max-w-3xl">
-          <motion.span
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="mb-4 block text-xs font-black uppercase tracking-[0.4em] text-red-500"
-          >
-            The Critical Failure
-          </motion.span>
-          <h2 className="font-display text-5xl uppercase leading-none tracking-tighter text-white md:text-7xl">
-            WHY YOUR CONTENT IS <br />
-            <span className="text-off-white/20">KILLING THE VIBE</span>
-          </h2>
-        </div>
+  const gridVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {failurePoints.map((point, i) => (
-            <GlassCard key={i} className="group border-red-500/10 p-8 hover:border-red-500/30">
-              <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-red-500/10 text-red-500 transition-all duration-500 group-hover:bg-red-500 group-hover:text-white">
-                <point.icon size={24} />
-              </div>
-              <h3 className="font-display mb-2 text-lg uppercase tracking-widest text-white">
-                {point.title}
-              </h3>
-              <p className="text-off-white/40 mb-6 text-sm leading-relaxed">{point.desc}</p>
-              <div className="border-t border-white/5 pt-4">
-                <span className="text-[10px] font-black uppercase tracking-widest text-red-500">
-                  Impact: {point.impact}
-                </span>
-              </div>
-            </GlassCard>
+  const cardVariants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+  };
+
+  return (
+    <section className="section-shell border-b border-white/5 bg-void">
+      <SectionBackdrop variant="danger" />
+      <div className="container relative z-10 mx-auto px-4">
+        <SectionIntro
+          tone="danger"
+          className="mb-16 max-w-3xl md:mb-20"
+          kicker="Where Most Venues Leak Revenue"
+          title="YOUR CONTENT LOOKS ACTIVE,"
+          highlight="BUT IT ISN'T CONVERTING."
+          highlightClassName="text-white/[0.28] text-shadow-none"
+        />
+
+        <motion.div
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4"
+        >
+          {failurePoints.map((point) => (
+            <motion.div key={point.title} variants={cardVariants}>
+              <GlassCard className="group h-full border-red-400/15 p-7 hover:border-red-400/35">
+                <div className="mb-5 flex size-11 items-center justify-center rounded-xl border border-red-300/20 bg-red-500/10 text-red-300 transition-all duration-500 group-hover:bg-red-500 group-hover:text-white">
+                  <point.icon size={20} />
+                </div>
+                <h3 className="mb-3 font-display text-base leading-tight tracking-[0.12em] text-white">
+                  {point.title}
+                </h3>
+                <p className="text-body-soft mb-6">{point.desc}</p>
+                <div className="border-t border-white/[0.08] pt-4">
+                  <span className="text-[10px] font-black uppercase tracking-[0.18em] text-red-300/95">
+                    Impact: {point.impact}
+                  </span>
+                </div>
+              </GlassCard>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

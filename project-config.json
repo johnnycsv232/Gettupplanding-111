@@ -5,13 +5,24 @@
     "script": "npm install",
     "bash": "#!/bin/bash\nnpm install\n# Add setup commands here...",
     "description": "Installs dependencies and prepares the worktree.",
-    "required_skills": ["npm-best-practices", "skill-developer", "workflow-automation"]
+    "required_skills": [
+      "npm-best-practices",
+      "skill-developer",
+      "workflow-automation",
+      "error-handling-resilience"
+    ]
   },
   "dev": {
     "script": "npm run dev",
     "bash": "#!/bin/bash\nnpm run dev\n# Add dev server command here...",
     "description": "Starts the development server.",
-    "required_skills": ["nextjs-best-practices", "react-best-practices", "3d-web-experience"]
+    "required_skills": [
+      "nextjs-best-practices",
+      "react-best-practices",
+      "3d-web-experience",
+      "performance-optimization-advanced",
+      "utility-libraries-advanced"
+    ]
   },
   "cleanup": {
     "script": "npm run lint",
@@ -20,7 +31,11 @@
     "required_skills": [
       "lint-and-validate",
       "test-driven-development",
-      "verification-before-completion"
+      "verification-before-completion",
+      "error-handling-resilience",
+      "monitoring-logging-production",
+      "code-quality-eslint-prettier",
+      "git-workflows-husky"
     ]
   },
   "copy_files": [
@@ -49,14 +64,30 @@
       "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID",
       "NEXT_PUBLIC_FIREBASE_APP_ID"
     ],
-    "Stripe": ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"],
-    "Sanity": ["NEXT_PUBLIC_SANITY_PROJECT_ID", "NEXT_PUBLIC_SANITY_DATASET"]
+    "Stripe": [
+      "STRIPE_SECRET_KEY",
+      "STRIPE_WEBHOOK_SECRET",
+      "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+      "STRIPE_LIVE_KEY"
+    ],
+    "Sanity": ["NEXT_PUBLIC_SANITY_PROJECT_ID", "NEXT_PUBLIC_SANITY_DATASET"],
+    "AI": ["GOOGLE_GENERATIVE_AI_API_KEY", "OPENAI_API_KEY"],
+    "Monitoring": ["SENTRY_DSN", "VERCEL_ANALYTICS_ID"]
   },
   "skill_protocols": {
     "planning": "Use @plan-writing and @senior-architect for all structural changes.",
     "development": "Enforce @typescript-expert and @zod for boundary safety.",
     "verification": "Mandate @tdd-workflow and @systematic-debugging for all fixes.",
-    "visuals": "Leverage @3d-web-experience and @ui-ux-pro-max for core UI components."
+    "visuals": "Leverage @3d-web-experience and @ui-ux-pro-max for core UI components.",
+    "ai": "Use @ai-integration-genkit and @ai-integration-langchain for AI features.",
+    "cms": "Leverage @cms-integration-sanity for content management.",
+    "performance": "Apply @performance-optimization-advanced for all production builds.",
+    "security": "Enforce @security-hardening-advanced for production deployments.",
+    "testing": "Use @e2e-testing-playwright, @unit-testing-vitest, and @testing-library-react for comprehensive testing.",
+    "quality": "Apply @code-quality-eslint-prettier and @git-workflows-husky for code quality.",
+    "accessibility": "Enforce @accessibility-wcag-compliance for inclusive design.",
+    "database": "Use @database-firebase-advanced for scalable data patterns.",
+    "api": "Apply @api-design-rest-graphql for robust backend integration."
   },
   "invariants": {
     "security": [
@@ -125,7 +156,11 @@
       "performance_audit": "tsx scripts/lighthouse_audit.ts",
       "security_scan": "tsx scripts/security_scan.ts",
       "api_validation": "tsx scripts/api_validator.ts",
-      "schema_validation": "tsx scripts/schema_validator.ts"
+      "schema_validation": "tsx scripts/schema_validator.ts",
+      "integration_map_audit": "tsx scripts/integration_map_audit.ts",
+      "bundle_analysis": "tsx scripts/bundle_analyzer.ts",
+      "accessibility_audit": "tsx scripts/accessibility_audit.ts",
+      "i18n_validation": "tsx scripts/i18n_validator.ts"
     }
   }
 }

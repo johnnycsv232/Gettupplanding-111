@@ -34,7 +34,7 @@ export class ErrorBoundary3D extends Component<Props, State> {
         this.props.fallback || (
           <div className="absolute inset-0 flex items-center justify-center bg-deep-void">
             <div className="glass-medium rounded-2xl p-8 text-center">
-              <h3 className="font-display mb-2 text-vegas-gold">IMMERSION PAUSED</h3>
+              <h3 className="mb-2 font-display text-vegas-gold">IMMERSION PAUSED</h3>
               <p className="text-xs uppercase tracking-widest text-white/40">
                 Hardware acceleration unavailable or encounterd an issue.
               </p>

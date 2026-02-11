@@ -39,15 +39,15 @@ export default function TestThemePage() {
           </h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <GlassCard className="p-6" intensity="low">
-              <h3 className="font-display mb-2 text-xl text-vegas-gold">Low Intensity</h3>
+              <h3 className="mb-2 font-display text-xl text-vegas-gold">Low Intensity</h3>
               <p className="text-off-white/70">Subtle backdrop blur and borders.</p>
             </GlassCard>
             <GlassCard className="p-6" intensity="medium">
-              <h3 className="font-display mb-2 text-xl text-vegas-gold">Medium Intensity</h3>
+              <h3 className="mb-2 font-display text-xl text-vegas-gold">Medium Intensity</h3>
               <p className="text-off-white/70">Our standard &quot;Liquid Glass&quot; effect.</p>
             </GlassCard>
             <GlassCard className="p-6" intensity="high" hoverEffect>
-              <h3 className="font-display mb-2 text-xl text-vegas-gold">High + Hover</h3>
+              <h3 className="mb-2 font-display text-xl text-vegas-gold">High + Hover</h3>
               <p className="text-off-white/70">Maximum blur and motion interactions.</p>
             </GlassCard>
           </div>
@@ -63,7 +63,7 @@ export default function TestThemePage() {
             </Button>
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
               <div className="p-10 text-center">
-                <h2 className="font-display mb-4 text-4xl uppercase text-vegas-gold">
+                <h2 className="mb-4 font-display text-4xl uppercase text-vegas-gold">
                   The Velvet Rope
                 </h2>
                 <p className="mb-8 text-off-white">

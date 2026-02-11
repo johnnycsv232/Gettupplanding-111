@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import { useInfiniteScroll } from '../../src/hooks/useInfiniteScroll';
@@ -30,7 +30,9 @@ describe('useInfiniteScroll', () => {
   it('should call onLoadMore on mount if initialLoad is true', async () => {
     const onLoadMore = vi.fn().mockResolvedValue(undefined);
     renderHook(() => useInfiniteScroll(onLoadMore, { initialLoad: true }));
-    expect(onLoadMore).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(onLoadMore).toHaveBeenCalled();
+    });
   });
 
   it('should NOT call onLoadMore on mount if initialLoad is false', async () => {

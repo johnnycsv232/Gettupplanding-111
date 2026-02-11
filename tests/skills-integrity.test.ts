@@ -3,7 +3,7 @@ import * as path from 'path';
 
 import { describe, it, expect } from 'vitest';
 
-const SKILLS_DIR = path.join(process.cwd(), '.agent', 'skills');
+const SKILLS_DIR = path.join(process.cwd(), '.agent', 'skills', 'skills');
 
 describe('Sovereign Skill Library Integrity', () => {
   it('should have the canonical skills directory', () => {

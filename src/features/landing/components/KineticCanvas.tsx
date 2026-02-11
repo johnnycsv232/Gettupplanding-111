@@ -87,7 +87,9 @@ export const KineticCanvas = () => {
           </p>
 
           <div className="glass-heavy rounded-3xl border-white/10 bg-white/5 p-8">
-            <h3 className="mb-2 text-2xl font-bold text-white">{services[activeIdx].name}</h3>
+            <h3 className="mb-2 font-display text-2xl font-bold tracking-widest text-white">
+              {services[activeIdx].name}
+            </h3>
             <p className="text-off-white/60">{services[activeIdx].desc}</p>
           </div>
         </div>

@@ -1,13 +1,22 @@
 'use server';
 
+import type { ActionResult } from '@/lib/actions';
+import { leadArchitectFlow } from '@/lib/ai/genkit';
 import { saveLead } from '@/lib/leads';
 
-export async function submitLeadAction(formData: FormData) {
-  const email = formData.get('email') as string;
-  const source = (formData.get('source') as string) || 'unknown';
+type LeadActionData = { id: string };
+export type SubmitLeadActionResult = ActionResult<LeadActionData>;
+
+export async function submitLeadAction(formData: FormData): Promise<SubmitLeadActionResult> {
+  const email = String(formData.get('email') ?? '').trim();
+  const source = String(formData.get('source') ?? 'unknown').trim() || 'unknown';
 
   if (!email) {
-    return { success: false, error: 'Email is required' };
+    return {
+      success: false,
+      error: 'Email is required',
+      timestamp: new Date().toISOString(),
+    };
   }
 
   // Reuse existing lead logic
@@ -16,23 +25,31 @@ export async function submitLeadAction(formData: FormData) {
 
 /**
  * agentChatAction
- * Server Action to simulate AI responses or eventually call an LLM.
+ * Server Action to invoke the Firebase Genkit autonomous agent flow.
  */
-export async function agentChatAction(message: string) {
-  // Simulate network latency
-  await new Promise((resolve) => setTimeout(resolve, 800));
+export async function agentChatAction(
+  message: string,
+  city: string = 'Your City',
+  country: string = 'US'
+) {
+  try {
+    const result = await leadArchitectFlow({
+      message,
+      city,
+      country,
+    });
 
-  let response =
-    'Understood. Our team specializes in high-energy production. Would you like to schedule a strategy audit?';
-
-  const userMessage = message.toLowerCase();
-
-  if (userMessage.includes('price') || userMessage.includes('cost')) {
-    response =
-      'Our retainers are tailored for high-growth venues. We usually start with a Pilot Phase to prove ROI. Should I send over the pricing deck?';
-  } else if (userMessage.includes('hello') || userMessage.includes('hi')) {
-    response = `Greetings! Great to see you're interested in scaling. How can I held you dominate today?`;
+    return {
+      success: true,
+      response: result.response,
+      intent: result.intent,
+      score: result.score,
+    };
+  } catch (error: unknown) {
+    console.error('Genkit Flow Error:', error);
+    return {
+      success: false,
+      response: 'The Lead Architect is currently recalibrating. Please try again in a moment.',
+    };
   }
-
-  return { success: true, response };
 }

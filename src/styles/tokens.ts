@@ -15,8 +15,8 @@ export const tokens = {
   },
   typography: {
     display: 'Orbitron, sans-serif',
-    ui: 'Inter, sans-serif',
-    serif: 'Inter, serif',
+    ui: 'Manrope, sans-serif',
+    serif: 'Cormorant Garamond, serif',
   },
   spacing: {
     xs: 'var(--spacing-xs)',

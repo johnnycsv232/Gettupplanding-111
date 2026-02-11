@@ -29,7 +29,7 @@ export const LoadingFallback = () => {
             initial={{ x: '-100%' }}
             animate={{ x: '100%' }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-            className="via-vegas-gold/50 size-full bg-gradient-to-r from-transparent to-transparent"
+            className="size-full bg-[linear-gradient(to_right,transparent,rgba(212,175,55,0.5),transparent)]"
           />
         </div>
         <span className="text-vegas-gold/40 text-[10px] font-black uppercase tracking-[0.5em]">

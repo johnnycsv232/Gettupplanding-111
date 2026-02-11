@@ -1,6 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
+
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
 
 const girls = [
   {
@@ -27,32 +31,32 @@ const girls = [
  */
 export const GettuppGirlsSection = () => {
   return (
-    <section className="bg-void overflow-hidden border-t border-white/5 py-32">
-      <div className="container mx-auto mb-20 px-4 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          className="space-y-4"
-        >
-          <span className="text-[10px] font-black uppercase tracking-[0.6em] text-vegas-gold">
-            The Aesthetic Vanguard
-          </span>
-          <h2 className="font-display text-5xl uppercase tracking-tighter text-white md:text-8xl">
-            GETTUPP <span className="text-white/20">COLLECTION</span>
-          </h2>
-        </motion.div>
+    <section className="section-shell overflow-hidden border-t border-white/5 bg-void">
+      <SectionBackdrop variant="neutral" />
+      <div className="container relative z-10 mx-auto mb-14 px-4 text-center md:mb-16">
+        <SectionIntro
+          align="center"
+          className="mx-auto max-w-3xl"
+          tone="neutral"
+          kicker="The Aesthetic Vanguard"
+          kickerIcon={<Sparkles size={13} />}
+          title="GETTUPP"
+          highlight="COLLECTION"
+          highlightClassName="text-white/[0.38] text-shadow-none"
+          description="A high-fashion production lane built to elevate campaign visuals and nightlife identity systems."
+        />
       </div>
 
-      <div className="relative flex overflow-hidden border-y border-white/5 bg-black/20">
+      <div className="relative flex overflow-hidden border-y border-white/[0.08] bg-black/[0.26]">
         <div className="animate-marquee flex gap-6 py-12">
-          {[...girls, ...girls].map((girl, i) => (
+          {[...girls, ...girls].map((girl, index) => (
             <motion.div
-              key={i}
+              key={`${girl.label}-${index}`}
               whileHover={{ y: -20, scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="glass-heavy glint-effect group relative aspect-[3/4] w-[300px] shrink-0 overflow-hidden rounded-2xl border border-white/10 md:w-[400px]"
+              className="glass-heavy glint-effect group relative aspect-[3/4] w-[280px] shrink-0 overflow-hidden rounded-2xl border border-white/15 md:w-[360px]"
             >
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-20" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/20 to-transparent opacity-65 transition-opacity group-hover:opacity-25" />
               <div
                 className="absolute inset-0 bg-cover bg-center contrast-[1.1] grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0"
                 style={{ backgroundImage: `url(${girl.img})` }}
@@ -67,8 +71,8 @@ export const GettuppGirlsSection = () => {
         </div>
       </div>
 
-      <div className="mt-20 text-center">
-        <span className="font-display animate-pulse text-sm uppercase tracking-[0.5em] text-white/20">
+      <div className="relative z-10 mt-14 text-center md:mt-16">
+        <span className="animate-pulse font-display text-sm uppercase tracking-[0.5em] text-white/[0.35]">
           Coming Soon: The Winter Collection
         </span>
       </div>

@@ -9,7 +9,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const SKILLS_DIR = path.join(process.cwd(), 'skills');
+import { resolveSkillsDirectory } from './workspace-paths';
+
+const SKILLS_DIR = resolveSkillsDirectory();
 
 // Allowed frontmatter fields per SkillPort spec
 const ALLOWED_FIELDS = new Set([
@@ -237,4 +239,7 @@ async function main() {
   console.log('\n✅ Done! Run "skillport validate skills" to verify.');
 }
 
-main().catch(console.error);
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

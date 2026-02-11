@@ -21,5 +21,10 @@
     "**/node_modules/**": true,
     "**/.next/**": true
   },
-  "editor.codeActions.triggerOnFocusChange": true
+  "editor.codeActions.triggerOnFocusChange": true,
+  "tailwindCSS.lint.invalidConfigPath": "warning",
+  "tailwindCSS.lint.invalidApply": "warning",
+  "tailwindCSS.lint.invalidScreen": "warning",
+  "tailwindCSS.lint.invalidTailwindDirective": "warning",
+  "tailwindCSS.lint.invalidVariant": "warning"
 }

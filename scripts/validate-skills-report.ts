@@ -7,7 +7,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const SKILLS_DIR = path.join(process.cwd(), 'skills');
+import { resolveSkillsDirectory } from './workspace-paths';
+
+const SKILLS_DIR = resolveSkillsDirectory();
 
 const ALLOWED_FIELDS = new Set([
   'name',
@@ -157,4 +159,7 @@ async function main() {
   process.exit(invalidCount > 0 ? 1 : 0);
 }
 
-main().catch(console.error);
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

@@ -25,7 +25,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const variants = {
       primary:
-        'bg-vegas-gold text-deep-void-black font-bold hover:bg-yellow-400 box-glow-gold border border-vegas-gold',
+        'bg-vegas-gold text-black font-bold hover:bg-yellow-400 box-glow-gold border border-vegas-gold',
       secondary: 'bg-transparent border border-vegas-gold text-vegas-gold hover:bg-vegas-gold/10',
       ghost: 'bg-transparent text-off-white hover:text-white hover:bg-white/5',
       neon: 'bg-neon-magenta text-white border border-neon-magenta box-glow-magenta hover:bg-fuchsia-500',
@@ -42,7 +42,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const baseClasses = cn(
-      'font-display relative flex items-center justify-center gap-2 rounded-none uppercase tracking-wider transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50',
+      'relative flex items-center justify-center gap-2 rounded-none font-display uppercase tracking-wider transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50',
       variants[variant as keyof typeof variants],
       sizes[size],
       className

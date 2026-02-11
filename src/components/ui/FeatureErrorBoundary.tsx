@@ -53,7 +53,7 @@ export class FeatureErrorBoundary extends Component<Props, State> {
             <div className="mx-auto mb-6 flex size-20 items-center justify-center rounded-full bg-red-500/10 text-red-500">
               <AlertTriangle size={40} />
             </div>
-            <h2 className="font-display mb-4 text-2xl uppercase tracking-tighter text-white">
+            <h2 className="mb-4 font-display text-2xl uppercase tracking-tighter text-white">
               SYSTEM <span className="text-red-500">ANOMALY</span>
             </h2>
             <p className="mb-8 text-sm leading-relaxed text-white/60">

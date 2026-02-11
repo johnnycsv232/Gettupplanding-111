@@ -19,7 +19,7 @@ interface LeadsTableProps {
 export function LeadsTable({ leads }: LeadsTableProps) {
   return (
     <GlassCard className="p-6">
-      <h2 className="mb-6 text-xl font-bold">Recent Leads</h2>
+      <h2 className="mb-6 font-display text-xl">Recent Leads</h2>
       {leads.length === 0 ? (
         <EmptyState
           icon={Users}

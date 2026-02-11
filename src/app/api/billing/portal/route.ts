@@ -3,38 +3,63 @@
  */
 
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
 
-import { getAdminAuth, getAdminDb } from '@/lib/firebase-admin';
+import { verifyBearerTokenFromRequest } from '@/lib/api-auth';
+import { getAdminDb } from '@/lib/firebase-admin';
 import { createBillingPortalSession } from '@/lib/services/customer.service';
+
+const billingPortalRequestSchema = z
+  .object({
+    returnUrl: z.string().url('returnUrl must be a valid URL'),
+  })
+  .strict();
 
 export async function POST(req: Request) {
   try {
-    const authHeader = req.headers.get('Authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
+    const decodedToken = await verifyBearerTokenFromRequest(req);
+    if (!decodedToken) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const idToken = authHeader.split('Bearer ')[1];
-    const decodedToken = await getAdminAuth().verifyIdToken(idToken);
     const userId = decodedToken.uid;
 
-    const { returnUrl } = await req.json();
-
-    if (!returnUrl) {
-      return NextResponse.json({ error: 'returnUrl is required' }, { status: 400 });
+    let rawBody: unknown;
+    try {
+      rawBody = await req.json();
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
     }
 
+    const { returnUrl } = billingPortalRequestSchema.parse(rawBody);
+
     // SECURITY: Validate returnUrl to prevent open redirect attacks
-    const allowedOrigins = [
-      process.env.NEXT_PUBLIC_APP_URL,
-      'http://localhost:3000',
-      'https://gettupp.com',
-      'https://www.gettupp.com',
-    ].filter(Boolean);
+    const allowedOrigins = new Set(
+      [
+        process.env.NEXT_PUBLIC_APP_URL,
+        process.env.APP_URL,
+        process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+        process.env.VERCEL_PROJECT_PRODUCTION_URL
+          ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+          : undefined,
+        'http://127.0.0.1:3000',
+        'http://localhost:3000',
+        'https://gettupp.com',
+        'https://www.gettupp.com',
+      ]
+        .filter((value): value is string => Boolean(value))
+        .flatMap((value) => {
+          try {
+            return [new URL(value).origin];
+          } catch {
+            return [];
+          }
+        })
+    );
 
     try {
       const url = new URL(returnUrl);
-      const isAllowed = allowedOrigins.some((origin) => url.origin === origin);
+      const isAllowed = allowedOrigins.has(url.origin);
       if (!isAllowed) {
         return NextResponse.json({ error: 'Invalid returnUrl' }, { status: 400 });
       }
@@ -62,8 +87,12 @@ export async function POST(req: Request) {
 
     const session = await createBillingPortalSession(stripeCustomerId, returnUrl);
 
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({ success: true, url: session.url, data: { url: session.url } });
   } catch (error: unknown) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: 'Validation Error', details: error.flatten() }, { status: 400 });
+    }
+
     const message = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error creating billing portal session:', message);
     return NextResponse.json({ error: message }, { status: 500 });

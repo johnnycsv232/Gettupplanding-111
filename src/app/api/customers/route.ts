@@ -6,40 +6,46 @@
  */
 
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
 
-import { getAdminAuth, getAdminDb } from '@/lib/firebase-admin';
+import { hasAdminPrivileges, verifyBearerTokenFromRequest } from '@/lib/api-auth';
+import { getAdminDb } from '@/lib/firebase-admin';
 import { createCustomer } from '@/lib/services/customer.service';
 import type { Customer } from '@/types/customer';
 
 export const dynamic = 'force-dynamic';
 
+const createCustomerRequestSchema = z
+  .object({
+    userId: z.string().min(1).optional(),
+    email: z.string().email('Valid email required'),
+    displayName: z.string().min(1).max(100).optional(),
+    phone: z.string().max(20).optional(),
+    source: z.string().optional(),
+    originalLeadId: z.string().optional(),
+  })
+  .strict();
+
 // GET: Get current user's customer record only
 // SECURITY: Users can only access their own customer data
 export async function GET(req: Request) {
   try {
-    const authHeader = req.headers.get('Authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
+    const decodedToken = await verifyBearerTokenFromRequest(req);
+    if (!decodedToken) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
-    const idToken = authHeader.split('Bearer ')[1];
-    const decodedToken = await getAdminAuth().verifyIdToken(idToken);
     const userId = decodedToken.uid;
-
-    if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
 
     const db = getAdminDb();
     // SECURITY: Only return customer records belonging to the authenticated user
     const snapshot = await db.collection('customers').where('userId', '==', userId).limit(1).get();
 
     if (snapshot.empty) {
-      return NextResponse.json({ customer: null });
+      return NextResponse.json({ success: true, customer: null, data: { customer: null } });
     }
 
     const customer = snapshot.docs[0].data() as Customer;
-    return NextResponse.json({ customer });
+    return NextResponse.json({ success: true, customer, data: { customer } });
   } catch (error) {
     console.error('Error fetching customer:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
@@ -49,41 +55,40 @@ export async function GET(req: Request) {
 // POST: Create new customer
 export async function POST(req: Request) {
   try {
-    const authHeader = req.headers.get('Authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
+    const decodedToken = await verifyBearerTokenFromRequest(req);
+    if (!decodedToken) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    const requestingUserId = decodedToken.uid;
+    const isAdmin = hasAdminPrivileges(decodedToken);
 
-    const idToken = authHeader.split('Bearer ')[1];
-    const decodedToken = await getAdminAuth().verifyIdToken(idToken);
-    const userId = decodedToken.uid;
-
-    const body = await req.json();
+    let rawBody: unknown;
+    try {
+      rawBody = await req.json();
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+    }
+    const body = createCustomerRequestSchema.parse(rawBody);
 
     // Verify user is creating customer for themselves (or is admin)
-    if (body.userId && body.userId !== userId) {
-      // Check admin claim if creating for another user
-      // if (!decodedToken.admin) return 403
-      // For now, strict ownership:
+    if (body.userId && body.userId !== requestingUserId && !isAdmin) {
       return NextResponse.json(
         { error: 'Forbidden: Can only create customer for self' },
         { status: 403 }
       );
     }
 
-    // Default to current user if not specified
-    if (!body.userId) {
-      body.userId = userId;
-    }
+    const result = await createCustomer({
+      ...body,
+      userId: body.userId ?? requestingUserId,
+      source: body.source ?? 'direct',
+    });
 
-    const result = await createCustomer(body);
-
-    return NextResponse.json(result);
+    return NextResponse.json({ success: true, data: result, ...result });
   } catch (error: unknown) {
-    if (error instanceof Error && error.name === 'ZodError') {
-      const zodError = error as import('zod').ZodError;
+    if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Validation Error', details: zodError.format() },
+        { error: 'Validation Error', details: error.format() },
         { status: 400 }
       );
     }

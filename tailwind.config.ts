@@ -5,6 +5,7 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/features/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
   theme: {
@@ -21,8 +22,10 @@ const config: Config = {
         gold: 'var(--gold)',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        orbitron: ['Orbitron', 'sans-serif'],
+        sans: ['var(--font-ui)', 'sans-serif'],
+        orbitron: ['var(--font-display)', 'sans-serif'],
+        display: ['var(--font-display)', 'sans-serif'],
+        serif: ['var(--font-serif)', 'serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

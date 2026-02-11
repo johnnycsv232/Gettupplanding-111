@@ -16,9 +16,38 @@ let adminApp: App | undefined;
 let adminDb: Firestore | undefined;
 let adminAuth: Auth | undefined;
 
+type AdminEnvShape = {
+  FIREBASE_ADMIN_PROJECT_ID?: string;
+  FIREBASE_ADMIN_CLIENT_EMAIL?: string;
+  FIREBASE_ADMIN_PRIVATE_KEY?: string;
+};
+
+export function assertFirebaseAdminEnvConfigured(candidate: AdminEnvShape = env): void {
+  const missing: string[] = [];
+
+  if (!candidate.FIREBASE_ADMIN_PROJECT_ID?.trim()) {
+    missing.push('FIREBASE_ADMIN_PROJECT_ID');
+  }
+
+  if (!candidate.FIREBASE_ADMIN_CLIENT_EMAIL?.trim()) {
+    missing.push('FIREBASE_ADMIN_CLIENT_EMAIL');
+  }
+
+  if (!candidate.FIREBASE_ADMIN_PRIVATE_KEY?.trim()) {
+    missing.push('FIREBASE_ADMIN_PRIVATE_KEY');
+  }
+
+  if (missing.length > 0) {
+    throw new Error(
+      `[RC_FIREBASE_ADMIN_ENV] Missing required Firebase Admin credentials: ${missing.join(', ')}`
+    );
+  }
+}
+
 export function getAdminApp(): App {
   if (!adminApp) {
     if (getApps().length === 0) {
+      assertFirebaseAdminEnvConfigured();
       adminApp = initializeApp({
         credential: cert({
           projectId: env.FIREBASE_ADMIN_PROJECT_ID,

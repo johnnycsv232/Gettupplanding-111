@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getAdminAuth, getAdminDb } from '@/lib/firebase-admin';
+import { verifyBearerTokenFromRequest } from '@/lib/api-auth';
+import { getAdminDb } from '@/lib/firebase-admin';
 import { syncSubscription } from '@/lib/subscription';
 import { StripeSubscriptionId } from '@/types/brands';
 
@@ -10,19 +11,15 @@ import { StripeSubscriptionId } from '@/types/brands';
  * Prevents "Local subscription state drifting from Stripe state".
  */
 export async function POST(req: NextRequest) {
-  const authHeader = req.headers.get('Authorization');
-
-  if (!authHeader?.startsWith('Bearer ')) {
+  const decodedToken = await verifyBearerTokenFromRequest(req);
+  if (!decodedToken) {
     return NextResponse.json({ error: 'Unauthorized: Missing or invalid token' }, { status: 401 });
   }
 
-  const idToken = authHeader.split('Bearer ')[1];
-  const adminAuth = getAdminAuth();
   const adminDb = getAdminDb();
 
   try {
     // 1. Verify User Session
-    const decodedToken = await adminAuth.verifyIdToken(idToken);
     const userId = decodedToken.uid;
 
     // 2. Find User's Subscription ID
@@ -44,7 +41,7 @@ export async function POST(req: NextRequest) {
 
     if (subscriptionsSnapshot.empty) {
       return NextResponse.json(
-        { message: 'No active subscription found to sync' },
+        { success: true, message: 'No active subscription found to sync' },
         { status: 200 },
       );
     }

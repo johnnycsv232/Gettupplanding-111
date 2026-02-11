@@ -55,7 +55,7 @@ describe('Stripe Webhook Handler', () => {
       const res = await POST(req);
 
       expect(res.status).toBe(200);
-      expect(await res.json()).toEqual({ received: true, skipped: true });
+      expect(await res.json()).toMatchObject({ received: true, skipped: true });
     });
   });
 

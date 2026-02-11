@@ -1,14 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
+import { Play, Film } from 'lucide-react';
 
 import { GlassCard } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
 
 export default function CinemaGradeSection() {
   return (
-    <section className="relative overflow-hidden bg-black py-24">
-      <div className="container mx-auto grid items-center gap-12 px-4 md:grid-cols-2">
+    <section className="section-shell relative overflow-hidden bg-black py-24">
+      <SectionBackdrop variant="danger" />
+      <div className="container relative z-10 mx-auto grid items-center gap-10 px-4 md:grid-cols-2 md:gap-12">
         <motion.div
           className="relative order-2 md:order-1"
           initial={{ opacity: 0, x: -30 }}
@@ -17,7 +20,7 @@ export default function CinemaGradeSection() {
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
         >
           {/* Mock Video Player UI */}
-          <GlassCard className="box-glow-magenta border-neon-magenta/30 group relative aspect-video overflow-hidden bg-black">
+          <GlassCard className="box-glow-magenta border-neon-magenta/30 group relative aspect-video overflow-hidden border bg-black">
             <div className="absolute inset-0 flex items-center justify-center">
               <motion.div
                 className="flex size-20 cursor-pointer items-center justify-center rounded-full border-2 border-neon-magenta text-neon-magenta"
@@ -46,15 +49,17 @@ export default function CinemaGradeSection() {
           viewport={{ once: true }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
         >
-          <h2 className="font-display text-5xl uppercase tracking-tighter text-white">
-            <span className="text-shadow-neon text-neon-magenta">Cinema Grade</span>
-            <br />
-            Post-Production
-          </h2>
-          <p className="text-off-white/80 text-lg font-light leading-relaxed">
-            We don&apos;t use Instagram filters. We use DaVinci Resolve. Every frame is color graded
-            to match your venue&apos;s lighting and vibe.
-          </p>
+          <SectionIntro
+            className="max-w-xl"
+            kicker="Post Pipeline"
+            kickerIcon={<Film size={13} />}
+            tone="danger"
+            title="CINEMA GRADE"
+            highlight="POST-PRODUCTION"
+            highlightClassName="text-neon-magenta text-glow-magenta"
+            description="No template filters. Every frame is calibrated with pro color pipelines to match your venue lighting and brand atmosphere."
+            descriptionClassName="text-white/[0.7]"
+          />
           <ul className="text-neon-magenta/80 space-y-3 font-mono text-sm tracking-widest">
             <li>{'// Custom LUT Development'}</li>
             <li>{'// Sound Design & Mixing'}</li>

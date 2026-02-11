@@ -35,7 +35,7 @@ class CheckoutService {
     try {
       const params =
         typeof priceIdOrParams === 'string'
-          ? { priceId: priceIdOrParams, tier: 'unknown', mode: 'payment' as const }
+          ? { priceId: priceIdOrParams, tier: 'free', mode: 'payment' as const }
           : priceIdOrParams;
 
       const auth = getFirebaseAuth();

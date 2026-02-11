@@ -20,7 +20,8 @@ export default function Hero() {
           loop
           muted
           playsInline
-          className="h-full w-full scale-105 object-cover opacity-60 grayscale"
+          aria-hidden="true"
+          className="size-full scale-105 object-cover opacity-60 grayscale"
         >
           <source src="/videos/A_macro_productreveal_1080p_202601121922.mp4" type="video/mp4" />
         </video>
@@ -40,7 +41,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          className="font-display mb-4 text-[clamp(2.5rem,10vw,8rem)] font-black uppercase leading-[0.9] tracking-tighter text-white"
+          className="mb-4 font-display text-[clamp(2.5rem,10vw,8rem)] font-black uppercase leading-[0.9] tracking-tighter text-white"
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
@@ -49,7 +50,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.h2
-          className="mx-auto mb-6 max-w-3xl text-[clamp(1rem,2vw,1.5rem)] font-medium leading-relaxed tracking-tight text-white md:text-2xl"
+          className="mx-auto mb-6 max-w-3xl font-display text-[clamp(1rem,2vw,1.5rem)] font-medium leading-relaxed tracking-[0.08em] text-white md:text-2xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
@@ -58,7 +59,7 @@ export default function Hero() {
         </motion.h2>
 
         <motion.p
-          className="mb-12 text-sm font-black uppercase tracking-[0.05em] text-white/60 md:text-base"
+          className="mb-12 text-sm font-black uppercase tracking-wider text-white/[0.6] md:text-base"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 1 }}
@@ -77,7 +78,7 @@ export default function Hero() {
               <span className="font-display text-2xl font-extrabold text-white md:text-3xl">
                 {metric.value}
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-white/40">
+              <span className="text-[10px] uppercase tracking-widest text-white/[0.4]">
                 {metric.label}
               </span>
             </div>

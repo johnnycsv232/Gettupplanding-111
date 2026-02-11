@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { PROJECT_ROOT, ensureDirectory, resolveSkillsDirectory } from './workspace-paths';
+
 /**
  * sync-skills.ts
  * Cross-platform replacement for sync_recommended_skills.sh
@@ -63,7 +65,18 @@ function copyDir(src: string, dest: string) {
   }
 }
 
+function assertSafeTargetDir(targetDir: string) {
+  const resolved = path.resolve(targetDir);
+  const root = path.parse(resolved).root;
+
+  if (resolved === root || resolved === PROJECT_ROOT) {
+    throw new Error(`Refusing to sync skills into unsafe target directory: ${resolved}`);
+  }
+}
+
 function syncSkills(sourceLib: string, localLib: string) {
+  assertSafeTargetDir(localLib);
+
   console.log('🔄 Sync Recommended Skills');
   console.log('=========================');
   console.log(`📍 Source: ${sourceLib}`);
@@ -76,7 +89,7 @@ function syncSkills(sourceLib: string, localLib: string) {
   }
 
   if (!fs.existsSync(localLib)) {
-    fs.mkdirSync(localLib, { recursive: true });
+    ensureDirectory(localLib);
   }
 
   // Backup skipped for brevity in this CLI version, but we'll clear and copy
@@ -111,9 +124,10 @@ function syncSkills(sourceLib: string, localLib: string) {
 function main() {
   const args = process.argv.slice(2);
   // Defaults based on the user's environment if not provided
-  const sourceLib =
-    args[0] || path.join(process.cwd(), '..', 'antigravity-awesome-skills', 'skills');
-  const localLib = args[1] || path.join(process.cwd(), 'skills');
+  const sourceLib = args[0]
+    ? path.resolve(args[0])
+    : path.join(process.cwd(), '..', 'antigravity-awesome-skills', 'skills');
+  const localLib = args[1] ? path.resolve(args[1]) : resolveSkillsDirectory(false);
 
   syncSkills(sourceLib, localLib);
 }

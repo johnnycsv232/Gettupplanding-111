@@ -34,7 +34,7 @@ export default function Founder() {
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            <h3 className="text-display mb-6 text-2xl font-bold text-white">
+            <h3 className="mb-6 font-display text-2xl font-bold tracking-[0.08em] text-white">
               THE MAN BEHIND MINNEAPOLIS NIGHTS
             </h3>
             <p className={styles.founderBio}>
