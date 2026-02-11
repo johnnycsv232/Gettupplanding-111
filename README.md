@@ -49,6 +49,19 @@ npm run verify   # Run the Zenith setup verification script
 npm run setup    # Run the complete environment setup
 ```
 
+### Codex Cloud Development
+
+This repo is ready for Codex Cloud workspaces.
+
+```bash
+npm run codex:cloud:setup
+```
+
+Docs and environment template:
+
+- `docs/system/codex-cloud-environment.md`
+- `codex-cloud.env.example`
+
 ## 🧠 Skills System
 
 The project is governed by a modular **Skills System** localized in `/skills`. These skills provide the blueprints for:

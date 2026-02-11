@@ -15,6 +15,8 @@
     "test:e2e": "npm run test:e2e:dev",
     "test:e2e:dev": "tsx scripts/run-playwright.ts dev --project=chromium",
     "test:e2e:ci": "tsx scripts/run-playwright.ts ci --project=chromium",
+    "codex:cloud:setup": "bash scripts/codex-cloud-setup.sh",
+    "codex:cloud:maintain": "bash scripts/codex-cloud-maintenance.sh",
     "full_audit": "npm run lint && npm run type-check && npm run test",
     "ui_check": "npm run test:e2e:dev",
     "skill_sync": "npm run skills:index && npm run skills:validate",
