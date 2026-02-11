@@ -1,81 +1,129 @@
 'use client';
 
-import { useState } from 'react';
-import Modal from '@/components/ui/Modal';
-import Button from '@/components/ui/Button';
-import { useExitIntent } from '@/hooks/useExitIntent';
-import { Sparkles } from 'lucide-react';
-import { saveLead } from '@/lib/leads';
+import { Sparkles, Gift, ShieldCheck } from 'lucide-react';
+import { useState, useTransition } from 'react';
 
-export default function ExitIntentPopup() {
+import { submitLeadAction } from '@/app/actions';
+import { Button, Modal } from '@/components/ui';
+import { useExitIntent } from '@/hooks/useExitIntent';
+
+/**
+ * ExitIntentPopup
+ * Captures abandoning traffic with a direct lead magnet.
+ */
+export const ExitIntentPopup = () => {
   const { showExitIntent, closeExitIntent } = useExitIntent();
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
-    
-    const result = await saveLead({ email, source: 'exit-intent' });
-    
-    setIsSubmitting(false);
-    if (result.success) {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        closeExitIntent();
-        setIsSubmitted(false);
-        setEmail('');
-      }, 2000);
-    } else {
-      setError(typeof result.error === 'string' ? result.error : 'Something went wrong');
-    }
+    setError('');
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('source', 'exit_intent');
+
+    startTransition(() => {
+      void (async () => {
+        try {
+          const result = await submitLeadAction(formData);
+
+          if (result.success) {
+            setIsSubmitted(true);
+            setTimeout(() => {
+              closeExitIntent();
+            }, 2800);
+          } else {
+            setError(typeof result.error === 'string' ? result.error : 'Something went wrong');
+          }
+        } catch {
+          setError('Something went wrong');
+        }
+      })();
+    });
   };
 
   return (
-    <Modal isOpen={showExitIntent} onClose={closeExitIntent} className="bg-deep-void-black text-center p-8 border border-vegas-gold/50 box-glow-gold">
-      <div className="flex flex-col items-center gap-6">
-        <div className="w-16 h-16 rounded-full bg-vegas-gold/10 flex items-center justify-center text-vegas-gold box-glow-gold">
-          <Sparkles size={32} />
-        </div>
-        
-        <div className="space-y-2">
-          <h2 className="font-display text-4xl text-white uppercase">The VIP Entrance</h2>
-          <p className="text-off-white/80 max-w-xs mx-auto">
-            Join the inner circle. Get exclusive content and a free 5-point content audit instantly.
-          </p>
+    <Modal
+      isOpen={showExitIntent}
+      onClose={closeExitIntent}
+      className="border-vegas-gold/40 border bg-deep-void p-7 text-left shadow-[0_20px_90px_rgba(0,0,0,0.55)]"
+    >
+      <div className="flex flex-col gap-5">
+        <div className="flex items-center gap-3">
+          <div className="box-glow-gold border-vegas-gold/35 bg-vegas-gold/10 flex size-11 items-center justify-center rounded-xl border text-vegas-gold">
+            <Sparkles size={20} />
+          </div>
+          <div>
+            <h2 className="font-display text-3xl uppercase tracking-[0.08em] text-white">
+              The VIP Entrance
+            </h2>
+            <p className="text-vegas-gold/85 mt-1 text-xs uppercase tracking-[0.2em]">
+              Before You Go
+            </p>
+          </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="w-full space-y-4">
+        <p className="text-sm leading-relaxed text-white/[0.76]">
+          Get a free 5-point nightlife content audit and a personalized pilot strategy in your
+          inbox.
+        </p>
+
+        <div className="grid grid-cols-1 gap-3 text-[11px] text-white/60 sm:grid-cols-2">
+          <div className="liquid-glass rounded-xl border border-white/10 p-3">
+            <Gift size={14} className="mb-2 text-vegas-gold" />
+            Instant audit checklist
+          </div>
+          <div className="liquid-glass rounded-xl border border-white/10 p-3">
+            <ShieldCheck size={14} className="mb-2 text-vegas-gold" />
+            No spam. Venue-only insights
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-3">
           {isSubmitted ? (
-            <div className="text-vegas-gold font-display text-xl py-4 animate-pulse">
+            <div className="border-vegas-gold/35 bg-vegas-gold/10 animate-pulse rounded-xl border py-4 text-center text-sm font-black uppercase tracking-[0.3em] text-vegas-gold">
               ACCESS GRANTED.
             </div>
           ) : (
             <>
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-vegas-gold focus:outline-none transition-colors"
+              <label className="sr-only" htmlFor="exit-intent-email">
+                Email Address
+              </label>
+              <input
+                id="exit-intent-email"
+                type="email"
+                placeholder="Enter your email"
+                className="focus-ring-gold w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white transition-colors placeholder:text-white/[0.45] focus:border-vegas-gold"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                disabled={isSubmitting}
+                disabled={isPending}
               />
-              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-              <Button variant="primary" size="lg" className="w-full" isLoading={isSubmitting}>
+              {error && <p className="mt-1 text-sm text-red-400">{error}</p>}
+              <Button
+                variant="primary"
+                size="lg"
+                className="w-full rounded-xl text-[11px] tracking-[0.2em]"
+                isLoading={isPending}
+                type="submit"
+              >
                 GET VIP ACCESS
               </Button>
             </>
           )}
         </form>
 
-        <button onClick={closeExitIntent} className="text-xs text-white/30 hover:text-white uppercase tracking-widest">
-          No thanks, I hate money.
+        <button
+          onClick={closeExitIntent}
+          className="text-xs uppercase tracking-[0.18em] text-white/[0.45] hover:text-white/70"
+        >
+          Continue browsing for now
         </button>
       </div>
     </Modal>
   );
-}
+};

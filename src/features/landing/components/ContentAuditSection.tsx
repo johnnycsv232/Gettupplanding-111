@@ -1,48 +1,98 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Button from '@/components/ui/Button';
-import GlassCard from '@/components/ui/GlassCard';
+import { TrendingDown, Users, Target, ShieldAlert } from 'lucide-react';
 
-export default function ContentAuditSection() {
+import { GlassCard } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
+
+const failurePoints = [
+  {
+    icon: TrendingDown,
+    title: 'Content Dies Before Peak Hour',
+    desc: 'Most teams post too late. The moment fades before the recap lands.',
+    impact: 'Lower same-week bookings',
+  },
+  {
+    icon: ShieldAlert,
+    title: 'Lighting Is Crushed',
+    desc: 'Phone-only workflows miss texture, depth, and table energy in dark scenes.',
+    impact: 'Premium brand feel is lost',
+  },
+  {
+    icon: Users,
+    title: 'No Narrative Direction',
+    desc: 'Random clips without a story underperform on watch time and saves.',
+    impact: 'Audience drop-off',
+  },
+  {
+    icon: Target,
+    title: 'No Conversion Layer',
+    desc: 'Great visuals without clear hooks and CTAs fail to move real revenue.',
+    impact: 'High reach, low bookings',
+  },
+];
+
+/**
+ * ContentAuditSection
+ * Frames common nightlife content failures before introducing solutions.
+ */
+export const ContentAuditSection = () => {
+  const gridVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+  };
+
   return (
-    <section className="py-12 bg-black border-y border-white/5 relative overflow-hidden">
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-vegas-gold/5 rounded-full blur-[100px] pointer-events-none" />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <GlassCard className="p-12 md:p-16 text-center border-white/5 bg-white/[0.02]">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="max-w-3xl mx-auto space-y-8"
-          >
-            <div className="inline-block px-4 py-1 rounded-full border border-vegas-gold/30 text-vegas-gold text-[10px] font-bold tracking-[0.3em] uppercase mb-4">
-              Limited Availability
-            </div>
-            
-            <h3 className="text-4xl md:text-5xl font-display text-white tracking-tighter uppercase">
-              NOT READY FOR <span className="text-vegas-gold">THE PILOT?</span>
-            </h3>
-            
-            <p className="text-off-white/60 text-lg md:text-xl max-w-xl mx-auto font-light leading-relaxed">
-              Get a comprehensive 5-point audit of your current social presence. We&apos;ll tell you exactly why you&apos;re losing money.
-            </p>
-            
-            <div className="pt-4">
-              <Button variant="secondary" size="lg" className="border-vegas-gold/50 hover:bg-vegas-gold hover:text-black">
-                GET THE AUDIT ($300)
-              </Button>
-            </div>
-            
-            <p className="text-[10px] text-white/20 uppercase tracking-[0.4em]">
-              Instant Delivery Upon Receipt of Profile
-            </p>
-          </motion.div>
-        </GlassCard>
+    <section className="section-shell border-b border-white/5 bg-void">
+      <SectionBackdrop variant="danger" />
+      <div className="container relative z-10 mx-auto px-4">
+        <SectionIntro
+          tone="danger"
+          className="mb-16 max-w-3xl md:mb-20"
+          kicker="Where Most Venues Leak Revenue"
+          title="YOUR CONTENT LOOKS ACTIVE,"
+          highlight="BUT IT ISN'T CONVERTING."
+          highlightClassName="text-white/[0.28] text-shadow-none"
+        />
+
+        <motion.div
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4"
+        >
+          {failurePoints.map((point) => (
+            <motion.div key={point.title} variants={cardVariants}>
+              <GlassCard className="group h-full border-red-400/15 p-7 hover:border-red-400/35">
+                <div className="mb-5 flex size-11 items-center justify-center rounded-xl border border-red-300/20 bg-red-500/10 text-red-300 transition-all duration-500 group-hover:bg-red-500 group-hover:text-white">
+                  <point.icon size={20} />
+                </div>
+                <h3 className="mb-3 font-display text-base leading-tight tracking-[0.12em] text-white">
+                  {point.title}
+                </h3>
+                <p className="text-body-soft mb-6">{point.desc}</p>
+                <div className="border-t border-white/[0.08] pt-4">
+                  <span className="text-[10px] font-black uppercase tracking-[0.18em] text-red-300/95">
+                    Impact: {point.impact}
+                  </span>
+                </div>
+              </GlassCard>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
-}
+};

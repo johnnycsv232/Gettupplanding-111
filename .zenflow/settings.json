@@ -1,6 +1,34 @@
 {
-  "setup_script": "npm install && npm run skills:index",
+  "display_name": "Gettupplanding 111",
+  "repository_path": "C:\\Users\\finan\\Gettupplanding-111",
+  "workflow_path": ".zenflow/workflows",
+  "rule_folders": [
+    ".zencoder/rules",
+    ".ai/rules",
+    ".cursor/rules",
+    ".clinerules",
+    ".windsurf/rules",
+    ".continue/rules"
+  ],
+  "always_added_rules": ["CLAUDE.md", "AGENTS.MD", "GEMINI.md", ".github/copilot-instructions.md"],
+  "setup_script": "npm install",
   "dev_script": "npm run dev",
-  "verification_script": "npm run lint && npm run type-check && npm run test -- --run",
-  "copy_files": [".env.local", ".env.local.example"]
+  "cleanup_script": "npm run lint",
+  "copy_files": [
+    ".env.local",
+    ".env.local.example",
+    ".firebaserc",
+    "firebase.json",
+    "firestore.rules",
+    "firestore.indexes.json",
+    "next.config.ts",
+    "tailwind.config.ts",
+    "tsconfig.json",
+    "vitest.config.mts",
+    "vercel.json",
+    "eslint.config.mjs",
+    "postcss.config.mjs",
+    "playwright.config.ts",
+    ".gitignore"
+  ]
 }

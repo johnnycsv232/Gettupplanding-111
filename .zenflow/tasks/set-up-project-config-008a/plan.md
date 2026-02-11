@@ -1,6 +1,7 @@
 # Quick change
 
 ## Configuration
+
 - **Artifacts Path**: {@artifacts_path} → `.zenflow/tasks/{task_id}`
 
 ---
@@ -25,6 +26,7 @@ If blocked or uncertain on a critical decision, ask the user for direction.
 ## Workflow Steps
 
 ### [x] Step: Implementation
+
 <!-- chat-id: 6d5d9518-1051-445b-8ac8-ea7db8b01030 -->
 
 Implement the task directly based on the task description.

@@ -1,7 +1,7 @@
 'use client';
 
-import { Canvas, useFrame } from '@react-three/fiber';
 import { Sparkles, Float } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
 
@@ -27,22 +27,15 @@ function Particles({ count = 200, color = '#FFC72C', speed = 0.5, size = 2 }: Pa
   return (
     <group ref={ref}>
       <Float speed={speed} rotationIntensity={0.5} floatIntensity={0.5}>
-        <Sparkles
-          count={count}
-          scale={12}
-          size={size}
-          speed={0.4}
-          opacity={0.6}
-          color={color}
-        />
+        <Sparkles count={count} scale={12} size={size} speed={0.4} opacity={0.6} color={color} />
       </Float>
     </group>
   );
 }
 
-export default function ParticleField(props: ParticleFieldProps) {
+export function ParticleField(props: ParticleFieldProps) {
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none">
+    <div className="pointer-events-none absolute inset-0 z-0">
       <Canvas camera={{ position: [0, 0, 5], fov: 60 }} gl={{ alpha: true }}>
         <Particles {...props} />
       </Canvas>

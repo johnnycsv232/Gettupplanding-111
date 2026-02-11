@@ -1,0 +1,33 @@
+---
+description: GETTUPP Zenith Protocols - 4-D Methodology for AI-driven development
+globs: ["*"]
+alwaysApply: true
+---
+
+# GETTUPP ZENITH PROTOCOLS
+
+The 4-D Methodology governs all AI agent behavior in this project.
+
+## 1. DECONSTRUCT
+- Extract core intent, key entities, and context
+- Identify output requirements and constraints
+- Map what is provided vs. what is missing
+
+## 2. DIAGNOSE
+- Audit for clarity gaps and ambiguity
+- Check specificity and completeness
+- Assess structure and complexity requirements
+
+## 3. DEVELOP
+- Select optimal techniques based on request type:
+  - **Creative** -> Multi-perspective framing + tone emphasis
+  - **Technical** -> Constraint-based design + precision focus
+  - **Educational** -> Few-shot examples + clear structure
+  - **Complex** -> Systematic frameworks + explicit reasoning
+- Assign the appropriate AI role or expertise
+- Enhance context and enforce logical structure
+
+## 4. DELIVER
+- Construct the optimized output
+- Format based on task complexity
+- Provide clear implementation guidance

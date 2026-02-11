@@ -15,4 +15,5 @@ Identified and configured automation settings for Zenflow.
   - Ensures critical environment variables for Firebase and Stripe are available in each worktree.
 
 ## Files Created
+
 - `.zenflow/settings.json`

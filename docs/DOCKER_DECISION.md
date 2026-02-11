@@ -3,6 +3,7 @@
 ## Analysis Date: 2026-01-26
 
 ## Current Tech Stack
+
 - **Framework**: Next.js 15 (App Router)
 - **Frontend**: React 19 + TypeScript
 - **Backend**: Firebase (Auth, Firestore, Functions, Storage)
@@ -49,6 +50,7 @@
 ### ✅ When You WOULD Need Docker
 
 You would only need Docker if you:
+
 - Had custom backend services (Node.js/Express servers)
 - Needed Redis, PostgreSQL, or other databases
 - Required specific OS-level dependencies
@@ -58,6 +60,7 @@ You would only need Docker if you:
 ### Current Recommendation
 
 **Stay with Vercel deployment** and local development using:
+
 ```bash
 npm run dev              # Local development
 npm run build            # Production build test
@@ -65,14 +68,18 @@ vercel deploy            # Deploy to production
 ```
 
 ### Local Development Setup
+
 No Docker needed. Just:
+
 1. Node.js 20+ installed
 2. Firebase CLI for emulators: `npm install -g firebase-tools`
 3. Run emulators: `firebase emulators:start`
 4. Run Next.js: `npm run dev`
 
 ### Future Considerations
+
 If you later add:
+
 - Custom Redis caching
 - PostgreSQL database
 - Microservices

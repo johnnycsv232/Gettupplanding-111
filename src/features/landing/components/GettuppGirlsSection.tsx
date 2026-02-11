@@ -1,74 +1,98 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Button from '@/components/ui/Button';
+import { Sparkles } from 'lucide-react';
 
-const models = [
-  { id: 1, tilt: -3 },
-  { id: 2, tilt: 2 },
-  { id: 3, tilt: -1.5 },
-  { id: 4, tilt: 4 },
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
+
+const girls = [
+  {
+    label: 'ELEGANCE',
+    img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80',
+  },
+  {
+    label: 'VELOCITY',
+    img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80',
+  },
+  {
+    label: 'PRESTIGE',
+    img: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&q=80',
+  },
+  {
+    label: 'OPULENCE',
+    img: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80',
+  },
 ];
 
-export default function GettuppGirlsSection() {
+/**
+ * GettuppGirlsSection
+ * An aesthetic showcase featuring high-fashion production value and character.
+ */
+export const GettuppGirlsSection = () => {
   return (
-    <section className="py-24 bg-deep-void-black border-y border-neon-magenta/20 relative overflow-hidden">
-      {/* Ambient Glow */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-neon-magenta/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-neon-magenta/5 blur-[100px] pointer-events-none" />
+    <section className="section-shell overflow-hidden border-t border-white/5 bg-void">
+      <SectionBackdrop variant="neutral" />
+      <div className="container relative z-10 mx-auto mb-14 px-4 text-center md:mb-16">
+        <SectionIntro
+          align="center"
+          className="mx-auto max-w-3xl"
+          tone="neutral"
+          kicker="The Aesthetic Vanguard"
+          kickerIcon={<Sparkles size={13} />}
+          title="GETTUPP"
+          highlight="COLLECTION"
+          highlightClassName="text-white/[0.38] text-shadow-none"
+          description="A high-fashion production lane built to elevate campaign visuals and nightlife identity systems."
+        />
+      </div>
 
-      <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center relative z-10">
-        <div className="space-y-8">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="font-display text-5xl md:text-7xl text-white mb-6">
-              GETTUPP <span className="text-neon-magenta drop-shadow-[0_0_15px_rgba(255,0,255,0.5)]">GIRLS</span>
-            </h2>
-            <p className="text-off-white/80 text-xl leading-relaxed max-w-lg mb-8">
-              The elite face of your venue. We source, cast, and manage premium talent that defines the atmosphere. 
-              Models. Bottle Service. Unmatched Presence.
-            </p>
-            <Button 
-              variant="neon" 
-              className="px-10 py-4 text-lg border-2 border-neon-magenta text-neon-magenta hover:bg-neon-magenta hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,0,255,0.2)]"
-            >
-              VIEW THE ROSTER
-            </Button>
-          </motion.div>
-        </div>
-        
-        <div className="grid grid-cols-2 gap-6 md:gap-8">
-          {models.map((model, i) => (
+      <div className="relative flex overflow-hidden border-y border-white/[0.08] bg-black/[0.26]">
+        <div className="animate-marquee flex gap-6 py-12">
+          {[...girls, ...girls].map((girl, index) => (
             <motion.div
-              key={model.id}
-              initial={{ opacity: 0, y: 30, rotate: model.tilt }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ 
-                rotate: 0, 
-                scale: 1.05,
-                zIndex: 20,
-                transition: { type: 'spring', stiffness: 300 }
-              }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="relative group cursor-pointer"
+              key={`${girl.label}-${index}`}
+              whileHover={{ y: -20, scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="glass-heavy glint-effect group relative aspect-[3/4] w-[280px] shrink-0 overflow-hidden rounded-2xl border border-white/15 md:w-[360px]"
             >
-              <div className="bg-white p-3 pb-12 shadow-2xl transform transition-all duration-500 group-hover:shadow-neon-magenta/20">
-                <div className="aspect-[3/4] overflow-hidden bg-neutral-900 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-neon-magenta/20 to-transparent mix-blend-overlay" />
-                  {/* Image would go here */}
-                  <div className="w-full h-full bg-[url('/api/placeholder/400/500')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700" />
-                </div>
-                <div className="mt-4 h-4 w-2/3 bg-neutral-100 rounded-sm" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/20 to-transparent opacity-65 transition-opacity group-hover:opacity-25" />
+              <div
+                className="absolute inset-0 bg-cover bg-center contrast-[1.1] grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0"
+                style={{ backgroundImage: `url(${girl.img})` }}
+              />
+              <div className="absolute bottom-8 left-8 z-20">
+                <span className="group-hover:border-neon-magenta/50 rounded-full border border-white/20 bg-black/60 px-4 py-2 text-[10px] font-black tracking-[0.2em] text-white backdrop-blur-xl transition-all group-hover:text-neon-magenta">
+                  {girl.label}
+                </span>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      <div className="relative z-10 mt-14 text-center md:mt-16">
+        <span className="animate-pulse font-display text-sm uppercase tracking-[0.5em] text-white/[0.35]">
+          Coming Soon: The Winter Collection
+        </span>
+      </div>
+
+      <style jsx global>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
-}
+};

@@ -1,57 +1,100 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import GlassCard from '@/components/ui/GlassCard';
 import { Camera, Zap, Cloud, TrendingUp, Users, Lock } from 'lucide-react';
 
+import { GlassCard, GlintEffect } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
+
 const features = [
-  { icon: Camera, title: "Cinema Grade 4K", desc: "Sony FX3/A7SIII Production for world-class clarity." },
-  { icon: Zap, title: "24HR Turnaround", desc: "Recaps delivered while the night is still trending." },
-  { icon: Cloud, title: "Cloud Delivery", desc: "Instant high-res access via secure Frame.io portal." },
-  { icon: TrendingUp, title: "Growth Strategy", desc: "Content engineered for maximum ROI and reach." },
-  { icon: Users, title: "Talent Scouting", desc: "Expert direction to capture the crowd's best energy." },
-  { icon: Lock, title: "Asset Protection", desc: "Lifetime redundant archival of all raw production files." },
+  {
+    icon: Camera,
+    title: 'Cinema Capture Stack',
+    desc: 'Full-frame low-light camera systems that preserve atmosphere, skin tone, and detail.',
+  },
+  {
+    icon: Zap,
+    title: 'Velocity Editing',
+    desc: 'Hook-first editing workflow optimized for same-night buzz and next-day demand.',
+  },
+  {
+    icon: Cloud,
+    title: 'Instant Delivery Portal',
+    desc: 'Frame.io cloud handoff with platform-specific exports and posting notes.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Growth-Led Creative',
+    desc: 'Every cut includes CTA framing designed for bookings, RSVPs, and bottle service.',
+  },
+  {
+    icon: Users,
+    title: 'On-Floor Direction',
+    desc: 'Talent cues and crowd choreography so clips feel alive, not random.',
+  },
+  {
+    icon: Lock,
+    title: 'Protected Media Archive',
+    desc: 'Secure long-term asset retention so your best nights never disappear.',
+  },
 ];
 
-export default function WhatYouGetSection() {
-  return (
-    <section className="py-32 bg-deep-void-black relative overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
-          className="text-center mb-20 space-y-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        >
-          <h2 className="font-display text-5xl md:text-6xl text-white tracking-tighter uppercase">
-            THE GETTUPP <span className="text-vegas-gold text-shadow-glow">ARSENAL</span>
-          </h2>
-          <p className="text-off-white/40 uppercase tracking-[0.4em] text-xs">Full Stack Nightlife Production</p>
-        </motion.div>
+/**
+ * WhatYouGetSection
+ * Benefit-led feature stack for conversion support.
+ */
+export const WhatYouGetSection = () => {
+  const gridVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.06,
+      },
+    },
+  };
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, type: "spring", damping: 20, stiffness: 200 }}
-            >
-              <GlassCard className="p-10 flex flex-col items-start text-left gap-6 group hover:border-vegas-gold/50 transition-all duration-500 h-full">
-                <div className="w-14 h-14 rounded-none border border-vegas-gold/30 flex items-center justify-center text-vegas-gold group-hover:bg-vegas-gold group-hover:text-black transition-all duration-500 box-glow-gold">
-                  <feature.icon size={28} />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="font-display text-2xl text-white tracking-tight">{feature.title}</h3>
-                  <p className="text-off-white/60 leading-relaxed font-light">{feature.desc}</p>
-                </div>
-              </GlassCard>
+  const cardVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.42 } },
+  };
+
+  return (
+    <section id="services" className="relative overflow-hidden bg-deep-void py-24 md:py-32">
+      <SectionBackdrop variant="gold" />
+      <div className="container relative z-10 mx-auto px-4">
+        <SectionIntro
+          className="mb-14 max-w-3xl md:mb-20"
+          kicker="What You Get"
+          title="THE GETTUPP"
+          highlight="CONVERSION ARSENAL"
+          description="A full production + performance system built specifically for venues that win on atmosphere and urgency."
+        />
+
+        <motion.div
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {features.map((feature) => (
+            <motion.div key={feature.title} variants={cardVariants}>
+              <GlintEffect>
+                <GlassCard className="group h-full rounded-2xl p-7" hoverEffect>
+                  <div className="border-vegas-gold/25 bg-vegas-gold/10 mb-5 inline-flex size-11 items-center justify-center rounded-xl border text-vegas-gold transition-colors group-hover:bg-vegas-gold group-hover:text-black">
+                    <feature.icon size={20} />
+                  </div>
+                  <h3 className="mb-2 font-display text-lg uppercase tracking-[0.12em] text-white">
+                    {feature.title}
+                  </h3>
+                  <p className="text-body-soft">{feature.desc}</p>
+                </GlassCard>
+              </GlintEffect>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
-}
+};

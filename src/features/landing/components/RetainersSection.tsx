@@ -1,113 +1,172 @@
 'use client';
 
-import GlassCard from '@/components/ui/GlassCard';
-import Button from '@/components/ui/Button';
-import { Check } from 'lucide-react';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Zap, Rocket, Crown, Check, ArrowRight, Sparkles } from 'lucide-react';
+
+import { Button, GlassCard, GlintEffect } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
 
 const tiers = [
   {
-    name: "ESSENTIAL",
-    price: "495",
-    priceId: "price_essential_placeholder",
-    features: ["1 Event / Month", "15 Photos", "1 Recap Reel", "Standard Edits"],
-    cta: "Start Essential",
-    highlight: false
+    name: 'Essential',
+    icon: Zap,
+    price: '$495',
+    cadence: '/month',
+    subhead: 'For venues that want a predictable monthly content engine.',
+    features: [
+      '1 event recap / month',
+      '24HR delivery window',
+      'Instagram + TikTok exports',
+      'Monthly creative briefing',
+    ],
+    cta: 'Start Essential',
+    highlight: false,
   },
   {
-    name: "GROWTH",
-    price: "695",
-    priceId: "price_growth_placeholder",
-    features: ["2 Events / Month", "30 Photos", "2 Recap Reels", "Priority 24hr Delivery", "Color Grading"],
-    cta: "Start Growth",
-    highlight: true
+    name: 'Elite',
+    icon: Rocket,
+    price: '$1,295',
+    cadence: '/month',
+    subhead: 'Our highest-converting package for growth-focused operators.',
+    features: [
+      '2 event recaps / month',
+      'Priority 18HR turnaround',
+      'UGC scripting + shot direction',
+      'Paid-ad creative cutdowns',
+      'Weekly performance review',
+    ],
+    cta: 'Apply For Elite',
+    highlight: true,
   },
   {
-    name: "DOMINATE",
-    price: "995",
-    priceId: "price_dominate_placeholder",
-    features: ["4 Events / Month", "60 Photos", "4 Recap Reels", "Dedicated Editor", "Raw Footage Access"],
-    cta: "Start Dominate",
-    highlight: false
-  }
+    name: 'Enterprise',
+    icon: Crown,
+    price: 'Custom',
+    cadence: '',
+    subhead: 'For multi-city brands that require a full production system.',
+    features: [
+      'Unlimited coverage planning',
+      'On-site creative director',
+      'White-label content ops',
+      'Cross-market creative governance',
+    ],
+    cta: 'Book Strategy Call',
+    highlight: false,
+  },
 ];
 
-export default function RetainersSection() {
-  const [loadingTier, setLoadingTier] = useState<string | null>(null);
+/**
+ * RetainersSection
+ * Pricing and package selection for monthly engagements.
+ */
+export const RetainersSection = () => {
+  const listVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
 
-  const handleSubscribe = async (tier: typeof tiers[0]) => {
-    setLoadingTier(tier.name);
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          priceId: tier.priceId,
-          tier: tier.name,
-          mode: 'subscription'
-        }),
-      });
-
-      const { url, error } = await response.json();
-      if (error) throw new Error(error);
-      if (url) window.location.href = url;
-    } catch (err) {
-      console.error('Checkout error:', err);
-      alert('Failed to initiate checkout. Please try again.');
-    } finally {
-      setLoadingTier(null);
-    }
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
   };
 
   return (
-    <section id="pricing" className="py-24 bg-deep-void-black relative">
-      <div className="container mx-auto px-4">
-        <h2 className="font-display text-5xl text-center text-white mb-4">FULL RETAINERS</h2>
-        <p className="text-center text-off-white/60 mb-16">Consistent excellence. Zero overhead.</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
-          {tiers.map((tier, i) => (
-            <GlassCard 
-              key={i} 
-              intensity={tier.highlight ? "medium" : "low"}
-              className={`p-8 flex flex-col gap-6 relative ${tier.highlight ? 'border-vegas-gold/50 box-glow-gold scale-105 z-10' : 'border-white/10'}`}
-            >
-              {tier.highlight && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-vegas-gold text-black text-xs font-bold px-3 py-1 rounded-b-lg">
-                  BEST VALUE
-                </div>
-              )}
-              
-              <div className="text-center space-y-2">
-                <h3 className={`font-display text-2xl ${tier.highlight ? 'text-vegas-gold' : 'text-white'}`}>{tier.name}</h3>
-                <div className="flex items-start justify-center text-white">
-                  <span className="text-lg mt-1">$</span>
-                  <span className="text-5xl font-bold">{tier.price}</span>
-                  <span className="text-sm text-white/40 mt-4">/mo</span>
-                </div>
-              </div>
+    <section id="pricing" className="relative overflow-hidden bg-deep-void py-24 md:py-32">
+      <SectionBackdrop variant="gold" />
+      <div className="container relative z-10 mx-auto px-4">
+        <SectionIntro
+          align="center"
+          className="mb-14 md:mb-16"
+          kickerIcon={<Sparkles size={12} />}
+          kicker="Monthly Retainers"
+          title="CHOOSE YOUR"
+          highlight="GROWTH VELOCITY"
+          description="Every package is designed to move from content chaos to repeatable booking outcomes."
+          descriptionClassName="text-white/[0.66]"
+        />
 
-              <ul className="space-y-4 flex-1">
-                {tier.features.map((feat, j) => (
-                  <li key={j} className="flex items-center gap-3 text-sm text-off-white">
-                    <Check size={16} className={tier.highlight ? "text-vegas-gold" : "text-white/40"} />
-                    {feat}
-                  </li>
-                ))}
-              </ul>
+        <motion.div
+          variants={listVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-7"
+        >
+          {tiers.map((tier) => {
+            const Icon = tier.icon;
 
-              <Button 
-                variant={tier.highlight ? "primary" : "secondary"} 
-                className="w-full"
-                onClick={() => handleSubscribe(tier)}
-                isLoading={loadingTier === tier.name}
-              >
-                {tier.cta}
-              </Button>
-            </GlassCard>
-          ))}
-        </div>
+            return (
+              <motion.div key={tier.name} variants={cardVariants}>
+                <GlassCard
+                  intensity={tier.highlight ? 'high' : 'medium'}
+                  className={`relative flex h-full flex-col p-7 md:p-8 ${
+                    tier.highlight
+                      ? 'border-vegas-gold/50 shadow-[0_20px_50px_rgba(212,175,55,0.16)]'
+                      : 'border-white/10'
+                  }`}
+                  hoverEffect
+                >
+                  {tier.highlight && (
+                    <div className="border-vegas-gold/35 absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border bg-vegas-gold px-4 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-black">
+                      Best Value
+                    </div>
+                  )}
+
+                  <div className="mb-6 flex items-center justify-between">
+                    <div className="rounded-xl border border-white/15 bg-white/5 p-2 text-vegas-gold">
+                      <Icon size={20} />
+                    </div>
+                    <span className="font-display text-xs tracking-[0.24em] text-white/[0.65]">
+                      {tier.name}
+                    </span>
+                  </div>
+
+                  <div className="mb-3 flex items-end gap-2">
+                    <span className="font-display text-5xl font-black leading-none text-white">
+                      {tier.price}
+                    </span>
+                    {tier.cadence && (
+                      <span className="pb-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/[0.45]">
+                        {tier.cadence}
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="mb-7 min-h-14 text-sm leading-relaxed text-white/[0.62]">
+                    {tier.subhead}
+                  </p>
+
+                  <div className="mb-8 flex-1 space-y-3">
+                    {tier.features.map((feature) => (
+                      <div key={feature} className="flex items-start gap-3 text-sm text-white/[0.76]">
+                        <Check size={16} className="mt-0.5 shrink-0 text-vegas-gold" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <GlintEffect>
+                    <Button
+                      asChild
+                      variant={tier.highlight ? 'primary' : 'outline'}
+                      className="w-full rounded-2xl py-3 text-[11px] tracking-[0.2em]"
+                    >
+                      <a href="#lead-capture">
+                        {tier.cta} <ArrowRight size={15} />
+                      </a>
+                    </Button>
+                  </GlintEffect>
+                </GlassCard>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
-}
+};

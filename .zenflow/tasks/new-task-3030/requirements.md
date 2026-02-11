@@ -2,7 +2,7 @@
 
 **Version:** 2.0  
 **Last Updated:** January 26, 2026  
-**Status:** Ready for Implementation  
+**Status:** Ready for Implementation
 
 ---
 
@@ -19,6 +19,7 @@ GETTUPPENT is a Minneapolis-based premium content/media production company targe
 ## 1. Product Vision & Target Aesthetic
 
 ### 1.1 Brand Positioning
+
 - **Market:** Premium nightlife content production (Minneapolis-focused, nationally scalable)
 - **Target Audience:** Venue owners, event promoters, brand managers, influencers
 - **Unique Value Proposition:** "Own the Night" - 24-hour delivery, Cinema-grade post-production, proven ROI (79.7K views in 90 days)
@@ -75,7 +76,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - **Swipe Gestures**: Testimonials carousel, gallery lightbox navigation
 
 4. **Mobile-Optimized Layouts**
-   - **Hero Section:** 
+   - **Hero Section:**
      - Full-screen height on mobile (100vh)
      - Larger headline relative to viewport (20vw vs. fixed px)
      - Bottom-anchored CTAs (within thumb reach)
@@ -108,12 +109,14 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - Viewport range: 320px (iPhone SE) to 428px (iPhone 14 Pro Max)
    - Portrait AND landscape orientations
 
-**Success Metric:** 
+**Success Metric:**
+
 > "When a venue owner pulls up this site on their iPhone while at a bar, they should immediately text their business partner: 'Check this out. We need this.'"
 
 ### 1.4 Current State Analysis
 
 **Existing Infrastructure:**
+
 - ✅ Next.js 16 with App Router
 - ✅ React 19
 - ✅ Firebase (Auth, Firestore) - fully configured
@@ -125,6 +128,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - ✅ 50+ specialized development skills
 
 **Current Components (Partial Implementation):**
+
 - Hero.tsx (exists, uses CSS Modules)
 - Founder.tsx (exists)
 - Pricing.tsx (exists)
@@ -133,6 +137,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - MeshBackground.tsx (exists)
 
 **Migration Requirements:**
+
 - ⚠️ **CRITICAL**: Must migrate from CSS Modules to Tailwind CSS
 - ⚠️ Components need to align with new 16-section architecture
 - ⚠️ Existing components may need complete rewrite to match Liquid Glass 2.0 aesthetic
@@ -144,6 +149,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 2.1 User Flows
 
 #### Primary Flow: Pilot Conversion
+
 1. User lands on Hero → Impressed by video + particles
 2. User scrolls to "THE PILOT" → Glassmorphism card captures attention
 3. User clicks "START THE PILOT" CTA → Redirects to Stripe Checkout ($345)
@@ -152,6 +158,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 6. User books initial consultation call
 
 #### Secondary Flow: Retainer Conversion
+
 1. User lands on Hero
 2. User scrolls through "THE WORK" gallery → Sees quality
 3. User reviews "FULL RETAINERS" pricing → Identifies tier
@@ -160,6 +167,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 6. User receives onboarding email
 
 #### Tertiary Flow: Lead Capture
+
 1. User explores site without committing
 2. **Trigger A**: User moves mouse to exit viewport (exit-intent)
    - OR **Trigger B**: 45 seconds on page (time-delayed)
@@ -173,6 +181,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 #### 2.2.1 Stripe Payment Processing
 
 **Products to Configure:**
+
 1. **The Pilot** - One-time: $345
 2. **Content Audit** - One-time: $300
 3. **Essential Retainer** - Subscription: $495/month
@@ -180,6 +189,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 5. **Dominate Retainer** - Subscription: $995/month (consultation-only, no direct checkout)
 
 **Implementation Requirements:**
+
 - Client-side: Use `@stripe/stripe-js` for checkout redirects
 - Server-side: Webhook handler at `/api/webhooks/stripe` (already exists, verify completeness)
 - Post-payment: Update Firestore collection `purchases` with:
@@ -201,6 +211,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 **Collections:**
 
 1. **`leads`** (Email captures)
+
    ```typescript
    {
      id: auto-generated,
@@ -214,6 +225,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    ```
 
 2. **`purchases`** (Stripe successful payments)
+
    ```typescript
    {
      id: auto-generated,
@@ -238,9 +250,10 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
      createdAt: Timestamp
    }
    ```
-   *Note: This collection is stored in Firestore. Access is strictly controlled via Firebase Security Rules which check if `request.auth.token.email` exists in this collection.*
+   _Note: This collection is stored in Firestore. Access is strictly controlled via Firebase Security Rules which check if `request.auth.token.email` exists in this collection._
 
 **Security Rules:**
+
 - `leads`: Write-only for client, read for authenticated admins
 - `purchases`: Server-only writes (via webhook), read for authenticated admins
 - `admin_users`: Read-only for authenticated users (to verify own access)
@@ -250,6 +263,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 **Schema Requirements:**
 
 1. **`galleryItem`** (Portfolio pieces for "THE WORK" section)
+
    ```typescript
    {
      _id: string,
@@ -279,6 +293,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    ```
 
 **API Implementation:**
+
 - Client-side data fetching using `@sanity/client`
 - Cache strategy: ISR (Incremental Static Regeneration) with 60-second revalidation
 - Fallback: Show placeholder skeleton UI if Sanity is unreachable
@@ -286,6 +301,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 #### 2.2.4 Cal.com Booking Integration
 
 **Requirements:**
+
 - Embed Cal.com scheduling widget on `/book` page (post-Pilot purchase)
 - Pass user email from Stripe webhook to pre-fill booking form
 - Configuration: Use Cal.com embed script with custom styling to match Liquid Glass theme
@@ -295,9 +311,11 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ## 3. Section-by-Section Requirements (16 Sections)
 
 ### 3.1 Sticky Header
+
 **Purpose:** Persistent navigation and conversion anchor
 
 **Features:**
+
 - Transparent background on load, solid Deep Void Black on scroll (50px threshold)
 - Logo (left): "GETTUPPENT" wordmark in Vegas Gold
 - Navigation (center): Links to #pilot, #retainers, #work, #about
@@ -305,11 +323,13 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - Mobile: Hamburger menu with slide-out navigation
 
 **Interactions:**
+
 - Smooth scroll to anchor sections on nav click
 - CTA button scales on hover (1.05x)
 - Header slides down on scroll up, hides on scroll down (except on mobile)
 
 **Technical:**
+
 - Use Framer Motion's `useScroll` for scroll detection
 - Implement Intersection Observer for section highlighting in nav
 - Sticky positioning with z-index: 1000
@@ -317,18 +337,21 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ---
 
 ### 3.2 Hero Section
+
 **Purpose:** Immediate visual impact + primary lead capture
 
 **Content:**
+
 - Headline: "OWN THE NIGHT" (animated gold gradient)
 - Subheadline: "Premium nightlife content that converts followers into customers"
 - Body: "79.7K views in 90 days. 24-hour delivery. Cinema-grade post-production."
 - City Input: "Enter your city" → Stores to Firestore `leads`
-- CTAs: 
+- CTAs:
   - Primary: "START $345 PILOT" (Vegas Gold button)
   - Secondary: "VIEW THE WORK" (Ghost button, scrolls to gallery)
 
 **Visual Elements:**
+
 1. **Background:** Looping video (muted, autoplay, lazy-loaded)
    - Overlay: Radial gradient (Deep Void Black center → transparent edges)
 2. **Three.js Particle Field:**
@@ -338,10 +361,12 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - Performance: Use `THREE.Points` with instanced geometry
 
 **Interactions:**
+
 - Staggered text entrance: Headline (0s) → Subhead (0.5s) → Body (0.7s) → Input (1s) → CTAs (1.2s)
 - City input: On submit, validate email format (Zod), store to Firestore, show success toast
 
 **Performance:**
+
 - Video: Use `<video>` tag with `preload="metadata"`, `muted`, `autoplay`, `loop`, `playsinline`
 - Three.js: Lazy-load using `next/dynamic` with `ssr: false`
 - Target LCP: < 2.5s (hero image/video must load fast)
@@ -394,21 +419,23 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 
 **Desktop vs. Mobile Comparison:**
 
-| Element | Desktop (1920px) | Mobile (375px) |
-|---------|-----------------|----------------|
-| Headline Size | 96px | clamp(2.5rem, 8vw, 4rem) ≈ 40px |
-| Particle Count | 200 | 50 |
-| Video Quality | 1080p | 720p |
-| CTA Position | Center (horizontal) | Bottom-anchored (60px from bottom) |
-| Input Width | 400px | 100% (minus 32px padding) |
-| Backdrop Blur | 30px | 20px |
+| Element        | Desktop (1920px)    | Mobile (375px)                     |
+| -------------- | ------------------- | ---------------------------------- |
+| Headline Size  | 96px                | clamp(2.5rem, 8vw, 4rem) ≈ 40px    |
+| Particle Count | 200                 | 50                                 |
+| Video Quality  | 1080p               | 720p                               |
+| CTA Position   | Center (horizontal) | Bottom-anchored (60px from bottom) |
+| Input Width    | 400px               | 100% (minus 32px padding)          |
+| Backdrop Blur  | 30px                | 20px                               |
 
 ---
 
 ### 3.3 The Pilot Section
+
 **Purpose:** Introduce flagship offer with high-value positioning
 
 **Content:**
+
 - Badge: "VIP ACCESS" (Neon Magenta glow, pulsing animation)
 - Headline: "THE PILOT: $345"
 - Subheadline: "Your invite-only test drive"
@@ -422,6 +449,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - CTA: "CLAIM YOUR PILOT" (Vegas Gold, links to Stripe Checkout)
 
 **Visual:**
+
 - **Glassmorphism Card:**
   - Background: `rgba(255, 255, 255, 0.05)` with `backdrop-filter: blur(30px)`
   - Border: 1px solid `rgba(255, 255, 255, 0.1)`
@@ -429,20 +457,24 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - **Badge:** "INVITE ONLY" text with pulsing neon effect (Framer Motion)
 
 **Interactions:**
+
 - Card: 3D tilt on hover (Framer Motion `motion.div` with `whileHover` transform)
 - Inner glow: Intensifies on hover (from 0.3 to 0.6 opacity)
 - CTA: Scale + glow on hover
 
 **Technical:**
+
 - Use Framer Motion for tilt effect: `rotateX` and `rotateY` based on mouse position
 - Implement smooth entry animation when section scrolls into view (Intersection Observer)
 
 ---
 
 ### 3.4 Content Audit Section
+
 **Purpose:** Down-sell offer for budget-conscious leads
 
 **Content:**
+
 - Headline: "NOT READY? START WITH A $300 AUDIT"
 - Subheadline: "Get a 5-point content performance analysis"
 - Benefits:
@@ -454,19 +486,23 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - CTA: "GET YOUR AUDIT" (Ghost button, Vegas Gold border)
 
 **Visual:**
+
 - Minimalist card (no glassmorphism, just dark background with gold border)
 - Smaller, less prominent than Pilot section
 
 **Interactions:**
+
 - Subtle fade-in on scroll
 - CTA links to Stripe Checkout for $300 product
 
 ---
 
 ### 3.5 Problem/Solution Section
+
 **Purpose:** Emotional hook + value proposition
 
 **Content:**
+
 - Problem Side:
   - Headline: "YOU'RE INVISIBLE"
   - Body: "Your events are fire. Your content is forgettable. You're losing money to venues with worse vibes but better content."
@@ -475,19 +511,23 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   - Body: "Cinema-grade content that makes your audience feel the energy. ROI in 90 days or we refund you."
 
 **Visual:**
+
 - Two-column split (50/50 on desktop, stacked on mobile)
 - Problem side: Dark red glow
 - Solution side: Vegas Gold glow
 
 **Interactions:**
+
 - Parallax scroll: Problem side scrolls slower than solution side
 
 ---
 
 ### 3.6 What You Get Section
+
 **Purpose:** Visual breakdown of deliverables
 
 **Content:**
+
 - Headline: "WHAT YOU GET (EVERY SHOOT)"
 - Icon grid (6 items):
   1. 📹 **Cinema-Grade Footage** - Shot on professional mirrorless cameras
@@ -498,19 +538,23 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   6. 💬 **Copy + Captions** - Ready-to-post content written for you
 
 **Visual:**
+
 - 3-column grid on desktop, 2-column on tablet, 1-column on mobile
 - Each item: Icon (lucide-react) + Headline + Body
 - Hover: Icon scales up, background glow appears
 
 **Interactions:**
+
 - Staggered fade-in as section enters viewport
 
 ---
 
 ### 3.7 Full Retainers Section (Pricing)
+
 **Purpose:** Upsell to recurring revenue, highlight Growth tier
 
 **Content:**
+
 - Headline: "GO ALL-IN: FULL RETAINERS"
 - Subheadline: "Own your city's nightlife narrative"
 
@@ -547,15 +591,18 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - CTA: "BOOK A CALL" (links to Cal.com, not Stripe)
 
 **Visual:**
+
 - Dark floating cards with thin Vegas Gold border
 - Border animation: Subtle "breathing" effect (border opacity pulses 0.3 → 0.6 → 0.3)
 - Growth card: Larger, elevated shadow, persistent glow
 
 **Interactions:**
+
 - Hover: Card scales up (1.05x), shadow intensifies
 - Click CTA: Essential/Growth → Stripe Checkout; Dominate → Scroll to contact/Cal.com
 
 **Technical:**
+
 - Use Framer Motion for tilt effect on hover
 - Implement breathing animation with CSS keyframes or Framer Motion loop
 
@@ -592,20 +639,22 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 
 **Desktop vs. Mobile Layout:**
 
-| Element | Desktop | Mobile |
-|---------|---------|--------|
-| Layout | 3-column grid (side-by-side) | 1-column carousel (horizontal scroll) |
-| Card Width | 320px | 90vw (~340px on iPhone 14) |
-| Navigation | Hover effects | Swipe gestures + dot indicators |
-| CTA Height | 44px | 56px |
-| Tilt Effect | 3D tilt on hover | Disabled (performance) |
+| Element     | Desktop                      | Mobile                                |
+| ----------- | ---------------------------- | ------------------------------------- |
+| Layout      | 3-column grid (side-by-side) | 1-column carousel (horizontal scroll) |
+| Card Width  | 320px                        | 90vw (~340px on iPhone 14)            |
+| Navigation  | Hover effects                | Swipe gestures + dot indicators       |
+| CTA Height  | 44px                         | 56px                                  |
+| Tilt Effect | 3D tilt on hover             | Disabled (performance)                |
 
 ---
 
 ### 3.8 The Work (Gallery)
+
 **Purpose:** Social proof through portfolio
 
 **Content:**
+
 - Headline: "THE WORK"
 - Filter Tabs: ALL | VIDEO | PHOTO
 - Masonry Grid: Fetch from Sanity CMS
@@ -613,11 +662,13 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   - Click: Open lightbox with full media
 
 **Visual:**
+
 - Masonry layout (use CSS Grid or library like `react-masonry-css`)
 - Dark metallic border around each item
 - Liquid transition: On filter change, grid items morph with smooth, liquid-like distortion
 
 **Interactions:**
+
 1. Filter change:
    - Framer Motion `AnimatePresence` for item exit/enter
    - Liquid distortion: Use Framer Motion's `layoutId` + custom transition
@@ -630,12 +681,14 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - Close button (top-right)
 
 **Technical:**
+
 - Fetch data from Sanity using `@sanity/client`
 - ISR revalidation: 60 seconds
 - Lazy-load images below the fold using `next/image` with `loading="lazy"`
 - Videos: Use `<video>` tag with `controls`, load on lightbox open only
 
 **Performance:**
+
 - Thumbnail optimization: Next.js Image with `width={400}` and `quality={80}`
 - Infinite scroll (optional): Load more items as user scrolls (reduces initial load)
 
@@ -675,21 +728,23 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 
 **Desktop vs. Mobile Layout:**
 
-| Element | Desktop | Mobile |
-|---------|---------|--------|
-| Grid Columns | 3-4 columns (masonry) | 1 column (vertical stack) |
-| Image Gap | 16px | 8px |
-| Lightbox Navigation | Arrow buttons | Swipe gestures |
-| Lightbox Close | X button (top-right) | Swipe down or X button |
-| Filter Tabs | Top-anchored | Bottom-anchored (sticky) |
-| Initial Load | 20 images | 10 images |
+| Element             | Desktop               | Mobile                    |
+| ------------------- | --------------------- | ------------------------- |
+| Grid Columns        | 3-4 columns (masonry) | 1 column (vertical stack) |
+| Image Gap           | 16px                  | 8px                       |
+| Lightbox Navigation | Arrow buttons         | Swipe gestures            |
+| Lightbox Close      | X button (top-right)  | Swipe down or X button    |
+| Filter Tabs         | Top-anchored          | Bottom-anchored (sticky)  |
+| Initial Load        | 20 images             | 10 images                 |
 
 ---
 
 ### 3.9 Cinema Grade Section
+
 **Purpose:** Showcase post-production quality
 
 **Content:**
+
 - Headline: "CINEMA GRADE POST-PRODUCTION"
 - Subheadline: "Your content deserves more than a quick edit"
 - Feature List:
@@ -701,24 +756,29 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - Video Player Mockup: Before/After slider or demo reel
 
 **Visual:**
+
 - Electric Cyan (#00FFFF) accents throughout section
 - Video player UI: Custom controls with cyan highlights
 - Background: Subtle diagonal stripe pattern (dark gray + darker gray)
 
 **Interactions:**
+
 - Before/After slider: Drag to reveal
 - Video player: Click to play demo reel
 
 **Technical:**
+
 - Use `<video>` tag with custom controls (HTML5 Video API)
 - Before/After: Implement with CSS `clip-path` and JavaScript/React drag handler
 
 ---
 
 ### 3.10 Events Section
+
 **Purpose:** Authority building through client logos
 
 **Content:**
+
 - Headline: "WE'VE SHOT 350+ EVENTS"
 - Subheadline: "From underground raves to corporate galas"
 - Logo Grid: Client logos (grayscale, color on hover)
@@ -729,28 +789,34 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   - 60-day guarantee (< 1% refund rate)
 
 **Visual:**
+
 - Logos in 4-column grid (grayscale filter, remove on hover)
 - Stats in horizontal row (large numbers in Vegas Gold, labels in off-white)
 
 **Interactions:**
+
 - Logo hover: Color returns, slight scale up
 - Stats: Count-up animation when section enters viewport
 
 **Technical:**
+
 - Count-up animation: Use Framer Motion or `react-countup`
 - Logos: Fetch from Sanity or hardcode as SVGs
 
 ---
 
 ### 3.11 Testimonials Section
+
 **Purpose:** Social proof through customer reviews
 
 **Content:**
+
 - Headline: "DON'T TAKE OUR WORD FOR IT"
 - Carousel: Customer testimonials (3 visible at once on desktop)
   - Each card: Quote, Name, Role, Platform (IG/TikTok/Google), Avatar
 
 **Visual:**
+
 - Platform-specific UI:
   - Instagram: Purple gradient border
   - TikTok: Pink/cyan gradient border
@@ -758,11 +824,13 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - Carousel: Auto-scroll every 5 seconds, manual navigation arrows
 
 **Interactions:**
+
 - Card hover: Slight lift effect
 - Auto-scroll: Pause on hover
 - Navigation: Prev/Next arrows, dot indicators
 
 **Technical:**
+
 - Fetch from Sanity `testimonial` collection
 - Use Framer Motion for carousel transitions
 - Implement auto-scroll with `setInterval`, clear on hover
@@ -770,9 +838,11 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ---
 
 ### 3.12 Founder Section
+
 **Purpose:** Personal brand + authority
 
 **Content:**
+
 - Headline: "MEET THE FOUNDER"
 - Image: Professional photo of founder (provided: johnny_cage.png.jpg)
 - Copy:
@@ -784,6 +854,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - CTA: "WORK WITH ME" (links to Pilot checkout)
 
 **Visual:**
+
 - Asymmetric split layout:
   - 40% image (left)
   - 60% text (right)
@@ -791,42 +862,51 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - Parallax effect: Image moves slower than text on scroll
 
 **Interactions:**
+
 - Parallax scroll: Use Framer Motion's `useScroll` + `useTransform`
 - Image hover: Glow intensifies
 
 **Technical:**
+
 - Image: Use `next/image` with `priority` (above fold)
 - Parallax: Transform Y position based on scroll offset
 
 ---
 
 ### 3.13 Gettupp Girls Section
+
 **Purpose:** Brand vertical showcase
 
 **Content:**
+
 - Headline: "GETTUPP GIRLS: BRAND AMBASSADORS"
 - Subheadline: "The faces of Minneapolis nightlife"
 - Polaroid Grid: Photos of brand ambassadors (casual, fun aesthetic)
 - Body: "Our Brand Ambassadors bring energy to every event. They're content creators, influencers, and nightlife royalty."
 
 **Visual:**
+
 - **Neon Magenta (#FF00FF) dominates this section**
 - Polaroid-style grid: White border, slight random tilt (-3° to +3°)
 - Background: Subtle magenta glow
 
 **Interactions:**
+
 - Image hover: Straighten (rotate to 0°), scale up (1.1x)
 
 **Technical:**
+
 - Random tilt: Generate rotation value on mount (`Math.random()`)
 - Hover: Framer Motion `whileHover` to override rotation
 
 ---
 
 ### 3.14 Upgrades Section
+
 **Purpose:** Highlight post-Pilot add-ons
 
 **Content:**
+
 - Headline: "BEYOND THE PILOT: PREMIUM ADD-ONS"
 - List:
   - 🎬 **Same-Day Rush Delivery**: +$200/shoot
@@ -836,18 +916,22 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   - 🎤 **Interviews + BTS Content**: +$250/shoot
 
 **Visual:**
+
 - Minimalist list with Vegas Gold icons
 - Each item: Icon + title + price (right-aligned)
 
 **Interactions:**
+
 - Subtle fade-in on scroll
 
 ---
 
 ### 3.15 Rules Section
+
 **Purpose:** Set expectations + legal CYA
 
 **Content:**
+
 - Headline: "THE FINE PRINT"
 - List:
   - 60-Day Money-Back Guarantee: If you don't see ROI, we refund 100%
@@ -857,24 +941,29 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   - Payment: All sales final for one-time products (Pilot, Audit)
 
 **Visual:**
+
 - Small, high-contrast list
 - Vegas Gold bullet points
 - Light gray body text
 
 **Interactions:**
+
 - None (static section)
 
 ---
 
 ### 3.16 Final CTA Section
+
 **Purpose:** Last conversion opportunity
 
 **Content:**
+
 - Headline: "READY TO OWN THE NIGHT?"
 - Subheadline: "Start your $345 Pilot. Delivered in 24 hours. Guaranteed ROI or full refund."
 - CTA: "START THE PILOT NOW" (massive button, Vegas Gold, glowing)
 
 **Visual:**
+
 - Full-width section
 - **Three.js Particle Burst:**
   - Particle field from Hero returns
@@ -882,19 +971,23 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   - Particles converge toward CTA button
 
 **Interactions:**
+
 - Particles: Mouse-reactive swirl
 - CTA: Scale on hover, particle intensity increases near button
 
 **Technical:**
+
 - Three.js: Reuse particle system from Hero, modify motion pattern
 - CTA: Link to Stripe Checkout
 
 ---
 
 ### 3.17 Footer
+
 **Purpose:** Navigation + legal + social
 
 **Content:**
+
 - Logo (left)
 - Navigation Links (center): Home, About, Services, Gallery, Contact
 - Social Media Icons (right): Instagram, TikTok, YouTube
@@ -902,15 +995,18 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - Legal: Privacy Policy, Terms of Service
 
 **Visual:**
+
 - Dark background (slightly lighter than main background)
 - Vegas Gold accents on links/icons
 - Sticky social media clickables: Vertical bar (left side of screen) that floats on all pages
 
 **Interactions:**
+
 - Social icons hover: Color fill, scale up
 - Sticky clickables: Slide in from left on scroll (after Hero section)
 
 **Technical:**
+
 - Sticky clickables: Use `position: fixed` with conditional rendering (hide on Hero)
 
 ---
@@ -920,10 +1016,12 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 4.1 Exit-Intent "Velvet Rope" Popup
 
 **Triggers:**
+
 1. **Exit-Intent**: User moves mouse out of viewport (top edge)
 2. **Time-Delayed**: 45 seconds on page (fallback if no exit-intent)
 
 **Content:**
+
 - Headline: "THE NIGHT ISN'T OVER"
 - Subheadline: "Join the VIP List for exclusive content, early access, and a free 5-point audit delivered instantly."
 - Email Input: "Enter your email"
@@ -931,12 +1029,14 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - Close: "X" button (top-right)
 
 **Visual:**
+
 - Full-screen modal (z-index: 10000)
 - Background: Deep Void Black with 90% opacity, blurred backdrop
 - Central card: Glassmorphism with Vegas Gold glow
 - Form: Vegas Gold focus states
 
 **Interactions:**
+
 1. On trigger:
    - Fade-in background (300ms)
    - Scale-in card (500ms, ease-out)
@@ -949,6 +1049,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - Set localStorage flag: `vip_popup_dismissed=true` (don't show again for 30 days)
 
 **Technical:**
+
 - Exit-intent: Listen for `mouseleave` event on `document` with `clientY < 10`
 - Time-delayed: `setTimeout` for 45,000ms
 - Prevent re-trigger: Check `localStorage` before showing
@@ -997,24 +1098,26 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 
 **Desktop vs. Mobile Comparison:**
 
-| Element | Desktop | Mobile |
-|---------|---------|--------|
-| Trigger | Exit-intent (mouse) | Back button + time-delay + scroll-to-bottom |
-| Time-Delay | 45 seconds | 30 seconds |
-| Background | Blurred backdrop | Solid color (performance) |
-| Modal Size | Centered card (600px) | Full-screen |
-| Close Button | Top-right (32px) | Bottom-left (48px, thumb reach) |
-| Input Height | 48px | 56px |
+| Element      | Desktop               | Mobile                                      |
+| ------------ | --------------------- | ------------------------------------------- |
+| Trigger      | Exit-intent (mouse)   | Back button + time-delay + scroll-to-bottom |
+| Time-Delay   | 45 seconds            | 30 seconds                                  |
+| Background   | Blurred backdrop      | Solid color (performance)                   |
+| Modal Size   | Centered card (600px) | Full-screen                                 |
+| Close Button | Top-right (32px)      | Bottom-left (48px, thumb reach)             |
+| Input Height | 48px                  | 56px                                        |
 
 ### 4.2 Hero City Input Lead Capture
 
 **Purpose:** Low-friction lead gen for users not ready to buy
 
 **Content:**
+
 - Input: "Enter your city to see our work" (placeholder)
 - Button: "SEE THE WORK" (Vegas Gold)
 
 **Functionality:**
+
 1. User enters city name
 2. On submit:
    - Validate input (non-empty string)
@@ -1023,6 +1126,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - Show toast: "Welcome to the family! Check out our {city} work below."
 
 **Technical:**
+
 - Form submit handler
 - Firestore write (client SDK)
 - Smooth scroll: Use `scrollIntoView({ behavior: 'smooth' })`
@@ -1032,12 +1136,14 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 **Purpose:** Always-visible conversion anchor
 
 **Functionality:**
+
 - "START THE PILOT" button visible in header at all times (except on mobile below 500px scroll)
 - On scroll down (>100px): Button slides in from right
 - On scroll up: Button remains visible
 - Click: Redirect to Stripe Checkout
 
 **Technical:**
+
 - Scroll detection: Framer Motion `useScroll` or vanilla JS `window.scrollY`
 - Animation: Framer Motion `motion.button` with `animate` prop
 
@@ -1048,6 +1154,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 5.1 Lighthouse Score Targets
 
 **Performance: 100/100**
+
 - **LCP (Largest Contentful Paint)**: < 2.5s
   - Hero video must load fast (use `preload="metadata"`)
   - Use `next/image` with `priority` for above-fold images
@@ -1060,6 +1167,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   - Reserve space for images with `width`/`height` attributes
 
 **Accessibility: 100/100**
+
 - **ARIA for Modals:**
   - `role="dialog"`
   - `aria-modal="true"`
@@ -1074,6 +1182,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   - Visible focus states (Vegas Gold outline)
 
 **Best Practices: 100/100**
+
 - **HTTPS:** Enforce on Vercel
 - **Security:**
   - No secrets in client code
@@ -1082,6 +1191,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - **No console errors:** Clean console on production build
 
 **SEO: 100/100**
+
 - **Meta Tags:**
   - `<title>`: "GETTUPPENT - Premium Nightlife Content Production | Minneapolis"
   - `<meta name="description">`: "Own the night with cinema-grade content. 24-hour delivery, 79.7K views in 90 days. Start your $345 Pilot today."
@@ -1097,16 +1207,18 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 5.2 Performance Optimizations
 
 **Code Splitting:**
+
 - Three.js components: `next/dynamic` with `ssr: false`
 - Framer Motion: Import only used functions (tree-shaking)
 - Lazy-load sections below the fold
 
 **Asset Optimization:**
+
 - **Images:** Next.js Image component with:
   - WebP format
   - Responsive sizes
   - Lazy loading for below-fold
-- **Videos:** 
+- **Videos:**
   - Compress to < 5MB
   - Use H.264 codec for broad compatibility
   - Poster image for instant display
@@ -1115,11 +1227,13 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
   - Subset fonts to include only used characters
 
 **CDN & Caching:**
+
 - Vercel Edge Network for global CDN
 - Static assets: `Cache-Control: public, max-age=31536000, immutable`
 - API routes: Appropriate cache headers (no cache for webhooks)
 
 **Monitoring:**
+
 - Vercel Analytics for performance tracking
 - Sentry (optional) for error monitoring
 
@@ -1130,11 +1244,13 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 6.1 Authentication
 
 **Requirements:**
+
 - Whitelisted email login (Firebase Auth)
 - Check user email against Firestore `admin_users` collection
 - Redirect unauthorized users to home page
 
 **Implementation:**
+
 - Use Firebase Auth UI for login flow
 - Server-side check: Verify user in `admin_users` collection on page load
 - If not authorized: Redirect to `/` with toast message: "Access denied"
@@ -1160,6 +1276,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - Action: "Email All" button (opens default email client with BCC list)
 
 **Technical:**
+
 - Fetch data from Firestore using server-side query (Next.js Server Component)
 - Real-time updates: Use Firestore `onSnapshot` (optional, may impact performance)
 - CSV export: Use `papaparse` library
@@ -1171,12 +1288,14 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 7.1 Component-First Approach (Stitch-Inspired)
 
 **Principles:**
+
 1. **Modular Development**: Build each of the 16 sections as a standalone component
 2. **Iterative Refinement**: Implement → Test → Refine → Move to next section
 3. **Consistent Patterns**: Reuse component patterns (e.g., glassmorphism card, CTA button)
 4. **Design System**: Create Tailwind config with custom tokens (Vegas Gold, Neon Magenta, etc.)
 
 **Execution:**
+
 - Create components in `src/features/landing/components/v2/` (to avoid conflicts with existing)
 - Each component: TypeScript, Zod props validation, Framer Motion animations
 - Storybook (optional): Visual testing for each component
@@ -1184,6 +1303,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 7.2 Multi-Skill Development Directive
 
 **Primary Architect: Stitch Methodology**
+
 - Component-first, iterative building process
 
 **Specialized Skills to Leverage:**
@@ -1224,6 +1344,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 7.3 Testing Strategy
 
 **Test-First Development (TDD):**
+
 1. Write failing test
 2. Write minimal code to pass
 3. Refactor
@@ -1250,6 +1371,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - Performance testing (Lighthouse CI)
 
 **Coverage Target:**
+
 - 80% code coverage minimum
 - 100% coverage for critical paths (payment, lead capture)
 
@@ -1260,12 +1382,14 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 8.1 Current vs. Target State
 
 **Current:**
+
 - CSS Modules (Landing.module.css, Pricing.module.css)
 - Partial component implementation (Hero, Founder, Pricing, etc.)
 - Using Inter/Outfit fonts
 - Basic glassmorphism in CSS variables
 
 **Target:**
+
 - Tailwind CSS (custom config with Vegas Gold, Neon Magenta, Electric Cyan)
 - Complete 16-section architecture
 - Bebas Neue / Inter Black for headlines
@@ -1274,12 +1398,14 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 8.2 Migration Approach
 
 **Option A: Full Rewrite (Recommended)**
+
 - Preserve existing components as `src/features/landing/components/v1/`
 - Build new components in `src/features/landing/components/v2/`
 - Gradually replace sections in main page
 - Benefits: Clean slate, no technical debt
 
 **Option B: Incremental Migration**
+
 - Convert CSS Module classes to Tailwind utilities
 - Refactor existing components to match new design
 - Risk: May introduce inconsistencies
@@ -1289,13 +1415,16 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 8.3 Tailwind Configuration
 
 **Setup:**
+
 1. Install Tailwind CSS:
+
    ```bash
    npm install -D tailwindcss postcss autoprefixer
    npx tailwindcss init -p
    ```
 
 2. Create `tailwind.config.ts`:
+
    ```typescript
    import type { Config } from 'tailwindcss';
 
@@ -1315,14 +1444,14 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
            'off-white': '#E0E0E0',
          },
          fontFamily: {
-           'bebas': ['Bebas Neue', 'sans-serif'],
-           'inter': ['Inter', 'sans-serif'],
+           bebas: ['Bebas Neue', 'sans-serif'],
+           inter: ['Inter', 'sans-serif'],
          },
          backdropBlur: {
-           'glass': '30px',
+           glass: '30px',
          },
          boxShadow: {
-           'glass': '0 0 20px rgba(255, 199, 44, 0.4)',
+           glass: '0 0 20px rgba(255, 199, 44, 0.4)',
            'neon-magenta': 'inset 0 0 20px rgba(255, 0, 255, 0.3)',
          },
        },
@@ -1333,6 +1462,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    ```
 
 3. Update `src/app/globals.css`:
+
    ```css
    @tailwind base;
    @tailwind components;
@@ -1346,7 +1476,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 
    @layer components {
      .glass {
-       @apply bg-white/5 backdrop-blur-glass border border-white/10;
+       @apply backdrop-blur-glass border border-white/10 bg-white/5;
      }
    }
    ```
@@ -1358,6 +1488,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 9.1 Technical Success Criteria
 
 **Must-Have (Launch Blockers):**
+
 - ✅ **Desktop:** Lighthouse Performance: 100/100
 - ✅ **Mobile:** Lighthouse Performance: 95+/100 (Three.js may impact mobile score)
 - ✅ Lighthouse Accessibility: 100/100 (desktop AND mobile)
@@ -1376,6 +1507,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - ✅ Test coverage: >80%
 
 **Mobile-Specific Success Criteria:**
+
 - ✅ **Hero loads in < 3s on 4G connection** (tested with Chrome DevTools throttling)
 - ✅ **Pricing carousel swipes smoothly** (60fps, no jank)
 - ✅ **Gallery lightbox has Instagram Stories-style swipe navigation**
@@ -1388,6 +1520,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - ✅ **Landscape orientation handled gracefully**
 
 **Nice-to-Have (Post-Launch):**
+
 - Lighthouse SEO: 100/100 (may require content adjustments)
 - Storybook component library
 - Real-time Firestore updates in admin dashboard
@@ -1396,16 +1529,19 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 9.2 Business Success Criteria (30 Days Post-Launch)
 
 **Lead Generation:**
+
 - 500+ email captures (hero input + popup)
 - 50+ Pilot purchases ($17,250 revenue)
 - 10+ Retainer subscriptions ($5,000-$9,950 MRR)
 
 **Engagement (Overall):**
+
 - Average session duration: >2 minutes
 - Bounce rate: <40%
 - Gallery lightbox opens: >30% of visitors
 
 **Engagement (Mobile-Specific):**
+
 - **Mobile traffic:** >60% of total traffic (nightlife industry is mobile-heavy)
 - **Mobile session duration:** >90 seconds (shorter than desktop, but still engaged)
 - **Mobile bounce rate:** <45% (slightly higher than desktop is acceptable)
@@ -1414,18 +1550,22 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 - **Share button taps:** >5% of mobile visitors tap share on gallery items
 
 **Conversion Rates (Overall):**
+
 - Hero → Pilot CTA: >5% click-through
 - Exit-intent popup: >10% email capture rate
 - Pricing page → Checkout: >15% click-through
 
 **Conversion Rates (Mobile-Specific):**
+
 - **Mobile → Pilot CTA:** >4% click-through (slightly lower than desktop due to smaller screen)
 - **Mobile exit-intent (back button):** >8% email capture rate
 - **Mobile → One-tap checkout:** >20% completion rate (Apple Pay / Google Pay boost)
 - **Sticky bottom CTA (mobile):** >6% click-through after appearing
 
 **"Wow Factor" Success Metric:**
+
 > **Primary Goal:** When a venue owner shows this site to their business partner on mobile, the partner should immediately say: "Who built this? We need them."
+
 - Measure: Post-launch user interviews (ask 10 customers how they heard about us)
 - Target: >50% mention "saw the website" as a key decision factor
 
@@ -1435,22 +1575,22 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 
 ### 10.1 Technical Risks
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| Three.js performance issues on low-end devices | High | Medium | Lazy-load, reduce particle count on mobile, provide fallback 2D animation |
-| Stripe webhook failures (missed payments) | Critical | Low | Implement webhook retry logic, log all failures to Firestore, set up monitoring alerts |
-| Firestore security rule bypass | Critical | Low | Comprehensive unit tests using @firebase/rules-unit-testing, manual penetration testing |
-| Exit-intent popup triggers too early/often | Medium | Medium | Fine-tune trigger conditions, implement localStorage cooldown, A/B test thresholds |
-| Video background impacts LCP | High | Medium | Use poster image, lazy-load video after LCP, optimize video file size (<5MB) |
-| Tailwind migration breaks existing components | Low | Medium | Full rewrite in separate directory, gradual replacement, thorough QA |
+| Risk                                           | Impact   | Probability | Mitigation                                                                              |
+| ---------------------------------------------- | -------- | ----------- | --------------------------------------------------------------------------------------- |
+| Three.js performance issues on low-end devices | High     | Medium      | Lazy-load, reduce particle count on mobile, provide fallback 2D animation               |
+| Stripe webhook failures (missed payments)      | Critical | Low         | Implement webhook retry logic, log all failures to Firestore, set up monitoring alerts  |
+| Firestore security rule bypass                 | Critical | Low         | Comprehensive unit tests using @firebase/rules-unit-testing, manual penetration testing |
+| Exit-intent popup triggers too early/often     | Medium   | Medium      | Fine-tune trigger conditions, implement localStorage cooldown, A/B test thresholds      |
+| Video background impacts LCP                   | High     | Medium      | Use poster image, lazy-load video after LCP, optimize video file size (<5MB)            |
+| Tailwind migration breaks existing components  | Low      | Medium      | Full rewrite in separate directory, gradual replacement, thorough QA                    |
 
 ### 10.2 Business Risks
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| Low conversion rates despite high traffic | High | Medium | A/B test CTAs, implement heatmap tracking (Hotjar), user testing sessions |
-| Stripe account limitations (high chargeback rate) | Critical | Low | Clear refund policy, 60-day guarantee reduces disputes, proactive customer support |
-| Sanity CMS downtime affects gallery | Medium | Low | Implement ISR caching (60s revalidation), fallback to static placeholder images |
+| Risk                                              | Impact   | Probability | Mitigation                                                                         |
+| ------------------------------------------------- | -------- | ----------- | ---------------------------------------------------------------------------------- |
+| Low conversion rates despite high traffic         | High     | Medium      | A/B test CTAs, implement heatmap tracking (Hotjar), user testing sessions          |
+| Stripe account limitations (high chargeback rate) | Critical | Low         | Clear refund policy, 60-day guarantee reduces disputes, proactive customer support |
+| Sanity CMS downtime affects gallery               | Medium   | Low         | Implement ISR caching (60s revalidation), fallback to static placeholder images    |
 
 ---
 
@@ -1459,6 +1599,7 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
 ### 11.1 Third-Party Services
 
 **Required for MVP:**
+
 1. **Vercel Account** (Deployment)
    - Environment variables configured
    - Domain connected (if custom domain)
@@ -1485,13 +1626,15 @@ The site must evoke **exclusivity, high-end production quality, and immediate tr
    - Embed code generated
 
 **Optional (Post-Launch):**
+
 - Google Analytics / Vercel Analytics
 - Hotjar (heatmap tracking)
 - Sentry (error monitoring)
 
 ### 11.2 Environment Variables
 
-**Client-Side (NEXT_PUBLIC_*):**
+**Client-Side (NEXT*PUBLIC*\*):**
+
 ```
 NEXT_PUBLIC_FIREBASE_API_KEY=
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
@@ -1505,6 +1648,7 @@ NEXT_PUBLIC_SANITY_DATASET=
 ```
 
 **Server-Side:**
+
 ```
 STRIPE_SECRET_KEY=
 STRIPE_WEBHOOK_SECRET=
@@ -1516,6 +1660,7 @@ RESEND_API_KEY= (for automated audit emails)
 ```
 
 **Email Configuration (Resend.com):**
+
 - Sign up at https://resend.com
 - Create API key in dashboard
 - Add verified domain or use resend.dev for testing
@@ -1577,6 +1722,7 @@ RESEND_API_KEY= (for automated audit emails)
 **RECOMMENDED: Resend.com (Best Balance of Easy + Automated + Free)**
 
 **Why Resend:**
+
 - ✅ **Easiest Developer Experience:** Literally 3 lines of code in Next.js API route
 - ✅ **Free Tier:** 3,000 emails/month, 100 emails/day (more than enough)
 - ✅ **Beautiful Templates:** Use React Email for professional-looking audits
@@ -1585,6 +1731,7 @@ RESEND_API_KEY= (for automated audit emails)
 - ✅ **No Monthly Cost:** Free tier covers your needs
 
 **Implementation:**
+
 ```bash
 npm install resend react-email
 ```
@@ -1598,14 +1745,14 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   const { email } = await req.json();
-  
+
   await resend.emails.send({
     from: 'GETTUPPENT <audit@gettuppent.com>',
     to: email,
     subject: '🎬 Your Free 5-Point Content Audit',
     react: AuditEmail({ recipientEmail: email }),
   });
-  
+
   return Response.json({ success: true });
 }
 ```
@@ -1613,6 +1760,7 @@ export async function POST(req: Request) {
 **Trigger:** When user submits VIP popup email, call this API route → Instant delivery
 
 **Alternative Option: Zapier (No-Code, Slightly More Cost)**
+
 - ✅ **Setup Time:** 5 minutes (no code)
 - ✅ **Cost:** $20/month for paid plan (100 tasks/month on free tier)
 - ✅ **Flow:** Firestore new document → Send email via Gmail/SendGrid
@@ -1665,25 +1813,25 @@ Upon approval of this PRD, the next phase will involve:
 
 ## Appendix A: Color Palette Reference
 
-| Color Name | Hex Code | Usage | Tailwind Class |
-|------------|----------|-------|----------------|
-| Vegas Gold | #FFC72C | Primary CTAs, highlights, conversion elements | `bg-vegas-gold`, `text-vegas-gold`, `border-vegas-gold` |
-| Neon Magenta | #FF00FF | GETTUPP GIRLS section, pulsing accents | `bg-neon-magenta`, `text-neon-magenta` |
-| Electric Cyan | #00FFFF | CINEMA GRADE section, video UI | `bg-electric-cyan`, `text-electric-cyan` |
-| Deep Void Black | #080808 | Background | `bg-deep-void` |
-| Off-White | #E0E0E0 | Body text | `text-off-white` |
+| Color Name      | Hex Code | Usage                                         | Tailwind Class                                          |
+| --------------- | -------- | --------------------------------------------- | ------------------------------------------------------- |
+| Vegas Gold      | #FFC72C  | Primary CTAs, highlights, conversion elements | `bg-vegas-gold`, `text-vegas-gold`, `border-vegas-gold` |
+| Neon Magenta    | #FF00FF  | GETTUPP GIRLS section, pulsing accents        | `bg-neon-magenta`, `text-neon-magenta`                  |
+| Electric Cyan   | #00FFFF  | CINEMA GRADE section, video UI                | `bg-electric-cyan`, `text-electric-cyan`                |
+| Deep Void Black | #080808  | Background                                    | `bg-deep-void`                                          |
+| Off-White       | #E0E0E0  | Body text                                     | `text-off-white`                                        |
 
 ---
 
 ## Appendix B: Typography Reference
 
-| Element | Font Family | Weight | Size (Desktop) | Size (Mobile) | Line Height | Letter Spacing |
-|---------|-------------|--------|----------------|---------------|-------------|----------------|
-| Hero Headline | Bebas Neue | Black (900) | 96px | 48px | 1.0 | -0.02em |
-| Section Headline | Inter Black | Black (900) | 64px | 36px | 1.1 | -0.02em |
-| Subheadline | Inter | SemiBold (600) | 24px | 18px | 1.4 | 0 |
-| Body | Inter | Regular (400) | 18px | 16px | 1.6 | 0 |
-| Button Text | Inter | Bold (700) | 16px | 14px | 1.0 | 0.05em |
+| Element          | Font Family | Weight         | Size (Desktop) | Size (Mobile) | Line Height | Letter Spacing |
+| ---------------- | ----------- | -------------- | -------------- | ------------- | ----------- | -------------- |
+| Hero Headline    | Bebas Neue  | Black (900)    | 96px           | 48px          | 1.0         | -0.02em        |
+| Section Headline | Inter Black | Black (900)    | 64px           | 36px          | 1.1         | -0.02em        |
+| Subheadline      | Inter       | SemiBold (600) | 24px           | 18px          | 1.4         | 0              |
+| Body             | Inter       | Regular (400)  | 18px           | 16px          | 1.6         | 0              |
+| Button Text      | Inter       | Bold (700)     | 16px           | 14px          | 1.0         | 0.05em         |
 
 ---
 
@@ -1774,27 +1922,27 @@ gettuppent-landing/
 
 **CRITICAL:** This table serves as the quick reference for all mobile-specific enhancements. Every section must implement these features.
 
-| Section | Mobile Layout | Touch Interactions | Performance Optimization | "Wow Factor" Element |
-|---------|--------------|-------------------|-------------------------|---------------------|
-| **Hero** | Full-screen (100vh), bottom-anchored CTAs | Device gyroscope parallax, haptic feedback on CTA tap | 50 particles (vs. 200 desktop), 720p video | Particles tilt with phone movement |
-| **The Pilot** | Full-width glassmorphism card, larger badge | Tap card to expand, swipe to dismiss | Disable 3D tilt (performance) | Pulsing neon badge more vibrant on mobile |
-| **Pricing (Retainers)** | Horizontal swipe carousel with snap points | Swipe to navigate, haptic feedback on snap | Lazy-load off-screen cards | Peek effect (20% of adjacent cards visible) |
-| **Gallery** | 1-column vertical stack | Instagram Stories-style swipe (left/right/down to close) | 10 images initial load, LQIP placeholders | Double-tap to zoom, long-press to share |
-| **Exit-Intent Popup** | Full-screen modal, bottom-left close button | Back button intercept, swipe down to close | Solid background (no blur) | Pre-fill email if user entered city in Hero |
-| **Sticky Header** | Transparent → solid on scroll, hamburger menu | Tap to expand menu, smooth scroll to sections | Hide on scroll down (save screen space) | Slide-in animation for CTA button |
-| **Sticky Bottom CTA** | Appears after 2 scrolls, always visible | Haptic feedback on tap, Apple Pay / Google Pay integration | Lightweight bar (no heavy graphics) | Gold glow pulses every 3 seconds |
+| Section                 | Mobile Layout                                 | Touch Interactions                                         | Performance Optimization                   | "Wow Factor" Element                        |
+| ----------------------- | --------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------ | ------------------------------------------- |
+| **Hero**                | Full-screen (100vh), bottom-anchored CTAs     | Device gyroscope parallax, haptic feedback on CTA tap      | 50 particles (vs. 200 desktop), 720p video | Particles tilt with phone movement          |
+| **The Pilot**           | Full-width glassmorphism card, larger badge   | Tap card to expand, swipe to dismiss                       | Disable 3D tilt (performance)              | Pulsing neon badge more vibrant on mobile   |
+| **Pricing (Retainers)** | Horizontal swipe carousel with snap points    | Swipe to navigate, haptic feedback on snap                 | Lazy-load off-screen cards                 | Peek effect (20% of adjacent cards visible) |
+| **Gallery**             | 1-column vertical stack                       | Instagram Stories-style swipe (left/right/down to close)   | 10 images initial load, LQIP placeholders  | Double-tap to zoom, long-press to share     |
+| **Exit-Intent Popup**   | Full-screen modal, bottom-left close button   | Back button intercept, swipe down to close                 | Solid background (no blur)                 | Pre-fill email if user entered city in Hero |
+| **Sticky Header**       | Transparent → solid on scroll, hamburger menu | Tap to expand menu, smooth scroll to sections              | Hide on scroll down (save screen space)    | Slide-in animation for CTA button           |
+| **Sticky Bottom CTA**   | Appears after 2 scrolls, always visible       | Haptic feedback on tap, Apple Pay / Google Pay integration | Lightweight bar (no heavy graphics)        | Gold glow pulses every 3 seconds            |
 
 **Mobile-Specific Technologies:**
 
-| Technology | Purpose | Implementation | Browser Support |
-|------------|---------|----------------|----------------|
-| **DeviceMotion API** | Gyroscope parallax for particles | `window.addEventListener('deviceorientation', ...)` | iOS Safari 13+, Chrome Android 80+ |
-| **Navigator.vibrate()** | Haptic feedback on CTA taps | `navigator.vibrate([50])` | Chrome Android, iOS Safari (limited) |
-| **History API** | Exit-intent via back button intercept | `window.history.pushState()` + `popstate` listener | All modern mobile browsers |
-| **CSS scroll-snap** | Smooth carousel snapping | `scroll-snap-type: x mandatory` | iOS Safari 11+, Chrome Android 69+ |
-| **Intersection Observer** | Lazy-load images, pause off-screen videos | `new IntersectionObserver(...)` | All modern mobile browsers |
-| **Apple Pay / Google Pay** | One-tap checkout | Stripe Payment Request Button | iOS Safari, Chrome Android |
-| **PWA Manifest** | "Add to Home Screen" prompt | `manifest.json` with icons and theme | All modern mobile browsers |
+| Technology                 | Purpose                                   | Implementation                                      | Browser Support                      |
+| -------------------------- | ----------------------------------------- | --------------------------------------------------- | ------------------------------------ |
+| **DeviceMotion API**       | Gyroscope parallax for particles          | `window.addEventListener('deviceorientation', ...)` | iOS Safari 13+, Chrome Android 80+   |
+| **Navigator.vibrate()**    | Haptic feedback on CTA taps               | `navigator.vibrate([50])`                           | Chrome Android, iOS Safari (limited) |
+| **History API**            | Exit-intent via back button intercept     | `window.history.pushState()` + `popstate` listener  | All modern mobile browsers           |
+| **CSS scroll-snap**        | Smooth carousel snapping                  | `scroll-snap-type: x mandatory`                     | iOS Safari 11+, Chrome Android 69+   |
+| **Intersection Observer**  | Lazy-load images, pause off-screen videos | `new IntersectionObserver(...)`                     | All modern mobile browsers           |
+| **Apple Pay / Google Pay** | One-tap checkout                          | Stripe Payment Request Button                       | iOS Safari, Chrome Android           |
+| **PWA Manifest**           | "Add to Home Screen" prompt               | `manifest.json` with icons and theme                | All modern mobile browsers           |
 
 **Mobile Testing Checklist:**
 
@@ -1816,16 +1964,16 @@ gettuppent-landing/
 
 **Mobile Performance Targets:**
 
-| Metric | Target | How to Measure |
-|--------|--------|----------------|
-| **First Contentful Paint (FCP)** | < 1.5s | Chrome DevTools Lighthouse (mobile) |
-| **Largest Contentful Paint (LCP)** | < 2.5s | Chrome DevTools Lighthouse (mobile) |
-| **First Input Delay (FID)** | < 100ms | Real User Monitoring (RUM) or Lighthouse |
-| **Cumulative Layout Shift (CLS)** | < 0.1 | Chrome DevTools Lighthouse (mobile) |
-| **Time to Interactive (TTI)** | < 3.5s | Chrome DevTools Lighthouse (mobile) |
-| **Total Page Size** | < 2MB | Chrome DevTools Network tab |
-| **JavaScript Bundle Size** | < 300KB (gzipped) | Next.js build output |
-| **Hero Video Size** | < 3MB (720p mobile) | Video compression tool |
+| Metric                             | Target              | How to Measure                           |
+| ---------------------------------- | ------------------- | ---------------------------------------- |
+| **First Contentful Paint (FCP)**   | < 1.5s              | Chrome DevTools Lighthouse (mobile)      |
+| **Largest Contentful Paint (LCP)** | < 2.5s              | Chrome DevTools Lighthouse (mobile)      |
+| **First Input Delay (FID)**        | < 100ms             | Real User Monitoring (RUM) or Lighthouse |
+| **Cumulative Layout Shift (CLS)**  | < 0.1               | Chrome DevTools Lighthouse (mobile)      |
+| **Time to Interactive (TTI)**      | < 3.5s              | Chrome DevTools Lighthouse (mobile)      |
+| **Total Page Size**                | < 2MB               | Chrome DevTools Network tab              |
+| **JavaScript Bundle Size**         | < 300KB (gzipped)   | Next.js build output                     |
+| **Hero Video Size**                | < 3MB (720p mobile) | Video compression tool                   |
 
 **Mobile-First Development Workflow:**
 
@@ -1850,6 +1998,7 @@ gettuppent-landing/
 **Next Step:** Await user approval → Proceed to Technical Specification
 
 **Mobile-First Enhancements:**
+
 - ✅ Added Section 1.3: Mobile-First Development Philosophy (7 core principles)
 - ✅ Enhanced Hero Section with device gyroscope parallax and mobile-specific optimizations
 - ✅ Enhanced Pricing Section with horizontal swipe carousel and peek effect
@@ -1860,6 +2009,7 @@ gettuppent-landing/
 - ✅ Added comprehensive mobile testing checklist and performance targets
 
 **User Approval Status:**
+
 - ✅ **PRD reviewed and approved** (mobile-first enhancements included)
 - ✅ **Open questions answered** (Section 12.2 - all questions resolved)
 - ✅ **Brand assets sourcing plan confirmed** (placeholders for testing, real assets later)
@@ -1871,10 +2021,11 @@ gettuppent-landing/
   - Firebase Security Rules deployment
 
 **Ready to Proceed:**
+
 - ✅ **Next Step:** Create Technical Specification (`spec.md`)
 - ✅ **After Spec:** Create Implementation Plan (`plan.md`)
 - ✅ **After Plan:** Begin development with Tailwind CSS setup and component scaffolding in `src/features/landing/components/v2/`
 
 ---
 
-*End of Product Requirements Document*
+_End of Product Requirements Document_

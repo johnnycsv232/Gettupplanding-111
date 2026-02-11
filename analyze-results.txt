@@ -1,0 +1,37 @@
+﻿
+> gettupplanding@0.1.0 analyze
+> set ANALYZE=true && next build
+
+Γû▓ Next.js 16.1.5 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  ┬╖ optimizePackageImports
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 28.4s
+  Running TypeScript ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/10) ...
+  Generating static pages using 11 workers (2/10) 
+  Generating static pages using 11 workers (4/10) 
+  Generating static pages using 11 workers (7/10) 
+Γ£ô Generating static pages using 11 workers (10/10) in 5.8s
+  Finalizing page optimization ...
+
+Route (app)
+Γöî ╞Æ /
+Γö£ ╞Æ /_not-found
+Γö£ ╞Æ /admin
+Γö£ ╞Æ /api/checkout
+Γö£ ╞Æ /api/subscriptions/sync
+Γö£ ╞Æ /api/webhooks/stripe
+Γö£ Γùï /robots.txt
+Γö£ Γùï /sitemap.xml
+Γöö ╞Æ /test-theme
+
+
+╞Æ Proxy (Middleware)
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+

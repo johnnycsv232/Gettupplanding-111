@@ -1,0 +1,166 @@
+{
+  "project": "Gettupplanding 111",
+  "repository_path": "C:\\Users\\finan\\Gettupplanding-111",
+  "setup": {
+    "script": "npm install",
+    "bash": "#!/bin/bash\nnpm install\n# Add setup commands here...",
+    "description": "Installs dependencies and prepares the worktree.",
+    "required_skills": [
+      "npm-best-practices",
+      "skill-developer",
+      "workflow-automation",
+      "error-handling-resilience"
+    ]
+  },
+  "dev": {
+    "script": "npm run dev",
+    "bash": "#!/bin/bash\nnpm run dev\n# Add dev server command here...",
+    "description": "Starts the development server.",
+    "required_skills": [
+      "nextjs-best-practices",
+      "react-best-practices",
+      "3d-web-experience",
+      "performance-optimization-advanced",
+      "utility-libraries-advanced"
+    ]
+  },
+  "cleanup": {
+    "script": "npm run lint",
+    "bash": "#!/bin/bash\nnpm run lint\n# Add cleanup commands here...",
+    "description": "Runs linting and QA tasks.",
+    "required_skills": [
+      "lint-and-validate",
+      "test-driven-development",
+      "verification-before-completion",
+      "error-handling-resilience",
+      "monitoring-logging-production",
+      "code-quality-eslint-prettier",
+      "git-workflows-husky"
+    ]
+  },
+  "copy_files": [
+    ".env.local",
+    ".env.local.example",
+    ".firebaserc",
+    "firebase.json",
+    "firestore.rules",
+    "firestore.indexes.json",
+    "next.config.ts",
+    "tailwind.config.ts",
+    "tsconfig.json",
+    "vitest.config.mts",
+    "vercel.json",
+    "eslint.config.mjs",
+    "postcss.config.mjs",
+    "playwright.config.ts",
+    ".gitignore"
+  ],
+  "environment_variables": {
+    "Firebase": [
+      "NEXT_PUBLIC_FIREBASE_API_KEY",
+      "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN",
+      "NEXT_PUBLIC_FIREBASE_PROJECT_ID",
+      "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
+      "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID",
+      "NEXT_PUBLIC_FIREBASE_APP_ID"
+    ],
+    "Stripe": [
+      "STRIPE_SECRET_KEY",
+      "STRIPE_WEBHOOK_SECRET",
+      "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+      "STRIPE_LIVE_KEY"
+    ],
+    "Sanity": ["NEXT_PUBLIC_SANITY_PROJECT_ID", "NEXT_PUBLIC_SANITY_DATASET"],
+    "AI": ["GOOGLE_GENERATIVE_AI_API_KEY", "OPENAI_API_KEY"],
+    "Monitoring": ["SENTRY_DSN", "VERCEL_ANALYTICS_ID"]
+  },
+  "skill_protocols": {
+    "planning": "Use @plan-writing and @senior-architect for all structural changes.",
+    "development": "Enforce @typescript-expert and @zod for boundary safety.",
+    "verification": "Mandate @tdd-workflow and @systematic-debugging for all fixes.",
+    "visuals": "Leverage @3d-web-experience and @ui-ux-pro-max for core UI components.",
+    "ai": "Use @ai-integration-genkit and @ai-integration-langchain for AI features.",
+    "cms": "Leverage @cms-integration-sanity for content management.",
+    "performance": "Apply @performance-optimization-advanced for all production builds.",
+    "security": "Enforce @security-hardening-advanced for production deployments.",
+    "testing": "Use @e2e-testing-playwright, @unit-testing-vitest, and @testing-library-react for comprehensive testing.",
+    "quality": "Apply @code-quality-eslint-prettier and @git-workflows-husky for code quality.",
+    "accessibility": "Enforce @accessibility-wcag-compliance for inclusive design.",
+    "database": "Use @database-firebase-advanced for scalable data patterns.",
+    "api": "Apply @api-design-rest-graphql for robust backend integration."
+  },
+  "invariants": {
+    "security": [
+      "NO production code without failing tests (TDD Iron Law)",
+      "Webhooks MUST verify signatures (Stripe/Firebase)",
+      "Security Rules MUST be defined from Day 1",
+      "No client-side admin operations or direct DB access",
+      "Parameterized queries ONLY; No raw string concatenation",
+      "Regenerate session IDs on every login (Auth Security)",
+      "Implement Strict CSP and X-Frame-Options headers"
+    ],
+    "architecture": [
+      "Server-First by default (Next.js App Router)",
+      "Lib-First approach: Search before building (Software Architecture)",
+      "Early Return / Guard Clauses for all logic paths",
+      "Module length < 200 lines; functions < 20 lines (Clean Code)",
+      "No generic names (utils, helpers, shared); use Domain names",
+      "Prefer interfaces over types for object shapes (TS Expert)"
+    ],
+    "ux_ui": [
+      "SVG Icons ONLY (Heroicons/Lucide); NO emojis for UI",
+      "Minimum 44x44px touch targets",
+      "Accessible color contrast (4.5:1 ratio)",
+      "Stable hover states (no layout shifts)",
+      "Smooth micro-interactions (150-300ms)"
+    ],
+    "process": [
+      "Find root cause BEFORE fixing (Systematic Debugging)",
+      "3+ failed fixes = Architectural Flaw (Stop & Reflect)",
+      "Evidence before Claims (Verification Before Completion)",
+      "Always verify tests before merging or creating PRs"
+    ],
+    "seo": [
+      "Unique Title Tags (50-60 chars) and Meta Descriptions (150-160 chars) per page",
+      "One H1 per page containing primary keyword",
+      "Descriptive Alt Text for all images",
+      "Valid HTTPS and canonical tags on all pages"
+    ],
+    "performance": [
+      "LCP < 2.5s, INP < 200ms, CLS < 0.1",
+      "Baseline -> Identify -> Fix -> Validate workflow",
+      "Lazy load images and code-split heavy routes",
+      "Compress assets and use modern formats (WebP)"
+    ],
+    "database": [
+      "No SELECT * in production; Fetch only required fields",
+      "Mandatory indexing for ALL queried fields",
+      "JSON columns ONLY for non-relational, variable-schema data"
+    ],
+    "api": [
+      "No verbs in REST endpoints (/users, not /getUsers)",
+      "Consistent Envelope Pattern for all responses",
+      "Mandatory Rate Limiting for all production routes"
+    ]
+  },
+  "analytics_protocol": {
+    "naming": "Object-Action (e.g., signup_completed, cta_clicked)",
+    "essential_events": ["page_view", "cta_clicked", "form_submitted", "purchase_completed"],
+    "utm_convention": "lowercase with underscores (e.g., utm_source=google, utm_campaign=spring_sale)"
+  },
+  "verifications": {
+    "scripts": {
+      "full_audit": "npm run lint && npm run type-check && npm run test",
+      "ui_check": "npx playwright test",
+      "skill_sync": "npm run skills:index && npm run skills:validate",
+      "performance_audit": "tsx scripts/lighthouse_audit.ts",
+      "security_scan": "tsx scripts/security_scan.ts",
+      "api_validation": "tsx scripts/api_validator.ts",
+      "schema_validation": "tsx scripts/schema_validator.ts",
+      "integration_map_audit": "tsx scripts/integration_map_audit.ts",
+      "bundle_analysis": "tsx scripts/bundle_analyzer.ts",
+      "accessibility_audit": "tsx scripts/accessibility_audit.ts",
+      "i18n_validation": "tsx scripts/i18n_validator.ts"
+    }
+  }
+}

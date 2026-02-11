@@ -1,98 +1,96 @@
 'use client';
 
+import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { getFirebaseDb } from '@/lib/firebase';
-import { collection, query, orderBy, limit, getDocs, Timestamp } from 'firebase/firestore';
-import GlassCard from '@/components/ui/GlassCard';
+
+import { GlassCard } from '@/components/ui';
+import { getFirebaseAuth } from '@/lib/firebase';
+
+import { LeadsTable } from './components/LeadsTable';
 
 interface Lead {
   id: string;
   email: string;
   city?: string;
-  createdAt: Timestamp | null;
+  createdAt: string | null;
   source?: string;
 }
 
 export default function AdminDashboard() {
   const [leads, setLeads] = useState<Lead[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchLeads = async () => {
-      const db = getFirebaseDb();
-      try {
-        const q = query(collection(db, 'leads'), orderBy('createdAt', 'desc'), limit(50));
-        const snapshot = await getDocs(q);
-        const leadsData = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        })) as Lead[];
-        setLeads(leadsData);
-      } catch (error) {
-        console.error("Error fetching leads:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const auth = getFirebaseAuth();
 
-    fetchLeads();
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        setLeads([]);
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        setErrorMessage(null);
+
+        const idToken = await user.getIdToken();
+        const response = await fetch('/api/admin/leads', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+          cache: 'no-store',
+        });
+
+        if (!response.ok) {
+          const body = await response.json().catch(() => ({}));
+          throw new Error(body?.error ?? 'Failed to fetch leads');
+        }
+
+        const body = (await response.json()) as { leads?: Lead[] };
+        setLeads(Array.isArray(body.leads) ? body.leads : []);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Unknown error';
+        setErrorMessage(message);
+        setLeads([]);
+      } finally {
+        setIsLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (
     <div className="space-y-8">
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">Quick Actions</h2>
-          <a 
-            href="https://sanity.io" 
-            target="_blank" 
+          <h2 className="mb-4 font-display text-xl">Quick Actions</h2>
+          <a
+            href="https://sanity.io"
+            target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-4 py-2 bg-[#F03E2F] text-white rounded font-bold hover:bg-red-600 transition-colors"
+            className="inline-block rounded bg-[#F03E2F] px-4 py-2 font-bold text-white transition-colors hover:bg-red-600"
           >
             OPEN SANITY STUDIO
           </a>
         </GlassCard>
-        
+
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">Stats</h2>
-          <div className="text-4xl font-display text-vegas-gold">{leads.length}</div>
-          <div className="text-sm text-white/60 uppercase tracking-widest">Total Leads</div>
+          <h2 className="mb-4 font-display text-xl">Stats</h2>
+          <div className="font-display text-4xl text-vegas-gold">{leads.length}</div>
+          <div className="text-sm uppercase tracking-widest text-white/60">
+            {isLoading ? 'Loading leads...' : 'Total Leads'}
+          </div>
+          {errorMessage ? (
+            <p className="mt-4 text-sm text-red-400">Could not load leads: {errorMessage}</p>
+          ) : null}
         </GlassCard>
       </div>
 
-      <GlassCard className="p-6">
-        <h2 className="text-xl font-bold mb-6">Recent Leads</h2>
-        {loading ? (
-          <div className="text-white/40">Loading leads...</div>
-        ) : leads.length === 0 ? (
-          <div className="text-white/40">No leads found yet.</div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="text-white/40 text-xs uppercase tracking-widest border-b border-white/10">
-                  <th className="p-4">Date</th>
-                  <th className="p-4">Email</th>
-                  <th className="p-4">City</th>
-                  <th className="p-4">Source</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leads.map((lead) => (
-                  <tr key={lead.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                    <td className="p-4 text-white/60">
-                      {lead.createdAt?.toDate ? lead.createdAt.toDate().toLocaleDateString() : 'Just now'}
-                    </td>
-                    <td className="p-4 text-white font-mono">{lead.email}</td>
-                    <td className="p-4 text-white/80">{lead.city || '-'}</td>
-                    <td className="p-4 text-white/60">{lead.source || 'Hero'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </GlassCard>
+      <LeadsTable leads={leads} />
     </div>
   );
 }

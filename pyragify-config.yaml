@@ -1,0 +1,27 @@
+repo_path: /home/finan/dev/work/GettUppLanding
+output_dir: /home/finan/dev/work/GettUppLanding/pyragify-output
+max_words: 10000
+max_file_size: 1048576 # 1 MB
+skip_patterns:
+  - '*.log'
+  - '*.tmp'
+  - '*.lock'
+  - 'test-results/**'
+  - 'playwright-report/**'
+  - 'node_modules/**'
+  - '.next/**'
+  - 'dist/**'
+  - '*.map'
+  - '*.min.js'
+  - '*.min.css'
+skip_dirs:
+  - '__pycache__'
+  - 'node_modules'
+  - '.next'
+  - 'dist'
+  - '.git'
+  - 'test-results'
+  - 'playwright-report'
+  - '.venv'
+  - 'pyragify-venv'
+verbose: false

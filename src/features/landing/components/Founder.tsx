@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+
 import styles from '../styles/Landing.module.css';
 
 export default function Founder() {
@@ -33,16 +34,25 @@ export default function Founder() {
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-bold mb-6 text-white text-display">THE MAN BEHIND MINNEAPOLIS NIGHTS</h3>
+            <h3 className="mb-6 font-display text-2xl font-bold tracking-[0.08em] text-white">
+              THE MAN BEHIND MINNEAPOLIS NIGHTS
+            </h3>
             <p className={styles.founderBio}>
-              Johnny Cage is the lens behind 350+ Minneapolis nights this year and the name venues recognize before they see the camera.
-              <br /><br />
-              Official photographer for <strong>Last Call</strong> and a fixture at <strong>DJ YS</strong> sets, he turned &quot;pull up with the homies&quot; access into a system that delivers nightclub-grade content on a 24-72h clock.
-              <br /><br />
-              <strong>GettUpp ENT</strong> is that system—built by the guy who&apos;s already in the room, then hardened with an enterprise playbook so your content hits on schedule every time.
+              Johnny Cage is the lens behind 350+ Minneapolis nights this year and the name venues
+              recognize before they see the camera.
+              <br />
+              <br />
+              Official photographer for <strong>Last Call</strong> and a fixture at{' '}
+              <strong>DJ YS</strong> sets, he turned &quot;pull up with the homies&quot; access into
+              a system that delivers nightclub-grade content on a 24-72h clock.
+              <br />
+              <br />
+              <strong>GettUpp ENT</strong> is that system—built by the guy who&apos;s already in the
+              room, then hardened with an enterprise playbook so your content hits on schedule every
+              time.
             </p>
-            
-            <motion.div 
+
+            <motion.div
               className={styles.founderStats}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -65,9 +75,9 @@ export default function Founder() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-transparent" />
             {/* Image placeholder for Johnny Cage */}
-            <div className="w-full h-full flex items-center justify-center text-gray-500 font-bold bg-zinc-900">
+            <div className="flex size-full items-center justify-center bg-zinc-900 font-bold text-gray-500">
               JOHNNY CAGE
             </div>
           </motion.div>

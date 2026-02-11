@@ -1,92 +1,114 @@
 'use client';
 
-import GlassCard from '@/components/ui/GlassCard';
-import Button from '@/components/ui/Button';
-import { Check, ShieldCheck } from 'lucide-react';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ShieldCheck, Target, Timer, ArrowRight } from 'lucide-react';
 
-export default function PilotSection() {
-  const [isLoading, setIsLoading] = useState(false);
+import { Button, GlassCard, GlintEffect } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
 
-  const handlePilotCheckout = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          priceId: 'price_pilot_placeholder',
-          tier: 'PILOT',
-          mode: 'payment' // Pilot is a one-time payment
-        }),
-      });
+const pilotDeliverables = [
+  'One full cinematic recap + 3 vertical cutdowns',
+  'Hook-first scripting and posting plan',
+  'Delivery in < 24 hours after your event ends',
+];
 
-      const { url, error } = await response.json();
-      if (error) throw new Error(error);
-      if (url) window.location.href = url;
-    } catch (err) {
-      console.error('Checkout error:', err);
-      alert('Failed to initiate checkout. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+/**
+ * PilotSection
+ * Low-friction paid entry offer for conversion.
+ */
+export const PilotSection = () => {
   return (
-    <section className="py-24 px-4 bg-deep-void-black relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-neon-magenta/20 rounded-full blur-[100px] pointer-events-none" />
+    <section id="pilot" className="section-shell">
+      <SectionBackdrop variant="neutral" />
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            className="space-y-8"
+          >
+            <SectionIntro
+              className="max-w-3xl"
+              kicker="Pilot Offer"
+              title="START WITH A"
+              highlight="PROOF NIGHT"
+              description="One high-impact event recap designed to prove speed, quality, and growth before any monthly commitment."
+              descriptionClassName="text-white/[0.74]"
+            />
 
-      <div className="container mx-auto max-w-4xl relative z-10">
-        <GlassCard hoverEffect intensity="medium" className="p-8 md:p-12 border-neon-magenta/30 box-glow-magenta">
-          <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
-            
-            <div className="space-y-6 flex-1">
-              <div className="inline-block px-3 py-1 rounded-full border border-neon-magenta text-neon-magenta text-xs font-bold tracking-widest uppercase mb-2 box-shadow-neon">
-                Invite Only
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+              <div className="liquid-glass rounded-2xl border border-white/10 p-4">
+                <ShieldCheck size={18} className="text-vegas-gold" />
+                <p className="mt-3 text-sm font-semibold text-white">Risk Controlled</p>
+                <p className="mt-1 text-xs text-white/[0.5]">One event. Zero lock-in.</p>
               </div>
-              <h2 className="font-display text-5xl md:text-6xl text-white">
-                THE PILOT
-              </h2>
-              <div className="flex items-baseline gap-2">
-                <span className="text-4xl text-vegas-gold font-bold">$345</span>
-                <span className="text-white/50 line-through text-lg">$995</span>
+              <div className="liquid-glass rounded-2xl border border-white/10 p-4">
+                <Timer size={18} className="text-vegas-gold" />
+                <p className="mt-3 text-sm font-semibold text-white">24HR Delivery</p>
+                <p className="mt-1 text-xs text-white/[0.5]">Edits arrive while hype is hot.</p>
               </div>
-              <p className="text-off-white/80">
-                One event. Full coverage. 24-hour delivery. See exactly what we can do before you commit to a retainer.
+              <div className="liquid-glass rounded-2xl border border-white/10 p-4">
+                <Target size={18} className="text-vegas-gold" />
+                <p className="mt-3 text-sm font-semibold text-white">Conversion Focused</p>
+                <p className="mt-1 text-xs text-white/[0.5]">Built for bookings, not vanity.</p>
+              </div>
+            </div>
+
+            <ul className="space-y-3">
+              {pilotDeliverables.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-white/[0.7]">
+                  <span className="mt-1 inline-block size-1.5 rounded-full bg-vegas-gold" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <GlintEffect>
+            <GlassCard className="border-vegas-gold/30 p-8 md:p-10" intensity="high">
+              <p className="text-[11px] font-black uppercase tracking-[0.28em] text-vegas-gold">
+                Single Event Pilot
               </p>
-              
-              <ul className="space-y-2">
-                {['2 Hours of Coverage', '25+ High-Res Photos', '1 Recap Reel (Reels/TikTok)', '24-Hour Turnaround'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-off-white">
-                    <Check size={16} className="text-neon-magenta" /> {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <div className="mt-4">
+                <span className="font-display text-6xl font-black text-white">$250</span>
+                <span className="ml-2 text-sm uppercase tracking-[0.2em] text-white/[0.45]">
+                  One-time
+                </span>
+              </div>
 
-            <div className="flex-1 w-full md:w-auto flex flex-col items-center gap-4">
-               {/* Visual Badge/Icon could go here */}
-               <div className="w-full aspect-video rounded-lg bg-black/40 flex items-center justify-center border border-white/10 mb-4">
-                  <span className="text-white/20 font-display text-2xl">VIP PREVIEW</span>
-               </div>
-               <Button 
-                 variant="neon" 
-                 size="xl" 
-                 className="w-full md:w-auto"
-                 onClick={handlePilotCheckout}
-                 isLoading={isLoading}
-               >
-                 SECURE ACCESS
-               </Button>
-               <div className="flex items-center gap-2 text-xs text-white/40">
-                 <ShieldCheck size={14} /> 100% Money-Back Guarantee
-               </div>
-            </div>
+              <p className="mt-4 text-sm leading-relaxed text-white/[0.62]">
+                Limited to 5 venues per city each month so our team can keep post-production
+                velocity high.
+              </p>
 
-          </div>
-        </GlassCard>
+              <div className="mt-8 flex flex-col gap-3">
+                <Button
+                  asChild
+                  variant="primary"
+                  size="lg"
+                  className="w-full rounded-2xl text-[11px] tracking-[0.22em]"
+                >
+                  <a href="#lead-capture">
+                    Reserve Pilot Slot <ArrowRight size={16} />
+                  </a>
+                </Button>
+                <a
+                  href="#pricing"
+                  className="focus-ring-gold rounded-2xl border border-white/20 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white/[0.7] hover:border-white/35 hover:bg-white/10"
+                >
+                  Compare Retainers
+                </a>
+              </div>
+
+              <p className="mt-6 text-[11px] text-white/[0.45]">
+                No account required. We confirm your slot by email.
+              </p>
+            </GlassCard>
+          </GlintEffect>
+        </div>
       </div>
     </section>
   );
-}
+};

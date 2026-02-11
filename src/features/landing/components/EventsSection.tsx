@@ -1,38 +1,82 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Globe, Radio } from 'lucide-react';
 
-export default function EventsSection() {
-  const brands = ["LIV", "OMNIA", "HAKKASAN", "TAO", "E11EVEN", "MARQUEE"];
+import { VelocityTypography } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
+
+const eventTags = [
+  'Miami',
+  'Ibiza',
+  'Tulum',
+  'Las Vegas',
+  'Dubai',
+  'Mykonos',
+  'London',
+  'Berlin',
+  'New York',
+];
+
+/**
+ * EventsSection
+ * Features a high-velocity marquee of global nightlife destinations.
+ */
+export const EventsSection = () => {
+  const reverseTags = [...eventTags].reverse();
 
   return (
-    <section className="py-24 border-y border-white/5 bg-deep-void-black overflow-hidden">
-      <div className="container mx-auto px-4 text-center">
-        <motion.p 
-          className="text-[10px] text-off-white/40 uppercase tracking-[0.5em] mb-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+    <section className="section-shell border-y border-white/5 bg-void">
+      <SectionBackdrop variant="neutral" />
+      <div className="container relative z-10 mx-auto mb-12 px-4 text-center md:mb-16">
+        <SectionIntro
+          align="center"
+          className="mx-auto max-w-3xl"
+          kicker="Global Deployment"
+          kickerIcon={<Globe size={13} />}
+          title="WORLDWIDE"
+          highlight="VELOCITY"
+          highlightClassName="text-neon-magenta text-glow-magenta"
+          description="From destination weekends to headline residencies, the deployment model scales without quality drop-off."
+          tone="neutral"
+        />
+
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ delay: 0.15, duration: 0.45 }}
+          className="mx-auto mt-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/[0.66]"
         >
-          Trusted by the World&apos;s Best Venues
-        </motion.p>
-        
-        <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-12 md:gap-x-24 opacity-30">
-          {brands.map((brand, i) => (
-            <motion.span 
-              key={i} 
-              initial={{ opacity: 0, filter: 'blur(10px)' }}
-              whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-              whileHover={{ opacity: 1, color: '#D4AF37', scale: 1.1 }}
-              transition={{ delay: i * 0.1, duration: 0.8 }}
-              viewport={{ once: true }}
-              className="font-display text-4xl md:text-6xl text-white transition-all cursor-default"
+          <Radio size={12} className="text-vegas-gold" />
+          Active City Rotation
+        </motion.div>
+      </div>
+
+      <div className="relative z-10 space-y-10">
+        <VelocityTypography velocity={2}>
+          {eventTags.map((tag, index) => (
+            <span
+              key={`${tag}-${index}`}
+              className="hover:text-vegas-gold/[0.35] mx-10 cursor-default font-display text-5xl uppercase text-white/[0.12] transition-colors md:text-8xl"
             >
-              {brand}
-            </motion.span>
+              {tag}
+            </span>
           ))}
-        </div>
+        </VelocityTypography>
+
+        <VelocityTypography velocity={-2}>
+          {reverseTags.map((tag, index) => (
+            <span
+              key={`${tag}-reverse-${index}`}
+              className="hover:text-neon-magenta/[0.35] mx-10 cursor-default font-display text-5xl uppercase text-white/[0.12] transition-colors md:text-8xl"
+            >
+              {tag}
+            </span>
+          ))}
+        </VelocityTypography>
       </div>
     </section>
   );
-}
+};

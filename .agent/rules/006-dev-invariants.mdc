@@ -1,0 +1,35 @@
+---
+description: GETTUPP Development Invariants - TDD, type safety, and coding standards
+globs: ["*.ts", "*.tsx", "*.test.ts", "*.spec.ts"]
+alwaysApply: false
+---
+
+# DEVELOPMENT INVARIANTS
+
+> **Rule Status**: ABSOLUTE (All agents must obey)
+
+## 1. Red-Green-Refactor
+No production code without a pre-existing failing test.
+
+## 2. Behavior over Implementation
+Tests must verify user-centric behaviors or API contracts, not internal implementation details.
+
+## 3. The Iron Law of Debugging
+No fixes without documented root cause investigation first.
+**Symptom-fixing is prohibited.**
+
+## 4. Mandatory Zod DTOs
+Every service boundary, API route, and external integration must use Zod schemas.
+
+## 5. Type Safety
+No usage of any. All data types must be inferred from Zod schemas where possible.
+
+## 6. Factory-First Mocks
+All mock data in tests must be generated via factory functions (getMockX()).
+
+## 7. AI Proof Packs
+Every delivery must be logged as a Proof Pack in Firestore with AI quality scores.
+
+## 8. Tokenized UI
+All UI components must consume design tokens from tokens.ts.
+Hardcoded hex values are FORBIDDEN.

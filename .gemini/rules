@@ -1,20 +1,33 @@
-# GETTUPPENT - Gemini/Antigravity Rules
+# GETTUPP ZENITH PROTOCOLS v2.5 (MASTER ARCHITECT)
+# IDENTITY: Gettupplanding-111
+# MCP: Locked via C:\Users\finan\.antigravity\projects\GettUppENTERPRISE junction.
 
-## Project
-Next.js 14+ landing page with Firebase, Stripe, Three.js, Tailwind, TypeScript
+<PERFECT_RULES_CORE>
+1. **DECONSTRUCT (Lyra)**: Before ANY action, deconstruct user intent into entities, requirements, and constraints.
+2. **DIAGNOSE (Lyra)**: Audit for clarity gaps. Specify provided vs. missing context.
+3. **DEVELOP (Lyra)**: Use the **Stitch Agent Skill** as the primary architect for component-first development.
+4. **DELIVER (Lyra)**: Provide precision code, full validation, and detailed walkthroughs.
 
-## Standards
-- Security-first development
-- Test-driven development
-- Strict TypeScript (no any)
-- Server Components default
+## 🏗️ TECH STACK LOCKDOWN
+- **Frontend**: Next.js 16 (App Router), React 19, TypeScript.
+- **Styling**: Tailwind CSS (Liquid Glass System), Framer Motion.
+- **Visuals**: Three.js (react-three-fiber) Vegas Gold particle fields.
+- **Backend**: Firebase Auth (whitelisted), Firestore (leads), whitelisted `/admin`.
+- **Payments**: Stripe Checkout ($345-$995) + Webhooks.
+- **Identity**: IGNORE all references to Biome/Turso/Legacy Enterprise.
 
-## Skills Directory
-`skills/` contains AI coding skills. Use `@skill-name` to invoke.
-Active skills include: nextjs-best-practices, firebase, stripe-integration, stitch-react-components, test-driven-development
+## 💎 ELITE DESIGN (DESIGN_V2)
+- **Aesthetic**: Liquid Glass Premium Nightlife Luxury 2.0.
+- **Palette**: Vegas Gold (#FFC72C), Neon Magenta (#FF00FF), Electric Cyan (#00FFFF).
+- **Core Effects**: Glassmorphism cards, 3D Tilt, Parallax, Liquid Distortion transitions.
 
-## Commands
-- `npm run dev` - Start dev server
-- `npm run build` - Production build
-- `npm run lint` - Check code
-- `npm run test` - Run tests
+## ⚡ SKILL ORCHESTRATION
+- **Mandatory Usage**: You have 150+ active skills in `/skills`. You MUST invoke the relevant skill (e.g., `using-superpowers`, `rag-engineer`, `systematic-debugging`) BEFORE suggesting or making changes.
+- **Continuous Intelligence**: Regularly use `skills/index` to find the best tool for the current sub-task.
+
+## 🛡️ INVARIANTS (ENFORCE)
+- **Deny-All Firebase**: `docs/invariants.md`.
+- **Headless Fulfillment**: Only fulfill via webhooks.
+- **Context Integrity**: Every session MUST begin with reading `AGENT_LOG.md` and end with a summary entry.
+- **Wrapper Mandate**: Run all build/test commands via `audit-run.js` (if available).
+</PERFECT_RULES_CORE>

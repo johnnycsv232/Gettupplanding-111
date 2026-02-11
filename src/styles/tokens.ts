@@ -1,22 +1,22 @@
 export const tokens = {
   colors: {
-    black: '#080808',
-    gold: '#FFC72C',
-    goldLight: '#E0E0E0',
-    pink: '#FF00FF',
-    pinkHyper: '#FF00FF',
-    yellow: '#FFFF00',
+    black: '#050505',
+    gold: '#D4AF37',
+    goldLight: '#F1E5AC',
+    pink: '#FF007F',
+    pinkHyper: '#FF007F',
+    yellow: '#D4AF37',
     blue: '#00FFFF',
     silver: '#C0C0C0',
-    white: '#FFFFFF',
+    white: '#FAFAFA',
     transparent: 'transparent',
     glass: 'rgba(255, 255, 255, 0.1)',
-    obsidian: 'rgba(8, 8, 8, 0.8)',
+    obsidian: 'rgba(5, 5, 5, 0.8)',
   },
   typography: {
-    display: 'Bebas Neue, Outfit, sans-serif',
-    ui: 'Inter, sans-serif',
-    serif: 'Cormorant, serif',
+    display: 'Orbitron, sans-serif',
+    ui: 'Manrope, sans-serif',
+    serif: 'Cormorant Garamond, serif',
   },
   spacing: {
     xs: 'var(--spacing-xs)',
@@ -33,5 +33,17 @@ export const tokens = {
     silverGlow: '0 0 20px rgba(192, 192, 192, 0.4)',
     blueGlow: '0 0 20px rgba(0, 255, 255, 0.5)',
     obsidianShadow: '0 20px 40px rgba(0, 0, 0, 0.6)',
+  },
+  config3d: {
+    hero: {
+      count: 150,
+      speed: 0.3,
+      size: 1.5,
+    },
+    finalCta: {
+      count: 800,
+      speed: 2,
+      size: 4,
+    },
   },
 };

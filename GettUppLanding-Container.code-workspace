@@ -1,0 +1,50 @@
+{
+  "name": "GettUppLanding - Container Development",
+  "folders": [
+    {
+      "path": ".",
+    },
+  ],
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "docker",
+        "args": ["exec", "-it", "gettupplanding-web-1", "/bin/sh"],
+      },
+      "container": {
+        "path": "docker",
+        "args": ["exec", "-it", "gettupplanding-web-1", "/bin/sh"],
+      },
+    },
+    "terminal.integrated.defaultProfile.linux": "container",
+    "docker.showExplorer": true,
+    "docker.showStartPage": false,
+    "pieces.cloudCapabilities": "Blended",
+    "gitai.experiments.aiTabTracking": true,
+    "editor.aiStats.enabled": true,
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode-remote.remote-containers",
+      "ms-azuretools.vscode-docker",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss",
+    ],
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug in Container",
+        "type": "node",
+        "request": "attach",
+        "address": "localhost",
+        "port": 9229,
+        "localRoot": "${workspaceFolder}",
+        "remoteRoot": "/app",
+        "skipFiles": ["<node_internals>/**"],
+      },
+    ],
+  },
+}

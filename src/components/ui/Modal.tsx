@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useState, useRef, useId } from 'react';
-import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useEffect, useState, useRef, useId } from 'react';
+import { createPortal } from 'react-dom';
+
+import { useScrollLock } from '@/hooks/use-scroll-lock';
 import { cn } from '@/lib/utils';
 
 interface ModalProps {
@@ -15,7 +17,18 @@ interface ModalProps {
   descriptionId?: string;
 }
 
-export default function Modal({ isOpen, onClose, children, className, title, descriptionId }: ModalProps) {
+/**
+ * Modal
+ * A premium accessibility-focused modal component using Framer Motion for cinematic transitions.
+ */
+export const Modal = ({
+  isOpen,
+  onClose,
+  children,
+  title,
+  className = '',
+  descriptionId,
+}: ModalProps) => {
   const [mounted, setMounted] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -25,25 +38,20 @@ export default function Modal({ isOpen, onClose, children, className, title, des
     return () => clearTimeout(timer);
   }, []);
 
+  useScrollLock(isOpen);
+
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      
       // Focus the first focusable element or the modal itself
       const focusableElements = modalRef.current?.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       ) as NodeListOf<HTMLElement>;
-      
+
       if (focusableElements && focusableElements.length > 0) {
         // Delay slightly to ensure motion animation doesn't interfere with focus
         setTimeout(() => focusableElements[0].focus(), 50);
       }
-    } else {
-      document.body.style.overflow = 'unset';
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [isOpen]);
 
   // Handle Escape key and Focus trapping
@@ -57,9 +65,9 @@ export default function Modal({ isOpen, onClose, children, className, title, des
 
       if (e.key === 'Tab') {
         const focusableElements = modalRef.current?.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
         ) as NodeListOf<HTMLElement>;
-        
+
         if (!focusableElements || focusableElements.length === 0) return;
 
         const firstElement = focusableElements[0];
@@ -88,9 +96,9 @@ export default function Modal({ isOpen, onClose, children, className, title, des
   return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" 
-          role="dialog" 
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+          role="dialog"
           aria-modal="true"
           aria-labelledby={title ? titleId : undefined}
           aria-describedby={descriptionId}
@@ -109,16 +117,20 @@ export default function Modal({ isOpen, onClose, children, className, title, des
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             className={cn(
-              "relative w-full max-w-lg overflow-hidden rounded-2xl liquid-glass border-vegas-gold/30 shadow-2xl shadow-vegas-gold/10",
-              className
+              'liquid-glass border-vegas-gold/30 shadow-vegas-gold/10 relative w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl',
+              className,
             )}
           >
-            {title && <h2 id={titleId} className="sr-only">{title}</h2>}
+            {title && (
+              <h2 id={titleId} className="sr-only">
+                {title}
+              </h2>
+            )}
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 rounded-full p-1 text-off-white/50 hover:bg-white/10 hover:text-white transition-colors"
+              className="text-off-white/50 absolute right-4 top-4 rounded-full p-1 transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Close modal"
             >
               <X size={20} />
@@ -128,6 +140,6 @@ export default function Modal({ isOpen, onClose, children, className, title, des
         </div>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
-}
+};

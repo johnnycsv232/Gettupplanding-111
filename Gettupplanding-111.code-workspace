@@ -1,19 +1,9 @@
 {
   "folders": [
     {
-      "name": "Project Root",
-      "path": "."
+      "name": "Zenith Root",
+      "path": ".",
     },
-    {
-      "name": "Skills Library",
-      "path": "skills"
-    },
-    {
-      "path": "../set-up-project-config-5d06"
-    },
-    {
-      "path": "../set-up-project-config-008a"
-    }
   ],
   "settings": {
     "editor.formatOnSave": true,
@@ -30,11 +20,12 @@
     "[markdown]": {
       "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     },
-    "powershell.cwd": "Project Root",
     "[jsonc]": {
       "editor.defaultFormatter": "vscode.json-language-features",
     },
     "editor.codeActions.triggerOnFocusChange": true,
+    "powershell.cwd": "Project Root",
+    "markdown.validate.enabled": true,
   },
   "extensions": {
     "recommendations": [

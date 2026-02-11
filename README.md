@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌌 GETTUPP ENT: Elite Nightlife & Luxury Design
 
-## Getting Started
+> **Liquid Glass Premium Nightlife Luxury. Own The Night.**
 
-First, run the development server:
+Building the future of nightlife content and luxury design in Minneapolis. This project is the digital ground zero for the GETTUPP brand, featuring cutting-edge 3D experiences, cinema-grade content delivery, and elite service retainers.
+
+## 🚀 Tech Stack
+
+- **Core**: [Next.js 16 (App Router)](https://nextjs.org/)
+- **Frontend**: [React 19](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/)
+- **Aesthetics**: [Framer Motion](https://www.framer.com/motion/), [Three.js (React Three Fiber)](https://docs.pmnd.rs/react-three-fiber/)
+- **Backend**: [Firebase](https://firebase.google.com/) (Auth, Firestore, Functions)
+- **CMS**: [Sanity](https://www.sanity.io/)
+- **Payments**: [Stripe](https://stripe.com/)
+- **Deployment**: [Vercel](https://vercel.com/)
+
+## 🎨 Design System: Liquid Glass
+
+We utilize the **Zenith Protocol** for development, ensuring every component meets our "Liquid Glass" aesthetic standard:
+
+- 💎 **Transparency**: Heavy use of backdrop blurs and subtle glassmorphism.
+- ✨ **Glow**: Neon magenta and vegas gold accents.
+- 🌑 **Void**: Deep obsidian backgrounds for maximum impact.
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js v20+
+- Firebase CLI
+- Stripe API Keys (Local .env)
+
+### Installation
+
+```bash
+npm install
+```
+
+### Local Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Verification & Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run verify   # Run the Zenith setup verification script
+npm run setup    # Run the complete environment setup
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Codex Cloud Development
 
-## Learn More
+This repo is ready for Codex Cloud workspaces.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run codex:cloud:setup
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Docs and environment template:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `docs/system/codex-cloud-environment.md`
+- `codex-cloud.env.example`
 
-## Deploy on Vercel
+## 🧠 Skills System
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project is governed by a modular **Skills System** localized in `/skills`. These skills provide the blueprints for:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `_core/`: Fundamental technologies (Next.js, Firebase).
+- `_frontend/`: Premium UI/UX and 3D experience patterns.
+- `_backend/`: Scalable API and database designs.
+- `_quality/`: Rigorous testing and code quality standards.
+
+## ⚖️ License
+
+Proprietary. All Rights Reserved. GETTUPP ENT © 2026.

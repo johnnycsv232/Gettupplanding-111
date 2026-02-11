@@ -1,67 +1,80 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { AlertTriangle } from 'lucide-react';
+
+import { GlassCard } from '@/components/ui';
+import { SectionBackdrop } from '@/features/landing/components/primitives/SectionBackdrop';
+import { SectionIntro } from '@/features/landing/components/primitives/SectionIntro';
 
 const rules = [
-  { id: '01', text: '50% NON-REFUNDABLE DEPOSIT REQUIRED TO SECURE DATE.' },
-  { id: '02', text: 'NO REFUNDS. IF THE SHUTTER CLICKS, THE INVOICE STICKS.' },
-  { id: '03', text: 'WE RETAIN FULL RIGHTS UNTIL FINAL BALANCE IS CLEARED.' },
-  { id: '04', text: 'DO NOT TOUCH OR OBSTRUCT PRODUCTION EQUIPMENT.' },
-  { id: '05', text: 'DELIVERY TIMELINES ARE FINAL. NO RUSH WITHOUT FEE.' },
+  {
+    id: '01',
+    title: 'Absolute Discretion',
+    desc: 'We operate like ghosts. Your VIPs remain anonymous unless otherwise requested.',
+  },
+  {
+    id: '02',
+    title: 'Zero Friction',
+    desc: 'Our crews are optimized for minimal impact on venue flow and guest experience.',
+  },
+  {
+    id: '03',
+    title: 'Master Ownership',
+    desc: 'You own 100% of the raw assets. We archive them for life at no extra cost.',
+  },
+  {
+    id: '04',
+    title: 'Elite Talent',
+    desc: 'Only vetted production veterans handle our gear. No amateurs, no excuses.',
+  },
 ];
 
-export default function RulesSection() {
+/**
+ * RulesSection
+ * Outlines the operational standards and "GettUpp Rules" for partnership.
+ */
+export const RulesSection = () => {
   return (
-    <section className="py-32 bg-black relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      
-      <div className="container mx-auto px-4 max-w-4xl relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-[#0A0A0A] border border-white/10 p-8 md:p-16 relative shadow-2xl"
-        >
-          {/* Decorative Corner */}
-          <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-vegas-gold opacity-50" />
-          
-          <div className="flex items-center gap-4 mb-12">
-            <AlertTriangle className="text-vegas-gold" size={32} />
-            <h2 className="font-display text-4xl md:text-5xl text-white tracking-tighter">THE RULES</h2>
-          </div>
+    <section className="section-shell border-b border-white/5 bg-void">
+      <SectionBackdrop variant="neutral" />
+      <div className="container relative z-10 mx-auto px-4">
+        <SectionIntro
+          className="mb-14 max-w-3xl md:mb-16"
+          kicker="Operational Excellence"
+          title="THE RULES OF"
+          highlight="ENGAGEMENT"
+          description="Premium venues require zero-drama execution. These are the standards every GettUpp deployment is measured against."
+          tone="neutral"
+          highlightClassName="text-white/[0.36] text-shadow-none"
+        />
 
-          <div className="space-y-8">
-            {rules.map((rule, i) => (
-              <motion.div 
-                key={rule.id}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="flex gap-6 items-start group"
-              >
-                <span className="font-mono text-vegas-gold text-lg font-bold pt-1 opacity-50 group-hover:opacity-100 transition-opacity">
-                  {rule.id}
-                </span>
-                <p className="text-off-white/80 font-mono text-sm md:text-base leading-relaxed tracking-wide group-hover:text-white transition-colors">
-                  {rule.text}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-off-white/30 text-[10px] font-mono tracking-[0.2em] uppercase">
-              Compliance is non-negotiable for elite production.
-            </p>
-            <div className="h-px flex-grow mx-8 bg-white/5 hidden md:block" />
-            <span className="text-vegas-gold/40 font-display text-xl">GETTUPP ENT.</span>
-          </div>
-        </motion.div>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {rules.map((rule, index) => (
+            <motion.div
+              key={rule.id}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.07, duration: 0.42 }}
+              viewport={{ once: true, margin: '-80px' }}
+            >
+              <GlassCard className="group h-full rounded-2xl border border-white/[0.1] p-6">
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="font-display text-3xl leading-none tracking-[0.12em] text-white/[0.2]">
+                    {rule.id}
+                  </span>
+                  <span className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-white/[0.52]">
+                    Rule
+                  </span>
+                </div>
+                <h3 className="mb-3 font-display text-base leading-tight tracking-[0.14em] text-white">
+                  {rule.title}
+                </h3>
+                <p className="text-body-soft">{rule.desc}</p>
+              </GlassCard>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
-}
+};

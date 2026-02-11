@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+**/node_modules
+**/dist
+**/__pycache__
+*.pyc
 /.pnp
 .pnp.*
 .yarn/*
@@ -41,7 +45,9 @@ yarn-error.log*
 next-env.d.ts
 
 # Skills repo (external)
-.agent/skills/
+# Skills repo (external)
+skills/
+
 
 # firebase
 .firebase/

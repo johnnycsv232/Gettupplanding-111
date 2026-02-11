@@ -1,68 +1,71 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ParticleField from '@/components/three/ParticleField';
-import Button from '@/components/ui/Button';
+import { ArrowRight, Sparkles, CalendarClock } from 'lucide-react';
 
-export default function FinalCTASection() {
+import { Magnetic } from '@/components/animations/Magnetic';
+import { Button, GlintEffect } from '@/components/ui';
+
+/**
+ * FinalCTASection
+ * Final close with clear high-intent paths.
+ */
+export const FinalCTASection = () => {
   return (
-    <section className="relative py-48 md:py-64 bg-deep-void-black overflow-hidden flex items-center justify-center text-center">
-      {/* Intense Particle Field */}
+    <section className="relative overflow-hidden border-y border-white/5 bg-deep-void py-28 md:py-40">
       <div className="absolute inset-0 z-0">
-        <ParticleField count={800} speed={2} color="#FFC72C" size={4} />
+        <div className="bg-vegas-gold/10 absolute left-1/2 top-1/2 size-[76vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[180px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_22%,rgba(212,175,55,0.12),transparent_44%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.08),transparent_40%)]" />
       </div>
-      
-      {/* Overlay Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-b from-deep-void-black via-transparent to-deep-void-black z-[1]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,199,44,0.1)_0%,transparent_70%)] z-[1]" />
 
-      <div className="relative z-10 container mx-auto px-4">
+      <div className="container relative z-10 mx-auto px-4 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="space-y-12"
+          viewport={{ once: true, margin: '-120px' }}
+          className="glass-zenith mx-auto max-w-5xl space-y-8 rounded-[2rem] border border-white/15 px-6 py-12 md:px-12 md:py-16"
         >
-          <h2 className="font-display text-7xl md:text-[12rem] leading-[0.8] text-white tracking-tighter">
-            READY TO<br/>
-            <motion.span 
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-vegas-gold inline-block drop-shadow-[0_0_30px_rgba(255,199,44,0.4)]"
-            >
-              DOMINATE?
-            </motion.span>
+          <div className="brand-kicker">
+            <Sparkles size={15} />
+            <span>Limited Pilot Slots This Month</span>
+          </div>
+
+          <h2 className="font-display text-[clamp(3rem,8vw,7rem)] uppercase leading-[0.86] tracking-[0.02em] text-white">
+            READY TO TURN
+            <span className="text-glow-gold block text-vegas-gold">NIGHTLIFE INTO DEMAND?</span>
           </h2>
-          
-          <p className="text-off-white/60 text-xl md:text-2xl max-w-2xl mx-auto font-light tracking-wide italic">
-            &quot;The night belongs to those who own the vision.&quot;
+
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/[0.76]">
+            Lock your pilot date and we will map the full content plan around your next peak event.
           </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col items-center gap-6"
-          >
-            <Button 
-              variant="primary" 
-              size="xl" 
-              className="px-20 py-8 text-3xl font-bold tracking-widest shadow-[0_0_50px_rgba(255,199,44,0.3)] hover:shadow-[0_0_70px_rgba(255,199,44,0.5)] transition-all duration-500 rounded-none border-2 border-vegas-gold bg-transparent text-vegas-gold hover:bg-vegas-gold hover:text-black uppercase"
+          <div className="flex flex-col items-center justify-center gap-4 pt-6 sm:flex-row">
+            <Magnetic strength={0.15}>
+              <GlintEffect>
+                <Button
+                  asChild
+                  variant="primary"
+                  size="lg"
+                  className="rounded-2xl px-10 py-5 text-[11px] tracking-[0.22em]"
+                >
+                  <a href="#lead-capture">
+                    BOOK YOUR PILOT <ArrowRight size={18} className="ml-1" />
+                  </a>
+                </Button>
+              </GlintEffect>
+            </Magnetic>
+
+            <a
+              href="#pricing"
+              className="focus-ring-gold inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 px-6 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white/[0.74] hover:border-white/40 hover:bg-white/10"
             >
-              START THE PILOT
-            </Button>
-            <span className="text-off-white/30 font-mono text-xs tracking-[0.3em] uppercase">
-              Limited availability for Q1 2026
-            </span>
-          </motion.div>
+              <CalendarClock size={16} />
+              Compare Plans
+            </a>
+          </div>
         </motion.div>
       </div>
-
-      {/* Edge Glows */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-[2]" />
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-[2]" />
     </section>
   );
-}
+};
